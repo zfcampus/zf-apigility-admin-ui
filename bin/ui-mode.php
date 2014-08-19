@@ -61,7 +61,7 @@ function updateConfig($configfile, $version)
 {
     echo "    Updating config\n";
     $config = file_get_contents($configfile);
-    $regex  = '#(\'ui\'\s+=>\s+.*?\'\/)([^\']+)#m';
+    $regex  = '#(\'ui\'\s+=>\s+.*?\'\/\.\.\/)([^\']+)#m';
     $config = preg_replace($regex, '$1' . $version, $config);
     file_put_contents($configfile, $config);
 }
