@@ -1,8 +1,8 @@
 {
-  "name": "zf-apigility-admin",
+  "name": "zf-apigility-admin-ui",
   "description": "Apigility Admin UI",
   "type": "library",
-  "version": "0.9.0-beta",
+  "version": "1.0.4",
   "author": "",
   "contributors": [],
   "license": "BSD-3-Clause",
@@ -16,18 +16,25 @@
   "support": {
     "email": "apigility-users@zend.com",
     "irc": "irc://irc.freenode.net/apigility",
-    "source": "https://github.com/zfcampus/zf-apigility-admin",
-    "issues": "https://github.com/zfcampus/zf-apigility-admin/issues"
+    "source": "https://github.com/zfcampus/zf-apigility-admin-ui",
+    "issues": "https://github.com/zfcampus/zf-apigility-admin-ui/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zfcampus/zf-apigility-admin.git"
+    "url": "https://github.com/zfcampus/zf-apigility-admin-ui.git"
   },
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "valid-url": "^1.0.9",
+    "minimist": "^1.1.0",
+    "serve-static": "^1.5.3",
+    "connect": "^2.25.7",
+    "morgan": "^1.2.3",
+    "connect-timeout": "^1.2.2"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
