@@ -1,0 +1,41 @@
+{
+    "name": "zfcampus/zf-apigility-admin-ui",
+    "description": "Apigility Admin UI module",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "api",
+        "apigility",
+        "framework",
+        "zf2"
+    ],
+    "homepage": "http://apigility.org/",
+    "support": {
+        "email": "apigility-users@zend.com",
+        "irc": "irc://irc.freenode.net/apigility",
+        "source": "https://github.com/zfcampus/zf-apigility-admin-ui",
+        "issues": "https://github.com/zfcampus/zf-apigility-admin-ui/issues"
+    },
+    "repositories": [
+        { "type": "composer", "url": "https://packages.zendframework.com/" }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
+        }
+    },
+    "require": {
+        "php": ">=5.3.23",
+        "rwoverdijk/assetmanager": "~1.3",
+        "zendframework/zend-view": "~2.3"
+    },
+    "require-dev": {
+        "zendframework/zend-console": "~2.3"
+    },
+    "autoload": {
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}
