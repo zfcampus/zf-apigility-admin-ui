@@ -1,3 +1,8 @@
+composer.lock
 node_modules/
-src/zf-apigility-admin/vendor/
+srce/zf-apigility-admin/vendor/
+vendor/
+.project
+.buildpath
+.settings
 .tmp/
