@@ -43,6 +43,7 @@ var path  = __dirname + '/' + env + '/zf-apigility-admin';
 var index = fs.readFileSync(path + '/index.html', { encoding: 'utf-8' });
 index = index.replace(/%BASE_HREF%/g, base);
 index = index.replace(/%API_BASE%/g, api);
+index = index.replace(/%HOME_URI%/g, '#/');
 index = index.replace(/%DOC_URI%/g, doc);
 
 var app = connect();
