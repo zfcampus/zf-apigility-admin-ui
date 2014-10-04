@@ -76,3 +76,25 @@
         </li>
     </ul>
 </div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <i class="glyphicon glyphicon-book"></i>
+            <a ui-sref="ag.settings.doctrine-adapters">Doctrine Adapters</a>
+        </h4>
+    </div>
+
+    <div class="panel-body" ng-show="!dashboard.doctrineAdapters.length">
+        <p class="text-warning">
+            No doctrine adapter configured;
+            <a ui-sref="ag.settings.doctrine-adapters">would you like to set one up now?</a>
+        </p>
+    </div>
+
+    <ul class="list-group">
+        <li ng-repeat="adapter in dashboard.doctrineAdapters" class="list-group-item">
+            <a ui-sref="ag.settings.doctrine-adapters({adapter: adapter.adapter_name})">{{ adapter.adapter_name }}</a>
+        </li>
+    </ul>
+</div>

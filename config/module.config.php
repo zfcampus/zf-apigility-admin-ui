@@ -3,7 +3,7 @@ return array(
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
-                'ui' => __DIR__ . '/../dist',
+                'ui' => __DIR__ . '/../src',
             ),
         ),
     ),

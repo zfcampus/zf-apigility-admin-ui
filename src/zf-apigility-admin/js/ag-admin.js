@@ -13,8 +13,8 @@
     'angular-flash.flash-alert-directive',
     'ui.sortable',
     'ui.select2',
-    'toggle-switch',
-    'templates-main'
+    'toggle-switch'
+    //'templates-main'
   ]).config(
     function($provide, $stateProvider, $urlRouterProvider) {
       // setup the API Base Path (this should come from initial ui load/php)
@@ -229,6 +229,23 @@
             controller: 'DbAdapterController'
           }
         }
+      });
+      $stateProvider.state('ag.settings.doctrine-adapters', {
+          url: '/doctrine-adapters?adapter&edit',
+          data: {
+              pageTitle: 'Doctrine Adapters'
+          },
+          resolve: {
+              doctrineAdapters: ['DoctrineAdapterResource', function (DoctrineAdapterResource) {
+                  return DoctrineAdapterResource.getList();
+              }]
+          },
+          views: {
+              'content@': {
+                  templateUrl: 'html/settings/doctrine-adapters/index.html',
+                  controller: 'DoctrineAdapterController'
+              }
+          }
       });
 
       $stateProvider.state('ag.api', {
