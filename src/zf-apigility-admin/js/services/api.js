@@ -229,6 +229,15 @@ angular.module('ag-admin').factory('ApiRepository', function ($q, $http, apiBase
             );
         },
 
+        serviceExist: function (serviceName) {
+            var path = apiBasePath + '/service-exist?service_name=' + serviceName;
+            var config = {
+                method: 'GET',
+                url: path
+            }
+            return $http(config);
+        },
+
         createNewRestService: function (apiName, restServiceName) {
             return $http.post(moduleApiPath + '/' + apiName + '/rest', {service_name: restServiceName}).then(
                 function (response) {
@@ -246,6 +255,26 @@ angular.module('ag-admin').factory('ApiRepository', function ($q, $http, apiBase
                 );
         },
 
+        createNewDoctrineConnectedService: function(apiName, doctrineObjectManager, doctrineServiceName, doctrineEntityClass, routeIdentifier, entityIdentifier, route, doctrineHydrateByValue, doctrineUseGeneratedHydrator, doctrineHydratorClassName, doctrineHydratorStrategies) {
+            var data = {
+                objectManager: doctrineObjectManager,
+                serviceName: doctrineServiceName,
+                entityClass: doctrineEntityClass,
+                routeIdentifierName: routeIdentifier,
+                entityIdentifierName: entityIdentifier,
+                routeMatch: route,
+                byValue: doctrineHydrateByValue,
+                useGeneratedHydrator: doctrineUseGeneratedHydrator,
+                hydratorName: doctrineHydratorClassName,
+                hydratorStrategies: doctrineHydratorStrategies
+            };
+            return $http.post(moduleApiPath + '/' + apiName + '/doctrine/' + doctrineServiceName,
+                data)
+                .then(function (response) {
+                    return response.data;
+                });
+        },
+
         createNewRpcService: function (apiName, rpcServiceName, rpcServiceRoute) {
             return $http.post(moduleApiPath + '/' + apiName + '/rpc', {service_name: rpcServiceName, route_match: rpcServiceRoute})
                 .then(
@@ -255,8 +284,10 @@ angular.module('ag-admin').factory('ApiRepository', function ($q, $http, apiBase
                 );
         },
 
-        removeRestService: function (apiName, restServiceName, recursive) {
-            var url    = moduleApiPath + '/' + apiName + '/rest/' + encodeURIComponent(restServiceName);
+        removeRestService: function (apiName, restServiceName, recursive, doctrineConnected) {
+            doctrineConnected = !!doctrineConnected;
+            var endpoint = doctrineConnected ? '/doctrine/' : '/rest/';
+            var url    = moduleApiPath + '/' + apiName + endpoint + encodeURIComponent(restServiceName);
             var config = {};
             if ( !!recursive ) {
                 config.params = { recursive: 1 };
@@ -268,8 +299,7 @@ angular.module('ag-admin').factory('ApiRepository', function ($q, $http, apiBase
             );
         },
 
-        saveRestService: function (apiName, restService) {
-            var url = moduleApiPath + '/' + apiName + '/rest/' + encodeURIComponent(restService.controller_service_name);
+        saveRestService: function (apiName, restService, doctrineConnected) {
             var testForEmpty = this.testForEmpty;
             var data = {
                 accept_whitelist: restService.accept_whitelist,
@@ -290,17 +320,32 @@ angular.module('ag-admin').factory('ApiRepository', function ($q, $http, apiBase
                 selector: restService.selector,
                 service_name: restService.service_name
             };
+
+            var endpoint;
+
+            if( doctrineConnected ) {
+                endpoint = '/doctrine/';
+                data.object_manager = restService.object_manager;
+                data.resourceName = restService.service_name;
+                data.hydrator_strategies = restService.hydrator_strategies;
+                data.by_value = restService.by_value;
+                data.use_generated_hydrator = restService.use_generated_hydrator;
+            } else {
+                endpoint = '/rest/';
+            }
+
+            var url = moduleApiPath + '/' + apiName + endpoint + encodeURIComponent(restService.controller_service_name);
+
             if (restService.hasOwnProperty('adapter_name') && restService.adapter_name) {
                 data.adapter_name = restService.adapter_name;
             }
             if (restService.hasOwnProperty('table_name') && restService.table_name) {
                 data.table_name = restService.table_name;
             }
-            return $http({method: 'patch', url: url, data: data}).then(
-                function (response) {
+            return $http({method: 'patch', url: url, data: data})
+                .then(function (response) {
                     return response.data;
-                }
-            );
+                });
         },
 
         saveInputFilter: function (api, inputFilter) {

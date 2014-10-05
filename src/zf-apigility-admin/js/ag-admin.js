@@ -13,8 +13,8 @@
     'angular-flash.flash-alert-directive',
     'ui.sortable',
     'ui.select2',
-    'toggle-switch'
-    //'templates-main'
+    'toggle-switch',
+    'templates-main'
   ]).config(
     function($provide, $stateProvider, $urlRouterProvider) {
       // setup the API Base Path (this should come from initial ui load/php)
@@ -351,6 +351,9 @@
         resolve: {
           dbAdapters: ['DbAdapterResource', function (DbAdapterResource) {
             return DbAdapterResource.getList();
+          }],
+          doctrineAdapters: ['DoctrineAdapterResource', function (DoctrineAdapterResource) {
+              return DoctrineAdapterResource.getList();
           }],
           hydrators: ['HydratorServicesRepository', function (HydratorServicesRepository) {
             return HydratorServicesRepository.getList();

@@ -4,5 +4,6 @@ srce/zf-apigility-admin/vendor/
 vendor/
 .project
 .buildpath
-.settings
+.settings/
+.idea/
 .tmp/

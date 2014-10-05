@@ -52,6 +52,20 @@
         </collapse-body>
     </ag-collapse>
 
+    <ag-collapse class="panel-default" show="isDoctrineConnected(restService)">
+        <collapse-header>
+            <h4 class="panel-title">Doctrine Settings</h4>
+        </collapse-header>
+
+        <collapse-body class="list-group">
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">Object Manager</h4>
+                <p class="list-group-item-text">{{ restService.object_manager }}</p>
+            </div>
+        </collapse-body>
+    </ag-collapse>
+
+
     <ag-collapse class="panel-default">
         <collapse-header>
             <h4 class="panel-title">REST Parameters</h4>
@@ -71,6 +85,21 @@
             <div class="list-group-item">
                 <h4 class="list-group-item-heading">Hydrator Service Name</h4>
                 <p class="list-group-item-text">{{ restService.hydrator_name }}</p>
+            </div>
+
+            <div class="list-group-item" show="isDoctrineConnected(restService)">
+                <h4 class="list-group-item-heading">Hydrator Strategies</h4>
+                <p class="list-group-item-text">{{ restService.hydrator_strategies.join(', ') || 'n/a' }}</p>
+            </div>
+
+            <div class="list-group-item" show="isDoctrineConnected(restService)">
+                <h4 class="list-group-item-heading">Use Generated Hydrator</h4>
+                <p class="list-group-item-text">{{ restService.use_generated_hydrator | boolean }}</p>
+            </div>
+
+            <div class="list-group-item" show="isDoctrineConnected(restService)">
+                <h4 class="list-group-item-heading">Hydrate by value</h4>
+                <p class="list-group-item-text">{{ restService.by_value | boolean }}</p>
             </div>
 
             <div class="list-group-item">
