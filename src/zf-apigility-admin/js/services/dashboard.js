@@ -23,6 +23,7 @@ angular.module('ag-admin').factory('DashboardRepository', function ($http, apiBa
                     return {
                         authentication: authentication,
                         dbAdapters: Hal.pluckCollection('db_adapter', data),
+                        doctrineAdapters: Hal.pluckCollection('doctrine_adapter', data),
                         modules: Hal.pluckCollection('module', data)
                     };
                 }

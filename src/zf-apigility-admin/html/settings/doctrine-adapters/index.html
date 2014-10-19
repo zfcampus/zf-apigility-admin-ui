@@ -1,0 +1,55 @@
+<div class="ag panel-group tooltip-api">
+    <ag-collapse class="panel-info"
+            ng-repeat="doctrineAdapter in doctrineAdapters"
+            active="{{ activeAdapter == doctrineAdapter.name }}"
+            name="{{ doctrineAdapter.adapter_name }}"
+            searchParam="adapter"
+            conditionals="{{ {edit: inEdit, delete: false} }}">
+        <collapse-header>
+            <h4 class="panel-title">
+                <i class="glyphicon glyphicon-book"></i>
+                {{ doctrineAdapter.adapter_name }}
+                <div class="btn-group pull-right">
+                    <button
+                        type="button" title="Cancel" class="btn btn-sm btn-default"
+                        collapse-button criteria="{delete: false, edit: true}"
+                        ui-sref="ag.settings.doctrine-adapters({ edit: null})"
+                        ui-sref-options="{notify: false}">
+                        Cancel
+                    </button>
+
+                    <button
+                        type="button" class="btn btn-sm btn-success" title="Edit adapter"
+                        collapse-button criteria="{delete: false, edit: false}"
+                        ui-sref="ag.settings.doctrine-adapters({ edit: true})"
+                        ui-sref-options="{notify: false}">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+
+                    <button
+                        type="button" class="btn btn-sm btn-danger" title="Remove adapter"
+                        collapse-flag flags="{delete: true}"
+                        collapse-button criteria="{delete: false}">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+            </h4>
+
+            <div class="clearfix"></div>
+
+            <span collapse-show
+                 criteria="{delete: false}"
+                 default-template="'html/empty-content.html'"
+                 toggled-template="'html/settings/doctrine-adapters/remove.html'"></span>
+        </collapse-header>
+
+        <collapse-body>
+            <div
+                collapse-show
+                criteria="{edit: false}"
+                default-template="'html/settings/doctrine-adapters/view.html'"
+                toggled-template="'html/settings/doctrine-adapters/edit.html'">
+            </div>
+        </collapse-body>
+    </ag-collapse>
+</div>

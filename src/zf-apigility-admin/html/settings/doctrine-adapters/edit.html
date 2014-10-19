@@ -1,0 +1,79 @@
+<form class="panel-body" novalidate ng-submit="saveDoctrineAdapter($index)" ng-show="doctrineAdapter.adapter_name != 'odm_default'" ag-form>
+    <fieldset>
+        <div class="form-group">
+            <label class="control-label" for="driver">Driver Type</label>
+            <div class="controls">
+                {{doctrineAdapter.driverClass}}
+                <select class="form-control input-xlarge" ng-model="doctrineAdapter.driverClass" ng-options="k as v for (k,v) in ui.ormAdapters">
+                    <option>Select an adapter</option>
+                </select>
+            </div>
+            <p class="help-block">Driver adapter to use</p>
+        </div>
+
+        <div ng-switch="doctrineAdapter.driverClass">
+            <div ng-switch-when="Doctrine\DBAL\Driver\PDOSqlite\Driver">
+
+                <div class="form-group">
+                    <label class="control-label" for="path">Database Path</label>
+                    <div class="controls">
+                        <input type="text" placeholder="/path/to/your/db/file.sqlite" class="form-control input-xlarge" required="required" ng-model="doctrineAdapter.params.path">
+                        <p class="help-block">Name of database or database file</p>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-default>
+
+                <div class="form-group">
+                    <label class="control-label" for="database">Database</label>
+                    <div class="controls">
+                        <input type="text" placeholder="database name" class="form-control input-xlarge" required="required" ng-model="doctrineAdapter.params.dbname">
+                        <p class="help-block">Name of database or database file</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    <div class="controls">
+                        <input type="text" placeholder="(optional) Username" class="form-control input-xlarge" ng-model="doctrineAdapter.params.user">
+                        <p class="help-block">Username with which to connect</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" placeholder="(Optional) Password" class="form-control input-xlarge" ng-model="doctrineAdapter.params.password">
+                        <p class="help-block">Password with which to connect</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="hostname">Hostname</label>
+                    <div class="controls">
+                        <input type="text" placeholder="(Optional) Hostname" class="form-control input-xlarge" ng-model="doctrineAdapter.params.host">
+                        <p class="help-block">Hostname to which to connect</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="port">Port</label>
+                    <div class="controls">
+                        <input type="text" placeholder="(Optional) Port" class="form-control input-xlarge" ng-model="doctrineAdapter.params.port">
+                        <p class="help-block">Port to which to connect</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </fieldset>
+
+    <div class="btn-group pull-right">
+        <a ng-click="resetForm()" class="btn btn-sm btn-default">Cancel</a>
+        <button type="submit" class="btn btn-sm btn-success">Save</button>
+    </div>
+
+    <div class="clearfix"></div>
+</form>

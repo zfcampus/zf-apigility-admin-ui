@@ -1,4 +1,4 @@
-angular.module('templates-main', ['html/api/authorization.html', 'html/api/documentation-method-edit.html', 'html/api/documentation-method-view.html', 'html/api/index-sidebar.html', 'html/api/index.html', 'html/api/input-edit.html', 'html/api/input-filter-edit.html', 'html/api/input-filter-view.html', 'html/api/input-filter/filter-new.html', 'html/api/input-view.html', 'html/api/overview.html', 'html/api/rest-services/documentation-edit-collection-pane.html', 'html/api/rest-services/documentation-edit-entity-pane.html', 'html/api/rest-services/documentation-edit.html', 'html/api/rest-services/documentation-view-collection-pane.html', 'html/api/rest-services/documentation-view-entity-pane.html', 'html/api/rest-services/documentation-view.html', 'html/api/rest-services/edit.html', 'html/api/rest-services/index.html', 'html/api/rest-services/new.html', 'html/api/rest-services/remove.html', 'html/api/rest-services/settings-edit.html', 'html/api/rest-services/settings-view.html', 'html/api/rest-services/source-code.html', 'html/api/rest-services/view.html', 'html/api/rpc-services/documentation-edit.html', 'html/api/rpc-services/documentation-view.html', 'html/api/rpc-services/edit.html', 'html/api/rpc-services/index.html', 'html/api/rpc-services/new.html', 'html/api/rpc-services/remove.html', 'html/api/rpc-services/settings-edit.html', 'html/api/rpc-services/settings-view.html', 'html/api/rpc-services/source-code.html', 'html/api/rpc-services/view.html', 'html/api/sidebar.html', 'html/breadcrumbs.html', 'html/content.html', 'html/dashboard-sidebar.html', 'html/directives/ag-edit-inplace.html', 'html/empty-content.html', 'html/empty.html', 'html/index.html', 'html/modals/cache-check.html', 'html/modals/create-api-form.html', 'html/modals/fs-perms.html', 'html/modals/help-content-negotiation.html', 'html/modals/help-input-filter.html', 'html/modals/source-code.html', 'html/settings/authentication/http-basic-edit.html', 'html/settings/authentication/http-basic-view.html', 'html/settings/authentication/http-basic.html', 'html/settings/authentication/http-digest-edit.html', 'html/settings/authentication/http-digest-view.html', 'html/settings/authentication/http-digest.html', 'html/settings/authentication/index.html', 'html/settings/authentication/new-http-basic.html', 'html/settings/authentication/new-http-digest.html', 'html/settings/authentication/new-oauth2.html', 'html/settings/authentication/oauth2-edit.html', 'html/settings/authentication/oauth2-view.html', 'html/settings/authentication/oauth2.html', 'html/settings/authentication/remove.html', 'html/settings/content-negotiation/edit.html', 'html/settings/content-negotiation/index.html', 'html/settings/content-negotiation/new-selector-form.html', 'html/settings/content-negotiation/remove.html', 'html/settings/content-negotiation/view.html', 'html/settings/dashboard.html', 'html/settings/db-adapters/edit.html', 'html/settings/db-adapters/index.html', 'html/settings/db-adapters/new-adapter-form.html', 'html/settings/db-adapters/remove.html', 'html/settings/db-adapters/view.html', 'html/settings/sidebar.html', 'html/view-navigation.html']);
+angular.module('templates-main', ['html/api/authorization.html', 'html/api/documentation-method-edit.html', 'html/api/documentation-method-view.html', 'html/api/index-sidebar.html', 'html/api/index.html', 'html/api/input-edit.html', 'html/api/input-filter-edit.html', 'html/api/input-filter-view.html', 'html/api/input-filter/filter-new.html', 'html/api/input-view.html', 'html/api/overview.html', 'html/api/rest-services/documentation-edit-collection-pane.html', 'html/api/rest-services/documentation-edit-entity-pane.html', 'html/api/rest-services/documentation-edit.html', 'html/api/rest-services/documentation-view-collection-pane.html', 'html/api/rest-services/documentation-view-entity-pane.html', 'html/api/rest-services/documentation-view.html', 'html/api/rest-services/edit.html', 'html/api/rest-services/index.html', 'html/api/rest-services/new.html', 'html/api/rest-services/remove.html', 'html/api/rest-services/settings-edit.html', 'html/api/rest-services/settings-view.html', 'html/api/rest-services/source-code.html', 'html/api/rest-services/view.html', 'html/api/rpc-services/documentation-edit.html', 'html/api/rpc-services/documentation-view.html', 'html/api/rpc-services/edit.html', 'html/api/rpc-services/index.html', 'html/api/rpc-services/new.html', 'html/api/rpc-services/remove.html', 'html/api/rpc-services/settings-edit.html', 'html/api/rpc-services/settings-view.html', 'html/api/rpc-services/source-code.html', 'html/api/rpc-services/view.html', 'html/api/sidebar.html', 'html/breadcrumbs.html', 'html/content.html', 'html/dashboard-sidebar.html', 'html/directives/ag-edit-inplace.html', 'html/empty-content.html', 'html/empty.html', 'html/index.html', 'html/modals/cache-check.html', 'html/modals/create-api-form.html', 'html/modals/fs-perms.html', 'html/modals/help-content-negotiation.html', 'html/modals/help-input-filter.html', 'html/modals/source-code.html', 'html/settings/authentication/http-basic-edit.html', 'html/settings/authentication/http-basic-view.html', 'html/settings/authentication/http-basic.html', 'html/settings/authentication/http-digest-edit.html', 'html/settings/authentication/http-digest-view.html', 'html/settings/authentication/http-digest.html', 'html/settings/authentication/index.html', 'html/settings/authentication/new-http-basic.html', 'html/settings/authentication/new-http-digest.html', 'html/settings/authentication/new-oauth2.html', 'html/settings/authentication/oauth2-edit.html', 'html/settings/authentication/oauth2-view.html', 'html/settings/authentication/oauth2.html', 'html/settings/authentication/remove.html', 'html/settings/content-negotiation/edit.html', 'html/settings/content-negotiation/index.html', 'html/settings/content-negotiation/new-selector-form.html', 'html/settings/content-negotiation/remove.html', 'html/settings/content-negotiation/view.html', 'html/settings/dashboard.html', 'html/settings/db-adapters/edit.html', 'html/settings/db-adapters/index.html', 'html/settings/db-adapters/new-adapter-form.html', 'html/settings/db-adapters/remove.html', 'html/settings/db-adapters/view.html', 'html/settings/doctrine-adapters/edit.html', 'html/settings/doctrine-adapters/index.html', 'html/settings/doctrine-adapters/remove.html', 'html/settings/doctrine-adapters/view.html', 'html/settings/sidebar.html', 'html/view-navigation.html']);
 
 angular.module("html/api/authorization.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("html/api/authorization.html",
@@ -1209,6 +1209,89 @@ angular.module("html/api/rest-services/new.html", []).run(["$templateCache", fun
     "                    <div class=\"clearfix\"></div>\n" +
     "                </form>\n" +
     "            </div></div></ag-tab-pane>\n" +
+    "            <ag-tab-pane title=\"Doctrine-Connected\"><div class=\"panel\"><div class=\"panel-body\">\n" +
+    "                <div class=\"panel panel-warning\" ng-show=\"doctrineAdapters.length < 1\">\n" +
+    "                    <div class=\"panel-heading\">\n" +
+    "                        <h4 class=\"panel-title\">No Doctrine Adapters Present</h4>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"panel-body\">\n" +
+    "                        <p>\n" +
+    "                            You have not yet configured any doctrine adapters, and\n" +
+    "                            thus cannot create a Doctrine-Connected REST service.\n" +
+    "                        </p>\n" +
+    "\n" +
+    "                        <p>\n" +
+    "                            You can create adapters on the\n" +
+    "                            <a ng-href=\"admin#/global/doctrine-adapters\">Doctrine Adapters setting page</a>.\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <form class=\"form\"\n" +
+    "                      ng-show=\"doctrineAdapters.length > 0\"\n" +
+    "                      ng-submit=\"newService.createNewDoctrineConnectedService()\"\n" +
+    "                      ag-form>\n" +
+    "                    <fieldset>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label\">Object Manager</label>\n" +
+    "                            <input class=\"form-control input-xlarge\" type=\"text\" ng-model=\"newService.doctrineObjectManager\" placeholder=\"doctrine.entitymanager.orm_default\">\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label\">Entity Class</label>\n" +
+    "                            <input class=\"form-control input-xlarge\" type=\"text\" ng-model=\"newService.doctrineEntityClass\" placeholder=\"Namespace\\Entity\\ClassName\">\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label\">Service Name</label>\n" +
+    "                            <input class=\"form-control input-xlarge\" type=\"text\" ng-model=\"newService.doctrineServiceName\" placeholder=\"Service Name\">\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <label class=\"control-label\">Hydrator</label>\n" +
+    "                            <input class=\"form-control\" type=\"text\" ng-model=\"newService.doctrineHydratorName\" placeholder=\"Doctrine\\Entity\\HydratorName\">\n" +
+    "                        </div>\n" +
+    "                        <label class=\"control-label\">Hydrator Strategies</label>\n" +
+    "                        <div class=\"form-group\" data-ng-repeat=\"strategy in newService.doctrineHydratorStrategies\">\n" +
+    "                            <div class=\"input-group\">\n" +
+    "                                <input type=\"text\" class=\"form-control\" readonly ng-model=\"strategy\">\n" +
+    "						      <span class=\"input-group-btn\">\n" +
+    "						        <button type=\"button\" class=\"btn btn-danger\" ng-click=\"newService.removeStrategy($index)\"><i class=\"glyphicon glyphicon-trash\"></i></button>\n" +
+    "						      </span>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"form-group\">\n" +
+    "                            <div class=\"input-group\">\n" +
+    "                                <input class=\"form-control\" type=\"text\" ng-model=\"newService.newStrategy\" placeholder=\"Hydrator\\Strategy\\StrategyInterface\">\n" +
+    "                              <span class=\"input-group-btn\">\n" +
+    "                                <button type=\"button\" class=\"btn btn-success\" ng-click=\"newService.addStrategy()\" ng-show=\"!newService.searching\"><i class=\"glyphicon glyphicon-plus\"></i></button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-warning disabled\" ng-show=\"newService.searching\"><i class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></i></button>\n" +
+    "                              </span>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"panel panel-default\">\n" +
+    "                            <div class=\"panel-body\">\n" +
+    "                                <label class=\"control-label\">Hydrate by value</label>\n" +
+    "                                <toggle-switch class=\"small pull-right\" model=\"newService.doctrineHydrateByValue\" on-label=\"Yes\" off-label=\"No\"></toggle-switch>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"panel panel-default\">\n" +
+    "                            <div class=\"panel-body\">\n" +
+    "                                <label class=\"control-label\">Use generated hydrator</label>\n" +
+    "                                <toggle-switch class=\"small pull-right\" model=\"newService.doctrineUseGeneratedHydrator\" on-label=\"Yes\" off-label=\"No\"></toggle-switch>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </fieldset>\n" +
+    "\n" +
+    "                    <div class=\"btn-group pull-right\">\n" +
+    "                        <button\n" +
+    "                                type=\"button\" class=\"btn btn-sm btn-default\"\n" +
+    "                                ng-click=\"resetForm()\">Cancel</button>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-sm btn-primary\">\n" +
+    "                            Create Doctrine-Connected REST Service</button>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"clearfix\"></div>\n" +
+    "                </form>\n" +
+    "            </div></div></ag-tab-pane>\n" +
     "        </ag-tabs>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -1237,7 +1320,7 @@ angular.module("html/api/rest-services/remove.html", []).run(["$templateCache", 
     "                No\n" +
     "            </button>\n" +
     "            <button type=\"button\" class=\"btn btn-sm btn-danger\"\n" +
-    "                ng-click=\"removeRestService(restService.controller_service_name, recursive)\">\n" +
+    "                ng-click=\"removeRestService(restService, recursive)\">\n" +
     "                Yes\n" +
     "            </button>\n" +
     "        </div>\n" +
@@ -1332,6 +1415,19 @@ angular.module("html/api/rest-services/settings-edit.html", []).run(["$templateC
     "        </collapse-body>\n" +
     "    </ag-collapse>\n" +
     "\n" +
+    "    <ag-collapse class=\"panel-success\" show=\"isDoctrineConnected(restService)\">\n" +
+    "        <collapse-header>\n" +
+    "            <h4 class=\"panel-title\">Doctrine Settings</h4>\n" +
+    "        </collapse-header>\n" +
+    "\n" +
+    "        <collapse-body class=\"list-group\">\n" +
+    "            <div class=\"form-group list-group-item\">\n" +
+    "                <label class=\"control-label\" for=\"object_manager\">Object Manager</label>\n" +
+    "                <input class=\"form-control input-xlarge\" type=\"text\" ng-model=\"restService.object_manager\" required=\"\" placeholder=\"doctrine.entitymanager.orm_default\">\n" +
+    "            </div>\n" +
+    "        </collapse-body>\n" +
+    "    </ag-collapse>\n" +
+    "\n" +
     "    <ag-collapse class=\"panel-success\">\n" +
     "        <collapse-header>\n" +
     "            <h4 class=\"panel-title\">REST Parameters</h4>\n" +
@@ -1363,6 +1459,43 @@ angular.module("html/api/rest-services/settings-edit.html", []).run(["$templateC
     "                    <p class=\"help-block\">The name of the hydrator service used to hydrate entities</p>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
+    "            <!-- BEGIN -->\n" +
+    "\n" +
+    "            <div class=\"form-group list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <label class=\"control-label\">Hydrator Strategies</label>\n" +
+    "                <div class=\"form-group\" data-ng-repeat=\"strategy in restService.hydrator_strategies\">\n" +
+    "                    <div class=\"input-group\">\n" +
+    "                        <input type=\"text\" class=\"form-control\" readonly ng-model=\"strategy\">\n" +
+    "                      <span class=\"input-group-btn\">\n" +
+    "                        <button type=\"button\" class=\"btn btn-danger\" ng-click=\"editService.removeStrategy($parent.$index, $index)\"><i class=\"glyphicon glyphicon-trash\"></i></button>\n" +
+    "                      </span>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <div class=\"input-group\">\n" +
+    "                        <input class=\"form-control\" type=\"text\" ng-model=\"editService.newStrategy\" placeholder=\"Hydrator\\Strategy\\StrategyInterface\">\n" +
+    "                      <span class=\"input-group-btn\">\n" +
+    "                        <button type=\"button\" class=\"btn btn-success\" ng-click=\"editService.addStrategy($parent.$index)\" ng-show=\"!editService.searching\"><i class=\"glyphicon glyphicon-plus\"></i></button>\n" +
+    "                        <button type=\"button\" class=\"btn btn-warning disabled\" ng-show=\"editService.searching\"><i class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></i></button>\n" +
+    "                      </span>\n" +
+    "                    </div>\n" +
+    "                    <p class=\"help-block\">Names of strategy services declared in the service manager</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"form-group list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <label class=\"control-label\">Hydrate by value</label>\n" +
+    "                <toggle-switch class=\"small pull-right\" model=\"restService.by_value\" on-label=\"Yes\" off-label=\"No\"></toggle-switch>\n" +
+    "                <p class=\"help-block\">Lorem ipsum</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"form-group list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <label class=\"control-label\">Use generated hydrator</label>\n" +
+    "                <toggle-switch class=\"small pull-right\" model=\"restService.use_generated_hydrator\" on-label=\"Yes\" off-label=\"No\"></toggle-switch>\n" +
+    "                <p class=\"help-block\">Lorem ipsum</p>\n" +
+    "            </div>\n" +
+    "<!-- END -->\n" +
     "\n" +
     "            <div class=\"form-group list-group-item\">\n" +
     "                <label class=\"control-label\">Collection Name</label>\n" +
@@ -1536,6 +1669,20 @@ angular.module("html/api/rest-services/settings-view.html", []).run(["$templateC
     "        </collapse-body>\n" +
     "    </ag-collapse>\n" +
     "\n" +
+    "    <ag-collapse class=\"panel-default\" show=\"isDoctrineConnected(restService)\">\n" +
+    "        <collapse-header>\n" +
+    "            <h4 class=\"panel-title\">Doctrine Settings</h4>\n" +
+    "        </collapse-header>\n" +
+    "\n" +
+    "        <collapse-body class=\"list-group\">\n" +
+    "            <div class=\"list-group-item\">\n" +
+    "                <h4 class=\"list-group-item-heading\">Object Manager</h4>\n" +
+    "                <p class=\"list-group-item-text\">{{ restService.object_manager }}</p>\n" +
+    "            </div>\n" +
+    "        </collapse-body>\n" +
+    "    </ag-collapse>\n" +
+    "\n" +
+    "\n" +
     "    <ag-collapse class=\"panel-default\">\n" +
     "        <collapse-header>\n" +
     "            <h4 class=\"panel-title\">REST Parameters</h4>\n" +
@@ -1555,6 +1702,21 @@ angular.module("html/api/rest-services/settings-view.html", []).run(["$templateC
     "            <div class=\"list-group-item\">\n" +
     "                <h4 class=\"list-group-item-heading\">Hydrator Service Name</h4>\n" +
     "                <p class=\"list-group-item-text\">{{ restService.hydrator_name }}</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <h4 class=\"list-group-item-heading\">Hydrator Strategies</h4>\n" +
+    "                <p class=\"list-group-item-text\">{{ restService.hydrator_strategies.join(', ') || 'n/a' }}</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <h4 class=\"list-group-item-heading\">Use Generated Hydrator</h4>\n" +
+    "                <p class=\"list-group-item-text\">{{ restService.use_generated_hydrator | boolean }}</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"list-group-item\" show=\"isDoctrineConnected(restService)\">\n" +
+    "                <h4 class=\"list-group-item-heading\">Hydrate by value</h4>\n" +
+    "                <p class=\"list-group-item-text\">{{ restService.by_value | boolean }}</p>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"list-group-item\">\n" +
@@ -2306,35 +2468,6 @@ angular.module("html/index.html", []).run(["$templateCache", function($templateC
     "        <div class=\"panel panel-info\">\n" +
     "            <div class=\"panel-heading\">\n" +
     "                <h4 class=\"panel-title\">\n" +
-    "                    <i class=\"glyphicon glyphicon-lock\"></i>\n" +
-    "                    <a ui-sref=\"ag.settings.authentication\">Authentication</a>\n" +
-    "                </h4>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"panel-body\" ng-show=\"!dashboard.authentication\">\n" +
-    "                <p class=\"text-warning\">\n" +
-    "                    No authentication configured; <a ui-sref=\"ag.settings.authentication\">would you like to set it up now?</a>\n" +
-    "                </p>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <table class=\"table\">\n" +
-    "                <ag-conditional-include\n" +
-    "                    condition=\"isHttpBasicAuthentication(dashboard.authentication)\"\n" +
-    "                    src=\"html/settings/authentication/http-basic-view.html\"></ag-conditional-include>\n" +
-    "                <ag-conditional-include\n" +
-    "                    condition=\"isHttpDigestAuthentication(dashboard.authentication)\"\n" +
-    "                    src=\"html/settings/authentication/http-digest-view.html\"></ag-conditional-include>\n" +
-    "                <ag-conditional-include\n" +
-    "                    condition=\"isOAuth2(dashboard.authentication)\"\n" +
-    "                    src=\"html/settings/authentication/oauth2-view.html\"></ag-conditional-include>\n" +
-    "            </table>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"col-md-6\">\n" +
-    "        <div class=\"panel panel-info\">\n" +
-    "            <div class=\"panel-heading\">\n" +
-    "                <h4 class=\"panel-title\">\n" +
     "                    <i class=\"glyphicon glyphicon-book\"></i>\n" +
     "                    <a ui-sref=\"ag.settings.db-adapters\">Database Adapters</a>\n" +
     "                </h4>\n" +
@@ -2354,8 +2487,59 @@ angular.module("html/index.html", []).run(["$templateCache", function($templateC
     "            </ul>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"col-md-6\">\n" +
+    "        <div class=\"panel panel-info\">\n" +
+    "            <div class=\"panel-heading\">\n" +
+    "                <h4 class=\"panel-title\">\n" +
+    "                    <i class=\"glyphicon glyphicon-book\"></i>\n" +
+    "                    <a ui-sref=\"ag.settings.doctrine-adapters\">Doctrine Adapters</a>\n" +
+    "                </h4>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"panel-body\" ng-show=\"!dashboard.doctrineAdapters.length\">\n" +
+    "                <p class=\"text-warning\">\n" +
+    "                    Doctrine not installed\n" +
+    "                </p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <ul class=\"list-group\">\n" +
+    "                <li ng-repeat=\"adapter in dashboard.doctrineAdapters\" class=\"list-group-item\">\n" +
+    "                    <a ui-sref=\"ag.settings.doctrine-adapters({adapter: adapter.adapter_name})\">{{ adapter.adapter_name }}</a>\n" +
+    "                </li>\n" +
+    "            </ul>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>\n" +
-    "");
+    "<div class=\"row\">\n" +
+    "    <div class=\"col-md-6\">\n" +
+    "        <div class=\"panel panel-info\">\n" +
+    "            <div class=\"panel-heading\">\n" +
+    "                <h4 class=\"panel-title\">\n" +
+    "                    <i class=\"glyphicon glyphicon-lock\"></i>\n" +
+    "                    <a ui-sref=\"ag.settings.authentication\">Authentication</a>\n" +
+    "                </h4>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"panel-body\" ng-show=\"!dashboard.authentication\">\n" +
+    "                <p class=\"text-warning\">\n" +
+    "                    No authentication configured; <a ui-sref=\"ag.settings.authentication\">would you like to set it up now?</a>\n" +
+    "                </p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <table class=\"table\">\n" +
+    "                <ag-conditional-include\n" +
+    "                        condition=\"isHttpBasicAuthentication(dashboard.authentication)\"\n" +
+    "                        src=\"html/settings/authentication/http-basic-view.html\"></ag-conditional-include>\n" +
+    "                <ag-conditional-include\n" +
+    "                        condition=\"isHttpDigestAuthentication(dashboard.authentication)\"\n" +
+    "                        src=\"html/settings/authentication/http-digest-view.html\"></ag-conditional-include>\n" +
+    "                <ag-conditional-include\n" +
+    "                        condition=\"isOAuth2(dashboard.authentication)\"\n" +
+    "                        src=\"html/settings/authentication/oauth2-view.html\"></ag-conditional-include>\n" +
+    "            </table>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("html/modals/cache-check.html", []).run(["$templateCache", function($templateCache) {
@@ -3608,6 +3792,28 @@ angular.module("html/settings/dashboard.html", []).run(["$templateCache", functi
     "        </li>\n" +
     "    </ul>\n" +
     "</div>\n" +
+    "\n" +
+    "<div class=\"panel panel-info\">\n" +
+    "    <div class=\"panel-heading\">\n" +
+    "        <h4 class=\"panel-title\">\n" +
+    "            <i class=\"glyphicon glyphicon-book\"></i>\n" +
+    "            <a ui-sref=\"ag.settings.doctrine-adapters\">Doctrine Adapters</a>\n" +
+    "        </h4>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"panel-body\" ng-show=\"!dashboard.doctrineAdapters.length\">\n" +
+    "        <p class=\"text-warning\">\n" +
+    "            No doctrine adapter configured;\n" +
+    "            <a ui-sref=\"ag.settings.doctrine-adapters\">would you like to set one up now?</a>\n" +
+    "        </p>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <ul class=\"list-group\">\n" +
+    "        <li ng-repeat=\"adapter in dashboard.doctrineAdapters\" class=\"list-group-item\">\n" +
+    "            <a ui-sref=\"ag.settings.doctrine-adapters({adapter: adapter.adapter_name})\">{{ adapter.adapter_name }}</a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
     "");
 }]);
 
@@ -3749,7 +3955,7 @@ angular.module("html/settings/db-adapters/edit.html", []).run(["$templateCache",
     "    </ag-collapse>\n" +
     "\n" +
     "    <div class=\"btn-group pull-right\">\n" +
-    "        <button type=\"button\" class=\"btn btn-sm btn-default\" ag-cancel-edit>Cancel</a>\n" +
+    "        <button type=\"button\" class=\"btn btn-sm btn-default\" ag-cancel-edit>Cancel</button>\n" +
     "        <button type=\"submit\" class=\"btn btn-sm btn-success\">Save</button>\n" +
     "    </div>\n" +
     "\n" +
@@ -4074,6 +4280,239 @@ angular.module("html/settings/db-adapters/view.html", []).run(["$templateCache",
     "");
 }]);
 
+angular.module("html/settings/doctrine-adapters/edit.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("html/settings/doctrine-adapters/edit.html",
+    "<form class=\"panel-body\" novalidate ng-submit=\"saveDoctrineAdapter($index)\" ng-show=\"doctrineAdapter.adapter_name != 'odm_default'\" ag-form>\n" +
+    "    <fieldset>\n" +
+    "        <div class=\"form-group\">\n" +
+    "            <label class=\"control-label\" for=\"driver\">Driver Type</label>\n" +
+    "            <div class=\"controls\">\n" +
+    "                {{doctrineAdapter.driverClass}}\n" +
+    "                <select class=\"form-control input-xlarge\" ng-model=\"doctrineAdapter.driverClass\" ng-options=\"k as v for (k,v) in ui.ormAdapters\">\n" +
+    "                    <option>Select an adapter</option>\n" +
+    "                </select>\n" +
+    "            </div>\n" +
+    "            <p class=\"help-block\">Driver adapter to use</p>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div ng-switch=\"doctrineAdapter.driverClass\">\n" +
+    "            <div ng-switch-when=\"Doctrine\\DBAL\\Driver\\PDOSqlite\\Driver\">\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"path\">Database Path</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"text\" placeholder=\"/path/to/your/db/file.sqlite\" class=\"form-control input-xlarge\" required=\"required\" ng-model=\"doctrineAdapter.params.path\">\n" +
+    "                        <p class=\"help-block\">Name of database or database file</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "            <div ng-switch-default>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"database\">Database</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"text\" placeholder=\"database name\" class=\"form-control input-xlarge\" required=\"required\" ng-model=\"doctrineAdapter.params.dbname\">\n" +
+    "                        <p class=\"help-block\">Name of database or database file</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"username\">Username</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"text\" placeholder=\"(optional) Username\" class=\"form-control input-xlarge\" ng-model=\"doctrineAdapter.params.user\">\n" +
+    "                        <p class=\"help-block\">Username with which to connect</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"password\">Password</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"password\" placeholder=\"(Optional) Password\" class=\"form-control input-xlarge\" ng-model=\"doctrineAdapter.params.password\">\n" +
+    "                        <p class=\"help-block\">Password with which to connect</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"hostname\">Hostname</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"text\" placeholder=\"(Optional) Hostname\" class=\"form-control input-xlarge\" ng-model=\"doctrineAdapter.params.host\">\n" +
+    "                        <p class=\"help-block\">Hostname to which to connect</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <label class=\"control-label\" for=\"port\">Port</label>\n" +
+    "                    <div class=\"controls\">\n" +
+    "                        <input type=\"text\" placeholder=\"(Optional) Port\" class=\"form-control input-xlarge\" ng-model=\"doctrineAdapter.params.port\">\n" +
+    "                        <p class=\"help-block\">Port to which to connect</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </fieldset>\n" +
+    "\n" +
+    "    <div class=\"btn-group pull-right\">\n" +
+    "        <a ng-click=\"resetForm()\" class=\"btn btn-sm btn-default\">Cancel</a>\n" +
+    "        <button type=\"submit\" class=\"btn btn-sm btn-success\">Save</button>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"clearfix\"></div>\n" +
+    "</form>");
+}]);
+
+angular.module("html/settings/doctrine-adapters/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("html/settings/doctrine-adapters/index.html",
+    "<div class=\"ag panel-group tooltip-api\">\n" +
+    "    <ag-collapse class=\"panel-info\"\n" +
+    "            ng-repeat=\"doctrineAdapter in doctrineAdapters\"\n" +
+    "            active=\"{{ activeAdapter == doctrineAdapter.name }}\"\n" +
+    "            name=\"{{ doctrineAdapter.adapter_name }}\"\n" +
+    "            searchParam=\"adapter\"\n" +
+    "            conditionals=\"{{ {edit: inEdit, delete: false} }}\">\n" +
+    "        <collapse-header>\n" +
+    "            <h4 class=\"panel-title\">\n" +
+    "                <i class=\"glyphicon glyphicon-book\"></i>\n" +
+    "                {{ doctrineAdapter.adapter_name }}\n" +
+    "                <div class=\"btn-group pull-right\">\n" +
+    "                    <button\n" +
+    "                        type=\"button\" title=\"Cancel\" class=\"btn btn-sm btn-default\"\n" +
+    "                        collapse-button criteria=\"{delete: false, edit: true}\"\n" +
+    "                        ui-sref=\"ag.settings.doctrine-adapters({ edit: null})\"\n" +
+    "                        ui-sref-options=\"{notify: false}\">\n" +
+    "                        Cancel\n" +
+    "                    </button>\n" +
+    "\n" +
+    "                    <button\n" +
+    "                        type=\"button\" class=\"btn btn-sm btn-success\" title=\"Edit adapter\"\n" +
+    "                        collapse-button criteria=\"{delete: false, edit: false}\"\n" +
+    "                        ui-sref=\"ag.settings.doctrine-adapters({ edit: true})\"\n" +
+    "                        ui-sref-options=\"{notify: false}\">\n" +
+    "                        <i class=\"glyphicon glyphicon-edit\"></i>\n" +
+    "                    </button>\n" +
+    "\n" +
+    "                    <button\n" +
+    "                        type=\"button\" class=\"btn btn-sm btn-danger\" title=\"Remove adapter\"\n" +
+    "                        collapse-flag flags=\"{delete: true}\"\n" +
+    "                        collapse-button criteria=\"{delete: false}\">\n" +
+    "                        <i class=\"glyphicon glyphicon-trash\"></i>\n" +
+    "                    </button>\n" +
+    "                </div>\n" +
+    "            </h4>\n" +
+    "\n" +
+    "            <div class=\"clearfix\"></div>\n" +
+    "\n" +
+    "            <span collapse-show\n" +
+    "                 criteria=\"{delete: false}\"\n" +
+    "                 default-template=\"'html/empty-content.html'\"\n" +
+    "                 toggled-template=\"'html/settings/doctrine-adapters/remove.html'\"></span>\n" +
+    "        </collapse-header>\n" +
+    "\n" +
+    "        <collapse-body>\n" +
+    "            <div\n" +
+    "                collapse-show\n" +
+    "                criteria=\"{edit: false}\"\n" +
+    "                default-template=\"'html/settings/doctrine-adapters/view.html'\"\n" +
+    "                toggled-template=\"'html/settings/doctrine-adapters/edit.html'\">\n" +
+    "            </div>\n" +
+    "        </collapse-body>\n" +
+    "    </ag-collapse>\n" +
+    "</div>");
+}]);
+
+angular.module("html/settings/doctrine-adapters/remove.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("html/settings/doctrine-adapters/remove.html",
+    "<div class=\"panel panel-danger\">\n" +
+    "    <div class=\"panel-heading\"><h4 class=\"panel-title\">Reset Doctrine Adapter</h4></div>\n" +
+    "    <div class=\"panel-body\">\n" +
+    "        <form ng-submit=\"removeDoctrineAdapter(doctrineAdapter.adapter_name)\">\n" +
+    "            <p>Are you sure you want to reset the Adapter</p>\n" +
+    "\n" +
+    "            <div class=\"btn-group pull-right\">\n" +
+    "                <button collapse-flag flags=\"{delete: false}\" type=\"button\" class=\"btn btn-sm btn-default\">Cancel</button>\n" +
+    "                <button type=\"submit\" class=\"btn btn-sm btn-danger\">Yes</button>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"clearfix\"></div>\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("html/settings/doctrine-adapters/view.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("html/settings/doctrine-adapters/view.html",
+    "<table class=\"table table-striped\">\n" +
+    "    <tr ng-show=\"doctrineAdapter.driverClass\">\n" +
+    "        <td>Driver</td>\n" +
+    "        <td>{{ doctrineAdapter.driverClass }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.dbname\">\n" +
+    "        <td>Database</td>\n" +
+    "        <td>{{ doctrineAdapter.params.dbname }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.path\">\n" +
+    "        <td>Database Path</td>\n" +
+    "        <td>{{ doctrineAdapter.params.path }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.user\">\n" +
+    "        <td>Username</td>\n" +
+    "        <td>{{ doctrineAdapter.params.user }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.password\">\n" +
+    "        <td>Password</td>\n" +
+    "        <td>{{ doctrineAdapter.params.password }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.host\">\n" +
+    "        <td>Hostname</td>\n" +
+    "        <td>{{ doctrineAdapter.params.host }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.params.port\">\n" +
+    "        <td>Port</td>\n" +
+    "        <td>{{ doctrineAdapter.params.port }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.dbname\">\n" +
+    "        <td>Database</td>\n" +
+    "        <td>{{ doctrineAdapter.dbname }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.connectionString\">\n" +
+    "        <td>Connection String</td>\n" +
+    "        <td>{{ doctrineAdapter.connectionString }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.user\">\n" +
+    "        <td>Username</td>\n" +
+    "        <td>{{ doctrineAdapter.user }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.password\">\n" +
+    "        <td>Password</td>\n" +
+    "        <td>{{ doctrineAdapter.password }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.host\">\n" +
+    "        <td>Hostname</td>\n" +
+    "        <td>{{ doctrineAdapter.host }}</td>\n" +
+    "    </tr>\n" +
+    "\n" +
+    "    <tr ng-show=\"doctrineAdapter.port\">\n" +
+    "        <td>Port</td>\n" +
+    "        <td>{{ doctrineAdapter.port }}</td>\n" +
+    "    </tr>\n" +
+    "</table>\n" +
+    "");
+}]);
+
 angular.module("html/settings/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("html/settings/sidebar.html",
     "<ul class=\"nav nav-pills ag-admin-nav-pills nav-stacked\">\n" +
@@ -4081,6 +4520,7 @@ angular.module("html/settings/sidebar.html", []).run(["$templateCache", function
     "    <li ng-class=\"{active: ('ag.settings.authentication' | isState)}\"><a ui-sref=\"ag.settings.authentication\">Authentication</a></li>\n" +
     "    <li ng-class=\"{active: ('ag.settings.content-negotiation' | isState)}\"><a ui-sref=\"ag.settings.content-negotiation\">Content Negotiation</a></li>\n" +
     "    <li ng-class=\"{active: ('ag.settings.db-adapters' | isState)}\"><a ui-sref=\"ag.settings.db-adapters\">Database Adapters</a></li>\n" +
+    "    <li ng-class=\"{active: ('ag.settings.doctrine-adapters' | isState)}\"><a ui-sref=\"ag.settings.doctrine-adapters\">Doctrine Adapters</a></li>\n" +
     "</ul>\n" +
     "\n" +
     "");

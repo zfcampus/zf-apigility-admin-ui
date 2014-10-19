@@ -23,7 +23,8 @@ angular.module('ag-admin').factory('SettingsDashboardRepository', function ($htt
                     return {
                         authentication: authentication,
                         contentNegotiation: Hal.pluckCollection('content_negotiation', data),
-                        dbAdapters: Hal.pluckCollection('db_adapter', data)
+                        dbAdapters: Hal.pluckCollection('db_adapter', data),
+                        doctrineAdapters: Hal.pluckCollection('doctrine_adapter', data)
                     };
                 }
             );

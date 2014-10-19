@@ -82,6 +82,19 @@
         </collapse-body>
     </ag-collapse>
 
+    <ag-collapse class="panel-success" show="isDoctrineConnected(restService)">
+        <collapse-header>
+            <h4 class="panel-title">Doctrine Settings</h4>
+        </collapse-header>
+
+        <collapse-body class="list-group">
+            <div class="form-group list-group-item">
+                <label class="control-label" for="object_manager">Object Manager</label>
+                <input class="form-control input-xlarge" type="text" ng-model="restService.object_manager" required="" placeholder="doctrine.entitymanager.orm_default">
+            </div>
+        </collapse-body>
+    </ag-collapse>
+
     <ag-collapse class="panel-success">
         <collapse-header>
             <h4 class="panel-title">REST Parameters</h4>
@@ -113,6 +126,43 @@
                     <p class="help-block">The name of the hydrator service used to hydrate entities</p>
                 </div>
             </div>
+
+            <!-- BEGIN -->
+
+            <div class="form-group list-group-item" show="isDoctrineConnected(restService)">
+                <label class="control-label">Hydrator Strategies</label>
+                <div class="form-group" data-ng-repeat="strategy in restService.hydrator_strategies">
+                    <div class="input-group">
+                        <input type="text" class="form-control" readonly ng-model="strategy">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-danger" ng-click="editService.removeStrategy($parent.$index, $index)"><i class="glyphicon glyphicon-trash"></i></button>
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" ng-model="editService.newStrategy" placeholder="Hydrator\Strategy\StrategyInterface">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-success" ng-click="editService.addStrategy($parent.$index)" ng-show="!editService.searching"><i class="glyphicon glyphicon-plus"></i></button>
+                        <button type="button" class="btn btn-warning disabled" ng-show="editService.searching"><i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i></button>
+                      </span>
+                    </div>
+                    <p class="help-block">Names of strategy services declared in the service manager</p>
+                </div>
+            </div>
+
+            <div class="form-group list-group-item" show="isDoctrineConnected(restService)">
+                <label class="control-label">Hydrate by value</label>
+                <toggle-switch class="small pull-right" model="restService.by_value" on-label="Yes" off-label="No"></toggle-switch>
+                <p class="help-block">Lorem ipsum</p>
+            </div>
+
+            <div class="form-group list-group-item" show="isDoctrineConnected(restService)">
+                <label class="control-label">Use generated hydrator</label>
+                <toggle-switch class="small pull-right" model="restService.use_generated_hydrator" on-label="Yes" off-label="No"></toggle-switch>
+                <p class="help-block">Lorem ipsum</p>
+            </div>
+<!-- END -->
 
             <div class="form-group list-group-item">
                 <label class="control-label">Collection Name</label>

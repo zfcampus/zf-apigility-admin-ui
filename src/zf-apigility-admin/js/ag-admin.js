@@ -230,6 +230,23 @@
           }
         }
       });
+      $stateProvider.state('ag.settings.doctrine-adapters', {
+          url: '/doctrine-adapters?adapter&edit',
+          data: {
+              pageTitle: 'Doctrine Adapters'
+          },
+          resolve: {
+              doctrineAdapters: ['DoctrineAdapterResource', function (DoctrineAdapterResource) {
+                  return DoctrineAdapterResource.getList();
+              }]
+          },
+          views: {
+              'content@': {
+                  templateUrl: 'html/settings/doctrine-adapters/index.html',
+                  controller: 'DoctrineAdapterController'
+              }
+          }
+      });
 
       $stateProvider.state('ag.api', {
         url: '/api',
@@ -334,6 +351,9 @@
         resolve: {
           dbAdapters: ['DbAdapterResource', function (DbAdapterResource) {
             return DbAdapterResource.getList();
+          }],
+          doctrineAdapters: ['DoctrineAdapterResource', function (DoctrineAdapterResource) {
+              return DoctrineAdapterResource.getList();
           }],
           hydrators: ['HydratorServicesRepository', function (HydratorServicesRepository) {
             return HydratorServicesRepository.getList();

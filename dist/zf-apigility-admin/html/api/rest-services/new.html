@@ -75,6 +75,84 @@
                     <div class="clearfix"></div>
                 </form>
             </div></div></ag-tab-pane>
+            <ag-tab-pane title="Doctrine-Connected"><div class="panel"><div class="panel-body">
+                <div class="panel panel-warning" ng-show="doctrineAdapters.length < 1">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">No Doctrine Adapters Present</h4>
+                    </div>
+
+                    <div class="panel-body">
+                        <p>
+                            You have not yet configured any doctrine adapters, and
+                            thus cannot create a Doctrine-Connected REST service.
+                        </p>
+
+                        <p>
+                            You can create adapters on the
+                            <a ng-href="admin#/global/doctrine-adapters">Doctrine Adapters setting page</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <form class="form" ng-show="doctrineAdapters.length > 0" ng-submit="newService.createNewDoctrineConnectedService()" ag-form="">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label">Object Manager</label>
+                            <input class="form-control input-xlarge" type="text" ng-model="newService.doctrineObjectManager" placeholder="doctrine.entitymanager.orm_default">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Entity Class</label>
+                            <input class="form-control input-xlarge" type="text" ng-model="newService.doctrineEntityClass" placeholder="Namespace\Entity\ClassName">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Service Name</label>
+                            <input class="form-control input-xlarge" type="text" ng-model="newService.doctrineServiceName" placeholder="Service Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Hydrator</label>
+                            <input class="form-control" type="text" ng-model="newService.doctrineHydratorName" placeholder="Doctrine\Entity\HydratorName">
+                        </div>
+                        <label class="control-label">Hydrator Strategies</label>
+                        <div class="form-group" data-ng-repeat="strategy in newService.doctrineHydratorStrategies">
+                            <div class="input-group">
+                                <input type="text" class="form-control" readonly="readonly" ng-model="strategy">
+						      <span class="input-group-btn">
+						        <button type="button" class="btn btn-danger" ng-click="newService.removeStrategy($index)"><i class="glyphicon glyphicon-trash"></i></button>
+						      </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" type="text" ng-model="newService.newStrategy" placeholder="Hydrator\Strategy\StrategyInterface">
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-success" ng-click="newService.addStrategy()" ng-show="!newService.searching"><i class="glyphicon glyphicon-plus"></i></button>
+                                <button type="button" class="btn btn-warning disabled" ng-show="newService.searching"><i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i></button>
+                              </span>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <label class="control-label">Hydrate by value</label>
+                                <toggle-switch class="small pull-right" model="newService.doctrineHydrateByValue" on-label="Yes" off-label="No"></toggle-switch>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <label class="control-label">Use generated hydrator</label>
+                                <toggle-switch class="small pull-right" model="newService.doctrineUseGeneratedHydrator" on-label="Yes" off-label="No"></toggle-switch>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-sm btn-default" ng-click="resetForm()">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Create Doctrine-Connected REST Service</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </form>
+            </div></div></ag-tab-pane>
         </ag-tabs>
     </div>
 </div>

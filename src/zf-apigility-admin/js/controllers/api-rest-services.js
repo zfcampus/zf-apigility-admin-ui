@@ -3,7 +3,7 @@
 
 angular.module('ag-admin').controller(
   'ApiRestServicesController', 
-  function ($scope, $state, $stateParams, $sce, $modal, $timeout, flash, filters, hydrators, validators, selectors, ApiRepository, api, dbAdapters, toggleSelection, agFormHandler) {
+  function ($scope, $state, $stateParams, $sce, $modal, $timeout, flash, filters, hydrators, validators, selectors, ApiRepository, api, dbAdapters, doctrineAdapters, toggleSelection, agFormHandler) {
 
     $scope.activeService     = $stateParams.service ? $stateParams.service : '';
     $scope.inEdit            = !!$stateParams.edit;
@@ -13,6 +13,7 @@ angular.module('ag-admin').controller(
     $scope.api               = api;
     $scope.version           = $stateParams.version;
     $scope.dbAdapters        = dbAdapters;
+    $scope.doctrineAdapters  = doctrineAdapters;
     $scope.filterOptions     = filters;
     $scope.hydrators         = hydrators;
     $scope.validatorOptions  = validators;
@@ -23,7 +24,13 @@ angular.module('ag-admin').controller(
     $scope.newService        = {
         restServiceName: '',
         dbAdapterName:   '',
-        dbTableName:     ''
+        dbTableName:     '',
+        doctrineObjectManager: '',
+        doctrineUseGeneratedHydrator: true,
+        doctrineHydrateByValue: true,
+        doctrineServiceName: '',
+        doctrineEntityClass: '',
+        doctrineHydratorStrategies : []
     };
 
     $scope.resetForm = function () {
@@ -32,7 +39,14 @@ angular.module('ag-admin').controller(
         $scope.newService.restServiceName = '';
         $scope.newService.dbAdapterName   = '';
         $scope.newService.dbTableName     = '';
+        $scope.newService.doctrineObjectManager   = '';
+        $scope.newService.doctrineUseGeneratedHydrator = true;
+        $scope.newService.doctrineServiceName    = '';
+        $scope.newService.doctrineEntityClass     = '';
+        $scope.newService.doctrineHydratorName     = '';
     };
+
+    $scope.newService.action = 'plus';
 
     $scope.isLatestVersion = function () {
         return $scope.ApiRepository.isLatestVersion($scope.api);
@@ -53,6 +67,16 @@ angular.module('ag-admin').controller(
             return false;
         }
         if (restService.hasOwnProperty('adapter_name') || restService.hasOwnProperty('table_name') || restService.hasOwnProperty('table_service')) {
+            return true;
+        }
+        return false;
+    };
+
+    $scope.isDoctrineConnected = function (restService) {
+        if (typeof restService !== 'object' || typeof restService === 'undefined') {
+            return false;
+        }
+        if (restService.hasOwnProperty('object_manager') || restService.hasOwnProperty('entity_class') ) {
             return true;
         }
         return false;
@@ -100,9 +124,86 @@ angular.module('ag-admin').controller(
         );
     };
 
+    $scope.newService.createNewDoctrineConnectedService = function() {
+        var newServiceName = $scope.newService.doctrineServiceName;
+        var route = newServiceName.toLowerCase();
+        var routeIdentifier = route + '_id';
+        ApiRepository.createNewDoctrineConnectedService(
+            $scope.api.name,
+            $scope.newService.doctrineObjectManager,
+            $scope.newService.doctrineServiceName,
+            $scope.newService.doctrineEntityClass,
+            routeIdentifier,
+            'id',
+            '/' + route,
+            $scope.newService.doctrineHydrateByValue,
+            $scope.newService.doctrineUseGeneratedHydrator,
+            $scope.newService.doctrineHydratorName,
+            $scope.newService.doctrineHydratorStrategies
+        ).then(
+            function(restResource) {
+                flash.success = "New Doctrine-Connected REST service created; please wait for the list to refresh";
+                $scope.resetForm();
+                ApiRepository.refreshApi($scope, true, 'Finished reloading REST service list').then(function() {
+                    return $timeout(function() {
+                        $state.go('.', { service: newServiceName, view: 'settings'}, { reload: true});
+                    }, 1500);
+                });
+            },
+            function(error) {
+                agFormHandler.reportError(error, $scope);
+            }
+        );
+    };
+
+    $scope.newService.addStrategy = function() {
+        $scope.newService.searching = true;
+        ApiRepository.serviceExist($scope.newService.newStrategy).then(
+            function(response) {
+                $scope.newService.searching = false;
+                var result = response.data;
+                result.exist = !!result.exist;
+                if (result.exist == true) {
+                    $scope.newService.doctrineHydratorStrategies.push($scope.newService.newStrategy);
+                    $scope.newService.newStrategy = '';
+                } else {
+                    flash.error = 'This strategy is not declared in the service manager';
+                }
+            }
+        );
+    };
+
+    $scope.newService.removeStrategy = function(index) {
+        $scope.newService.doctrineHydratorStrategies.splice(index, 1);
+    }
+
+      $scope.editService = {
+          addStrategy: function (parent) {
+              $scope.editService.searching = true;
+              ApiRepository.serviceExist($scope.editService.newStrategy).then(
+                  function(response) {
+                      $scope.editService.searching = false;
+                      var result = response.data;
+                      result.exist = !!result.exist;
+                      if (result.exist == true) {
+                          $scope.api.restServices[parent].hydrator_strategies.push($scope.editService.newStrategy);
+                          $scope.editService.newStrategy = '';
+                      } else {
+                          flash.error = 'This strategy is not declared in the service manager';
+                      }
+                  }
+              );
+          },
+          removeStrategy: function(parent, index) {
+              $scope.api.restServices[parent].hydrator_strategies.splice(index, 1);
+          }
+      };
+
     $scope.saveRestService = function (index) {
         var restServiceData = _.clone($scope.api.restServices[index]);
-        ApiRepository.saveRestService($scope.api.name, restServiceData).then(
+        var doctrineConnected = $scope.isDoctrineConnected(restServiceData);
+
+        ApiRepository.saveRestService($scope.api.name, restServiceData, doctrineConnected).then(
             function (data) {
                 agFormHandler.resetForm($scope);
                 flash.success = 'REST Service updated';
@@ -115,8 +216,9 @@ angular.module('ag-admin').controller(
         );
     };
 
-    $scope.removeRestService = function (restServiceName, recursive) {
-        ApiRepository.removeRestService($scope.api.name, restServiceName, !!recursive).then(
+    $scope.removeRestService = function (restService, recursive) {
+        var doctrineConnected = $scope.isDoctrineConnected(restService);
+        ApiRepository.removeRestService($scope.api.name, restService.controller_service_name, !!recursive, doctrineConnected).then(
             function (data) {
                 ApiRepository.refreshApi($scope, true, 'REST Service deleted');
                 $scope.deleteRestService = false;
