@@ -1,0 +1,13 @@
+<?php
+$path    = __DIR__ . '/../dist/index.html';
+$apiBase = $this->url('zf-apigility/api/module');
+$apiBase = substr($apiBase, 0, strrpos($apiBase, '/'));
+$docUri  = (class_exists('ZF\Apigility\Documentation\Module')) ? $this->url('zf-apigility/documentation') : '';
+
+$basePath = $this->serverUrl(rtrim($this->basePath(), '/') . '/apigility-ui/');
+
+$html = file_get_contents($path);
+$html = str_replace('%BASE_HREF%', $basePath, $html);
+$html = str_replace('%API_BASE%', $apiBase, $html);
+$html = str_replace('%DOC_URI%', $docUri, $html);
+echo $html;

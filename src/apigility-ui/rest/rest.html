@@ -1,0 +1,223 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      REST service: {{vm.restName}} (v{{vm.version}})
+      <button class="btn btn-danger pull-right" ng-click="vm.deleteRestModal()"><span class="glyphicon glyphicon-trash"></span> Delete service</button>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <tabset justified="true">
+      <tab heading="General Settings">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="rest_name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_name" ng-model="vm.rest.service_name" readonly>
+            </div>
+            <label for="rest_page_size" class="col-sm-2 control-label">Page size</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_page_size" ng-model="vm.rest.page_size">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_route_match" class="col-sm-2 control-label">Route matches</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_route_match" ng-model="vm.rest.route_match">
+            </div>
+            <label for="rest_http_entity" class="col-sm-2 control-label">HTTP Entity Methods</label>
+            <div class="col-sm-4">
+              <span ng-repeat="http in vm.httpMethods">
+                <input type="checkbox" name="rest_http_entity[]" ng-checked="vm.rest.entity_http_methods.indexOf(http) > -1" value="{{http}}">
+                {{http}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_id" class="col-sm-2 control-label">Route identifier name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_id" ng-model="vm.rest.route_identifier_name">
+            </div>
+            <label for="rest_http_collection" class="col-sm-2 control-label">HTTP Collection Methods</label>
+            <div class="col-sm-4">
+              <span ng-repeat="http in vm.httpMethods">
+                <input type="checkbox" name="rest_http_collection[]" ng-checked="vm.rest.collection_http_methods.indexOf(http) > -1" value="{{http}}">
+                {{http}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_entity_id" class="col-sm-2 control-label">Entity identifier name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_entity_id" ng-model="vm.rest.entity_identifier_name">
+            </div>
+            <label for="rest_page_size_parameter" class="col-sm-2 control-label">Page Size Parameter</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="rest_page_size_parameter" ng-model="vm.rest.page_size_param">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_hydrator" class="col-sm-2 control-label">Hydrator Service Name</label>
+            <div class="col-sm-4">
+              <select class="form-control" ng-model="vm.rest.hydrator_name" ng-options="hydrator for hydrator in vm.hydrators"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_query_white_list" class="col-sm-2 control-label">Collection Query String Whitelist</label>
+            <div class="col-sm-4">
+              <tags-input
+                ng-model="vm.rest.collection_query_whitelist"
+                ng-readonly=""
+                placeholder="Insert query whitelist"
+                add-on-space="true"
+                add-on-enter="true"
+                add-on-blur="true"
+                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+            </div>
+            <label for="rest_collection_name" class="col-sm-2 control-label">Collection Name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" ng-model="vm.rest.collection_name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_entity_class" class="col-sm-2 control-label">Entity Class</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" ng-model="vm.rest.entity_class">
+            </div>
+            <label for="rest_collection_class" class="col-sm-2 control-label">Collection Class</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" ng-model="vm.rest.collection_class">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:40px">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="button" class="btn btn-default">Cancel</button>
+              <button type="button" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Content Negotiation">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="rest_content_negotiation" class="col-sm-2 control-label">Content Negotiation Selector</label>
+            <div class="col-sm-8">
+              <select class="form-control" ng-model="vm.rest.selector" ng-options="selector.content_name for selector in vm.content_negotiation"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_accept_whitelist" class="col-sm-2 control-label">Accept whitelist</label>
+            <div class="col-sm-8">
+              <tags-input
+                ng-model="vm.rest.accept_whitelist"
+                ng-readonly=""
+                placeholder="Add a mediatype"
+                add-on-space="true"
+                add-on-enter="true"
+                add-on-blur="true"
+                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_accept_whitelist" class="col-sm-2 control-label">Content-Type whitelist</label>
+            <div class="col-sm-8">
+              <tags-input
+                ng-model="vm.rest.content_type_whitelist"
+                ng-readonly=""
+                placeholder="Add a content type"
+                add-on-space="true"
+                add-on-enter="true"
+                add-on-blur="true"
+                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:50px">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="button" class="btn btn-default">Cancel</button>
+              <button type="button" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Fields">
+        <h3>Fields <button type="button" class="btn btn-primary btn-sm" ng-click="vm.newFieldModal()">New field</button></h3>
+        <table class="table table-bordered col-md-12">
+          <thead>
+            <tr>
+              <th class="col-md-2">Name</th>
+              <th class="col-md-1">Required</th>
+              <th class="col-md-3">Validator</th>
+              <th class="col-md-3">Filter</th>
+              <th class="col-md-3">Action</th>
+            </tr>
+          </thead>
+          <tr ng-repeat="item in vm.rest.fields">
+            <td>{{item.name}}</td>
+            <td><span ng-if="item.required" class="glyphicon glyphicon-ok"></span></td>
+            <td>
+              <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addValidatorModal(item.name)"><span class="glyphicon glyphicon-plus"></span></button>
+              <span ng-repeat="validator in item.validators"><a ng-click="vm.editValidatorModal(validator.name)">{{validator.name}}</a>, </span>
+              <span ng-if="item.validators.length == 0">No validators</span>
+              </td>
+            <td>
+              <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addFilterModal(item.name)"><span class="glyphicon glyphicon-plus"></span></button>
+              <span ng-repeat="filter in item.filters"><a ng-click="vm.editFilterModal(filter.name)">{{filter.name}}</a>, </span>
+              <span ng-if="item.filters.length == 0">No filters</span>
+            </td>
+            <td>
+              <button type="button" ng-click="vm.editFieldModal(item.name)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(item.name)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+            </td>
+          </tr>
+          <tr ng-if="vm.rest.fields.length == 0">
+            <td colspan="5">
+              No fields have been configured, <a href="">create the first one</a>
+            </td>
+          </tr>
+        </table>
+      </tab>
+      <tab heading="Authorization">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="rest_authorization_type" class="col-sm-2 control-label">Authentication type</label>
+            <div class="col-sm-8">
+              <select class="form-control" name="type" id="rest_authorization_type">
+                <option>None</option>
+                <option>Basic</option>
+                <option>Digest</option>
+                <option>OAuth2</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_entity_auth" class="col-sm-2 control-label">Entity authorization</label>
+            <div class="col-sm-8">
+              <input type="checkbox" name="rest_entity_auth" id="rest_entity_auth" value="GET"> GET
+              <input type="checkbox" name="rest_entity_auth" id="rest_entity_auth" value="POST"> POST
+              <input type="checkbox" name="rest_entity_auth" id="rest_entity_auth" value="PUT"> PUT
+              <input type="checkbox" name="rest_entity_auth" id="rest_entity_auth" value="PATCH"> PATCH
+              <input type="checkbox" name="rest_entity_auth" id="rest_entity_auth" value="DELETE"> DELETE
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rest_collection_auth" class="col-sm-2 control-label">Collection authorization</label>
+            <div class="col-sm-8">
+              <input type="checkbox" name="rest_collection_auth" id="rest_collection_auth" value="GET"> GET
+              <input type="checkbox" name="rest_collection_auth" id="rest_collection_auth" value="POST"> POST
+              <input type="checkbox" name="rest_collection_auth" id="rest_collection_auth" value="PUT"> PUT
+              <input type="checkbox" name="rest_collection_auth" id="rest_collection_auth" value="PATCH"> PATCH
+              <input type="checkbox" name="rest_collection_auth" id="rest_collection_auth" value="DELETE"> DELETE
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:50px">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="button" class="btn btn-default">Cancel</button>
+              <button type="button" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Documentation">
+
+      </tab>
+    </tabset>
+  </div>
+</div>

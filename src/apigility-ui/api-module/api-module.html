@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      API: {{vm.apiName}} (v{{vm.version}})
+      <button class="btn btn-danger pull-right" ng-click="vm.deleteApiModal()"><span class="glyphicon glyphicon-trash"></span> Delete API</button>
+      <button class="btn btn-primary pull-right" ng-click="vm.newVersionModal()" style="margin-right:10px">New version</button>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <h3>REST</h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-2">Service name</th>
+            <th class="col-sm-4">URL</th>
+            <th class="col-sm-6">Description</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="rest in vm.rest">
+          <td><a href="">{{rest.service_name}}</a></td>
+          <td>{{rest.route_match}}</td>
+          <td>
+            <a href="" ng-if="!rest._embedded.documentation.description">Add a description for this service</a>
+            <span ng-if="rest._embedded.documentation.description">{{rest._embedded.documentation.description}}</span>
+          </td>
+        </tr>
+        <tr ng-if="vm.rpc.length == 0">
+          <td colspan="3">
+            No REST services, <a href="">create a new one</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-sm-12">
+      <h3>RPC</h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-2">Service name</th>
+            <th class="col-sm-4">URL</th>
+            <th class="col-sm-6">Description</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="rpc in vm.rpc">
+          <td><a href="">{{rpc.service_name}}</a></td>
+          <td>{{rpc.route_match}}</td>
+          <td>
+            <a href="" ng-if="!rpc._embedded.documentation.description">Add a description for this service</a>
+            <span ng-if="rpc._embedded.documentation.description">{{rpc._embedded.documentation.description}}</span>
+          </td>
+        </tr>
+        <tr ng-if="vm.rpc.length == 0">
+          <td colspan="3">
+            No RPC services, <a href="">create a new one</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

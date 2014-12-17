@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Content Negotiation</h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <h3>Selector <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NewSelectorContent">New selector</button></h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-3">Name</th>
+            <th class="col-sm-6">View model</th>
+            <th class="col-sm-3">Action</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="item in vm.contentlist">
+          <td>{{item.name}}</td>
+          <td><{{item.view_models}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
