@@ -3,17 +3,18 @@
   'use strict';
 
   angular
-    .module('apigility.api-module')
+    .module('apigility')
     .controller('ApiModule', ApiModule);
 
-  ApiModule.$inject = [ 'api', '$modal', '$stateParams', '$rootScope'];
+  ApiModule.$inject = [ 'api', '$modal', '$state', '$stateParams', '$rootScope', 'Apis' ];
 
-  function ApiModule(api, $modal, $stateParams, $rootScope) {
+  function ApiModule(api, $modal, $state, $stateParams, $rootScope, Apis) {
     /* jshint validthis:true */
     var vm = this;
 
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
+    vm.loading = false;
 
     api.getRestList(vm.apiName, vm.version, function(result){
       vm.rest = result;
@@ -25,29 +26,26 @@
 
     vm.newVersionModal = function() {
       var modalInstance = $modal.open({
-        templateUrl: 'apigility-ui/api-module/new-version.modal.html',
-        controller: 'NewVersionModal',
+        templateUrl: 'apigility-ui/modal/new-version.html',
+        controller: 'NewVersion',
         controllerAs: 'vm'
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        //$scope.selected = selectedItem;
-      }, function () {
-        //$log.info('Modal dismissed at: ' + new Date());
+      modalInstance.result.then(function(response) {
+
       });
     }
 
     vm.deleteApiModal = function() {
       var modalInstance = $modal.open({
-        templateUrl: 'apigility-ui/api-module/delete-api.modal.html',
-        controller: 'DeleteApiModal',
+        templateUrl: 'apigility-ui/modal/delete-api.html',
+        controller: 'DeleteApi',
         controllerAs: 'vm'
       });
-      
-      modalInstance.result.then(function (selectedItem) {
-        //$scope.selected = selectedItem;
-      }, function () {
-        //$log.info('Modal dismissed at: ' + new Date());
+
+      modalInstance.result.then(function(apiName) {
+        Apis.removeApi(apiName);
+        $state.go('ag', null, {reload: true});
       });
     }
   }

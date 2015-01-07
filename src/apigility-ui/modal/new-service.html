@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="myModalService">Create a new service</h4>
+  <h4 class="modal-title">Create a new service</h4>
 </div>
 <div class="modal-body">
   <div role="tabpanel">
@@ -14,30 +14,29 @@
     <tabset justified="true">
       <tab heading="REST">
         <label for="rest_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" id="rest_service_name" placeholder="Insert the service name">
+        <input type="text" class="form-control" ng-model="vm.restname" placeholder="Insert the service name">
       </tab>
       <tab heading="RPC">
         <label for="rpc_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" id="rpc_service_name" placeholder="Insert the service name">
+        <input type="text" class="form-control" ng-model="vm.rpcname" placeholder="Insert the service name">
         <br />
         <label for="route_match" class="control-label">Route to match</label>
-        <input type="text" class="form-control" id="route_match" placeholder="Insert the route to match">
+        <input type="text" class="form-control" ng-model="vm.route" placeholder="Insert the route to match">
       </tab>
       <tab heading="DB Connected">
         <label for="db_adapter_name" class="control-label">DB adapter name</label>
-        <select class="form-control" name="db_adapter_name" id="db_adapter_name">
+        <select class="form-control" ng-model="vm.dbadapter">
           <option>PDO</option>
           <option>MongoDB</option>
         </select>
         <br />
         <label for="rtable_name" class="control-label">Table name</label>
-        <input type="text" class="form-control" id="table_name" placeholder="Insert the table name">
+        <input type="text" class="form-control" ng-model="vm.tablename" placeholder="Insert the table name">
       </tab>
     </tabset>
   </div>
-
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
-  <button type="button" id="add_service" class="btn btn-primary btn-sm">Create service</span></button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()">Create service</span></button>
 </div>

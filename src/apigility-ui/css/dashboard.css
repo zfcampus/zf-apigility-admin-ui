@@ -161,14 +161,13 @@ h3.panel-title {
 /**
  * Tree view customization
  */
- .angular-ui-tree-handle {
-   background: none repeat scroll 0 0 #f8faff;
-   border: 1px solid #dae2ea;
-   color: #7c9eb2;
-   padding: 10px;
- }
+.angular-ui-tree-handle {
+  background: none repeat scroll 0 0 #f8faff;
+  border: 1px solid #dae2ea;
+  color: #7c9eb2;
+  padding: 10px;
+}
 
-
- .modal_msg {
-   font-size: 18px;
- }
+.modal_msg {
+  font-size: 18px;
+}

@@ -3,12 +3,12 @@
   'use strict';
 
   angular
-  .module('apigility.api-module')
-  .controller('NewVersionModal', NewVersionModal);
+  .module('apigility.modal')
+  .controller('NewVersion', NewVersion);
 
-  NewVersionModal.$inject = [ '$modalInstance', '$stateParams' ];
+  NewVersion.$inject = [ '$modalInstance', '$stateParams' ];
 
-  function NewVersionModal($modalInstance, $stateParams) {
+  function NewVersion($modalInstance, $stateParams) {
     /* jshint validthis:true */
     var vm = this;
 

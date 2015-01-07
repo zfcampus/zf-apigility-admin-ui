@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('apigility.api')
+    .module('apigility.service')
     .service('api', Api);
 
   Api.$inject = [ 'xhr', 'agApiPath' ];
@@ -13,12 +13,50 @@
     this.getApiList = function(callback) {
       xhr.get(agApiPath + '/dashboard', '_embedded')
         .then(function (response) {
-          return callback(response.module);
+          return callback(false, response.module);
         })
         .catch(function (err) {
-          console.log('Failed to get the list of APIs', err);
-          return false;
+          return callback(true, null);
         });
+    };
+
+    this.getApi = function(name, callback) {
+      xhr.get(agApiPath + '/module/' + name)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, err.detail);
+      });
+    };
+
+    this.newApi = function(name, callback) {
+      var allowed = [ 'name' ];
+      xhr.create(agApiPath + '/module', [ name ], allowed)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        switch (err.status) {
+          case 409 :
+            return callback(true, err.data.detail);
+            break;
+          case 500 :
+            return callback(true, 'I cannot create the API module, please check if already exists');
+            break;
+        }
+        return callback(true, 'I cannot create the API module, please enter a valid name (alpha characters)');
+      });
+    };
+
+    this.deleteApi = function(name, recursive, callback) {
+      xhr.remove(agApiPath + '/module/' + name + '?recursive=' + (recursive ? 1 : 0))
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
     };
 
     this.getRestList = function(module, version, callback) {

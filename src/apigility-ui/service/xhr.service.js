@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('apigility.api')
+    .module('apigility.service')
     .service('xhr', xhr);
 
   xhr.$inject = ['$http', '$q'];
@@ -55,7 +55,8 @@
     var httpOptions = {
       method  : method,
       url     : path,
-      headers : headers
+      headers : headers,
+      cache   : false
     };
 
     if (method === 'POST' || method === 'PATCH') {

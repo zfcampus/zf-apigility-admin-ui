@@ -36,29 +36,7 @@
   </head>
 
   <body data-ag-api-path="%API_BASE%">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header col-sm-4 col-md-3">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a ui-sref="ag.index"><img id="logo" src="apigility-ui/img/logo.png" alt="Apigility"></a>
-        </div>
-
-        <div class="navbar-collapse collapse">
-          <ul class="nav nav-pills nav-justified">
-            <li><a ui-sref="ag.content">Content negotiation</a></li>
-            <li><a ui-sref="ag.authentication">Authentication</a></li>
-            <li><a ui-sref="ag.database">Database</a></li>
-            <li><a ui-sref="ag.documentation">Documentation</a></li>
-            <li><a ui-sref="ag.package">Package</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <ui-view name="header"></ui-view>
 
     <div class="container-fluid">
       <div class="row">
@@ -71,7 +49,8 @@
           <div style="margin-top: 20px" ui-view name="content"></div>
           <footer>
               <hr>
-              &copy; 2013 - 2014 by <a href="http://www.zend.com">Zend Technologies</a> Ltd.
+              <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com">Zend Technologies</a> Ltd.</div>
+              <div class="pull-right">Made with <span class="glyphicon glyphicon-heart"></span> using <a href="https://angularjs.org" target="_blank"><img src="apigility-ui/img/angularjs.png" valign="absmiddle"></a> and <a href="http://framework.zend.com" target="_blank"><img src="apigility-ui/img/zf2.png" valign="absmiddle"></a></div>
           </footer>
         </div>
       </div>
@@ -91,22 +70,23 @@
     <!-- build:js apigility-ui/apigility.js -->
     <script src="apigility-ui/app.module.js"></script>
     <script src="apigility-ui/app.config.js"></script>
+
     <script src="apigility-ui/core/core.module.js"></script>
     <script src="apigility-ui/core/nav.controller.js"></script>
 
-    <script src="apigility-ui/sidebar/sidebar.module.js"></script>
+    <script src="apigility-ui/header/header.controller.js"></script>
     <script src="apigility-ui/sidebar/sidebar.controller.js"></script>
-    <script src="apigility-ui/sidebar/new-api.controller.js"></script>
-    <script src="apigility-ui/sidebar/new-service.controller.js"></script>
-    <script src="apigility-ui/dashboard/dashboard.module.js"></script>
-    <script src="apigility-ui/dashboard/dashboard.config.js"></script>
     <script src="apigility-ui/dashboard/dashboard.controller.js"></script>
+
+    <script src="apigility-ui/modal/modal.module.js"></script>
+    <script src="apigility-ui/modal/new-api.controller.js"></script>
+    <script src="apigility-ui/modal/new-service.controller.js"></script>
+    <script src="apigility-ui/modal/new-version.controller.js"></script>
+    <script src="apigility-ui/modal/delete-api.controller.js"></script>
 
     <script src="apigility-ui/api-module/api-module.module.js"></script>
     <script src="apigility-ui/api-module/api-module.config.js"></script>
     <script src="apigility-ui/api-module/api-module.controller.js"></script>
-    <script src="apigility-ui/api-module/new-version.controller.js"></script>
-    <script src="apigility-ui/api-module/delete-api.controller.js"></script>
 
     <script src="apigility-ui/rest/rest.module.js"></script>
     <script src="apigility-ui/rest/rest.config.js"></script>
@@ -142,11 +122,10 @@
     <script src="apigility-ui/contentneg/contentneg.controller.js"></script>
     -->
 
-    <script src="apigility-ui/api/api.module.js"></script>
-    <script src="apigility-ui/api/api.service.js"></script>
-    <script src="apigility-ui/api/xhr.service.js"></script>
-
-    <script src="apigility-ui/templates.js"></script>
+    <script src="apigility-ui/service/service.module.js"></script>
+    <script src="apigility-ui/service/api.service.js"></script>
+    <script src="apigility-ui/service/apis.service.js"></script>
+    <script src="apigility-ui/service/xhr.service.js"></script>
     <!-- endbuild -->
   </body>
 </html>

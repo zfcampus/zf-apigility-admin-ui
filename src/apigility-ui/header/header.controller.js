@@ -4,13 +4,12 @@
 
   angular
     .module('apigility')
-    .controller('Dashboard', Dashboard);
+    .controller('Header', Header);
 
-  Dashboard.$inject = [ '$rootScope' ];
+  Header.$inject = [];
 
-  function Dashboard($rootScope) {
+  function Header(){
     /* jshint validthis:true */
     var vm = this;
-
   }
 })();

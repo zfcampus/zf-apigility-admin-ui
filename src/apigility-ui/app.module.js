@@ -4,15 +4,14 @@
   angular
     .module('apigility', [
       'apigility.core',
-      'apigility.api',
-      'apigility.sidebar',
-      'apigility.dashboard',
+      'apigility.service',
+      'apigility.modal',
       'apigility.api-module',
       'apigility.rest',
       'apigility.content-negotiation',
       'apigility.authentication',
       'apigility.database',
-      
+
       'ui.bootstrap',
       'ui.router',
       'ui.tree'

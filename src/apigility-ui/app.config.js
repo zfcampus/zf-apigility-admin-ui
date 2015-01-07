@@ -10,20 +10,9 @@
     '$provide',
     '$stateProvider',
     '$urlRouterProvider',
-    'localStorageServiceProvider',
+    //'localStorageServiceProvider',
     '$httpProvider'
   ];
-
-  var ag = {
-    abstract: true,
-    views: {
-      sidebar: {
-        templateUrl: 'apigility-ui/sidebar/sidebar.html',
-        controller: 'Sidebar',
-        controllerAs: 'vm'
-      }
-    }
-  };
 
   function config ($provide, $stateProvider, $urlRouterProvider, localStorageServiceProvider, $httpProvider) {
 
@@ -34,14 +23,36 @@
       '/api'
     );
 
-    $stateProvider
-    .state('ag', ag);
+    $stateProvider.state({
+      name : 'ag',
+      url : '/',
+      controller: 'Application',
+      views: {
+        'header@' : {
+          templateUrl: 'apigility-ui/header/header.html',
+          controller: 'Header',
+          controllerAs: 'vm',
+          parent : this
+        },
+        'sidebar@': {
+          templateUrl: 'apigility-ui/sidebar/sidebar.html',
+          controller: 'Sidebar',
+          controllerAs: 'vm',
+          parent : this
+        },
+        'content@': {
+          templateUrl: 'apigility-ui/dashboard/dashboard.html',
+          controller: 'Dashboard',
+          controllerAs: 'vm',
+          parent : this
+        }
+      }
+    });
 
-    $urlRouterProvider
-    .otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
-    localStorageServiceProvider
-    .setPrefix('ag');
+    //localStorageServiceProvider
+    //.setPrefix('ag');
   }
 
 })();
