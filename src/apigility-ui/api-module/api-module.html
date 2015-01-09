@@ -27,7 +27,7 @@
         </tr>
         <tr ng-if="vm.rpc.length == 0">
           <td colspan="3">
-            No REST services, <a href="">create a new one</a>
+            No REST services, <a href ng-click="vm.newServiceModal()">create a new one</a>
           </td>
         </tr>
       </table>

@@ -6,9 +6,9 @@
     .module('apigility.rest')
     .controller('Rest', Rest);
 
-  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope'];
+  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'Apis', '$state'];
 
-  function Rest(api, $modal, $stateParams, $rootScope) {
+  function Rest(api, $modal, $stateParams, $rootScope, Apis, $state) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -25,9 +25,11 @@
       vm.rest = result;
       vm.rest.fields = [];
       var i = 0;
-      while (typeof result._embedded.input_filters[0][i] !== 'undefined') {
-        vm.rest.fields[i] = result._embedded.input_filters[0][i];
-        i++;
+      if (result._embedded) {
+        while (typeof result._embedded.input_filters[0][i] !== 'undefined') {
+          vm.rest.fields[i] = result._embedded.input_filters[0][i];
+          i++;
+        }
       }
     });
 
@@ -37,15 +39,14 @@
 
     vm.deleteRestModal = function() {
       var modalInstance = $modal.open({
-        templateUrl: 'apigility-ui/rest/delete-rest.modal.html',
-        controller: 'DeleteRestModal',
+        templateUrl: 'apigility-ui/modal/delete-rest.html',
+        controller: 'DeleteRest',
         controllerAs: 'vm'
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        //$scope.selected = selectedItem;
-      }, function () {
-        //$log.info('Modal dismissed at: ' + new Date());
+      modalInstance.result.then(function (api, version, service) {
+        Apis.removeRestService(api, service);
+        $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
       });
     };
 

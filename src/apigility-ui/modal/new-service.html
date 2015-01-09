@@ -2,41 +2,42 @@
   <h4 class="modal-title">Create a new service</h4>
 </div>
 <div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
   <div role="tabpanel">
-    <label for="api_name" class="control-label">API</label>
-    <select class="form-control" name="api_name" id="api_name">
-      <option ng-repeat="api in vm.apis">{{api.name}}</option>
-    </select>
+    <label class="control-label">API</label>
+    <select class="form-control" ng-model="vm.apiname" ng-options="api.name for api in vm.apis" ng-disabled="vm.loading"></select>
     <br />
     <label class="control-label">Select the type of service to create</label>
     <br />
     <!-- Nav tabs -->
     <tabset justified="true">
-      <tab heading="REST">
+      <tab heading="REST" active="vm.tabs.rest">
         <label for="rest_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" ng-model="vm.restname" placeholder="Insert the service name">
+        <input type="text" class="form-control" ng-model="vm.restname" ng-disabled="vm.loading" placeholder="Insert the service name">
       </tab>
-      <tab heading="RPC">
+      <tab heading="RPC" active="vm.tabs.rpc">
         <label for="rpc_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" ng-model="vm.rpcname" placeholder="Insert the service name">
+        <input type="text" class="form-control" ng-model="vm.rpcname" ng-disabled="vm.loading" placeholder="Insert the service name">
         <br />
         <label for="route_match" class="control-label">Route to match</label>
-        <input type="text" class="form-control" ng-model="vm.route" placeholder="Insert the route to match">
+        <input type="text" class="form-control" ng-model="vm.route" ng-disabled="vm.loading" placeholder="Insert the route to match">
       </tab>
-      <tab heading="DB Connected">
+      <tab heading="DB Connected" active="vm.tabs.db">
         <label for="db_adapter_name" class="control-label">DB adapter name</label>
-        <select class="form-control" ng-model="vm.dbadapter">
+        <select class="form-control" ng-model="vm.dbadapter" ng-disabled="vm.loading">
           <option>PDO</option>
           <option>MongoDB</option>
         </select>
         <br />
         <label for="rtable_name" class="control-label">Table name</label>
-        <input type="text" class="form-control" ng-model="vm.tablename" placeholder="Insert the table name">
+        <input type="text" class="form-control" ng-model="vm.tablename" ng-disabled="vm.loading" placeholder="Insert the table name">
       </tab>
     </tabset>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
-  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()">Create service</span></button>
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">Close</button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Create service</span></button>
 </div>

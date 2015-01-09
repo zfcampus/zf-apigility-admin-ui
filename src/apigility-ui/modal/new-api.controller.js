@@ -21,16 +21,17 @@
         vm.alert = 'The API name cannot be empty';
         return;
       }
+      vm.loading = true;
       api.newApi(vm.apiname, function(err, response) {
         if (err) {
           vm.alert = response;
-        } else {
-          vm.loading = true;
-          $timeout(function(){
-            vm.loading = false;
-            $modalInstance.close(response);
-          }, 2000);
+          vm.loading = false;
+          return;
         }
+        $timeout(function(){
+          vm.loading = false;
+          $modalInstance.close(response);
+        }, 2000);
       });
     }
   }

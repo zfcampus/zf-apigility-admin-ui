@@ -1,43 +1,44 @@
 <div class="row">
-  <form class="navbar-form">
+  <form class="navbar-form" ng-submit="vm.searchApi(vm.search)">
     <div class="form-group has-feedback">
       <input
       class="form-control"
       type="search"
       placeholder="Search for a service"
       ng-model="vm.search"
+      ng-disabled="vm.loading"
       typeahead="service for service in vm.services | filter:$viewValue | limitTo:8">
-      <button type="button" class="btn btn-sm btn-primary form-control-feedback" ng-hide="vm.search"><span class="glyphicon glyphicon-search"></span></button>
-      <button type="button" class="btn btn-sm btn-danger form-control-feedback" ng-hide="!vm.search" ng-click="vm.search=''"><span class="glyphicon glyphicon-remove"></span></button>
+      <span class="glyphicon glyphicon-remove form-control-feedback" ng-hide="!vm.search" ng-click="vm.searchApi('');vm.search=''"></span>
     </div>
+    <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
   </form>
 </div>
 <br />
 <div class="row">
   <div class="col-sm-12 text-right">
-    <span class="pull-left"><strong>API LIST</strong></span>
-    <button type="button" id="new_api" class="btn btn-primary btn-sm" ng-click="vm.newApiModal()">New API</button>
-    <button type="button" id="new_service" class="btn btn-info btn-sm" ng-click="vm.newServiceModal()">New Service</button>
+    <span class="pull-left" ladda="vm.loading"><strong>API LIST</strong></span>
+    <button type="button" id="new_api" class="btn btn-primary btn-sm" ng-click="vm.newApiModal()" ng-disabled="vm.loading">New API</button>
+    <button type="button" id="new_service" class="btn btn-info btn-sm" ng-click="vm.newServiceModal()" ng-disabled="vm.loading">New Service</button>
   </div>
 </div>
 <br />
-<div ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2">
+<div ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
   <ol ui-tree-nodes="options" ng-model="vm.apis" class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes">
     <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis" ui-tree-node="">
       <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle>
         <a class="btn btn-default btn-xs" ng-click="vm.toggle(this)" data-nodrag="">
           <span ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" class="glyphicon glyphicon-chevron-down"></span>
         </a>
-        <a ui-sref="ag.apimodule({api: item.name, ver: vm.version})">{{item.name}}</a> - version <select ng-model="vm.version" ng-options="ver for ver in item.versions"></select>
+        <a ng-click="vm.apiname=item.name" ui-sref="ag.apimodule({api: item.name, ver: vm.version})">{{item.name}}</a> - version <select ng-model="vm.version" ng-options="ver for ver in item.versions"></select>
         <span class="badge pull-right">{{item.rest.length + item.rpc.length}}</span>
       </div>
       <ol class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes" ui-tree-nodes="" ng-model="item.rest" ng-class="{hidden: collapsed}">
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest" ui-tree-node ng-if="!vm.search || vm.search == subItem">
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest" ui-tree-node>
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle>
             <span class="glyphicon glyphicon-leaf"></span> <a ui-sref="ag.rest({api: item.name, ver: vm.version, rest: subItem})">{{subItem}}</a>
           </div>
         </li>
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc" ui-tree-node ng-if="!vm.search || vm.search == subItem">
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc" ui-tree-node>
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle>
             <span class="glyphicon glyphicon-fire"></span> <a ng-click="vm.loadService(item.name, subItem)">{{subItem}}</a>
           </div>
@@ -45,4 +46,10 @@
       </ol>
     </li>
   </ol>
+</div>
+<div class="alert alert-info" role="alert" ng-show="vm.apis.length == 0 && !vm.search">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No APIs configured, <a href="">would you like to create one?</a>
+</div>
+<div class="alert alert-danger" role="alert" ng-show="vm.apis.length == 0 && vm.search">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No services found, try with a new search
 </div>

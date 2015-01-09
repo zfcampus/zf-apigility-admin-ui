@@ -59,6 +59,36 @@
       });
     };
 
+    this.newRest = function(module, service, callback) {
+      var allowed = [ 'service_name' ];
+      xhr.create(agApiPath + '/module/' + module + '/rest', [ service ], allowed)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        switch (err.status) {
+          case 409 :
+            return callback(true, err.data.detail);
+            break;
+            case 500 :
+              return callback(true, 'I cannot create the API module, please check if already exists');
+              break;
+            }
+            return callback(true, 'I cannot create the API module, please enter a valid name (alpha characters)');
+          });
+    }
+
+    this.deleteRest = function(module, version, name, recursive, callback) {
+      xhr.remove(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + name + '-Controller?recursive=' + (recursive ? 1 : 0))
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
+    };
+
+
     this.getRestList = function(module, version, callback) {
       xhr.get(agApiPath + '/module/' + module + '/rest?version=' + version, '_embedded')
         .then(function (response) {

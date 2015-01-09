@@ -14,7 +14,8 @@
 
       'ui.bootstrap',
       'ui.router',
-      'ui.tree'
+      'ui.tree',
+      'angular-ladda'
       /*
       'ngSanitize',
       'ngTagsInput',

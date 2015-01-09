@@ -12,31 +12,53 @@
 
     var setApis = function(data) {
       apis = data;
-    }
+    };
 
     var addApi = function(api) {
       apis.push(api);
-    }
+    };
 
     var removeApi = function(apiName) {
       var newApis = [];
-      apis.forEach(function(api){
-        if (api.name != apiName){
+      apis.forEach(function(api) {
+        if (api.name != apiName) {
           newApis.push(api);
         }
       });
       apis = newApis;
-    }
+    };
 
     var getApis = function(){
       return apis;
     }
 
+    var addRestService = function(apiName, serviceName){
+      apis.forEach(function(api){
+        if (api.name == apiName) {
+          api.rest.push(serviceName);
+          return;
+        }
+      });
+    };
+
+    var removeRestService = function(apiName, serviceName){
+      var newApis = [];
+      apis.forEach(function(api){
+        if (api.name == apiName) {
+          api.rest.splice(api.rest.indexOf(serviceName)-1,1);
+        }
+        newApis.push(api);
+      })
+      apis = newApis;
+    };
+
     return {
       setApis   : setApis,
       addApi    : addApi,
       getApis   : getApis,
-      removeApi : removeApi
+      removeApi : removeApi,
+      addRestService : addRestService,
+      removeRestService : removeRestService
     };
   }
 

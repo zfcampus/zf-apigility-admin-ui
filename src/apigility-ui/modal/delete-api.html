@@ -12,7 +12,6 @@
   <p><input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading"> Delete all files associated with this API?</p>
 </div>
 <div class="modal-footer">
-  <div class="pull-left" ng-show="vm.loading"><img src="/apigility-ui/img/wait.gif"> Please wait...</div>
   <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">No</button>
-  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ng-disabled="vm.loading">Yes</span></button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Yes</span></button>
 </div>

@@ -48,5 +48,22 @@
         $state.go('ag', null, {reload: true});
       });
     }
+
+    vm.newServiceModal = function() {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/new-service.html',
+        controller: 'NewService',
+        controllerAs: 'vm',
+        resolve: {
+          apiname : function() {
+            return vm.apiName;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+        Apis.addRestService(response.api, response.rest);
+      });
+    }
   }
 })();
