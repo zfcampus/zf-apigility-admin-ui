@@ -4,7 +4,17 @@
 
   angular
     .module('apigility')
-    .config(config);
+    .config(config)
+    .directive('autofocus', ['$timeout', function($timeout) {
+      return {
+        restrict: 'A',
+        link : function($scope, $element) {
+          $timeout(function() {
+            $element[0].focus();
+          });
+        }
+      }
+    }]); 
 
   config.$inject = [
     '$provide',
@@ -14,7 +24,7 @@
     '$httpProvider'
   ];
 
-  function config ($provide, $stateProvider, $urlRouterProvider, localStorageServiceProvider, $httpProvider) {
+  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider) {
 
     $provide.value(
       'agApiPath',

@@ -8,6 +8,7 @@
       'apigility.modal',
       'apigility.api-module',
       'apigility.rest',
+      'apigility.rpc',
       'apigility.content-negotiation',
       'apigility.authentication',
       'apigility.database',
@@ -15,10 +16,12 @@
       'ui.bootstrap',
       'ui.router',
       'ui.tree',
-      'angular-ladda'
+      'angular-ladda',
+      'unsavedChanges',
+      'ngTagsInput',
+      'checklist-model'
       /*
       'ngSanitize',
-      'ngTagsInput',
       'ui-sortable',
       'ui-select2',
       'toggle-switch',

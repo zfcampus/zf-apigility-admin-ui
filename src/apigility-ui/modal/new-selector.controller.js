@@ -4,33 +4,31 @@
 
   angular
   .module('apigility.modal')
-  .controller('NewApi', NewApi);
+  .controller('NewSelector', NewSelector);
 
-  NewApi.$inject = [ '$modalInstance', 'api', '$timeout' ];
+  NewSelector.$inject = [ '$modalInstance', 'api' ];
 
-  function NewApi($modalInstance, api, $timeout) {
+  function NewSelector($modalInstance, api) {
     /* jshint validthis:true */
     var vm = this;
 
     vm.cancel  = $modalInstance.dismiss;
-    vm.apiname = '';
+    vm.selectorname = '';
     vm.loading = false;
 
     vm.ok = function() {
-      if (!vm.apiname) {
-        vm.alert = 'The API name cannot be empty';
+      if (!vm.selectorname) {
+        vm.alert = 'The Selector name cannot be empty';
         return;
       }
       vm.loading = true;
-      api.newApi(vm.apiname, function(err, response) {
+      api.newSelector(vm.selectorname, function(err, response) {
         vm.loading = false;
         if (err) {
           vm.alert = response;
           return;
         }
-        $timeout(function(){
-          $modalInstance.close(response);
-        }, 2000);
+        $modalInstance.close(response);
       });
     }
   }

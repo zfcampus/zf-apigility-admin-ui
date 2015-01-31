@@ -8,6 +8,18 @@
   </div>
   <div class="panel-body">
     <div class="col-sm-12">
+      <h3>Authentication</h3>
+      <br /><label class="col-sm-2 control-label">Authenication type</label>
+      <div class="col-sm-4">
+        <select class="form-control" ng-model="vm.authentication_type">
+          <option>None</option>
+          <option>Basic</option>
+          <option>Digest</option>
+          <option>OAuth2</option>
+        </select>
+      </div>
+      <button type="button" id="delete_selector" class="btn btn-success btn-sm">Set authentication</span></button>
+      <br />
       <h3>REST</h3>
       <table class="table table-bordered col-sm-12">
         <thead>
@@ -18,14 +30,14 @@
           </tr>
         </thead>
         <tr ng-repeat="rest in vm.rest">
-          <td><a href="">{{rest.service_name}}</a></td>
+          <td><a ui-sref="ag.rest({api: vm.apiName, ver: vm.version, rest: rest.service_name})">{{rest.service_name}}</a></td>
           <td>{{rest.route_match}}</td>
           <td>
             <a href="" ng-if="!rest._embedded.documentation.description">Add a description for this service</a>
             <span ng-if="rest._embedded.documentation.description">{{rest._embedded.documentation.description}}</span>
           </td>
         </tr>
-        <tr ng-if="vm.rpc.length == 0">
+        <tr ng-if="vm.rest.length == 0">
           <td colspan="3">
             No REST services, <a href ng-click="vm.newServiceModal()">create a new one</a>
           </td>
@@ -43,7 +55,7 @@
           </tr>
         </thead>
         <tr ng-repeat="rpc in vm.rpc">
-          <td><a href="">{{rpc.service_name}}</a></td>
+          <td><a ui-sref="ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.service_name})">{{rpc.service_name}}</a></td>
           <td>{{rpc.route_match}}</td>
           <td>
             <a href="" ng-if="!rpc._embedded.documentation.description">Add a description for this service</a>

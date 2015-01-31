@@ -6,9 +6,9 @@
     .module('apigility')
     .controller('ApiModule', ApiModule);
 
-  ApiModule.$inject = [ 'api', '$modal', '$state', '$stateParams', '$rootScope', 'Apis' ];
+  ApiModule.$inject = [ 'api', '$modal', '$state', '$stateParams', 'Apis' ];
 
-  function ApiModule(api, $modal, $state, $stateParams, $rootScope, Apis) {
+  function ApiModule(api, $modal, $state, $stateParams, Apis) {
     /* jshint validthis:true */
     var vm = this;
 

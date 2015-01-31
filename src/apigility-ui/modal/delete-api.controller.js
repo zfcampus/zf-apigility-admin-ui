@@ -19,13 +19,12 @@
     vm.ok = function() {
       vm.loading = true;
       api.deleteApi(vm.apiName, vm.recursive, function(err, response) {
+        vm.loading = false;
         if (err) {
           vm.alert = 'Error during the delete of the API';
-          vm.loading = false;
           return;
         }
         $timeout(function(){
-          vm.loading = false;
           $modalInstance.close(vm.apiName);
         }, 2000);
       });

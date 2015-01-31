@@ -3,18 +3,18 @@
   'use strict';
 
   angular
-    .module('apigility.rest')
-    .controller('Rest', Rest);
+    .module('apigility.rpc')
+    .controller('Rpc', Rpc);
 
-  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'Apis', '$state', '$scope'];
+  Rpc.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'Apis', '$state', '$scope'];
 
-  function Rest(api, $modal, $stateParams, $rootScope, Apis, $state, $scope) {
+  function Rpc(api, $modal, $stateParams, $rootScope, Apis, $state, $scope) {
     /* jshint validthis:true */
     var vm = this;
 
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
-    vm.restName = $stateParams.rest;
+    vm.rpcName = $stateParams.rpc;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
     vm.changed = [false, false, false, false];
     vm.tags = {
@@ -23,16 +23,12 @@
     };
 
     function initGeneral() {
-      api.getHydrators(function(result){
-        vm.hydrators = result;
-      });
-
-      api.getRest(vm.apiName, vm.version, vm.restName, function(result){
-        vm.rest = result;
-        vm.rest.accept_whitelist.forEach(function(entry){
+      api.getRpc(vm.apiName, vm.version, vm.rpcName, function(result){
+        vm.rpc = result;
+        vm.rpc.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
         });
-        vm.rest.content_type_whitelist.forEach(function(entry){
+        vm.rpc.content_type_whitelist.forEach(function(entry){
           vm.tags.content_type_whitelist.push({ text : entry });
         });
       });
@@ -40,8 +36,8 @@
       api.getContentNegotiation(function(result){
         vm.content_negotiation = result;
         for (var i = 0; i < result.length; i++) {
-          if (vm.rest.selector.content_name === result[i].content_name) {
-            vm.rest.selector = result[i];
+          if (vm.rpc.selector === result[i].content_name) {
+            vm.rpc.selector = result[i];
             break;
           }
         }
@@ -49,7 +45,7 @@
     }
 
     function initAuthorization() {
-      api.getAuthorizationRest(vm.apiName, vm.version, vm.restName, function(err, result){
+      api.getAuthorizationRpc(vm.apiName, vm.version, vm.rpcName, function(err, result){
         if (err) {
           console.log('Error getting the authorization data');
           return;
@@ -70,7 +66,9 @@
         return;
       }
       vm.loading = true;
-      api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, function(err, result){
+      vm.rpc.accept_whitelist = vm.tags.accept_whitelist.map(api.mapTagInput);
+      vm.rpc.content_type_whitelist = vm.tags.content_type_whitelist.map(api.mapTagInput);
+      api.updateGeneralRpc(vm.apiName, vm.version, vm.rpcName, vm.rpc, function(err, result){
         vm.loading = false;
         if (err) {
           vm.alert = result;
@@ -87,57 +85,33 @@
       }
     };
 
-    vm.saveContentNegotiation = function() {
+    vm.saveAuthorization = function() {
       if (!vm.changed[1]) {
         return;
       }
       vm.loading = true;
-      vm.rest.accept_whitelist = vm.tags.accept_whitelist.map(api.mapTagInput);
-      vm.rest.content_type_whitelist = vm.tags.content_type_whitelist.map(api.mapTagInput);
-      api.updateContentNegotiationRest(vm.apiName, vm.version, vm.restName, vm.rest, function(err, result){
+      api.saveAuthorizationRpc(vm.apiName, vm.version, vm.rpcName, vm.auth, function(err, result){
         vm.loading = false;
         if (err) {
           vm.alert = result;
           return;
         }
         vm.changed[1] = false;
-      });
-    };
-
-    vm.resetContentNegotiation = function() {
-      if (vm.changed[1]) {
-        initGeneral();
-        vm.changed[1] = false;
-      }
-    };
-
-    vm.saveAuthorization = function() {
-      if (!vm.changed[2]) {
-        return;
-      }
-      vm.loading = true;
-      api.saveAuthorizationRest(vm.apiName, vm.version, vm.restName, vm.auth, function(err, result){
-        vm.loading = false;
-        if (err) {
-          vm.alert = result;
-          return;
-        }
-        vm.changed[2] = false;
       });
     };
 
     vm.resetAuthorization = function() {
-      if (vm.changed[2]) {
+      if (vm.changed[1]) {
         initAuthorization();
-        vm.changed[2] = false;
+        vm.changed[1] = false;
       }
     };
 
     vm.saveDocumentation = function() {
-      if (!vm.changed[3]) {
+      if (!vm.changed[2]) {
         return;
       }
-      api.saveRestDoc(vm.apiName, vm.version, vm.restName, vm.rest.documentation, function(err,result){
+      api.saveRpcDoc(vm.apiName, vm.version, vm.rpcName, vm.rpc.documentation, function(err,result){
         vm.loading = false;
         if (err) {
           error = true;
@@ -149,21 +123,21 @@
     };
 
     vm.resetDocumentation = function() {
-      if (vm.changed[3]) {
+      if (vm.changed[2]) {
         initGeneral();
-        vm.changed[3] = false;
+        vm.changed[2] = false;
       }
     };
 
-    vm.deleteRestModal = function() {
+    vm.deleteRpcModal = function() {
       var modalInstance = $modal.open({
-        templateUrl: 'apigility-ui/modal/delete-rest.html',
-        controller: 'DeleteRest',
+        templateUrl: 'apigility-ui/modal/delete-rpc.html',
+        controller: 'DeleteRpc',
         controllerAs: 'vm'
       });
 
       modalInstance.result.then(function (api, version, service) {
-        Apis.removeRestService(api, service);
+        Apis.removeRpcService(api, service);
         $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
       });
     };
@@ -175,16 +149,16 @@
         controllerAs: 'vm',
         resolve : {
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -198,16 +172,16 @@
             return field;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -221,16 +195,16 @@
             return field;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -244,16 +218,16 @@
             return field;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -270,16 +244,16 @@
             return validator;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -293,16 +267,16 @@
             return field;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
 
@@ -319,16 +293,16 @@
             return filter;
           },
           fields : function() {
-            return vm.rest.fields;
+            return vm.rpc.fields;
           },
           type : function() {
-            return 'rest';
+            return 'rpc';
           }
         }
       });
 
       modalInstance.result.then(function (response) {
-        vm.rest.fields = response;
+        vm.rpc.fields = response;
       });
     };
   }

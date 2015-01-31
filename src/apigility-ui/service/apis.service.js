@@ -52,13 +52,35 @@
       apis = newApis;
     };
 
+    var removeRpcService = function(apiName, serviceName){
+      var newApis = [];
+      apis.forEach(function(api){
+        if (api.name == apiName) {
+          api.rpc.splice(api.rpc.indexOf(serviceName)-1,1);
+        }
+        newApis.push(api);
+      })
+      apis = newApis;
+    };
+
+    var addRpcService = function(apiName, serviceName){
+      apis.forEach(function(api){
+        if (api.name == apiName) {
+          api.rpc.push(serviceName);
+          return;
+        }
+      });
+    }
+
     return {
       setApis   : setApis,
       addApi    : addApi,
       getApis   : getApis,
       removeApi : removeApi,
       addRestService : addRestService,
-      removeRestService : removeRestService
+      removeRestService : removeRestService,
+      addRpcService : addRpcService,
+      removeRpcService : removeRpcService
     };
   }
 

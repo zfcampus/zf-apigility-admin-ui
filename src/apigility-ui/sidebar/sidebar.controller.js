@@ -20,8 +20,8 @@
     if (vm.apis.length == 0) {
       vm.loading = true;
       api.getApiList(function(err, result){
+        vm.loading = false;
         if (!err) {
-          vm.loading = false;
           Apis.setApis(result);
           vm.apis = result;
           getServiceList(result);
@@ -32,10 +32,11 @@
     vm.searchApi = function(search) {
       if (!search) {
         vm.apis = Apis.getApis();
+        vm.search = '';
         return;
       }
       var newApis = [];
-      Apis.getApis().forEach(function(api) {
+      vm.apis.forEach(function(api) {
         var rest = [];
         api.rest.forEach(function(service){
           if (service.toUpperCase()  == search.toUpperCase()) {
@@ -45,13 +46,14 @@
         var rpc = [];
         api.rpc.forEach(function(service){
           if (service.toUpperCase()  == search.toUpperCase()) {
-            rerpcst.push(service);
+            rpc.push(service);
           }
         });
         if (rest.length > 0 || rpc.length > 0) {
-          api.rest = rest;
-          api.rpc = rpc;
-          newApis.push(api);
+          var copyApi = angular.copy(api);
+          copyApi.rest = rest;
+          copyApi.rpc = rpc;
+          newApis.push(copyApi);
         }
       });
       vm.apis = newApis;
@@ -86,7 +88,11 @@
       });
 
       modalInstance.result.then(function (response) {
-        Apis.addRestService(response.api, response.rest);
+        if (response.hasOwnProperty('rest')) {
+          Apis.addRestService(response.api, response.rest);
+        } else if (response.hasOwnProperty('rpc')) {
+          Apis.addRpcService(response.api, response.rpc);
+        }
       });
     }
 

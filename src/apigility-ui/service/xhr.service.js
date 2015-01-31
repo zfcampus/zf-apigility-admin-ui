@@ -17,6 +17,7 @@
     this.create = create;
     this.update = update;
     this.remove = remove;
+    this.save   = save;
   }
 
   function get(path, key) {
@@ -41,6 +42,13 @@
     });
   }
 
+  function save(path, data) {
+    /* jshint validthis: true */
+    return send(this.http, this.q, 'PUT', path, {
+      data: data
+    });
+  }
+
   function remove(path) {
     /* jshint validthis: true */
     return send(this.http, this.q, 'DELETE', path);
@@ -48,7 +56,7 @@
 
   function send($http, $q, method, path, options) {
     var headers = { Accept: 'application/json' };
-    if (method === 'POST' || method === 'PATCH') {
+    if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
       headers['Content-Type'] = 'application/json';
     }
 
@@ -59,7 +67,7 @@
       cache   : false
     };
 
-    if (method === 'POST' || method === 'PATCH') {
+    if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
       if (! options || ! options.data) {
         throw new Error('Missing data for ' + method + ' operation');
       }
@@ -110,6 +118,14 @@
     for (var i = 0; i < allowed.length; i += 1) {
       if (typeof args[i] === 'undefined') {
         break;
+      }
+      // Manage object values
+      if (args[i] instanceof Array) {
+        for (var j = 0; j < args[i].length; j++) {
+          if (args[i][j].hasOwnProperty('text')) {
+            args[i][j] = args[i][j].text;
+          }
+        }
       }
       data[allowed[i]] = args[i];
     }

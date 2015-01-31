@@ -18,7 +18,7 @@
     vm.apiname = vm.apis[0];
     // If apiname is not empty, we select it
     if (apiname) {
-      for (var i=0; i < vm.apis.length; i++) {
+      for (var i = 0; i < vm.apis.length; i++) {
         if (vm.apis[i].name == apiname) {
           vm.apiname = vm.apis[i];
           break;
@@ -46,6 +46,27 @@
           }
         });
       } else if (vm.tabs.rpc) {
+        if (!vm.rpcname) {
+          vm.alert = 'The service name cannot be empty';
+          vm.loading = false;
+          return;
+        }
+        if (!vm.route) {
+          vm.alert = 'The route to match cannot be empty';
+          vm.loading = false;
+          return;
+        }
+        api.newRpc(vm.apiname.name, vm.rpcname, vm.route, function(err, response) {
+          if (err) {
+            vm.alert = response;
+            vm.loading = false;
+          } else {
+            $timeout(function(){
+              vm.loading = false;
+              $modalInstance.close({ 'api' : vm.apiname.name, 'rpc' : vm.rpcname });
+            }, 2000);
+          }
+        });
 
       } else if (vm.tabs.db) {
 

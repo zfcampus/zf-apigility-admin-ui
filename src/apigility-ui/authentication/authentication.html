@@ -3,122 +3,111 @@
     <h3 class="panel-title">Authentication</h3>
   </div>
   <div class="panel-body">
-    <br />
-    <label for="authentication_type" class="col-sm-2 control-label">Select authentication</label>
-    <div class="col-sm-4">
-      <select class="form-control" name="type" id="authentication_type">
-        <option>None</option>
-        <option>Basic</option>
-        <option>Digest</option>
-        <option>OAuth2</option>
-      </select>
-    </div>
-    <button type="button" id="delete_selector" class="col-sm-2 btn btn-success btn-sm">Set authentication</span></button>
-    <br /><br /><br />
+    <div class="form-group">
+      <tabset justified="true">
+        <!-- BASIC -->
+        <tab heading="Basic" active="vm.tabs.basic">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="auth_basic_realm" class="col-sm-2 control-label">Authentication Realm</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="vm.basic.realm" placeholder="Insert the Realm">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auth_basic_htpasswd" class="col-sm-2 control-label">Path of htpasswd file</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="vm.basic.path" placeholder="Insert the path of htpasswd">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" ng-click="vm.resetBasic()" unsaved-warning-clear>Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveBasic()" ladda="vm.loading">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
 
-    <tabset justified="true">
+        <!-- DIGEST -->
+        <tab heading="Digest" active="vm.tabs.digest">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="auth_digest_realm" class="col-sm-2 control-label">Authentication Realm</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="auth_digest_realm" placeholder="Insert the Realm">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auth_digest_htpasswd" class="col-sm-2 control-label">Path of htpasswd file</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="auth_digest_htpasswd" placeholder="Insert the path of htpasswd">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auth_digest_domains" class="col-sm-2 control-label">Digest domains</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="auth_digest_domains" placeholder="Insert the digest domains">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auth_digest_timeout" class="col-sm-2 control-label">Nonce timeout</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="auth_digest_timeout" placeholder="Insert the timeout">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-success">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
 
-      <!-- BASIC -->
-      <tab heading="Basic">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="auth_basic_realm" class="col-sm-2 control-label">Authentication Realm</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_basic_realm" placeholder="Insert the Realm">
+        <!-- OAUTH2 -->
+        <tab heading="OAuth2" active="vm.tabs.oauth2">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="oauth2_adapter" class="col-sm-2 control-label">Select adapter</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="type" id="oauth2_adapter">
+                  <option>PDO</option>
+                  <option>Mongo</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="auth_basic_htpasswd" class="col-sm-2 control-label">Path of htpasswd file</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_basic_htpasswd" placeholder="Insert the path of htpasswd">
+            <div class="form-group">
+              <label for="oauth2_pdo_dsn" class="col-sm-2 control-label">PDO DSN</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="oauth2_pdo_dsn" placeholder="DSN">
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" class="btn btn-success">Save</button>
+            <div class="form-group">
+              <label for="oauth2_username" class="col-sm-2 control-label">Username</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="oauth2_username" placeholder="Username">
+              </div>
             </div>
-          </div>
-        </form>
-      </tab>
-
-      <!-- DIGEST -->
-      <tab heading="Digest">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="auth_digest_realm" class="col-sm-2 control-label">Authentication Realm</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_digest_realm" placeholder="Insert the Realm">
+            <div class="form-group">
+              <label for="oauth2_password" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="oauth2_password" placeholder="Password">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="auth_digest_htpasswd" class="col-sm-2 control-label">Path of htpasswd file</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_digest_htpasswd" placeholder="Insert the path of htpasswd">
+            <div class="form-group">
+              <label for="oauth2_route" class="col-sm-2 control-label">OAuth2 route</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="oauth2_route" placeholder="/oauth">
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="auth_digest_domains" class="col-sm-2 control-label">Digest domains</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_digest_domains" placeholder="Insert the digest domains">
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-success">Save</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="auth_digest_timeout" class="col-sm-2 control-label">Nonce timeout</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="auth_digest_timeout" placeholder="Insert the timeout">
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" class="btn btn-success">Save</button>
-            </div>
-          </div>
-        </form>
-      </tab>
-
-      <!-- OAUTH2 -->
-      <tab heading="OAuth2">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="oauth2_adapter" class="col-sm-2 control-label">Select adapter</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="type" id="oauth2_adapter">
-                <option>PDO</option>
-                <option>Mongo</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="oauth2_pdo_dsn" class="col-sm-2 control-label">PDO DSN</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="oauth2_pdo_dsn" placeholder="DSN">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="oauth2_username" class="col-sm-2 control-label">Username</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="oauth2_username" placeholder="Username">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="oauth2_password" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="oauth2_password" placeholder="Password">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="oauth2_route" class="col-sm-2 control-label">OAuth2 route</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="oauth2_route" placeholder="/oauth">
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" class="btn btn-success">Save</button>
-            </div>
-          </div>
-        </form>
-      </tab>
+          </form>
+        </tab>
+      </tabset>
     </div>
   </div>
 </div>

@@ -11,5 +11,7 @@
   function Header(){
     /* jshint validthis:true */
     var vm = this;
+
+    vm.apigilityVersion = 'version 1.1';
   }
 })();

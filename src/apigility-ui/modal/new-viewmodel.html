@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">New View Model</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Name</label>
+  <input type="text" class="form-control" ng-model="vm.classname" placeholder="Insert the View Model class" autofocus><br />
+  <label class="control-label">Mediatypes</label>
+  <tags-input
+    ng-model="vm.mediatypes"
+    ng-readonly=""
+    placeholder="Add a media type"
+    add-on-space="true"
+    add-on-enter="true"
+    add-on-blur="true"
+    allowed-tags-pattern="^[a-zA-Z-]+/[a-zA-Z0-9*_+.-]+$"></tags-input>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</span></button>
+</div>

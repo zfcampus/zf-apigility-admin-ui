@@ -50,8 +50,8 @@
           <div style="margin-top: 20px" ui-view name="content"></div>
           <footer>
               <hr>
-              <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com">Zend Technologies</a> Ltd.</div>
-              <div class="pull-right">Made with <span class="glyphicon glyphicon-heart"></span> using <a href="https://angularjs.org" target="_blank"><img src="apigility-ui/img/angularjs.png" valign="absmiddle"></a> and <a href="http://framework.zend.com" target="_blank"><img src="apigility-ui/img/zf2.png" valign="absmiddle"></a></div>
+              <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd.</div>
+              <div class="pull-right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
           </footer>
         </div>
       </div>
@@ -69,6 +69,8 @@
     <script src="vendor/ladda/js/spin.js"></script>
     <script src="vendor/ladda/js/ladda.js"></script>
     <script src="vendor/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="vendor/angular-unsavedChanges/dist/unsavedChanges.min.js"></script>
+    <script src="vendor/checklist-model/checklist-model.js"></script>
     <!-- endbuild -->
 
     <!-- build:js apigility-ui/apigility.js -->
@@ -88,6 +90,21 @@
     <script src="apigility-ui/modal/new-version.controller.js"></script>
     <script src="apigility-ui/modal/delete-api.controller.js"></script>
     <script src="apigility-ui/modal/delete-rest.controller.js"></script>
+    <script src="apigility-ui/modal/new-field.controller.js"></script>
+    <script src="apigility-ui/modal/delete-field.controller.js"></script>
+    <script src="apigility-ui/modal/edit-field.controller.js"></script>
+    <script src="apigility-ui/modal/add-validator.controller.js"></script>
+    <script src="apigility-ui/modal/edit-validator.controller.js"></script>
+    <script src="apigility-ui/modal/delete-validator.controller.js"></script>
+    <script src="apigility-ui/modal/add-filter.controller.js"></script>
+    <script src="apigility-ui/modal/edit-filter.controller.js"></script>
+    <script src="apigility-ui/modal/delete-filter.controller.js"></script>
+    <script src="apigility-ui/modal/new-selector.controller.js"></script>
+    <script src="apigility-ui/modal/delete-selector.controller.js"></script>
+    <script src="apigility-ui/modal/delete-rpc.controller.js"></script>
+    <script src="apigility-ui/modal/new-viewmodel.controller.js"></script>
+    <script src="apigility-ui/modal/edit-viewmodel.controller.js"></script>
+    <script src="apigility-ui/modal/delete-viewmodel.controller.js"></script>
 
     <script src="apigility-ui/api-module/api-module.module.js"></script>
     <script src="apigility-ui/api-module/api-module.config.js"></script>
@@ -96,15 +113,10 @@
     <script src="apigility-ui/rest/rest.module.js"></script>
     <script src="apigility-ui/rest/rest.config.js"></script>
     <script src="apigility-ui/rest/rest.controller.js"></script>
-    <script src="apigility-ui/rest/new-field.controller.js"></script>
-    <script src="apigility-ui/rest/edit-field.controller.js"></script>
-    <script src="apigility-ui/rest/delete-field.controller.js"></script>
-    <script src="apigility-ui/rest/add-validator.controller.js"></script>
-    <script src="apigility-ui/rest/edit-validator.controller.js"></script>
-    <script src="apigility-ui/rest/delete-validator.controller.js"></script>
-    <script src="apigility-ui/rest/add-filter.controller.js"></script>
-    <script src="apigility-ui/rest/edit-filter.controller.js"></script>
-    <script src="apigility-ui/rest/delete-filter.controller.js"></script>
+
+    <script src="apigility-ui/rpc/rpc.module.js"></script>
+    <script src="apigility-ui/rpc/rpc.config.js"></script>
+    <script src="apigility-ui/rpc/rpc.controller.js"></script>
 
     <script src="apigility-ui/content-negotiation/content-negotiation.module.js"></script>
     <script src="apigility-ui/content-negotiation/content-negotiation.config.js"></script>

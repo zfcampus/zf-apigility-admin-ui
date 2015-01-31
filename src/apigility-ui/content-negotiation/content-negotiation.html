@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <div class="col-sm-12">
-      <h3>Selector <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NewSelectorContent">New selector</button></h3>
+      <h3>Selector <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-click="vm.newSelectorModal()">New selector</button></h3>
       <table class="table table-bordered col-sm-12">
         <thead>
           <tr>
@@ -13,9 +13,16 @@
             <th class="col-sm-3">Action</th>
           </tr>
         </thead>
-        <tr ng-repeat="item in vm.contentlist">
-          <td>{{item.name}}</td>
-          <td><{{item.view_models}}</td>
+        <tr ng-repeat="item in vm.content_negotiation">
+          <td>{{item.content_name}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addViewModel(item)"><span class="glyphicon glyphicon-plus"></span></button>
+            <span ng-repeat="(viewmodel, mediatype) in item.selectors"><a ng-click="vm.editViewModel(item, viewmodel)">{{viewmodel}}</a>, </span>
+            <span ng-if="vm.selectors.length == 0">No view models</span>
+          </td>
+          <td>
+            <button type="button" ng-click="vm.deleteSelectorModal(item)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+          </td>
         </tr>
       </table>
     </div>

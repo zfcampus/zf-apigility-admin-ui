@@ -171,3 +171,32 @@ h3.panel-title {
 .modal_msg {
   font-size: 18px;
 }
+
+.nav-tabs > li > a {
+  cursor: pointer;
+}
+
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 0px;
+}
+
+.nav-tabs {
+  margin-bottom: 0;
+}
+
+.angular-ui-tree-handle:hover:not(.selected) {
+  background: #eeeeee;
+}
+
+.selected {
+  background : #dddddd;
+}
+
+#version {
+  color: #eeeeee;
+  margin-left: 15px;
+}
