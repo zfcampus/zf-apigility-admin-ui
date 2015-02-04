@@ -12,6 +12,8 @@
       'apigility.content-negotiation',
       'apigility.authentication',
       'apigility.database',
+      'apigility.documentation',
+      'apigility.package',
 
       'ui.bootstrap',
       'ui.router',

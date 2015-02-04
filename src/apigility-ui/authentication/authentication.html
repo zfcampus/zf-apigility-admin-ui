@@ -8,16 +8,20 @@
         <!-- BASIC -->
         <tab heading="Basic" active="vm.tabs.basic">
           <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+            </div>
             <div class="form-group">
               <label for="auth_basic_realm" class="col-sm-2 control-label">Authentication Realm</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="vm.basic.realm" placeholder="Insert the Realm">
+                <input type="text" class="form-control" ng-model="vm.basic.realm" placeholder="Insert the Realm" ng-change="vm.change(0)">
               </div>
             </div>
             <div class="form-group">
               <label for="auth_basic_htpasswd" class="col-sm-2 control-label">Path of htpasswd file</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="vm.basic.path" placeholder="Insert the path of htpasswd">
+                <input type="text" class="form-control" ng-model="vm.basic.htpasswd" placeholder="Insert the path of htpasswd" ng-change="vm.change(0)">
+                <span class="help-block"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> If you need to create a <i>htpasswd</i> file, read this <a href="https://apigility.org/documentation/auth/authentication-http-basic" target="_blank">guide</a></span>
               </div>
             </div>
             <div class="form-group" style="margin-top:30px">

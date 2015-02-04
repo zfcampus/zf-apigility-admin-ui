@@ -200,3 +200,10 @@ h3.panel-title {
   color: #eeeeee;
   margin-left: 15px;
 }
+
+.jumbotron {
+  background-color: #fff;
+  border: 0px solid #4b70a2;
+  margin-top: 1em;
+  text-align: left;
+}

@@ -15,6 +15,8 @@
     vm.version = 1;
     vm.services = [];
     vm.apis = Apis.getApis();
+    vm.getSelected = Apis.getSelected;
+    vm.setSelected = Apis.setSelected;
 
     // Make an API call if the list of APIs is empty
     if (vm.apis.length == 0) {

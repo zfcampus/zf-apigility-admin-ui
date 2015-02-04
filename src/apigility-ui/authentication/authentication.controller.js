@@ -13,10 +13,16 @@
     var vm = this;
 
     vm.changed = [false, false, false];
+    var emptyBasic = false;
 
     function initBasic() {
-      
+      api.getAuthentication(function(err,result){
+        vm.basic = result;
+        emptyBasic = (!result.htpasswd);
+      });
     };
+
+    initBasic();
 
     vm.change = function(tab) {
       vm.changed[parseInt(tab)] = true;
@@ -27,7 +33,7 @@
         return;
       }
       vm.loading = true;
-      api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, function(err, result){
+      api.updateBasicAuthentication(vm.basic, function(err, result){
         vm.loading = false;
         if (err) {
           vm.alert = result;

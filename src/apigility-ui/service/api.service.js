@@ -496,6 +496,83 @@
       });
     };
 
+    this.getAuthentication = function (callback) {
+      xhr.get(agApiPath + '/authentication')
+        .then(function (response) {
+          if (response.hasOwnProperty('_links')) {
+            delete response._links;
+          }
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
+    };
+
+    this.addBasicAuthentication = function (auth, callback) {
+      var allowed = [
+        'accept_schemes',
+        'htpasswd',
+        'realm'
+      ];
+      if (!auth.hasOwnProperty('accept_schemes')) {
+        auth.accept_schemes = [];
+      }
+      auth.accept_schemes.push('basic');
+      xhr.create(agApiPath + '/authentication/http-basic', [ auth.accept_schemes, auth.htpasswd, auth.realm ], allowed)
+      .then(function (response) {
+        if (response.hasOwnProperty('_links')) {
+          delete response._links;
+        }
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, null);
+      });
+    };
+
+    this.saveBasicAuthentication = function (auth, callback) {
+      var allowed = [
+        'htpasswd',
+        'realm'
+      ];
+      xhr.update(agApiPath + '/authentication/http-basic', [ auth.htpasswd, auth.realm ], allowed)
+      .then(function (response) {
+        if (response.hasOwnProperty('_links')) {
+          delete response._links;
+        }
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        switch (err.status) {
+          case 422 :
+            return callback(true, err.validation_messages.htpasswd[0]);
+            break;
+          }
+        return callback(true, 'Error saving the basic authentication');
+      });
+    };
+
+    this.getApiDocumentList = function(callback) {
+      xhr.get(agApiPath + '/../documentation')
+        .then(function (response) {
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
+    };
+
+    this.getApiDocument = function(apiName, version, callback) {
+      xhr.get(agApiPath + '/../documentation/' + apiName + '-v' + version)
+        .then(function (response) {
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
+    };
+
     function capitalizeFirstLetter(string)
     {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -503,6 +580,6 @@
 
     this.mapTagInput = function(value) {
       return value.text;
-    }
+    };
   }
 })();

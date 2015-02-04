@@ -9,6 +9,7 @@
 
   function Apis(api) {
     var apis = [];
+    var selected = '';
 
     var setApis = function(data) {
       apis = data;
@@ -72,6 +73,14 @@
       });
     }
 
+    var getSelected = function(){
+      return selected;
+    }
+
+    var setSelected = function(data){
+      selected = data;
+    }
+
     return {
       setApis   : setApis,
       addApi    : addApi,
@@ -80,7 +89,9 @@
       addRestService : addRestService,
       removeRestService : removeRestService,
       addRpcService : addRpcService,
-      removeRpcService : removeRpcService
+      removeRpcService : removeRpcService,
+      getSelected : getSelected,
+      setSelected : setSelected
     };
   }
 

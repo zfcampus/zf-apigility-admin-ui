@@ -15,6 +15,8 @@
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
     vm.loading = false;
+    vm.setSelected = Apis.setSelected;
+    vm.getSelected = Apis.getSelected;
 
     api.getRestList(vm.apiName, vm.version, function(result){
       vm.rest = result;
