@@ -6,11 +6,12 @@
     .module('apigility')
     .controller('Header', Header);
 
-  Header.$inject = [];
+  Header.$inject = [ 'Apis'];
 
-  function Header(){
+  function Header(Apis){
     /* jshint validthis:true */
     var vm = this;
+    vm.setSelected = Apis.setSelected;
 
     vm.apigilityVersion = 'version 1.1';
   }
