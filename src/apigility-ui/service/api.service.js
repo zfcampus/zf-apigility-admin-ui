@@ -89,17 +89,12 @@
         'resource_class',
         'route_identifier_name',
         'route_match',
-        'service_name'
+        'service_name',
+        'table_name',
+        'adapter_name'
       ];
-      var keys = [];
-      var args = [];
-      allowed.forEach(function(key) {
-        if (data.hasOwnProperty(key)) {
-          keys.push(key);
-          args.push(data[key]);
-        }
-      });
-      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', args, keys)
+      var result = filterData(data, allowed);
+      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
         return callback(false, response);
       })
@@ -115,15 +110,8 @@
         'accept_whitelist',
         'content_type_whitelist'
       ];
-      var keys = [];
-      var args = [];
-      allowed.forEach(function(key) {
-        if (data.hasOwnProperty(key)) {
-          keys.push(key);
-          args.push(data[key]);
-        }
-      });
-      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', args, keys)
+      var result = filterData(data, allowed);
+      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
         return callback(false, response);
       })
@@ -469,15 +457,8 @@
         'selector',
         'service_name'
       ];
-      var keys = [];
-      var args = [];
-      allowed.forEach(function(key) {
-        if (data.hasOwnProperty(key)) {
-          keys.push(key);
-          args.push(data[key]);
-        }
-      });
-      xhr.update(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', args, keys)
+      var result = filterData(data, allowed);
+      xhr.update(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', result.value, result.key)
       .then(function(response) {
         return callback(false, response);
       })
@@ -572,6 +553,107 @@
           return callback(true, null);
         });
     };
+
+    this.getDatabase = function(callback) {
+      xhr.get(agApiPath + '/db-adapter', '_embedded')
+        .then(function (response) {
+          response.db_adapter.forEach(function(entry){
+            delete entry._links;
+          })
+          return callback(true, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
+    };
+
+    this.addDatabase = function(db, callback) {
+      var allowed = [
+        'adapter_name',
+        'charset',
+        'database',
+        'driver',
+        'hostname',
+        'username',
+        'password',
+        'port',
+        'dsn',
+        'driver_options'
+      ];
+      var data = filterData(db, allowed);
+      xhr.create(agApiPath + '/db-adapter', data.value, data.key)
+      .then(function (response) {
+        if (response.hasOwnProperty('_links')) {
+          delete response._links;
+        }
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, null);
+      });
+    };
+
+    this.saveDatabase = function(db, callback) {
+      var allowed = [
+        'charset',
+        'database',
+        'driver',
+        'hostname',
+        'username',
+        'password',
+        'port',
+        'dsn',
+        'driver_options'
+      ];
+      var data = filterData(db, allowed);
+      xhr.update(agApiPath + '/db-adapter/' + db.adapter_name, data.value, data.key)
+      .then(function (response) {
+        if (response.hasOwnProperty('_links')) {
+          delete response._links;
+        }
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, null);
+      });
+    };
+
+    this.deleteDatabase = function(name, callback) {
+      xhr.remove(agApiPath + '/db-adapter/' + name)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
+    };
+
+    this.newDbConnected = function(module, adapter, table, callback) {
+      var allowed = [ 'adapter_name', 'table_name' ];
+      xhr.create(agApiPath + '/module/' + module + '/rest', [ adapter, table ], allowed)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        switch (err.status) {
+          case 500 :
+            return callback(true, 'I cannot create the DB-Connected service, please check if already exists');
+            break;
+        }
+        return callback(true, 'I cannot create the DB-Connected service, please enter a valid name (alpha characters)');
+      });
+    };
+
+    function filterData(data, allowed){
+      var result = { key : [], value : [] };
+      allowed.forEach(function(entry){
+        if (data.hasOwnProperty(entry)) {
+          result.key.push(entry);
+          result.value.push(data[entry]);
+        }
+      });
+      return result;
+    }
 
     function capitalizeFirstLetter(string)
     {

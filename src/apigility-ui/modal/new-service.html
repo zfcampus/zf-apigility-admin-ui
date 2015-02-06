@@ -25,14 +25,17 @@
         <input type="text" class="form-control" ng-model="vm.route" ng-disabled="vm.loading" placeholder="Insert the route to match">
       </tab>
       <tab heading="DB Connected" active="vm.tabs.db">
-        <label for="db_adapter_name" class="control-label">DB adapter name</label>
-        <select class="form-control" ng-model="vm.dbadapter" ng-disabled="vm.loading">
-          <option>PDO</option>
-          <option>MongoDB</option>
-        </select>
-        <br />
-        <label for="rtable_name" class="control-label">Table name</label>
-        <input type="text" class="form-control" ng-model="vm.tablename" ng-disabled="vm.loading" placeholder="Insert the table name">
+        <div ng-if="vm.db.db_adapter.length === 0">
+          <h3>No DB Adapters Present</h3>
+          <p>You have not yet configured any database adapters, and thus cannot create a DB-Connected service. You can create adapters on the <a ui-sref="ag.database" ng-click="vm.cancel()">Database Adapters</a> setting page.
+        </div>
+        <div ng-if="vm.db.db_adapter.length > 0">
+          <label for="db_adapter_name" class="control-label">DB adapter name</label>
+          <select class="form-control" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter"></select>
+          <br />
+          <label for="rtable_name" class="control-label">Table name</label>
+          <input type="text" class="form-control" ng-model="vm.table_name" ng-disabled="vm.loading" placeholder="Insert the table name">
+        </div>
       </tab>
     </tabset>
   </div>

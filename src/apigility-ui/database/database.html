@@ -1,113 +1,33 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Database adapters</h3>
+    <h3 class="panel-title">Database</h3>
   </div>
   <div class="panel-body">
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-        <label for="db_adapter_name" class="control-label col-sm-2">Adapter name</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="db_adapter_name" placeholder="Insert the adapter name">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="db_driver_type" class="control-label col-sm-2">Driver Type</label>
-        <div class="col-sm-8">
-          <select class="form-control" name="db_driver_type" id="db_driver_type">
-            <option>IbmDb2</option>
-            <option>Mysqli</option>
-            <option>Oci8</option>
-            <option>PDO_Mysql</option>
-            <option>PDO_Oci</option>
-            <option>PDO_Pgsql</option>
-            <option>PDO_Sqlite</option>
-            <option>Pgsql</option>
-            <option>SqlSrv</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_name" class="col-sm-2 control-label">Database name</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="db_name" placeholder="Insert the database name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_dsn" class="col-sm-2 control-label">DSN</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="db_dsn" placeholder="(Optional) DSN for database">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_username" class="col-sm-2 control-label">Username</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="db_username" placeholder="(Optional) Username">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_password" class="col-sm-2 control-label">Password</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" id="db_password" placeholder="(Optional) Password">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_hostname" class="col-sm-2 control-label">Hostname</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" id="db_hostname" placeholder="(Optional) Hostname">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_port" class="col-sm-2 control-label">Port</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" id="db_port" placeholder="(Optional) Port">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="db_charset" class="col-sm-2 control-label">Charset</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" id="db_charset" placeholder="(Optional) Charset">
-        </div>
-      </div>
-
-      <div class="col-sm-8">
-        <div id="custom-toolbar-db">
-          <div class="form-inline" role="form">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon">Option</div>
-                <input type="text" class="form-control" id="db_option_name" placeholder="Option (if present)">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <label class="sr-only" for="db_option_value">Value</label>
-                <input type="text" class="form-control" id="db_option_value" placeholder="Value (if present)">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <button type="button" id="save_field" class="btn btn-success btn-sm">Add Option</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <table data-toggle="table" data-url="db_option.json" data-cache="false" data-height="100%"
-        data-toolbar="#custom-toolbar-db">
+    <div class="col-sm-12">
+      <h3>Database adapters <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-click="vm.newDbModal()">New DB Adapter</button></h3>
+      <table class="table table-bordered col-sm-12">
         <thead>
           <tr>
-            <th data-field="option" class="col-md-5">Option</th>
-            <th data-field="value" class="col-md-5">Value</th>
-            <th data-field="action" data-formatter="actionOptionValidatorButtons" class="col-md-2">Action</th>
+            <th class="col-sm-2">Name</th>
+            <th class="col-sm-2">Driver</th>
+            <th class="col-sm-2">Database</th>
+            <th class="col-sm-4">Driver options</th>
+            <th class="col-sm-2">Actions</th>
           </tr>
         </thead>
+        <tr ng-repeat="item in vm.db_adapter">
+          <td>{{item.adapter_name}}</td>
+          <td>{{item.driver}}</td>
+          <td>{{item.database}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addDbOptionModal(item)"><span class="glyphicon glyphicon-plus"></span></button>
+            <span ng-repeat="(option, value) in item.driver_options"><a ng-click="vm.editDbOptionModal(item, option)">{{option}} = {{value}}</a>, </span>
+          </td>
+          <td>
+            <button type="button" ng-click="vm.editDbModal(item)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteDbModal(item)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+          </td>
+        </tr>
       </table>
     </div>
-  </form>
-
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" id="save_field" class="btn btn-success btn-sm">Save</button>
   </div>
 </div>

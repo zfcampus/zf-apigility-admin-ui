@@ -27,6 +27,10 @@
         vm.hydrators = result;
       });
 
+      api.getDatabase(function(err, response){
+        vm.db = response;
+      });
+
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){
         vm.rest = result;
         vm.rest.accept_whitelist.forEach(function(entry){
@@ -35,6 +39,14 @@
         vm.rest.content_type_whitelist.forEach(function(entry){
           vm.tags.content_type_whitelist.push({ text : entry });
         });
+        if (vm.rest.hasOwnProperty('table_name')) {
+          for (var i = 0; i < vm.db.db_adapter.length; i++) {
+            if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
+              vm.adapter = vm.db.db_adapter[i];
+              break;
+            }
+          }
+        }
       });
 
       api.getContentNegotiation(function(result){
@@ -70,6 +82,9 @@
         return;
       }
       vm.loading = true;
+      if (vm.adapter) {
+        vm.rest.adapter_name = vm.adapter.adapter_name;
+      }
       api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, function(err, result){
         vm.loading = false;
         if (err) {

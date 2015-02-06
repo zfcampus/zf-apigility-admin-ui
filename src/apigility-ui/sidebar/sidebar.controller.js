@@ -74,6 +74,8 @@
 
       modalInstance.result.then(function (response) {
         Apis.addApi(response);
+        vm.setSelected('api' + response.name);
+        $state.go('ag.apimodule', {api: response.name, ver: 1});
       });
     }
 
@@ -92,8 +94,12 @@
       modalInstance.result.then(function (response) {
         if (response.hasOwnProperty('rest')) {
           Apis.addRestService(response.api, response.rest);
+          vm.setSelected('api' + response.api + 'rest' + response.rest);
+          $state.go('ag.rest', {api: response.api, ver: 1, rest: response.rest});
         } else if (response.hasOwnProperty('rpc')) {
           Apis.addRpcService(response.api, response.rpc);
+          vm.setSelected('api' + response.api + 'rpc' + response.rpc);
+          $state.go('ag.rpc', {api: response.api, ver: 1, rpc: response.rpc});
         }
       });
     }

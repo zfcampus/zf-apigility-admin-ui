@@ -37,7 +37,7 @@
             <span ng-if="rest._embedded.documentation.description">{{rest._embedded.documentation.description}}</span>
           </td>
         </tr>
-        <tr ng-if="vm.rest.length == 0">
+        <tr ng-if="!vm.rest || vm.rest.length == 0">
           <td colspan="3">
             No REST services, <a href ng-click="vm.newServiceModal()">create a new one</a>
           </td>
@@ -62,7 +62,7 @@
             <span ng-if="rpc._embedded.documentation.description">{{rpc._embedded.documentation.description}}</span>
           </td>
         </tr>
-        <tr ng-if="vm.rpc.length == 0">
+        <tr ng-if="!vm.rpc || vm.rpc.length == 0">
           <td colspan="3">
             No RPC services, <a href="">create a new one</a>
           </td>

@@ -23,12 +23,13 @@
       }
       vm.loading = true;
       api.newApi(vm.apiname, function(err, response) {
-        vm.loading = false;
         if (err) {
           vm.alert = response;
+          vm.loading = false;
           return;
         }
         $timeout(function(){
+          vm.loading = false;
           $modalInstance.close(response);
         }, 2000);
       });

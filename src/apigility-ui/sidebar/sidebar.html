@@ -34,12 +34,12 @@
         <span class="badge pull-right">{{item.rest.length + item.rpc.length}}</span>
       </div>
       <ol class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes" ng-class="{hidden: collapsed}">
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest" ui-tree-node>
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rest'+subItem === vm.getSelected() }">
             <span class="glyphicon glyphicon-leaf"></span> <a ui-sref="ag.rest({api: item.name, ver: vm.version, rest: subItem})" ng-click="vm.setSelected('api'+item.name+'rest'+subItem)">{{subItem}}</a>
           </div>
         </li>
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc" ui-tree-node>
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rpc'+subItem === vm.getSelected() }">
             <span class="glyphicon glyphicon-fire"></span> <a ui-sref="ag.rpc({api: item.name, ver: vm.version, rpc: subItem})" ng-click="vm.setSelected('api'+item.name+'rpc'+subItem)">{{subItem}}</a>
           </div>
