@@ -6,17 +6,18 @@
     .module('apigility')
     .controller('ApiModule', ApiModule);
 
-  ApiModule.$inject = [ 'api', '$modal', '$state', '$stateParams', 'Apis' ];
+  ApiModule.$inject = [ 'api', '$modal', '$state', '$stateParams', 'SidebarService' ];
 
-  function ApiModule(api, $modal, $state, $stateParams, Apis) {
+  function ApiModule(api, $modal, $state, $stateParams, SidebarService) {
     /* jshint validthis:true */
     var vm = this;
 
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
     vm.loading = false;
-    vm.setSelected = Apis.setSelected;
-    vm.getSelected = Apis.getSelected;
+    vm.setSelected = SidebarService.setSelected;
+    vm.getSelected = SidebarService.getSelected;
+    vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     api.getRestList(vm.apiName, vm.version, function(result){
       vm.rest = result;
@@ -26,6 +27,14 @@
       vm.rpc = result;
     });
 
+    var apis = SidebarService.getApis();
+    for (var i = 0; i < apis.length; i++) {
+        if (apis[i].name === vm.apiName) {
+          vm.module = apis[i];
+          break;
+        }
+    }
+
     vm.newVersionModal = function() {
       var modalInstance = $modal.open({
         templateUrl: 'apigility-ui/modal/new-version.html',
@@ -34,9 +43,12 @@
       });
 
       modalInstance.result.then(function(response) {
-
+        if (response.hasOwnProperty('version')) {
+          SidebarService.setApis([]);
+          $state.go('ag', null, {reload: true});
+        }
       });
-    }
+    };
 
     vm.deleteApiModal = function() {
       var modalInstance = $modal.open({
@@ -46,10 +58,10 @@
       });
 
       modalInstance.result.then(function(apiName) {
-        Apis.removeApi(apiName);
+        SidebarService.removeApi(apiName);
         $state.go('ag', null, {reload: true});
       });
-    }
+    };
 
     vm.newServiceModal = function() {
       var modalInstance = $modal.open({
@@ -64,8 +76,19 @@
       });
 
       modalInstance.result.then(function (response) {
-        Apis.addRestService(response.api, response.rest);
+        SidebarService.addRestService(response.api, response.rest);
       });
-    }
+    };
+
+    vm.setDefaultVersion = function() {
+      vm.loading = true;
+      api.setDefaultVersion(vm.apiName, vm.module.default_version, function(err, response){
+        vm.loading = false;
+        if (err) {
+          vm.alert = response;
+          return;
+        }
+      })
+    };
   }
 })();

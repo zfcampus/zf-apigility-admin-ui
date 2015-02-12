@@ -6,9 +6,9 @@
     .module('apigility.rest')
     .controller('Rest', Rest);
 
-  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'Apis', '$state', '$scope'];
+  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce'];
 
-  function Rest(api, $modal, $stateParams, $rootScope, Apis, $state, $scope) {
+  function Rest(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -21,6 +21,7 @@
       accept_whitelist : [],
       content_type_whitelist : []
     };
+    vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     function initGeneral() {
       api.getHydrators(function(result){
@@ -47,6 +48,17 @@
             }
           }
         }
+        vm.rest.source_code = [
+          { name : 'Collection Class', classname: vm.rest.collection_class },
+          { name : 'Entity Class', classname: vm.rest.entity_class },
+        ];
+        if (vm.rest.resource_class) {
+          vm.rest.source_code.push(
+            { name : 'Resource Class', classname: vm.rest.resource_class },
+            { name : 'Resource Factory', classname: vm.rest.resource_class + 'Factory' }
+          );
+        }
+        vm.getSourceCode(vm.rest.source_code[0].classname);
       });
 
       api.getContentNegotiation(function(result){
@@ -178,7 +190,7 @@
       });
 
       modalInstance.result.then(function (api, version, service) {
-        Apis.removeRestService(api, service);
+        SidebarService.removeRestService(api, service);
         $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
       });
     };
@@ -344,6 +356,13 @@
 
       modalInstance.result.then(function (response) {
         vm.rest.fields = response;
+      });
+    };
+
+    vm.getSourceCode = function(classname) {
+      api.getSourceCode(vm.apiName, classname, function(err, response){
+        vm.sourcecode = $sce.trustAsHtml(response.source);
+        vm.file = response.file;
       });
     };
   }

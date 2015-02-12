@@ -201,9 +201,11 @@ h3.panel-title {
   margin-left: 15px;
 }
 
-.jumbotron {
-  background-color: #fff;
-  border: 0px solid #4b70a2;
-  margin-top: 1em;
-  text-align: left;
+
+.icon-database {
+    background-image: url("/apigility-ui/img/icon-database.png");
+    background-position: center center;
+    width: 14px;
+    height: 19px;
+    line-height: 19px;
 }

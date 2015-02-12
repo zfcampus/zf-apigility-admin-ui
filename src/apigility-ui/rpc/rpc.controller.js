@@ -6,9 +6,9 @@
     .module('apigility.rpc')
     .controller('Rpc', Rpc);
 
-  Rpc.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'Apis', '$state', '$scope'];
+  Rpc.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce'];
 
-  function Rpc(api, $modal, $stateParams, $rootScope, Apis, $state, $scope) {
+  function Rpc(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -21,9 +21,14 @@
       accept_whitelist : [],
       content_type_whitelist : []
     };
+    vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     function initGeneral() {
-      api.getRpc(vm.apiName, vm.version, vm.rpcName, function(result){
+      api.getRpc(vm.apiName, vm.version, vm.rpcName, function(err, result){
+        if (err) {
+          vm.alert = 'The RPC service doesn\'t exist. Try to choose a different version!';
+          return;
+        }
         vm.rpc = result;
         vm.rpc.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
@@ -31,17 +36,24 @@
         vm.rpc.content_type_whitelist.forEach(function(entry){
           vm.tags.content_type_whitelist.push({ text : entry });
         });
+        vm.rpc.source_code = [
+          { name : 'Controller Class', classname: vm.rpc.controller_class },
+          { name : 'Controller Factory', classname: vm.rpc.controller_class + 'Factory' }
+        ];
+        vm.getSourceCode(vm.rpc.source_code[0].classname);
       });
 
-      api.getContentNegotiation(function(result){
-        vm.content_negotiation = result;
-        for (var i = 0; i < result.length; i++) {
-          if (vm.rpc.selector === result[i].content_name) {
-            vm.rpc.selector = result[i];
-            break;
+      if (vm.hasOwnProperty('rpc')) {
+        api.getContentNegotiation(function(result){
+          vm.content_negotiation = result;
+          for (var i = 0; i < result.length; i++) {
+            if (vm.rpc.selector === result[i].content_name) {
+              vm.rpc.selector = result[i];
+              break;
+            }
           }
-        }
-      });
+        });
+      }
     }
 
     function initAuthorization() {
@@ -137,7 +149,7 @@
       });
 
       modalInstance.result.then(function (api, version, service) {
-        Apis.removeRpcService(api, service);
+        SidebarService.removeRpcService(api, service);
         $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
       });
     };
@@ -303,6 +315,13 @@
 
       modalInstance.result.then(function (response) {
         vm.rpc.fields = response;
+      });
+    };
+
+    vm.getSourceCode = function(classname) {
+      api.getSourceCode(vm.apiName, classname, function(err, response){
+        vm.sourcecode = $sce.trustAsHtml(response.source);
+        vm.file = response.file;
       });
     };
   }

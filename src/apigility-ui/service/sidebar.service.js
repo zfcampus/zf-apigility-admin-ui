@@ -3,19 +3,48 @@
 
   angular
     .module('apigility.service')
-    .service('Apis', Apis);
+    .service('SidebarService', SidebarService);
 
-  Apis.$inject = [ 'api' ];
+  SidebarService.$inject = [ 'api' ];
 
-  function Apis(api) {
+  function SidebarService(api) {
     var apis = [];
     var selected = '';
+
+    var setSelectedVersion = function(apiName, version) {
+      for(var i = 0; i < apis.length; i++) {
+        if (apis[i].name === apiName) {
+          apis[i].selected_version = Integer.parseInt(version);
+          return;
+        }
+      }
+    }
+
+    var getSelectedVersion = function(){
+      for(var i = 0; i < apis.length; i++) {
+        if (apis[i].name === apiName) {
+          return apis[i].selected_version;
+        }
+      }
+    }
+
+    var isLastVersion = function(version, apiName){
+      for(var i = 0; i < apis.length; i++) {
+        if (apis[i].name === apiName) {
+          return (version == Math.max.apply(Math, apis[i].versions));
+        }
+      }
+      return false;
+    }
 
     var setApis = function(data) {
       apis = data;
     };
 
     var addApi = function(api) {
+      if (!api.hasOwnProperty('selected_version')) {
+        api.selected_version = Math.max.apply(Math, api.versions);
+      }
       apis.push(api);
     };
 
@@ -82,6 +111,9 @@
     }
 
     return {
+      setSelectedVersion : setSelectedVersion,
+      getSelectedVersion : getSelectedVersion,
+      isLastVersion : isLastVersion,
       setApis   : setApis,
       addApi    : addApi,
       getApis   : getApis,

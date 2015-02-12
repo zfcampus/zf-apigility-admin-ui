@@ -6,17 +6,15 @@
     .module('apigility')
     .controller('Sidebar', Sidebar);
 
-  Sidebar.$inject = [ 'api', '$modal', '$rootScope', '$state', 'Apis' ];
+  Sidebar.$inject = [ 'api', '$modal', '$rootScope', '$state', 'SidebarService' ];
 
-  function Sidebar(api, $modal, $rootScope, $state, Apis){
+  function Sidebar(api, $modal, $rootScope, $state, SidebarService){
     /* jshint validthis:true */
     var vm = this;
 
-    vm.version = 1;
-    vm.services = [];
-    vm.apis = Apis.getApis();
-    vm.getSelected = Apis.getSelected;
-    vm.setSelected = Apis.setSelected;
+    vm.apis = SidebarService.getApis();
+    vm.getSelected = SidebarService.getSelected;
+    vm.setSelected = SidebarService.setSelected;
 
     // Make an API call if the list of APIs is empty
     if (vm.apis.length == 0) {
@@ -24,16 +22,43 @@
       api.getApiList(function(err, result){
         vm.loading = false;
         if (!err) {
-          Apis.setApis(result);
+          SidebarService.setApis(result);
           vm.apis = result;
           getServiceList(result);
         }
       });
     }
 
+    vm.changeVersion = function(module, version) {
+      api.getRestList(module, version, function(result){
+        for (var i = 0; i < vm.apis.length; i++) {
+          if (vm.apis[i].name === module) {
+            vm.apis[i].rest = [];
+            result.forEach(function(entry){
+              vm.apis[i].rest.push(entry.service_name);
+            });
+            break;
+          }
+        }
+      });
+
+      api.getRpcList(module, version, function(result){
+        for (var i = 0; i < vm.apis.length; i++) {
+          if (vm.apis[i].name === module) {
+            vm.apis[i].rpc = [];
+            result.forEach(function(entry){
+              vm.apis[i].rpc.push(entry.service_name);
+            });
+            break;
+          }
+        }
+      });
+      $state.go('ag.apimodule', {api: module, ver: version}, {reload: true});
+    };
+
     vm.searchApi = function(search) {
       if (!search) {
-        vm.apis = Apis.getApis();
+        vm.apis = SidebarService.getApis();
         vm.search = '';
         return;
       }
@@ -59,7 +84,7 @@
         }
       });
       vm.apis = newApis;
-    }
+    };
 
     vm.toggle = function(scope) {
       scope.toggle();
@@ -73,11 +98,11 @@
       });
 
       modalInstance.result.then(function (response) {
-        Apis.addApi(response);
+        SidebarService.addApi(response);
         vm.setSelected('api' + response.name);
         $state.go('ag.apimodule', {api: response.name, ver: 1});
       });
-    }
+    };
 
     vm.newServiceModal = function() {
       var modalInstance = $modal.open({
@@ -93,18 +118,19 @@
 
       modalInstance.result.then(function (response) {
         if (response.hasOwnProperty('rest')) {
-          Apis.addRestService(response.api, response.rest);
+          SidebarService.addRestService(response.api, response.rest);
           vm.setSelected('api' + response.api + 'rest' + response.rest);
           $state.go('ag.rest', {api: response.api, ver: 1, rest: response.rest});
         } else if (response.hasOwnProperty('rpc')) {
-          Apis.addRpcService(response.api, response.rpc);
+          SidebarService.addRpcService(response.api, response.rpc);
           vm.setSelected('api' + response.api + 'rpc' + response.rpc);
           $state.go('ag.rpc', {api: response.api, ver: 1, rpc: response.rpc});
         }
       });
-    }
+    };
 
     function getServiceList(apiList) {
+      vm.services = [];
       apiList.forEach(function(api){
         api.rest.forEach(function(service){
           vm.services.push(service);

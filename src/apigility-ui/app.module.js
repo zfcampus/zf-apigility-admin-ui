@@ -22,8 +22,8 @@
       'unsavedChanges',
       'ngTagsInput',
       'checklist-model'
+
       /*
-      'ngSanitize',
       'ui-sortable',
       'ui-select2',
       'toggle-switch',

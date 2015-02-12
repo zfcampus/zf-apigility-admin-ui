@@ -15,6 +15,12 @@
     this.getApiList = function(callback) {
       xhr.get(agApiPath + '/dashboard', '_embedded')
         .then(function (response) {
+          response.module.forEach(function(api){
+            api.selected_version = Math.max.apply(Math, api.versions);
+            if (api.hasOwnProperty('_links')) {
+              delete api._links;
+            }
+          });
           return callback(false, response.module);
         })
         .catch(function (err) {
@@ -177,6 +183,11 @@
     this.getRestList = function(module, version, callback) {
       xhr.get(agApiPath + '/module/' + module + '/rest?version=' + version, '_embedded')
         .then(function (response) {
+          response.rest.forEach(function(entry){
+            if (entry.hasOwnProperty('_links')) {
+              delete entry._links;
+            }
+          });
           return callback(response.rest);
         })
         .catch(function (err) {
@@ -188,6 +199,11 @@
     this.getRpcList = function(module, version, callback) {
       xhr.get(agApiPath + '/module/' + module + '/rpc?version=' + version, '_embedded')
       .then(function (response) {
+        response.rpc.forEach(function(entry){
+          if (entry.hasOwnProperty('_links')) {
+            delete entry._links;
+          }
+        });
         return callback(response.rpc);
       })
       .catch(function (err) {
@@ -439,11 +455,10 @@
         // Remove hal json properties
         delete rpc._links;
         delete rpc._embedded;
-        return callback(rpc);
+        return callback(false, rpc);
       })
       .catch(function (err) {
-        console.log('Failed to get the RPC service', err);
-        return false;
+        return callback(true, 'Error getting the RPC service');
       });
     };
 
@@ -642,6 +657,38 @@
         }
         return callback(true, 'I cannot create the DB-Connected service, please enter a valid name (alpha characters)');
       });
+    };
+
+    this.newVersion = function(module, callback) {
+      var allowed = [ 'module' ];
+      xhr.update(agApiPath + '/versioning', [ module ], allowed)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, null);
+      });
+    };
+
+    this.setDefaultVersion = function(module, version, callback) {
+      var allowed = [ 'module', 'version' ];
+      xhr.update(agApiPath + '/default-version', [ module, version ], allowed)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, null);
+      });
+    };
+
+    this.getSourceCode = function(module, classname, callback) {
+      xhr.get(agApiPath + '/source?module=' + module + '&class=' + classname)
+        .then(function (response) {
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
     };
 
     function filterData(data, allowed){

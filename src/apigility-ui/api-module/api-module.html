@@ -2,24 +2,46 @@
   <div class="panel-heading">
     <h3 class="panel-title">
       API: {{vm.apiName}} (v{{vm.version}})
-      <button class="btn btn-danger pull-right" ng-click="vm.deleteApiModal()"><span class="glyphicon glyphicon-trash"></span> Delete API</button>
-      <button class="btn btn-primary pull-right" ng-click="vm.newVersionModal()" style="margin-right:10px">New version</button>
+      <button class="btn btn-danger pull-right" ng-click="vm.deleteApiModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete API</button>
     </h3>
   </div>
   <div class="panel-body">
+    <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+    </div>
     <div class="col-sm-12">
-      <h3>Authentication</h3>
-      <br /><label class="col-sm-2 control-label">Authenication type</label>
-      <div class="col-sm-4">
-        <select class="form-control" ng-model="vm.authentication_type">
-          <option>None</option>
-          <option>Basic</option>
-          <option>Digest</option>
-          <option>OAuth2</option>
-        </select>
+      <div class="col-sm-6">
+        <h3>Authentication</h3>
+        <br />
+        <form class="form-inline" role="form" unsaved-warning-form>
+          <div class="form-group">
+            <label class="control-label">Set authentication type</label>
+            <select class="form-control" ng-model="vm.authentication_type" ng-disabled="vm.disabled">
+              <option>None</option>
+              <option>Basic</option>
+              <option>Digest</option>
+              <option>OAuth2</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-sm" ng-hide="vm.disabled">Save</span></button>
+          </div>
+        </form>
       </div>
-      <button type="button" id="delete_selector" class="btn btn-success btn-sm">Set authentication</span></button>
-      <br />
+      <div class="col-sm-6">
+        <h3>Version <button class="btn btn-sm btn-primary" ng-click="vm.newVersionModal()" ng-hide="vm.disabled">New version</button></h3>
+        <br />
+        <form class="form-inline" role="form" unsaved-warning-form>
+          <div class="form-group">
+            <label class="control-label">Set default version</label>
+            <select class="form-control" ng-model="vm.module.default_version" ng-options="ver for ver in vm.module.versions" ng-disabled="vm.disabled"></select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-sm" ng-click="vm.setDefaultVersion()" ladda="vm.loading" ng-hide="vm.disabled">Save</span></button>
+          </div>
+        </form>
+      </div>
+      <br clear="left"><br />
       <h3>REST</h3>
       <table class="table table-bordered col-sm-12">
         <thead>
@@ -33,13 +55,13 @@
           <td><a ui-sref="ag.rest({api: vm.apiName, ver: vm.version, rest: rest.service_name})" ng-click="vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)">{{rest.service_name}}</a></td>
           <td>{{rest.route_match}}</td>
           <td>
-            <a href="" ng-if="!rest._embedded.documentation.description">Add a description for this service</a>
+            <a href="" ng-if="!rest._embedded.documentation.description" ng-hide="vm.disabled">Add a description for this service</a>
             <span ng-if="rest._embedded.documentation.description">{{rest._embedded.documentation.description}}</span>
           </td>
         </tr>
         <tr ng-if="!vm.rest || vm.rest.length == 0">
           <td colspan="3">
-            No REST services, <a href ng-click="vm.newServiceModal()">create a new one</a>
+            No REST services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
           </td>
         </tr>
       </table>
@@ -58,13 +80,13 @@
           <td><a ui-sref="ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.service_name})" ng-click="vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)">{{rpc.service_name}}</a></td>
           <td>{{rpc.route_match}}</td>
           <td>
-            <a href="" ng-if="!rpc._embedded.documentation.description">Add a description for this service</a>
+            <a href="" ng-if="!rpc._embedded.documentation.description" ng-hide="vm.disabled">Add a description for this service</a>
             <span ng-if="rpc._embedded.documentation.description">{{rpc._embedded.documentation.description}}</span>
           </td>
         </tr>
         <tr ng-if="!vm.rpc || vm.rpc.length == 0">
           <td colspan="3">
-            No RPC services, <a href="">create a new one</a>
+            No RPC services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
           </td>
         </tr>
       </table>

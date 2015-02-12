@@ -6,14 +6,14 @@
   .module('apigility.modal')
   .controller('NewService', NewService);
 
-  NewService.$inject = [ '$modalInstance', 'Apis', 'api', '$timeout', 'apiname' ];
+  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname' ];
 
-  function NewService($modalInstance, Apis, api, $timeout, apiname) {
+  function NewService($modalInstance, SidebarService, api, $timeout, apiname) {
     /* jshint validthis:true */
     var vm = this;
 
     vm.cancel = $modalInstance.dismiss;
-    vm.apis = Apis.getApis();
+    vm.apis = SidebarService.getApis();
     vm.tabs = {};
     vm.apiname = vm.apis[0];
     // If apiname is not empty, we select it

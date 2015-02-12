@@ -1,14 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
-      RPC service: {{vm.rpcName}} (v{{vm.version}})
-      <button class="btn btn-danger pull-right" ng-click="vm.deleteRpcModal()"><span class="glyphicon glyphicon-trash"></span> Delete service</button>
+      <span class="glyphicon glyphicon-fire"></span> RPC service: {{vm.rpcName}} (v{{vm.version}})
+      <button class="btn btn-danger pull-right" ng-click="vm.deleteRpcModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete service</button>
     </h3>
   </div>
   <div class="panel-body">
-    <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
-    </div>
     <tabset justified="true">
       <tab heading="General Settings" active="vm.tabs.general_settings">
         <form class="form-horizontal" role="form" unsaved-warning-form>
@@ -21,27 +18,28 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Route to match</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model="vm.rpc.route_match" ng-change="vm.change(0)">
+              <input type="text" class="form-control" ng-model="vm.rpc.route_match" ng-change="vm.change(0)" ng-disabled="vm.disabled">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">Allowed HTTP Methods</label>
             <div class="col-sm-10">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.rpc.http_methods" checklist-value="http" ng-change="vm.change(0)"> {{http}}
+                <input type="checkbox" checklist-model="vm.rpc.http_methods" checklist-value="http" ng-change="vm.change(0)" ng-disabled="vm.disabled"> {{http}}
               </span>
             </div>
           </div>
           <div class="form-group">
             <label for="rest_content_negotiation" class="col-sm-2 control-label">Content Negotiation Selector</label>
             <div class="col-sm-10">
-              <select class="form-control" ng-model="vm.rpc.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(0)"></select>
+              <select class="form-control" ng-model="vm.rpc.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">Accept whitelist</label>
             <div class="col-sm-10">
               <tags-input
+              ng-hide="vm.disabled"
               ng-click="vm.change(0)"
               ng-change="vm.change(0)"
               ng-model="vm.tags.accept_whitelist"
@@ -50,12 +48,14 @@
               add-on-enter="true"
               add-on-blur="true"
               allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+              <span ng-repeat="accept in vm.tags.accept_whitelist" ng-show="vm.disabled">{{accept.text}}, </span>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">Content-Type whitelist</label>
             <div class="col-sm-10">
               <tags-input
+              ng-hide="vm.disabled"
               ng-click="vm.change(0)"
               ng-change="vm.change(0)"
               ng-model="vm.tags.content_type_whitelist"
@@ -64,18 +64,19 @@
               add-on-enter="true"
               add-on-blur="true"
               allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+              <span ng-repeat="accept in vm.tags.content_type_whitelist" ng-show="vm.disabled">{{accept.text}}, </span>
             </div>
           </div>
           <div class="form-group" style="margin-top:30px">
             <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear>Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading">Save</button>
+              <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+              <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
             </div>
           </div>
         </form>
       </tab>
       <tab heading="Fields" active="vm.tabs.fields">
-        <h3>Fields <button type="button" class="btn btn-primary btn-sm" ng-click="vm.newFieldModal()">New field</button></h3>
+        <h3>Fields <button type="button" class="btn btn-primary btn-sm" ng-click="vm.newFieldModal()" ng-hide="vm.disabled">New field</button></h3>
         <div class="form-group">
           <table class="table table-bordered">
             <thead>
@@ -91,22 +92,22 @@
               <td>{{field.name}}</td>
               <td><span ng-if="field.required" class="glyphicon glyphicon-ok"></span></td>
               <td>
-                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addValidatorModal(field)"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addValidatorModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
                 <span ng-repeat="validator in field.validators"><a ng-click="vm.editValidatorModal(field, validator)">{{validator.name}}</a>, </span>
                 <span ng-if="field.validators.length == 0">No validators</span>
                 </td>
               <td>
-                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addFilterModal(field)"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addFilterModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
                 <span ng-repeat="filter in field.filters"><a ng-click="vm.editFilterModal(field, filter)">{{filter.name}}</a>, </span>
                 <span ng-if="field.filters.length == 0">No filters</span>
               </td>
               <td>
-                <button type="button" ng-click="vm.editFieldModal(field)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(field)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+                <button type="button" ng-click="vm.editFieldModal(field)" class="btn btn-success btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(field)" class="btn btn-danger btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-trash"></i> delete</button>
               </td>
             </tr>
             <tr ng-if="vm.rest.fields.length == 0">
               <td colspan="5">
-                No fields have been configured, <a href="">create the first one</a>
+                No fields have been configured<span ng-hide="vm.disabled">, <a ng-click="vm.newFieldModal()">create the first one</a></span>
               </td>
             </tr>
           </table>
@@ -115,21 +116,21 @@
       <tab heading="Authorization" active="vm.tabs.authorization">
         <form class="form-horizontal" role="form" unsaved-warning-form>
           <h3>HTTP methods authorization</h3>
-          <p>In this page you can specify which HTTP methods to put under authentication. You can choose only the HTTP methods available for the service, if you want to change it go to <a href="">General Settings</a>.
+          <p ng-hide="vm.disabled">In this page you can specify which HTTP methods to put under authentication. You can choose only the HTTP methods available for the service, if you want to change it go to <a href="">General Settings</a>.
           The authentication type is defined per API in <a ui-sref="ag.apimodule({api: vm.apiName, ver: vm.version})">this page</a>.</p>
           <br />
           <div class="form-group">
             <label class="col-sm-2 control-label">Authorization</label>
             <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth" checklist-value="http" ng-change="vm.change(1)" ng-disabled="vm.rpc.http_methods.indexOf(http) < 0"> {{http}}
+                <input type="checkbox" checklist-model="vm.auth" checklist-value="http" ng-change="vm.change(1)" ng-disabled="vm.rpc.http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
               </span>
             </div>
           </div>
           <div class="form-group" style="margin-top:30px">
             <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetAuthorization()" unsaved-warning-clear>Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveAuthorization()" ladda="vm.loading">Save</button>
+              <button type="button" class="btn btn-default" ng-click="vm.resetAuthorization()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+              <button type="submit" class="btn btn-success" ng-click="vm.saveAuthorization()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
             </div>
           </div>
         </form>
@@ -139,7 +140,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">RPC service description</label>
             <div class="col-sm-10">
-              <textarea class="form-control" ng-model="vm.rpc.documentation.description" placeholder="Insert the description here" ng-change="vm.change(2)"></textarea>
+              <textarea class="form-control" ng-model="vm.rpc.documentation.description" placeholder="Insert the description here" ng-change="vm.change(2)" ng-disabled="vm.disabled"></textarea>
             </div>
           </div>
           <div class="form-group">
@@ -148,19 +149,19 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Description</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].description" placeholder="Insert the description here" ng-change="vm.change(2)"></textarea>
+                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].description" placeholder="Insert the description here" ng-change="vm.change(2)" ng-disabled="vm.disabled"></textarea>
                   </div>
                 </div>
                 <div class="form-group" ng-if="http !== 'GET'">
                   <label class="col-sm-2 control-label">Request Body</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].request" placeholder="Insert the request specification" ng-change="vm.change(2)"></textarea>
+                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].request" placeholder="Insert the request specification" ng-change="vm.change(2)" ng-disabled="vm.disabled"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Response Body</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].response" placeholder="Insert the response specification" ng-change="vm.change(2)"></textarea>
+                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].response" placeholder="Insert the response specification" ng-change="vm.change(2)" ng-disabled="vm.disabled"></textarea>
                   </div>
                 </div>
               </tab>
@@ -168,13 +169,27 @@
           </div>
           <div class="form-group" style="margin-top:30px">
             <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetDocumentation()" unsaved-warning-clear>Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveDocumentation()" ladda="vm.loading">Save</button>
+              <button type="button" class="btn btn-default" ng-click="vm.resetDocumentation()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+              <button type="submit" class="btn btn-success" ng-click="vm.saveDocumentation()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
             </div>
           </div>
         </form>
       </tab>
+      <tab heading="Source code" active="vm.tabs.sourcecode">
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="control-label">Select the file to open</label>
+            <select class="form-control">
+              <option ng-click="vm.getSourceCode(source.classname)" ng-repeat="source in vm.rpc.source_code">{{source.name}}</option>
+            </select>
+          </div>
+        </form>
+        <br clear="left">
+        <div class="panel panel-default">
+          <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
+          <div class="panel-body" ng-bind-html="vm.sourcecode"></div>
+        </div>
+      </tab>
     </tabset>
   </div>
-  </form>
 </div>

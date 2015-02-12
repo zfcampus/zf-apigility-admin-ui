@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('EditFilter', EditFilter);
 
-  EditFilter.$inject = [ '$modalInstance', '$modal', '$stateParams', 'fields', 'field', 'filter', 'api', 'type' ];
+  EditFilter.$inject = [ '$modalInstance', '$modal', '$stateParams', 'fields', 'field', 'filter', 'api', 'type', 'SidebarService' ];
 
-  function EditFilter($modalInstance, $modal, $stateParams, fields, field, filter, api, type) {
+  function EditFilter($modalInstance, $modal, $stateParams, fields, field, filter, api, type, SidebarService) {
     /* jshint validthis:true */
     /* jshint validthis:true */
     var vm = this;
@@ -16,6 +16,7 @@
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
     vm.field = field;
+    vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     vm.cancel = $modalInstance.dismiss;
 

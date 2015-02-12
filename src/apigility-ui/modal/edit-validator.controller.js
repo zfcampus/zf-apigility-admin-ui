@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('EditValidator', EditValidator);
 
-  EditValidator.$inject = [ '$modalInstance', '$modal', '$stateParams', 'field', 'validator', 'api', 'fields', 'type' ];
+  EditValidator.$inject = [ '$modalInstance', '$modal', '$stateParams', 'field', 'validator', 'api', 'fields', 'type', 'SidebarService' ];
 
-  function EditValidator($modalInstance, $modal, $stateParams, field, validator, api, fields, type) {
+  function EditValidator($modalInstance, $modal, $stateParams, field, validator, api, fields, type, SidebarService) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -16,6 +16,7 @@
     vm.version = $stateParams.ver;
     vm.restName = $stateParams.rest;
     vm.field = field;
+    vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     vm.cancel = $modalInstance.dismiss;
 
