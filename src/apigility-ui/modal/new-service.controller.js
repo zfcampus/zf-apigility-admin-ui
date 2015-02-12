@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('NewService', NewService);
 
-  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname' ];
+  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname', 'version' ];
 
-  function NewService($modalInstance, SidebarService, api, $timeout, apiname) {
+  function NewService($modalInstance, SidebarService, api, $timeout, apiname, version) {
     /* jshint validthis:true */
     var vm = this;
 
