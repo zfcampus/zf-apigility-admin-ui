@@ -167,7 +167,6 @@
       api.saveRestDoc(vm.apiName, vm.version, vm.restName, vm.rest.documentation, function(err,result){
         vm.loading = false;
         if (err) {
-          error = true;
           vm.alert = result;
           return;
         }
@@ -189,9 +188,9 @@
         controllerAs: 'vm'
       });
 
-      modalInstance.result.then(function (api, version, service) {
-        SidebarService.removeRestService(api, service);
-        $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
+      modalInstance.result.then(function (response) {
+        SidebarService.removeRestService(response.api, response.service);
+        $state.go('ag.apimodule', {api: response.api, ver: response.version}, {reload: true});
       });
     };
 

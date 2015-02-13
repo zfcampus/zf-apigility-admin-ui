@@ -112,9 +112,6 @@
         resolve : {
           apiname : function() {
             return vm.apiname;
-          },
-          version: function() {
-            return vm.version;
           }
         }
       });
@@ -128,6 +125,11 @@
           SidebarService.addRpcService(response.api, response.rpc);
           vm.setSelected('api' + response.api + 'rpc' + response.rpc);
           $state.go('ag.rpc', {api: response.api, ver: 1, rpc: response.rpc});
+        } else if (response.hasOwnProperty('rests')) {
+          response.rests.forEach(function(service) {
+            SidebarService.addRestService(response.api, service);
+          });
+          $state.go('ag.apimodule', {api: response.api, ver: 1});
         }
       });
     };

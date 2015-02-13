@@ -643,6 +643,16 @@
       });
     };
 
+    this.autodiscover = function(module, version, name, callback) {
+      xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + name)
+        .then(function (response) {
+          return callback(true, response);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        })
+    };
+
     this.newDbConnected = function(module, adapter, table, callback) {
       var allowed = [ 'adapter_name', 'table_name' ];
       xhr.create(agApiPath + '/module/' + module + '/rest', [ adapter, table ], allowed)

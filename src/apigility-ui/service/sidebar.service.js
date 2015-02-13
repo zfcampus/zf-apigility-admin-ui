@@ -20,7 +20,7 @@
       }
     }
 
-    var getSelectedVersion = function(){
+    var getSelectedVersion = function(apiName){
       for(var i = 0; i < apis.length; i++) {
         if (apis[i].name === apiName) {
           return apis[i].selected_version;

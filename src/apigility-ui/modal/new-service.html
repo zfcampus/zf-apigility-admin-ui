@@ -15,14 +15,14 @@
     <tabset justified="true">
       <tab heading="REST" active="vm.tabs.rest">
         <label for="rest_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" ng-model="vm.restname" ng-disabled="vm.loading" placeholder="Insert the service name" autofocus>
+        <input type="text" id="rest_service_name" class="form-control" ng-model="vm.restname" ng-disabled="vm.loading" placeholder="Insert the service name" autofocus>
       </tab>
       <tab heading="RPC" active="vm.tabs.rpc">
         <label for="rpc_service_name" class="control-label">Service name</label>
-        <input type="text" class="form-control" ng-model="vm.rpcname" ng-disabled="vm.loading" placeholder="Insert the service name">
+        <input type="text" id="rpc_service_name" class="form-control" ng-model="vm.rpcname" ng-disabled="vm.loading" placeholder="Insert the service name">
         <br />
         <label for="route_match" class="control-label">Route to match</label>
-        <input type="text" class="form-control" ng-model="vm.route" ng-disabled="vm.loading" placeholder="Insert the route to match">
+        <input type="text" id="route_match" class="form-control" ng-model="vm.route" ng-disabled="vm.loading" placeholder="Insert the route to match">
       </tab>
       <tab heading="DB Connected" active="vm.tabs.db">
         <div ng-if="vm.db.db_adapter.length === 0">
@@ -31,10 +31,53 @@
         </div>
         <div ng-if="vm.db.db_adapter.length > 0">
           <label for="db_adapter_name" class="control-label">DB adapter name</label>
-          <select class="form-control" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter"></select>
-          <br />
+          <select class="form-control" id="db_adapter_name" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.discoverDb()">
+            <option value="" disabled>- Choose an adapter -</option>
+          </select>
+          <!--<br />
           <label for="rtable_name" class="control-label">Table name</label>
-          <input type="text" class="form-control" ng-model="vm.table_name" ng-disabled="vm.loading" placeholder="Insert the table name">
+          <input type="text" class="form-control" ng-model="vm.table_name" ng-disabled="vm.loading" placeholder="Insert the table name">-->
+        </div>
+        <div ui-tree class="angular-ui-tree" id="db-tables-tree" data-max-depth="2" ng-if="vm.tables || vm.discovering">
+          <label class="control-label">Tables<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
+          <ol ui-tree-nodes="options" ng-model="vm.tables" class="angular-ui-tree-nodes">
+            <li class="angular-ui-tree-node" ng-repeat="table in vm.tables" ui-tree-node collapsed="true">
+              <div class="tree-node">
+                <div class="pull-left tree-handle angular-ui-tree-handle" ui-tree-handle>
+                  <span class="glyphicon glyphicon-list"></span>
+                </div>
+                <div class="tree-node-content">
+                  <a class="btn btn-default btn-xs" ng-click="vm.toggle(this)" data-nodrag="">
+                    <span ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" class="glyphicon glyphicon-chevron-down"></span>
+                  </a>
+                  <span>{{table.table_name}}</span>
+                  <input type="checkbox" class="pull-right" checklist-model="vm.dbServices" checklist-value="table">
+                  <div class="clearfix"></div>
+                  <div ng-class="{hidden: collapsed}">
+                    <table class="table table-bordered">
+                      <caption>Fields</caption>
+                      <thead>
+                      <tr>
+                        <th class="col-sm-3">Column</th>
+                        <th class="col-sm-4">Type (Length)</th>
+                        <th class="col-sm-2">Required</th>
+                        <th class="col-sm-3">Constraints</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="column in table.columns">
+                        <td>{{column.name}}</td>
+                        <td>{{column.type}}<span ng-show="column['length']"> ({{column['length']}})</span></td>
+                        <td><i class="glyphicon glyphicon-ok" ng-if="!!column.required"></i></td>
+                        <td>{{column.constraints.join(', ')}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ol>
         </div>
       </tab>
     </tabset>

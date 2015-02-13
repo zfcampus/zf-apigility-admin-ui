@@ -28,7 +28,7 @@
         }
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close(vm.apiName, vm.version, vm.restName);
+          $modalInstance.close({api: vm.apiName, version: vm.version, service: vm.restName});
         }, 2000);
       });
     }

@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('NewService', NewService);
 
-  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname', 'version' ];
+  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname' ];
 
-  function NewService($modalInstance, SidebarService, api, $timeout, apiname, version) {
+  function NewService($modalInstance, SidebarService, api, $timeout, apiname) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -26,9 +26,22 @@
       }
     }
 
+    vm.toggle = function(scope) {
+      scope.toggle();
+    };
+
     api.getDatabase(function(err, response){
       vm.db = response;
     });
+
+    vm.discoverDb = function() {
+      vm.discovering = true;
+      api.autodiscover(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), encodeURIComponent(vm.adapter.adapter_name), function (err, response) {
+        vm.dbServices = [];
+        vm.discovering = false;
+        vm.tables = response;
+      });
+    };
 
     vm.ok = function() {
       vm.loading = true;
@@ -77,12 +90,12 @@
           vm.loading = false;
           return;
         }
-        if (!vm.table_name) {
-          vm.alert = 'The Table name cannot be empty';
+        if (vm.dbServices.length == 0) {
+          vm.alert = 'Please choose at least one table';
           vm.loading = false;
           return;
         }
-        api.newDbConnected(vm.apiname.name, vm.adapter.adapter_name, vm.table_name, function(err, response) {
+        /*api.newDbConnected(vm.apiname.name, vm.adapter.adapter_name, vm.table_name, function(err, response) {
           if (err) {
             vm.alert = response;
             vm.loading = false;
@@ -92,7 +105,40 @@
               $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.table_name });
             }, 2000);
           }
+        });*/
+        var rests = [];
+        vm.dbServices.forEach(function(table) {
+          api.newDbConnected(vm.apiname.name, vm.adapter.adapter_name, table.table_name, function(err, response) {
+            if (err) {
+              vm.alert = response;
+              vm.loading = false;
+            } else {
+              var fields = [];
+              table.columns.forEach(function(column) {
+                if (column.filters != undefined && column.validators != undefined) {
+                  fields.push({
+                    name: column.name,
+                    required: column.required,
+                    filters: column.filters,
+                    validators: column.validators
+                  });
+                }
+
+              });
+              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), table.table_name, fields, function(err, response) {
+                if (err) {
+                  //TODO: warn upon error
+                }
+              });
+              rests.push(table.table_name);
+              vm.tables.splice(table, 1);
+            }
+          });
         });
+        $timeout(function(){
+          vm.loading = false;
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests });
+        }, 2000);
       }
     }
   }
