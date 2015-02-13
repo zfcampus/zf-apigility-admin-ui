@@ -209,3 +209,7 @@ h3.panel-title {
     height: 19px;
     line-height: 19px;
 }
+
+form#doctrine-params > .form-group {
+    margin-bottom: 0;
+}

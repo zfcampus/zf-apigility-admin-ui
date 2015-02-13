@@ -659,6 +659,19 @@
       });
     };
 
+    this.getDoctrineAdapters = function(callback) {
+      xhr.get(agApiPath + '/doctrine-adapter', '_embedded')
+       .then(function (response) {
+         response.doctrine_adapter.forEach(function(entry){
+           delete entry._links;
+         })
+         return callback(true, response);
+       })
+       .catch(function (err) {
+         return callback(true, null);
+      });
+    };
+
     this.newVersion = function(module, callback) {
       var allowed = [ 'module' ];
       xhr.update(agApiPath + '/versioning', [ module ], allowed)

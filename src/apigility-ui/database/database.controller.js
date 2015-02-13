@@ -24,8 +24,27 @@
       'Sqlsrv'
     ];
 
+    vm.doctrine_driver_types = [
+      'Doctrine\\DBAL\\Driver\\DrizzlePDOMySql\\DrizzlePDOMySql',
+      'Doctrine\\DBAL\\Driver\\DB2Driver',
+      'Doctrine\\DBAL\\Driver\\Mysqli\\Driver',
+      'Doctrine\\DBAL\\Driver\\OCI8\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOIbm\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOMySql\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOOracle\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOPgSql\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOSqlite\\Driver',
+      'Doctrine\\DBAL\\Driver\\PDOSqlsrv\\Driver',
+      'Doctrine\\DBAL\\Driver\\SQLAnywhere\\Driver',
+      'Doctrine\\DBAL\\Driver\\SQLSrv\\Driver'
+    ];
+
     api.getDatabase(function(err, result){
       vm.db_adapter = result.db_adapter;
+    });
+
+    api.getDoctrineAdapters(function (err, result) {
+      vm.doctrine_adapter = result.doctrine_adapter;
     });
 
     vm.newDbModal = function() {
@@ -131,6 +150,23 @@
           break;
         }
       }
+    }
+
+    vm.viewDoctrineParamsModal = function (adapter) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/view-doctrineparams.html',
+        controller: 'ViewDoctrineParams',
+        controllerAs: 'vm',
+        resolve: {
+          doctrine_adapter: function() {
+            return adapter;
+          },
+          driver_types: function() {
+            return vm.doctrine_driver_types;
+          }
+        }
+      });
+
     }
   }
 })();
