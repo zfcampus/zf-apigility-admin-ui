@@ -129,7 +129,7 @@
             <div class="form-group">
               <label for="doctrine_object_manager" class="col-sm-2 control-label">Object Manager</label>
               <div class="col-sm-8">
-                <select class="form-control" id="doctrine_object_manager" ng-model="vm.rest.object_manager" ng-options="om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager"></select>
+                <select class="form-control" id="doctrine_object_manager" ng-model="vm.rest.object_manager" ng-options="om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager" ng-change="vm.change(1)"></select>
               </div>
             </div>
             <div class="form-group">
@@ -182,7 +182,7 @@
             <div class="form-group">
               <label for="rest_content_negotiation" class="col-sm-2 control-label">Content Negotiation Selector</label>
               <div class="col-sm-8">
-                <select class="form-control" ng-model="vm.rest.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(1)" ng-disabled="vm.disabled"></select>
+                <select class="form-control" ng-model="vm.rest.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(2)" ng-disabled="vm.disabled"></select>
               </div>
             </div>
             <div class="form-group">
@@ -190,7 +190,7 @@
               <div class="col-sm-8">
                 <tags-input
                     ng-hide="vm.disabled"
-                    ng-click="vm.change(1)"
+                    ng-click="vm.change(2)"
                     ng-change="vm.change(1)"
                     ng-model="vm.tags.accept_whitelist"
                     placeholder="Add a mediatype"
@@ -206,8 +206,8 @@
               <div class="col-sm-8">
                 <tags-input
                     ng-hide="vm.disabled"
-                    ng-click="vm.change(1)"
-                    ng-change="vm.change(1)"
+                    ng-click="vm.change(2)"
+                    ng-change="vm.change(2)"
                     ng-model="vm.tags.content_type_whitelist"
                     placeholder="Add a content type"
                     add-on-space="true"
@@ -274,7 +274,7 @@
               <label class="col-sm-2 control-label">Entity authorization</label>
               <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.entity" checklist-value="http" ng-change="vm.change(2)" ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <input type="checkbox" checklist-model="vm.auth.entity" checklist-value="http" ng-change="vm.change(3)" ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
               </span>
               </div>
             </div>
@@ -282,7 +282,7 @@
               <label class="col-sm-2 control-label">Collection authorization</label>
               <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.collection" checklist-value="http" ng-change="vm.change(2)" ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <input type="checkbox" checklist-model="vm.auth.collection" checklist-value="http" ng-change="vm.change(3)" ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
               </span>
               </div>
             </div>
@@ -299,7 +299,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">REST service description</label>
               <div class="col-sm-10">
-                <textarea class="form-control" ng-model="vm.rest.documentation.description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                <textarea class="form-control" ng-model="vm.rest.documentation.description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -308,7 +308,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" ng-model="vm.rest.documentation.collection.description" placeholder="Insert the Collection description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                      <textarea class="form-control" ng-model="vm.rest.documentation.collection.description" placeholder="Insert the Collection description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -317,19 +317,19 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Description</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                           </div>
                         </div>
                         <div class="form-group" ng-if="http !== 'GET'">
                           <label class="col-sm-2 control-label">Request Body</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].request" placeholder="Insert the request specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].request" placeholder="Insert the request specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Response Body</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].response" placeholder="Insert the response specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].response" placeholder="Insert the response specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                           </div>
                         </div>
                       </tab>
@@ -340,7 +340,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" ng-model="vm.rest.documentation.entity.description" placeholder="Insert the Entity description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                      <textarea class="form-control" ng-model="vm.rest.documentation.entity.description" placeholder="Insert the Entity description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -349,7 +349,7 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Description</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                           </div>
                         </div>
                         <div class="form-group" ng-if="http !== 'GET'">
@@ -361,7 +361,7 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Response Body</label>
                           <div class="col-sm-10">
-                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].response" placeholder="Insert the response specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].response" placeholder="Insert the response specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
                           </div>
                         </div>
                       </tab>
