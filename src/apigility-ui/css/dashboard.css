@@ -276,3 +276,8 @@ form#doctrine-params > .form-group {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.angular-ui-tree-empty {
+    min-height: 0;
+    border: none;
+}

@@ -38,7 +38,7 @@
           <label for="rtable_name" class="control-label">Table name</label>
           <input type="text" class="form-control" ng-model="vm.table_name" ng-disabled="vm.loading" placeholder="Insert the table name">-->
         </div>
-        <div ui-tree class="angular-ui-tree" id="db-tables-tree" data-max-depth="2" ng-if="vm.tables || vm.discovering">
+        <div ui-tree class="angular-ui-tree" id="db-tables-tree" data-max-depth="2" ng-if="(vm.tables && vm.tables.length > 0) || vm.discovering">
           <label class="control-label">Tables<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
           <ol ui-tree-nodes="options" ng-model="vm.tables" class="angular-ui-tree-nodes">
             <li class="angular-ui-tree-node" ng-repeat="table in vm.tables" ui-tree-node collapsed="true">
@@ -74,6 +74,30 @@
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </tab>
+      <tab heading="Doctrine Connected" ng-if="vm.doctrine" active="vm.tabs.doctrine">
+        <div class="form-group">
+          <label for="doctrine_entity_manager" class="control-label">Entity Manager</label>
+          <select class="form-control" id="doctrine_entity_manager" ng-model="vm.doctrineAdapter" ng-options="doctrine.adapter_name for doctrine in vm.doctrine" ng-change="vm.discoverDoctrine()" ng-disabled="vm.discovering">
+            <option value="" disabled>- Choose an adapter -</option>
+          </select>
+        </div>
+        <div ui-tree class="angular-ui-tree" id="db-entities-tree" data-max-depth="2" ng-if="(vm.entities && vm.entities.length > 0 ) || vm.discovering">
+          <label class="control-label">Entities<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
+          <ol ui-tree-nodes="options" ng-model="vm.entities" class="angular-ui-tree-nodes">
+            <li class="angular-ui-tree-node" ng-repeat="entity in vm.entities" ui-tree-node>
+              <div class="tree-node">
+                <div class="pull-left tree-handle angular-ui-tree-handle" ui-tree-handle>
+                  <span class="glyphicon glyphicon-list"></span>
+                </div>
+                <div class="tree-node-content">
+                  <span>{{entity.entity_class}}</span>
+                  <input type="checkbox" class="pull-right" checklist-model="vm.doctrineEntities" checklist-value="entity">
                 </div>
               </div>
             </li>

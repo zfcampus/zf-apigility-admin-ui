@@ -53,7 +53,7 @@
                 <input type="text" class="form-control" id="rest_page_size_parameter" ng-model="vm.rest.page_size_param" ng-change="vm.change(0)" ng-disabled="vm.disabled">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if="!vm.isDoctrine">
               <label for="rest_hydrator" class="col-sm-2 control-label">Hydrator Service Name</label>
               <div class="col-sm-4">
                 <select class="form-control" ng-model="vm.rest.hydrator_name" ng-options="hydrator for hydrator in vm.hydrators" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
@@ -99,27 +99,80 @@
         <tab heading="Database Settings" active="vm.tabs.db" ng-if="vm.rest.table_name">
           <form class="form-horizontal" role="form" unsaved-warning-form>
             <div class="form-group">
-              <label for="rest_content_negotiation" class="col-sm-2 control-label">Adapter name</label>
+              <label for="db_adapter_name" class="col-sm-2 control-label">Adapter name</label>
               <div class="col-sm-8">
-                <select class="form-control" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
+                <select class="form-control" id="db_adapter_name" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
               </div>
             </div>
             <div class="form-group">
-              <label for="rest_content_negotiation" class="col-sm-2 control-label">Table name</label>
+              <label for="table_name" class="col-sm-2 control-label">Table name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" ng-model="vm.rest.table_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+                <input type="text" id="table_name" class="form-control" ng-model="vm.rest.table_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
               </div>
             </div>
             <div class="form-group">
-              <label for="rest_content_negotiation" class="col-sm-2 control-label">TableGateway Service Name</label>
+              <label for="tg_service" class="col-sm-2 control-label">TableGateway Service Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" ng-model="vm.rest.table_service" readonly>
+                <input type="text" id="tg_service" class="form-control" ng-model="vm.rest.table_service" readonly>
               </div>
             </div>
             <div class="form-group" style="margin-top:30px">
               <div class="col-sm-offset-2 col-sm-4">
                 <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
                 <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Doctrine Settings" active="vm.tabs.doctrine" ng-if="vm.isDoctrine">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="doctrine_object_manager" class="col-sm-2 control-label">Object Manager</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="doctrine_object_manager" ng-model="vm.rest.object_manager" ng-options="om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="doctrine_hydrator_service" class="col-sm-2 control-label">Hydrator Service</label>
+              <div class="col-sm-8">
+                <input type="text" id="doctrine_hydrator_service" class="form-control" ng-model="vm.rest.hydrator_name" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Hydrator strategies<br><button type="button" class="btn btn-xs btn-primary" ng-click="vm.newDoctrineStrategyModal()"><span class="glyphicon glyphicon-plus"></span></button></label>
+              <div class="col-sm-8">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">Field</th>
+                      <th class="col-md-8">Strategy</th>
+                      <th class="col-md-1">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-if="vm.rest.strategies.length == 0">
+                      <td colspan="3">No hydrator strategy configured<span ng-hide="vm.disabled">, <a ng-click="vm.newDoctrineStrategyModal()">create the first one</a></span></td>
+                    </tr>
+                    <tr ng-repeat="(k,v) in vm.rest.strategies">
+                      <td>{{k}}</td>
+                      <td>{{v}}</td>
+                      <td><button type="button" class="btn btn-xs btn-danger" ng-click="vm.removeStrategy(k)"><span class="glyphicon glyphicon-minus"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+              <div class="col-sm-offset-2 col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.rest.by_value">Hydrate by value
+                  </label>
+                </div>
+              </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-3 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear>Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading">Save</button>
               </div>
             </div>
           </form>

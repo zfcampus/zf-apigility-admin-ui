@@ -75,7 +75,7 @@
       var newApis = [];
       apis.forEach(function(api){
         if (api.name == apiName) {
-          api.rest.splice(api.rest.indexOf(serviceName)-1,1);
+          api.rest.splice(api.rest.indexOf(serviceName),1);
         }
         newApis.push(api);
       })

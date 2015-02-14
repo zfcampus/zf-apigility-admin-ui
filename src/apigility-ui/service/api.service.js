@@ -64,6 +64,16 @@
       });
     };
 
+    this.strategyExists = function (strategyName, callback) {
+      xhr.get(agApiPath + '/strategy/' + strategyName)
+        .then(function (response) {
+          return callback(false, response.success);
+        })
+        .catch(function (err) {
+          return callback(true, err);
+        });
+    };
+
     this.newRest = function(module, service, callback) {
       var allowed = [ 'service_name' ];
       xhr.create(agApiPath + '/module/' + module + '/rest', [ service ], allowed)
@@ -80,7 +90,7 @@
       });
     };
 
-    this.updateGeneralRest = function(module, version, name, data, callback) {
+    this.updateGeneralRest = function(module, version, name, data, isDoctrine, callback) {
       var allowed = [
         'collection_class',
         'collection_http_methods',
@@ -99,15 +109,19 @@
         'table_name',
         'adapter_name'
       ];
+      if (isDoctrine) {
+        allowed.push('strategies', 'by_value');
+      }
       var result = filterData(data, allowed);
-      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
+      var path = isDoctrine ? '/doctrine/' : '/rest/';
+      xhr.update(agApiPath + '/module/' + module + path + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
         return callback(false, response);
       })
       .catch(function (err) {
         return callback(true, 'Error during the update of the REST service');
       });
-    }
+    };
 
     this.updateContentNegotiationRest = function(module, version, name, data, callback) {
       var allowed = [
@@ -126,14 +140,15 @@
       });
     }
 
-    this.deleteRest = function(module, version, name, recursive, callback) {
-      xhr.remove(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
-      .then(function (response) {
-        return callback(false, response);
-      })
-      .catch(function (err) {
-        return callback(true);
-      });
+    this.deleteRest = function(module, version, name, isDoctrine, recursive, callback) {
+      var path = isDoctrine ? 'doctrine' : 'rest';
+      xhr.remove(agApiPath + '/module/' + module + '/' + path + '/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
+        .then(function (response) {
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true);
+        });
     };
 
     this.getAuthorizationRest = function(module, version, name, callback) {
@@ -239,6 +254,16 @@
         return false;
       });
     };
+
+    this.getRestDoctrineMetadata = function(entity_manager, entity, callback) {
+      xhr.get(agApiPath + '/doctrine/' + entity_manager + '/metadata/' + encodeURIComponent(entity))
+        .then(function(response) {
+          return callback(false, response);
+        })
+        .catch(function(err) {
+          return callback(true, 'I cannot retrieve entity metadata');
+        })
+    }
 
     this.getHydrators = function(callback) {
       xhr.get(agApiPath + '/hydrators', 'hydrators' )
@@ -643,8 +668,9 @@
       });
     };
 
-    this.autodiscover = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + name)
+    this.autodiscover = function(module, version, isDoctrine, name, callback) {
+      var doctrine_route = isDoctrine ? 'doctrine/' : '';
+      xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + doctrine_route + name)
         .then(function (response) {
           return callback(true, response);
         })
@@ -665,7 +691,7 @@
             return callback(true, 'I cannot create the DB-Connected service, please check if already exists');
             break;
         }
-        return callback(true, 'I cannot create the DB-Connected service, please enter a valid name (alpha characters)');
+        return callback(true, 'I cannot create the DB-Connected service, please check your database server');
       });
     };
 
@@ -680,6 +706,22 @@
        .catch(function (err) {
          return callback(true, null);
       });
+    };
+
+    this.newDoctrine = function(module, adapter, entity, callback) {
+      var allowed = [ 'object_manager', 'entity_class', 'service_name' ];
+      xhr.create(agApiPath + '/module/' + module + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
+        .then(function (response) {
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          switch (err.status) {
+            case 500 :
+              return callback(true, 'I cannot create the Doctrine-Connected service, please check if already exists');
+              break;
+          }
+          return callback(true, 'I cannot create the Doctrine-Connected service, please check your database server');
+        });
     };
 
     this.newVersion = function(module, callback) {

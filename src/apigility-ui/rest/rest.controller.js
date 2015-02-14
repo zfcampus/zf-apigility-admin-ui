@@ -32,14 +32,30 @@
         vm.db = response;
       });
 
+      api.getDoctrineAdapters(function(err, response) {
+        vm.doctrine = response.doctrine_adapter;
+      });
+
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){
         vm.rest = result;
+        vm.isDoctrine = result.object_manager !== undefined;
+
         vm.rest.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
         });
         vm.rest.content_type_whitelist.forEach(function(entry){
           vm.tags.content_type_whitelist.push({ text : entry });
         });
+
+        if (vm.isDoctrine) {
+          api.getRestDoctrineMetadata(result.object_manager, result.entity_class, function(err, response) {
+            if (err) {
+              console.log(response);
+              return;
+            }
+            vm.doctrineMetadata = response;
+          });
+        }
         if (vm.rest.hasOwnProperty('table_name')) {
           for (var i = 0; i < vm.db.db_adapter.length; i++) {
             if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
@@ -90,14 +106,14 @@
     }
 
     vm.saveGeneral = function() {
-      if (!vm.changed[0]) {
+      if (!vm.changed[0] || !vm.changed[1]) {
         return;
       }
       vm.loading = true;
       if (vm.adapter) {
         vm.rest.adapter_name = vm.adapter.adapter_name;
       }
-      api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, function(err, result){
+      api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, vm.isDoctrine, function(err, result){
         vm.loading = false;
         if (err) {
           vm.alert = result;
@@ -112,6 +128,27 @@
         initGeneral();
         vm.changed[0] = false;
       }
+    };
+
+    vm.newDoctrineStrategyModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/new-doctrinestrategy.html',
+        controller: 'NewDoctrineStrategy',
+        controllerAs: 'vm',
+        resolve : {
+          fields : function() {
+            return vm.doctrineMetadata.fieldNames;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+        vm.rest.strategies[response.field] = response.strategy;
+      });
+    };
+
+    vm.removeStrategy = function(key) {
+      delete vm.rest.strategies[key];
     };
 
     vm.saveContentNegotiation = function() {
@@ -185,7 +222,12 @@
       var modalInstance = $modal.open({
         templateUrl: 'apigility-ui/modal/delete-rest.html',
         controller: 'DeleteRest',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isDoctrine: function() {
+            return vm.rest.object_manager !== undefined;
+          }
+        }
       });
 
       modalInstance.result.then(function (response) {
