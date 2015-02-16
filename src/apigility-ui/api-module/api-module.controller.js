@@ -71,6 +71,9 @@
         resolve: {
           apiname : function() {
             return vm.apiName;
+          },
+          version: function() {
+            return vm.version;
           }
         }
       });

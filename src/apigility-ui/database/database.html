@@ -29,5 +29,30 @@
         </tr>
       </table>
     </div>
+    <div class="row" ng-if="vm.doctrine_adapter">
+      <div class="col-sm-12">
+        <h3>Doctrine adapters</h3>
+        <table class="table table-bordered col-sm-12">
+          <thead>
+            <tr>
+              <th class="col-sm-2">Adapter name</th>
+              <th class="col-sm-2">Configuration</th>
+              <th class="col-sm-2">Event Manager</th>
+              <th class="col-sm-4">Driver class</th>
+              <th class="col-sm-2">Params</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.doctrine_adapter">
+              <td>{{item.adapter_name}}</td>
+              <td>{{item.configuration}}</td>
+              <td>{{item.eventmanager}}</td>
+              <td>{{item.driverClass}}</td>
+              <td><button type="button" ng-click="vm.viewDoctrineParamsModal(item)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> view params</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

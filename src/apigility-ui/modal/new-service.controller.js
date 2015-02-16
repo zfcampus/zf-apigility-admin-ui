@@ -26,9 +26,35 @@
       }
     }
 
+    vm.toggle = function(scope) {
+      scope.toggle();
+    };
+
     api.getDatabase(function(err, response){
       vm.db = response;
     });
+
+    api.getDoctrineAdapters(function(err, response) {
+      vm.doctrine = response.doctrine_adapter;
+    });
+
+    vm.discoverDb = function() {
+      vm.discovering = true;
+      api.autodiscover(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), false, encodeURIComponent(vm.adapter.adapter_name), function (err, response) {
+        vm.dbServices = [];
+        vm.discovering = false;
+        vm.tables = response;
+      });
+    };
+
+    vm.discoverDoctrine = function () {
+      vm.discovering = true;
+      api.autodiscover(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), true, vm.doctrineAdapter.adapter_name, function (err, response) {
+        vm.doctrineEntities = [];
+        vm.discovering = false;
+        vm.entities = response;
+      });
+    };
 
     vm.ok = function() {
       vm.loading = true;
@@ -77,22 +103,78 @@
           vm.loading = false;
           return;
         }
-        if (!vm.table_name) {
-          vm.alert = 'The Table name cannot be empty';
+        if (vm.dbServices.length == 0) {
+          vm.alert = 'Please choose at least one table';
           vm.loading = false;
           return;
         }
-        api.newDbConnected(vm.apiname.name, vm.adapter.adapter_name, vm.table_name, function(err, response) {
-          if (err) {
-            vm.alert = response;
-            vm.loading = false;
-          } else {
-            $timeout(function(){
+
+        var rests = [];
+        vm.dbServices.forEach(function(table) {
+          api.newDbConnected(vm.apiname.name, vm.adapter.adapter_name, table.table_name, function(err, response) {
+            if (err) {
+              vm.alert = response;
               vm.loading = false;
-              $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.table_name });
-            }, 2000);
-          }
+            } else {
+              var fields = [];
+              table.columns.forEach(function(column) {
+                if (column.filters != undefined && column.validators != undefined) {
+                  fields.push({
+                    name: column.name,
+                    required: column.required,
+                    filters: column.filters,
+                    validators: column.validators
+                  });
+                }
+
+              });
+              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), table.table_name, fields, function(err, response) {
+                if (err) {
+                  //TODO: warn upon error
+                }
+              });
+              rests.push(table.table_name);
+              vm.tables.splice(table, 1);
+            }
+          });
         });
+        $timeout(function(){
+          vm.loading = false;
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests });
+        }, 2000);
+      } else if (vm.tabs.doctrine) { // DOCTRINE-CONNECTED
+        if (!vm.doctrineAdapter) {
+          vm.alert = 'The DB adapter name cannot be empty';
+          vm.loading = false;
+          return;
+        }
+
+        if (vm.doctrineEntities.length == 0) {
+          vm.alert = 'Please choose at least one entity';
+          vm.loading = false;
+          return;
+        }
+        var rests = [];
+        vm.doctrineEntities.forEach(function(entity) {
+          api.newDoctrine(vm.apiname.name, vm.doctrineAdapter.adapter_name, entity, function (err, response) {
+            if (err) {
+              vm.alert = response;
+              vm.loading = false;
+            } else {
+              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), entity.service_name, entity.fields, function(err, response) {
+                if (err) {
+                  //TODO: warn upon error
+                }
+              });
+              rests.push(entity.service_name);
+              vm.entities.splice(entity, 1);
+            }
+          });
+        });
+        $timeout(function(){
+          vm.loading = false;
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests });
+        }, 2000);
       }
     }
   }

@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('DeleteRest', DeleteRest);
 
-  DeleteRest.$inject = [ '$modalInstance', '$stateParams', 'api', '$timeout' ];
+  DeleteRest.$inject = [ '$modalInstance', '$stateParams', 'api', '$timeout', 'isDoctrine' ];
 
-  function DeleteRest($modalInstance, $stateParams, api, $timeout) {
+  function DeleteRest($modalInstance, $stateParams, api, $timeout, isDoctrine) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -20,7 +20,7 @@
 
     vm.ok = function() {
       vm.loading = true;
-      api.deleteRest(vm.apiName, vm.version, vm.restName, vm.recursive, function(err, response) {
+      api.deleteRest(vm.apiName, vm.version, vm.restName, isDoctrine, vm.recursive, function(err, response) {
         if (err) {
           vm.alert = 'Error during the delete of the service';
           vm.loading = false;
@@ -28,7 +28,7 @@
         }
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close(vm.apiName, vm.version, vm.restName);
+          $modalInstance.close({api: vm.apiName, version: vm.version, service: vm.restName});
         }, 2000);
       });
     }

@@ -6,177 +6,230 @@
     </h3>
   </div>
   <div class="panel-body">
-    <tabset justified="true">
-      <tab heading="General Settings" active="vm.tabs.general_settings">
-        <form class="form-horizontal" role="form" unsaved-warning-form>
-          <div class="form-group">
-            <label for="rest_name" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="rest_name" ng-model="vm.rest.service_name" readonly>
+      <tabset>
+        <tab heading="General Settings" active="vm.tabs.general_settings">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="rest_name" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="rest_name" ng-model="vm.rest.service_name" readonly>
+              </div>
+              <label for="rest_page_size" class="col-sm-2 control-label">Page size</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="rest_page_size" ng-model="vm.rest.page_size" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
             </div>
-            <label for="rest_page_size" class="col-sm-2 control-label">Page size</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="rest_page_size" ng-model="vm.rest.page_size" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Route matches</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" ng-model="vm.rest.route_match" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-            <label class="col-sm-2 control-label">HTTP Entity Methods</label>
-            <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Route matches</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" ng-model="vm.rest.route_match" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+              <label class="col-sm-2 control-label">HTTP Entity Methods</label>
+              <div class="col-sm-4">
               <span ng-repeat="http in vm.httpMethods">
                 <input type="checkbox" checklist-model="vm.rest.entity_http_methods" checklist-value="http" ng-change="vm.change(0)" ng-disabled="vm.disabled"> {{http}}
               </span>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Route identifier name</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" ng-model="vm.rest.route_identifier_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-            <label class="col-sm-2 control-label">HTTP Collection Methods</label>
-            <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Route identifier name</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" ng-model="vm.rest.route_identifier_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+              <label class="col-sm-2 control-label">HTTP Collection Methods</label>
+              <div class="col-sm-4">
               <span ng-repeat="http in vm.httpMethods">
                 <input type="checkbox" checklist-model="vm.rest.collection_http_methods" checklist-value="http" ng-change="vm.change(0)" ng-disabled="vm.disabled"> {{http}}
               </span>
+              </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label for="rest_entity_id" class="col-sm-2 control-label">Entity identifier name</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="rest_entity_id" ng-model="vm.rest.entity_identifier_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+              <label for="rest_page_size_parameter" class="col-sm-2 control-label">Page Size Parameter</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="rest_page_size_parameter" ng-model="vm.rest.page_size_param" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+            </div>
+            <div class="form-group" ng-if="!vm.isDoctrine">
+              <label for="rest_hydrator" class="col-sm-2 control-label">Hydrator Service Name</label>
+              <div class="col-sm-4">
+                <select class="form-control" ng-model="vm.rest.hydrator_name" ng-options="hydrator for hydrator in vm.hydrators" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rest_query_white_list" class="col-sm-2 control-label">Collection Query String Whitelist</label>
+              <div class="col-sm-4">
+                <tags-input
+                    ng-model="vm.rest.collection_query_whitelist"
+                    ng-hide="vm.disabled"
+                    ng-change="vm.change(0)"
+                    placeholder="Insert query whitelist"
+                    add-on-space="true"
+                    add-on-enter="true"
+                    add-on-blur="true"
+                    allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+                <span ng-repeat="collection in vm.rest.collection_query_whitelist" ng-show="vm.disabled">{{collection.text}}, </span>
+              </div>
+              <label for="rest_collection_name" class="col-sm-2 control-label">Collection Name</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" ng-model="vm.rest.collection_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rest_entity_class" class="col-sm-2 control-label">Entity Class</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" ng-model="vm.rest.entity_class" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+              <label for="rest_collection_class" class="col-sm-2 control-label">Collection Class</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" ng-model="vm.rest.collection_class" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Database Settings" active="vm.tabs.db" ng-if="vm.rest.table_name">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="db_adapter_name" class="col-sm-2 control-label">Adapter name</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="db_adapter_name" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="table_name" class="col-sm-2 control-label">Table name</label>
+              <div class="col-sm-8">
+                <input type="text" id="table_name" class="form-control" ng-model="vm.rest.table_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tg_service" class="col-sm-2 control-label">TableGateway Service Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="tg_service" class="form-control" ng-model="vm.rest.table_service" readonly>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Doctrine Settings" active="vm.tabs.doctrine" ng-if="vm.isDoctrine">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="doctrine_object_manager" class="col-sm-2 control-label">Object Manager</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="doctrine_object_manager" ng-model="vm.rest.object_manager" ng-options="om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager" ng-change="vm.change(1)"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="doctrine_hydrator_service" class="col-sm-2 control-label">Hydrator Service</label>
+              <div class="col-sm-8">
+                <input type="text" id="doctrine_hydrator_service" class="form-control" ng-model="vm.rest.hydrator_name" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Hydrator strategies<br><button type="button" class="btn btn-xs btn-primary" ng-click="vm.newDoctrineStrategyModal()"><span class="glyphicon glyphicon-plus"></span></button></label>
+              <div class="col-sm-8">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">Field</th>
+                      <th class="col-md-8">Strategy</th>
+                      <th class="col-md-1">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-if="vm.rest.strategies.length == 0">
+                      <td colspan="3">No hydrator strategy configured<span ng-hide="vm.disabled">, <a ng-click="vm.newDoctrineStrategyModal()">create the first one</a></span></td>
+                    </tr>
+                    <tr ng-repeat="(k,v) in vm.rest.strategies">
+                      <td>{{k}}</td>
+                      <td>{{v}}</td>
+                      <td><button type="button" class="btn btn-xs btn-danger" ng-click="vm.removeStrategy(k)"><span class="glyphicon glyphicon-minus"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+              <div class="col-sm-offset-2 col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.rest.by_value">Hydrate by value
+                  </label>
+                </div>
+              </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-3 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear>Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Content Negotiation" active="vm.tabs.content_negotiation">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label for="rest_content_negotiation" class="col-sm-2 control-label">Content Negotiation Selector</label>
+              <div class="col-sm-8">
+                <select class="form-control" ng-model="vm.rest.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(2)" ng-disabled="vm.disabled"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Accept whitelist</label>
+              <div class="col-sm-8">
+                <tags-input
+                    ng-hide="vm.disabled"
+                    ng-click="vm.change(2)"
+                    ng-change="vm.change(1)"
+                    ng-model="vm.tags.accept_whitelist"
+                    placeholder="Add a mediatype"
+                    add-on-space="true"
+                    add-on-enter="true"
+                    add-on-blur="true"
+                    allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+                <span ng-repeat="accept in vm.tags.accept_whitelist" ng-show="vm.disabled">{{accept.text}}, </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Content-Type whitelist</label>
+              <div class="col-sm-8">
+                <tags-input
+                    ng-hide="vm.disabled"
+                    ng-click="vm.change(2)"
+                    ng-change="vm.change(2)"
+                    ng-model="vm.tags.content_type_whitelist"
+                    placeholder="Add a content type"
+                    add-on-space="true"
+                    add-on-enter="true"
+                    add-on-blur="true"
+                    allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+                <span ng-repeat="content in vm.tags.content_type_whitelist" ng-show="vm.disabled">{{content.text}}, </span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetContentNegotiation()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveContentNegotiation()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Fields" active="vm.tabs.fields">
+          <h3>Fields <button type="button" class="btn btn-primary btn-sm" ng-click="vm.newFieldModal()" ng-hide="vm.disabled">New field</button></h3>
           <div class="form-group">
-            <label for="rest_entity_id" class="col-sm-2 control-label">Entity identifier name</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="rest_entity_id" ng-model="vm.rest.entity_identifier_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-            <label for="rest_page_size_parameter" class="col-sm-2 control-label">Page Size Parameter</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="rest_page_size_parameter" ng-model="vm.rest.page_size_param" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rest_hydrator" class="col-sm-2 control-label">Hydrator Service Name</label>
-            <div class="col-sm-4">
-              <select class="form-control" ng-model="vm.rest.hydrator_name" ng-options="hydrator for hydrator in vm.hydrators" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rest_query_white_list" class="col-sm-2 control-label">Collection Query String Whitelist</label>
-            <div class="col-sm-4">
-              <tags-input
-                ng-model="vm.rest.collection_query_whitelist"
-                ng-hide="vm.disabled"
-                ng-change="vm.change(0)"
-                placeholder="Insert query whitelist"
-                add-on-space="true"
-                add-on-enter="true"
-                add-on-blur="true"
-                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
-              <span ng-repeat="collection in vm.rest.collection_query_whitelist" ng-show="vm.disabled">{{collection.text}}, </span>
-            </div>
-            <label for="rest_collection_name" class="col-sm-2 control-label">Collection Name</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" ng-model="vm.rest.collection_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rest_entity_class" class="col-sm-2 control-label">Entity Class</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" ng-model="vm.rest.entity_class" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-            <label for="rest_collection_class" class="col-sm-2 control-label">Collection Class</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" ng-model="vm.rest.collection_class" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
-            </div>
-          </div>
-        </form>
-      </tab>
-      <tab heading="Database Settings" active="vm.tabs.db" ng-if="vm.rest.table_name">
-        <form class="form-horizontal" role="form" unsaved-warning-form>
-          <div class="form-group">
-            <label for="rest_content_negotiation" class="col-sm-2 control-label">Adapter name</label>
-            <div class="col-sm-8">
-              <select class="form-control" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.change(0)" ng-disabled="vm.disabled"></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rest_content_negotiation" class="col-sm-2 control-label">Table name</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" ng-model="vm.rest.table_name" ng-change="vm.change(0)" ng-disabled="vm.disabled">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rest_content_negotiation" class="col-sm-2 control-label">TableGateway Service Name</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" ng-model="vm.rest.table_service" readonly>
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveGeneral()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
-            </div>
-          </div>
-        </form>
-      </tab>
-      <tab heading="Content Negotiation" active="vm.tabs.content_negotiation">
-        <form class="form-horizontal" role="form" unsaved-warning-form>
-          <div class="form-group">
-            <label for="rest_content_negotiation" class="col-sm-2 control-label">Content Negotiation Selector</label>
-            <div class="col-sm-8">
-              <select class="form-control" ng-model="vm.rest.selector" ng-options="selector.content_name for selector in vm.content_negotiation" ng-change="vm.change(1)" ng-disabled="vm.disabled"></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Accept whitelist</label>
-            <div class="col-sm-8">
-              <tags-input
-                ng-hide="vm.disabled"
-                ng-click="vm.change(1)"
-                ng-change="vm.change(1)"
-                ng-model="vm.tags.accept_whitelist"
-                placeholder="Add a mediatype"
-                add-on-space="true"
-                add-on-enter="true"
-                add-on-blur="true"
-                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
-              <span ng-repeat="accept in vm.tags.accept_whitelist" ng-show="vm.disabled">{{accept.text}}, </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Content-Type whitelist</label>
-            <div class="col-sm-8">
-              <tags-input
-                ng-hide="vm.disabled"
-                ng-click="vm.change(1)"
-                ng-change="vm.change(1)"
-                ng-model="vm.tags.content_type_whitelist"
-                placeholder="Add a content type"
-                add-on-space="true"
-                add-on-enter="true"
-                add-on-blur="true"
-                allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
-              <span ng-repeat="content in vm.tags.content_type_whitelist" ng-show="vm.disabled">{{content.text}}, </span>
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetContentNegotiation()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveContentNegotiation()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
-            </div>
-          </div>
-        </form>
-      </tab>
-      <tab heading="Fields" active="vm.tabs.fields">
-        <h3>Fields <button type="button" class="btn btn-primary btn-sm" ng-click="vm.newFieldModal()" ng-hide="vm.disabled">New field</button></h3>
-        <div class="form-group">
-          <table class="table table-bordered">
-            <thead>
+            <table class="table table-bordered">
+              <thead>
               <tr>
                 <th class="col-md-2">Name</th>
                 <th class="col-md-1">Required</th>
@@ -184,163 +237,163 @@
                 <th class="col-md-3">Filter</th>
                 <th class="col-md-3">Action</th>
               </tr>
-            </thead>
-            <tr ng-repeat="field in vm.rest.fields">
-              <td>{{field.name}}</td>
-              <td><span ng-if="field.required" class="glyphicon glyphicon-ok"></span></td>
-              <td>
-                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addValidatorModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
-                <span ng-repeat="validator in field.validators"><a ng-click="vm.editValidatorModal(field, validator)">{{validator.name}}</a>, </span>
-                <span ng-if="field.validators.length == 0">No validators</span>
+              </thead>
+              <tr ng-repeat="field in vm.rest.fields">
+                <td>{{field.name}}</td>
+                <td><span ng-if="field.required" class="glyphicon glyphicon-ok"></span></td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addValidatorModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
+                  <span ng-repeat="validator in field.validators"><a ng-click="vm.editValidatorModal(field, validator)">{{validator.name}}</a>, </span>
+                  <span ng-if="field.validators.length == 0">No validators</span>
                 </td>
-              <td>
-                <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addFilterModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
-                <span ng-repeat="filter in field.filters"><a ng-click="vm.editFilterModal(field, filter)">{{filter.name}}</a>, </span>
-                <span ng-if="field.filters.length == 0">No filters</span>
-              </td>
-              <td>
-                <button type="button" ng-click="vm.editFieldModal(field)" class="btn btn-success btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(field)" class="btn btn-danger btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-trash"></i> delete</button>
-              </td>
-            </tr>
-            <tr ng-if="vm.rest.fields.length == 0">
-              <td colspan="5">
-                No fields have been configured<span ng-hide="vm.disabled">, <a ng-click="vm.newFieldModal()">create the first one</a></span>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </tab>
-      <tab heading="Authorization" active="vm.tabs.authorization">
-        <form class="form-horizontal" role="form" unsaved-warning-form>
-          <h3>HTTP methods authorization</h3>
-          <p ng-hide="vm.disabled">In this page you can specify which HTTP methods to put under authentication, for your entity and collection service.
-          You can choose only the HTTP methods available for the service, if you want to change it go to <a href="">General Settings</a>.
-          The authentication type is defined per API in <a ui-sref="ag.apimodule({api: vm.apiName, ver: vm.version})">this page</a>.</p>
-          <br />
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Entity authorization</label>
-            <div class="col-sm-8">
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addFilterModal(field)" ng-hide="vm.disabled"><span class="glyphicon glyphicon-plus"></span></button>
+                  <span ng-repeat="filter in field.filters"><a ng-click="vm.editFilterModal(field, filter)">{{filter.name}}</a>, </span>
+                  <span ng-if="field.filters.length == 0">No filters</span>
+                </td>
+                <td>
+                  <button type="button" ng-click="vm.editFieldModal(field)" class="btn btn-success btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(field)" class="btn btn-danger btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-trash"></i> delete</button>
+                </td>
+              </tr>
+              <tr ng-if="vm.rest.fields.length == 0">
+                <td colspan="5">
+                  No fields have been configured<span ng-hide="vm.disabled">, <a ng-click="vm.newFieldModal()">create the first one</a></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </tab>
+        <tab heading="Authorization" active="vm.tabs.authorization">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <h3>HTTP methods authorization</h3>
+            <p ng-hide="vm.disabled">In this page you can specify which HTTP methods to put under authentication, for your entity and collection service.
+              You can choose only the HTTP methods available for the service, if you want to change it go to <a href="">General Settings</a>.
+              The authentication type is defined per API in <a ui-sref="ag.apimodule({api: vm.apiName, ver: vm.version})">this page</a>.</p>
+            <br />
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Entity authorization</label>
+              <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.entity" checklist-value="http" ng-change="vm.change(2)" ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <input type="checkbox" checklist-model="vm.auth.entity" checklist-value="http" ng-change="vm.change(3)" ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
               </span>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Collection authorization</label>
-            <div class="col-sm-8">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Collection authorization</label>
+              <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.collection" checklist-value="http" ng-change="vm.change(2)" ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <input type="checkbox" checklist-model="vm.auth.collection" checklist-value="http" ng-change="vm.change(3)" ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
               </span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetAuthorization()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveAuthorization()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetAuthorization()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveAuthorization()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
             </div>
-          </div>
-        </form>
-      </tab>
-      <tab heading="Documentation" active="vm.tabs.documentation">
-        <form class="form-horizontal" role="form" unsaved-warning-form>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">REST service description</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" ng-model="vm.rest.documentation.description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+          </form>
+        </tab>
+        <tab heading="Documentation" active="vm.tabs.documentation">
+          <form class="form-horizontal" role="form" unsaved-warning-form>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">REST service description</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" ng-model="vm.rest.documentation.description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <tabset justified="true" class="col-sm-12">
-              <tab heading="Collection" active="vm.tabs.doc.collection">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Description</label>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" ng-model="vm.rest.documentation.collection.description" placeholder="Insert the Collection description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+            <div class="form-group">
+              <tabset justified="true" class="col-sm-12">
+                <tab heading="Collection" active="vm.tabs.doc.collection">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" ng-model="vm.rest.documentation.collection.description" placeholder="Insert the Collection description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <tabset justified="true" class="col-sm-12">
-                    <tab ng-repeat="http in vm.rest.collection_http_methods" heading="{{http}}">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Description</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                  <div class="form-group">
+                    <tabset justified="true" class="col-sm-12">
+                      <tab ng-repeat="http in vm.rest.collection_http_methods" heading="{{http}}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Description</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group" ng-if="http !== 'GET'">
-                        <label class="col-sm-2 control-label">Request Body</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].request" placeholder="Insert the request specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                        <div class="form-group" ng-if="http !== 'GET'">
+                          <label class="col-sm-2 control-label">Request Body</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].request" placeholder="Insert the request specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Response Body</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].response" placeholder="Insert the response specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Response Body</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.collection[http].response" placeholder="Insert the response specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                    </tab>
-                  </tabset>
-                </div>
-              </tab>
-              <tab heading="Entity" active="vm.tabs.doc.entity">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Description</label>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" ng-model="vm.rest.documentation.entity.description" placeholder="Insert the Entity description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                      </tab>
+                    </tabset>
                   </div>
-                </div>
-                <div class="form-group">
-                  <tabset justified="true" class="col-sm-12">
-                    <tab ng-repeat="http in vm.rest.entity_http_methods" heading="{{http}}">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Description</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].description" placeholder="Insert the description here" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                </tab>
+                <tab heading="Entity" active="vm.tabs.doc.entity">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" ng-model="vm.rest.documentation.entity.description" placeholder="Insert the Entity description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <tabset justified="true" class="col-sm-12">
+                      <tab ng-repeat="http in vm.rest.entity_http_methods" heading="{{http}}">
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Description</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].description" placeholder="Insert the description here" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group" ng-if="http !== 'GET'">
-                        <label class="col-sm-2 control-label">Request Body</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].request" placeholder="Insert the request specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                        <div class="form-group" ng-if="http !== 'GET'">
+                          <label class="col-sm-2 control-label">Request Body</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].request" placeholder="Insert the request specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Response Body</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].response" placeholder="Insert the response specification" ng-change="vm.change(3)" ng-disabled="vm.disabled"></textarea>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label">Response Body</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" ng-model="vm.rest.documentation.entity[$index].response" placeholder="Insert the response specification" ng-change="vm.change(4)" ng-disabled="vm.disabled"></textarea>
+                          </div>
                         </div>
-                      </div>
-                    </tab>
-                  </tabset>
-                </div>
-              </tab>
-            </tabset>
-          </div>
-          <div class="form-group" style="margin-top:30px">
-            <div class="col-sm-offset-2 col-sm-4">
-              <button type="button" class="btn btn-default" ng-click="vm.resetDocumentation()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
-              <button type="submit" class="btn btn-success" ng-click="vm.saveDocumentation()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+                      </tab>
+                    </tabset>
+                  </div>
+                </tab>
+              </tabset>
             </div>
+            <div class="form-group" style="margin-top:30px">
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="vm.resetDocumentation()" unsaved-warning-clear ng-hide="vm.disabled">Reset</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.saveDocumentation()" ladda="vm.loading" ng-hide="vm.disabled">Save</button>
+              </div>
+            </div>
+          </form>
+        </tab>
+        <tab heading="Source code" active="vm.tabs.sourcecode">
+          <form class="form-inline">
+            <div class="form-group">
+              <label class="control-label">Select the file to open</label>
+              <select class="form-control">
+                <option ng-click="vm.getSourceCode(source.classname)" ng-repeat="source in vm.rest.source_code">{{source.name}}</option>
+              </select>
+            </div>
+          </form>
+          <br clear="left">
+          <div class="panel panel-default">
+            <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
+            <div class="panel-body" ng-bind-html="vm.sourcecode"></div>
           </div>
-        </form>
-      </tab>
-      <tab heading="Source code" active="vm.tabs.sourcecode">
-        <form class="form-inline">
-          <div class="form-group">
-            <label class="control-label">Select the file to open</label>
-            <select class="form-control">
-              <option ng-click="vm.getSourceCode(source.classname)" ng-repeat="source in vm.rest.source_code">{{source.name}}</option>
-            </select>
-          </div>
-        </form>
-        <br clear="left">
-        <div class="panel panel-default">
-          <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
-          <div class="panel-body" ng-bind-html="vm.sourcecode"></div>
-        </div>
-      </tab>
-    </tabset>
-  </div>
+        </tab>
+      </tabset>
+    </div>
   </form>
 </div>

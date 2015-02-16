@@ -31,7 +31,7 @@
         $timeout(function(){
           vm.loading = false;
           $modalInstance.close(response);
-        }, 2000);
+        }, 3000);
       });
     }
   }

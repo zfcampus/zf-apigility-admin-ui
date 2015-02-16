@@ -20,7 +20,7 @@
       }
     }
 
-    var getSelectedVersion = function(){
+    var getSelectedVersion = function(apiName){
       for(var i = 0; i < apis.length; i++) {
         if (apis[i].name === apiName) {
           return apis[i].selected_version;
@@ -75,7 +75,7 @@
       var newApis = [];
       apis.forEach(function(api){
         if (api.name == apiName) {
-          api.rest.splice(api.rest.indexOf(serviceName)-1,1);
+          api.rest.splice(api.rest.indexOf(serviceName),1);
         }
         newApis.push(api);
       })

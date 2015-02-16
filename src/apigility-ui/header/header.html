@@ -12,11 +12,11 @@
 
     <div class="navbar-collapse collapse">
       <ul class="nav nav-pills nav-justified">
-        <li><a ui-sref="ag.content" ng-click="vm.setSelected('')">Content negotiation</a></li>
-        <li><a ui-sref="ag.authentication" ng-click="vm.setSelected('')">Authentication</a></li>
-        <li><a ui-sref="ag.database" ng-click="vm.setSelected('')">Database</a></li>
-        <li><a ui-sref="ag.documentation({api : null, ver : null})" ng-click="vm.setSelected('')">Documentation</a></li>
-        <li><a ui-sref="ag.package" ng-click="vm.setSelected('')">Package</a></li>
+        <li ng-class="{active: ('ag.content' | includedByState)}"><a ui-sref="ag.content" ng-click="vm.setSelected('')">Content negotiation</a></li>
+        <li ng-class="{active: ('ag.authentication' | includedByState)}"><a ui-sref="ag.authentication" ng-click="vm.setSelected('')">Authentication</a></li>
+        <li ng-class="{active: ('ag.database' | includedByState)}"><a ui-sref="ag.database" ng-click="vm.setSelected('')">Database</a></li>
+        <li ng-class="{active: ('ag.documentation' | includedByState)}"><a ui-sref="ag.documentation({api : null, ver : null})" ng-click="vm.setSelected('')">Documentation</a></li>
+        <li ng-class="{active: ('ag.package' | includedByState)}"><a ui-sref="ag.package" ng-click="vm.setSelected('')">Package</a></li>
       </ul>
     </div>
   </div>
