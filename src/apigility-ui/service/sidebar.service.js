@@ -11,14 +11,35 @@
     var apis = [];
     var selected = '';
 
-    var setSelectedVersion = function(apiName, version) {
+    var addVersion = function(apiName, version) {
       for(var i = 0; i < apis.length; i++) {
         if (apis[i].name === apiName) {
-          apis[i].selected_version = Integer.parseInt(version);
+          apis[i].versions.push(version);
           return;
         }
       }
-    }
+    };
+
+    var setSelectedVersion = function(apiName, version) {
+      for(var i = 0; i < apis.length; i++) {
+        if (apis[i].name === apiName) {
+          apis[i].selected_version = version;
+          api.getRestList(apiName, version, function(result){
+            apis[i].rest = [];
+            result.forEach(function(entry){
+              apis[i].rest.push(entry.service_name);
+            });
+          });
+          api.getRpcList(apiName, version, function(result){
+            apis[i].rpc = [];
+            result.forEach(function(entry){
+              apis[i].rpc.push(entry.service_name);
+            });
+          });
+          return;
+        }
+      }
+    };
 
     var getSelectedVersion = function(apiName){
       for(var i = 0; i < apis.length; i++) {
@@ -26,7 +47,7 @@
           return apis[i].selected_version;
         }
       }
-    }
+    };
 
     var isLastVersion = function(version, apiName){
       for(var i = 0; i < apis.length; i++) {
@@ -35,7 +56,7 @@
         }
       }
       return false;
-    }
+    };
 
     var setApis = function(data) {
       apis = data;
@@ -111,6 +132,7 @@
     }
 
     return {
+      addVersion : addVersion,
       setSelectedVersion : setSelectedVersion,
       getSelectedVersion : getSelectedVersion,
       isLastVersion : isLastVersion,

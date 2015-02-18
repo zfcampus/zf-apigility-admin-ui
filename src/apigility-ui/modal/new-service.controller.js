@@ -6,9 +6,9 @@
   .module('apigility.modal')
   .controller('NewService', NewService);
 
-  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout', 'apiname' ];
+  NewService.$inject = [ '$modalInstance', 'SidebarService', 'api', '$timeout' ];
 
-  function NewService($modalInstance, SidebarService, api, $timeout, apiname) {
+  function NewService($modalInstance, SidebarService, api, $timeout) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -16,13 +16,12 @@
     vm.apis = SidebarService.getApis();
     vm.tabs = {};
     vm.apiname = vm.apis[0];
-    // If apiname is not empty, we select it
-    if (apiname) {
-      for (var i = 0; i < vm.apis.length; i++) {
-        if (vm.apis[i].name == apiname) {
-          vm.apiname = vm.apis[i];
-          break;
-        }
+
+    // We use the selected API, if any
+    for (var i = 0; i < vm.apis.length; i++) {
+      if (('api' + vm.apis[i].name) === SidebarService.getSelected()) {
+        vm.apiname = vm.apis[i];
+        break;
       }
     }
 
@@ -58,6 +57,13 @@
 
     vm.ok = function() {
       vm.loading = true;
+      var lastversion = 1;
+      // Get the last version of selected API
+      vm.apis.forEach(function(api){
+        if (api.name === vm.apiname.name) {
+          lastversion = Math.max.apply(Math, api.versions);
+        }
+      });
       if (vm.tabs.rest) { // REST
         if (!vm.restname) {
           vm.alert = 'The service name cannot be empty';
@@ -71,7 +77,7 @@
           } else {
             $timeout(function(){
               vm.loading = false;
-              $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.restname });
+              $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.restname, 'ver' : lastversion });
             }, 2000);
           }
         });
@@ -93,7 +99,7 @@
           } else {
             $timeout(function(){
               vm.loading = false;
-              $modalInstance.close({ 'api' : vm.apiname.name, 'rpc' : vm.rpcname });
+              $modalInstance.close({ 'api' : vm.apiname.name, 'rpc' : vm.rpcname, 'ver' : lastversion });
             }, 2000);
           }
         });
@@ -140,7 +146,7 @@
         });
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests });
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion });
         }, 2000);
       } else if (vm.tabs.doctrine) { // DOCTRINE-CONNECTED
         if (!vm.doctrineAdapter) {
@@ -173,7 +179,7 @@
         });
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests });
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion });
         }, 2000);
       }
     }

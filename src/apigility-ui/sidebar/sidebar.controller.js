@@ -15,6 +15,7 @@
     vm.apis = SidebarService.getApis();
     vm.getSelected = SidebarService.getSelected;
     vm.setSelected = SidebarService.setSelected;
+    vm.changeVersion = SidebarService.setSelectedVersion;
 
     // Make an API call if the list of APIs is empty
     if (vm.apis.length == 0) {
@@ -28,33 +29,6 @@
         }
       });
     }
-
-    vm.changeVersion = function(module, version) {
-      api.getRestList(module, version, function(result){
-        for (var i = 0; i < vm.apis.length; i++) {
-          if (vm.apis[i].name === module) {
-            vm.apis[i].rest = [];
-            result.forEach(function(entry){
-              vm.apis[i].rest.push(entry.service_name);
-            });
-            break;
-          }
-        }
-      });
-
-      api.getRpcList(module, version, function(result){
-        for (var i = 0; i < vm.apis.length; i++) {
-          if (vm.apis[i].name === module) {
-            vm.apis[i].rpc = [];
-            result.forEach(function(entry){
-              vm.apis[i].rpc.push(entry.service_name);
-            });
-            break;
-          }
-        }
-      });
-      $state.go('ag.apimodule', {api: module, ver: version}, {reload: true});
-    };
 
     vm.searchApi = function(search) {
       if (!search) {
@@ -108,28 +82,26 @@
       var modalInstance = $modal.open({
         templateUrl: 'apigility-ui/modal/new-service.html',
         controller: 'NewService',
-        controllerAs: 'vm',
-        resolve : {
-          apiname : function() {
-            return vm.apiname;
-          }
-        }
+        controllerAs: 'vm'
       });
 
       modalInstance.result.then(function (response) {
         if (response.hasOwnProperty('rest')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
+          $state.go('ag.rest', {api: response.api, ver: response.ver, rest: response.rest});
           SidebarService.addRestService(response.api, response.rest);
           vm.setSelected('api' + response.api + 'rest' + response.rest);
-          $state.go('ag.rest', {api: response.api, ver: 1, rest: response.rest});
         } else if (response.hasOwnProperty('rpc')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
+          $state.go('ag.rpc', {api: response.api, ver: response.ver, rpc: response.rpc});
           SidebarService.addRpcService(response.api, response.rpc);
           vm.setSelected('api' + response.api + 'rpc' + response.rpc);
-          $state.go('ag.rpc', {api: response.api, ver: 1, rpc: response.rpc});
         } else if (response.hasOwnProperty('rests')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
           response.rests.forEach(function(service) {
             SidebarService.addRestService(response.api, service);
           });
-          $state.go('ag.apimodule', {api: response.api, ver: 1});
+          $state.go('ag.apimodule', {api: response.api, ver: response.ver});
         }
       });
     };

@@ -44,8 +44,9 @@
 
       modalInstance.result.then(function(response) {
         if (response.hasOwnProperty('version')) {
-          SidebarService.setApis([]);
-          $state.go('ag', null, {reload: true});
+          SidebarService.addVersion(vm.apiName, response.version);
+          SidebarService.setSelectedVersion(vm.apiName, response.version);
+          $state.go('ag.apimodule', { api: vm.apiName, ver: response.version});
         }
       });
     };
