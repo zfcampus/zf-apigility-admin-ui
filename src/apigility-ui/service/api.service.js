@@ -646,7 +646,7 @@
         'driver_options'
       ];
       var data = filterData(db, allowed);
-      xhr.update(agApiPath + '/db-adapter/' + db.adapter_name, data.value, data.key)
+      xhr.update(agApiPath + '/db-adapter/' + encodeURIComponent(db.adapter_name), data.value, data.key)
       .then(function (response) {
         if (response.hasOwnProperty('_links')) {
           delete response._links;
@@ -659,7 +659,7 @@
     };
 
     this.deleteDatabase = function(name, callback) {
-      xhr.remove(agApiPath + '/db-adapter/' + name)
+      xhr.remove(agApiPath + '/db-adapter/' + encodeURIComponent(name))
       .then(function (response) {
         return callback(false, response);
       })
