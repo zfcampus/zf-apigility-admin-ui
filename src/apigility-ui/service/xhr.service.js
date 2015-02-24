@@ -116,7 +116,7 @@
 
     var data = {};
     for (var i = 0; i < allowed.length; i += 1) {
-      if (typeof args[i] === 'undefined') {
+      if (angular.isUndefined(args[i])) {
         break;
       }
       // Manage object values

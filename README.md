@@ -1,7 +1,21 @@
-Apigility Admin UI
-==================
+Apigility Admin UI (develop branch)
+===================================
 
-This is the source code for the Apigility Admin user interface.
+This is the source code for the new Apigility Admin user interface.
+We rewrote from scratch the UI in [AngularJS](https://angularjs.org/) with a huge performance improvement.
+
+We added some new features:
+
+- Doctrine support for DB connected REST service;
+- DB autodiscover table and fields;
+- Build the package API file, ready for deployment (develop in progress, see [TODO list](TODO.md));
+- Per-API authentication (develop in progress, see [TODO list](TODO.md));
+
+> **Note**
+>
+> To be able to run the new UI you need to use the develop branch of [zf-apigility-admin](https://github.com/zfcampus/zf-apigility-admin/tree/develop)
+>
+
 
 Requirements
 ------------
@@ -58,7 +72,7 @@ to run tests automatically as files are changed.
 Invoking the Admin
 ------------------
 
-There are three ways to invoke the Admin UI: as part of an Apigility project, 
+There are three ways to invoke the Admin UI: as part of an Apigility project,
 standalone via [node](https://nodejs.org), or via source using grunt.
 
 ### Via Apigility
@@ -120,7 +134,7 @@ To develop the Admin UI (e.g., to add features or fix a bug), you will need to
 run the server using the source, not distribution, files. This means using
 `grunt serve` to develop.
 
-All changes to the admin UI code should be made in the `src/` directory. 
+All changes to the admin UI code should be made in the `src/` directory.
 
 Once you are happy with the changes you have made, you will need to rebuild the
 distribution files. Run the following from this directory:
