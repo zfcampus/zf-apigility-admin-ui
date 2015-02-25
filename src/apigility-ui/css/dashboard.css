@@ -1,0 +1,283 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 70px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 1;
+  border-color: #428bca;
+  background: #105d8a;
+}
+
+.navbar-fixed-top a {
+  font-size: 18px;
+  color: white;
+}
+
+#logo {
+  margin:10px;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+  margin-top:18px;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #428bca;
+    -webkit-box-shadow: 5px 0 3px -2px #888;
+    box-shadow: 5px 0 3px -2px #888;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #000000;
+  background-color: #428bca;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  color: black;
+  background-color: #74cb34;
+}
+
+.nav {
+  margin-top:16px;
+}
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 20px 20px;
+    pointer-events: none;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+label.method-checkbox {
+  margin-right: 1em;
+  font-weight: normal;
+}
+
+label.method-checkbox input[type=checkbox] {
+  margin-right: 0.25em;
+}
+
+h3.panel-title {
+  font-size: 2.0em;
+}
+
+
+/**
+ * Tree view customization
+ */
+.angular-ui-tree-handle {
+  background: none repeat scroll 0 0 #f8faff;
+  border: 1px solid #dae2ea;
+  color: #7c9eb2;
+  padding: 10px;
+}
+
+.modal_msg {
+  font-size: 18px;
+}
+
+.nav-tabs > li > a {
+  cursor: pointer;
+}
+
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 0px;
+}
+
+.nav-tabs {
+  margin-bottom: 0;
+}
+
+.angular-ui-tree-handle:hover:not(.selected) {
+  background: #eeeeee;
+}
+
+.selected {
+  background : #dddddd;
+}
+
+#version {
+  color: #eeeeee;
+  margin-left: 15px;
+}
+
+
+.icon-database {
+    background-image: url("/apigility-ui/img/icon-database.png");
+    background-position: center center;
+    width: 14px;
+    height: 19px;
+    line-height: 19px;
+}
+
+form#doctrine-params > .form-group {
+    margin-bottom: 0;
+}
+
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+    display: inline-block;
+    margin: 0 10px;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+#db-tables-tree {
+    margin-top: 20px;
+}
+
+.angular-ui-tree-node table {
+    font-weight: normal;
+    color: #000;
+    background: #fff;
+}
+
+.tree-node {
+    border: 1px solid #dae2ea;
+    background: #f8faff;
+    color: #7c9eb2;
+    border-radius: 4px;
+}
+
+.tree-node-content {
+    margin: 10px;
+}
+
+.tree-handle {
+    padding: 10px;
+    background: #428bca;
+    color: #FFF;
+    margin-right: 5px;
+}
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.angular-ui-tree-empty {
+    min-height: 0;
+    border: none;
+}

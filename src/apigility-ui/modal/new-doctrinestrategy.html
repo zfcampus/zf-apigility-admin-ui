@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title">New Hydrator Strategy</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Field</label>
+  <select ng-model="vm.field" class="form-control" ng-options="k as v for (k,v) in vm.fields">
+    <option value='' disabled>- Choose a field -</option>
+  </select><br>
+  <label class="control-label">Strategy</label>
+  <input type="text" class="form-control" ng-model="vm.strategy" placeholder="Type a declared strategy service name" ng-disabled="vm.loading" autofocus>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">Close</button>
+  <button type="button" class="btn btn-primary" ng-click="vm.ok()" ladda="vm.loading">Create</span></button>
+</div>

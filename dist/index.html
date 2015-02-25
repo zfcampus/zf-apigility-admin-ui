@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="apigility">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Apigility: API Builder and Engine for PHP">
+    <meta name="author" content="http://framework.zend.com/">
+
+    <base href="%BASE_HREF%">
+
+    <title>Apigility Admin UI</title>
+
+    <link rel="icon" href="apigility-ui/img/favicon.png">
+
+    <link rel="stylesheet" href="apigility-ui/css/cdea4ebd.apigility.min.css"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css" id="holderjs-style"></style>
+  </head>
+
+  <body data-ag-api-path="%API_BASE%">
+    <ui-view name="header"></ui-view>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-sm-4 col-md-3 sidebar">
+          <ui-view name="sidebar"></ui-view>
+        </div>
+
+        <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
+          <div style="margin-top: 20px" ui-view="" name="content"></div>
+          <footer>
+              <hr>
+              <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd</div>
+              <div class="pull-right" align="right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <script src="apigility-ui/624f9237.vendor.js" charset="utf-8"></script>
+
+    <script src="apigility-ui/8baaef84.apigility.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -1,16 +1,13 @@
 <?php
-$version = 'dist';
-$path    = __DIR__ . '/../' . $version . '/zf-apigility-admin/index.html';
+$path    = __DIR__ . '/../dist/index.html';
 $apiBase = $this->url('zf-apigility/api/module');
 $apiBase = substr($apiBase, 0, strrpos($apiBase, '/'));
-$homeUri = $this->url('zf-apigility') . '/ui#/';
 $docUri  = (class_exists('ZF\Apigility\Documentation\Module')) ? $this->url('zf-apigility/documentation') : '';
 
-$basePath = $this->serverUrl(rtrim($this->basePath(), '/') . '/zf-apigility-admin/');
+$basePath = $this->serverUrl(rtrim($this->basePath(), '/') . '');
 
 $html = file_get_contents($path);
 $html = str_replace('%BASE_HREF%', $basePath, $html);
 $html = str_replace('%API_BASE%', $apiBase, $html);
-$html = str_replace('%HOME_URI%', $homeUri, $html);
 $html = str_replace('%DOC_URI%', $docUri, $html);
 echo $html;

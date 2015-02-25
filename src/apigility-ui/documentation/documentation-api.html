@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <accordion close-others="oneAtATime">
+      <accordion-group ng-repeat="service in vm.doc.services" heading="{{service.name}}">
+        <accordion>
+          <p>{{service.description}}</p>
+          <accordion-group ng-repeat="(http, collection) in service.operations">
+            <ng-include src="'apigility-ui/documentation/documentation-service.html'"></ng-include>
+          </accordion-group>
+          <accordion-group ng-repeat="(http, collection) in service.entity_operations">
+            <ng-include src="'apigility-ui/documentation/documentation-service.html'"></ng-include>
+          </accordion-group>
+        </accordion>
+      </accordion-gruop>
+    </accordion>
+  </div>
+</div>

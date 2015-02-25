@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add filter for field {{vm.field.name}}</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Filter</label>
+  <select class="form-control" ng-model="vm.filter.name" ng-options="name as name for (name, value) in vm.filters" ng-change="vm.selectFilter()"></select>
+  <br />
+  <div class="form-group">
+    <label for="rest_validator_option" class="col-sm-2 control-label">Option</label>
+    <div class="col-sm-8">
+      <select class="form-control" ng-model="vm.option.name" ng-options="name as name for (name, value) in vm.options" ng-change="vm.option.value=''"></select>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success btn-sm" ng-click="vm.addOption()">Add option</span></button>
+    </div>
+  </div>
+  <br />
+  <div class="form-group">
+    <label class="control-label col-sm-2">Value</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" ng-model="vm.option.value" placeholder="Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})">
+    </div>
+  </div>
+  <br /><br />
+  <table class="table table-bordered col-md-12">
+    <thead>
+      <tr>
+        <th class="col-md-5">Option</th>
+        <th class="col-md-5">Value</th>
+        <th class="col-md-2">Action</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="(option, value) in vm.filter.options">
+      <td>{{option}}</td>
+      <td>{{value}}</td>
+      <td><button type="button" ng-click="vm.deleteOption(option)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button></td>
+    </tr>
+    <tr ng-show="vm.filter.options | emptyObject">
+      <td colspan="3">
+        No options have been defined</a>
+      </td>
+    </tr>
+  </table>
+  <br clear="left" />
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</span></button>
+</div>

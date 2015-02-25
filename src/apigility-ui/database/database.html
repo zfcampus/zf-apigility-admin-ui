@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Database</h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <h3>Database adapters <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-click="vm.newDbModal()">New DB Adapter</button></h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-2">Name</th>
+            <th class="col-sm-2">Driver</th>
+            <th class="col-sm-2">Database</th>
+            <th class="col-sm-4">Driver options</th>
+            <th class="col-sm-2">Actions</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="item in vm.db_adapter">
+          <td>{{item.adapter_name}}</td>
+          <td>{{item.driver}}</td>
+          <td>{{item.database}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addDbOptionModal(item)"><span class="glyphicon glyphicon-plus"></span></button>
+            <span ng-repeat="(option, value) in item.driver_options"><a ng-click="vm.editDbOptionModal(item, option)">{{option}} = {{value}}</a>, </span>
+          </td>
+          <td>
+            <button type="button" ng-click="vm.editDbModal(item)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteDbModal(item)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="row" ng-if="vm.doctrine_adapter">
+      <div class="col-sm-12">
+        <h3>Doctrine adapters</h3>
+        <table class="table table-bordered col-sm-12">
+          <thead>
+            <tr>
+              <th class="col-sm-2">Adapter name</th>
+              <th class="col-sm-2">Configuration</th>
+              <th class="col-sm-2">Event Manager</th>
+              <th class="col-sm-4">Driver class</th>
+              <th class="col-sm-2">Params</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.doctrine_adapter">
+              <td>{{item.adapter_name}}</td>
+              <td>{{item.configuration}}</td>
+              <td>{{item.eventmanager}}</td>
+              <td>{{item.driverClass}}</td>
+              <td><button type="button" ng-click="vm.viewDoctrineParamsModal(item)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-search"></i> view params</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

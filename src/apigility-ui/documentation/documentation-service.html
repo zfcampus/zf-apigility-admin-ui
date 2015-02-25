@@ -1,0 +1,82 @@
+            <accordion-heading>
+              <span style="width:70px" class="badge">{{http}}</span> {{service.route_collection}}
+              <span class="pull-right" ng-if="collection.requires_authorization"><span class="glyphicon glyphicon-lock"></span> requires authentication</span>
+            </accordion-heading>
+            <p>{{collection.description}}</p>
+            <h4 ng-if="service.fields">Fields</h4>
+            <table class="table table-striped table-bordered" ng-if="service.fields">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Description</th>
+                  <th class="center-block">Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(field, data) in service.fields">
+                  <td>{{field}}</td>
+                  <td>{{data.description}}</td>
+                  <td class="center-block"><span ng-if="data.required" class="glyphicon glyphicon-ok"></span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="panel-info">
+              <div class="panel-heading"><h4 class="panel-title">Request</h4></div>
+              <div class="panel-body">
+                <h4>Headers</h4>
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Header</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Accept</td>
+                      <td class="list-group">
+                        <div class="list-group-item" ng-repeat="type in service.request_accept_types">{{type}}</div>
+                      </td>
+                    </tr>
+                    <tr ng-if="collection.requires_authorization">
+                      <td>Authentication</td>
+                      <td style="color:gray">HTTP Basic, HTTP Digest, or OAuth2 Bearer token (check API provider for details)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4 ng-if="http !== 'GET' && http !== 'DELETE'">Body</h4>
+                <pre ng-if="http !== 'GET' && http !== 'DELETE'" class="pre-scrollable">{{collection.request}}</pre>
+              </div>
+            </div>
+            <div class="panel-info">
+              <div class="panel-heading"><h4 class="panel-title">Response</h4></div>
+              <div class="panel-body">
+                <h4>Status Codes</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="status in collection.response_status_codes"><strong>{{status.code}}:</strong> {{status.message}}</li>
+                </ul>
+                <h4>Headers</h4>
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Header</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Content-Type</td>
+                      <td class="list-group">
+                        <div class="list-group-item" ng-repeat="type in service.response_content_types">{{type}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Allow</td>
+                      <td style="color:gray">Comma-separated list of all HTTP methods allowed</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4 ng-if="http !== 'DELETE'">Body</h4>
+                <pre ng-if="http !== 'DELETE'" class="pre-scrollable">{{collection.response}}</pre>
+              </div>
+            </div>

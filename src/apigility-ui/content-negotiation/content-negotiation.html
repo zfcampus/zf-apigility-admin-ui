@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Content Negotiation</h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <h3>Selectors <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-click="vm.newSelectorModal()">New selector</button></h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-3">Name</th>
+            <th class="col-sm-6">View model</th>
+            <th class="col-sm-3">Action</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="item in vm.content_negotiation">
+          <td>{{item.content_name}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-xs" ng-click="vm.addViewModel(item)"><span class="glyphicon glyphicon-plus"></span></button>
+            <span ng-repeat="(viewmodel, mediatype) in item.selectors"><a ng-click="vm.editViewModel(item, viewmodel)">{{viewmodel}}</a>, </span>
+            <span ng-if="vm.selectors.length == 0">No view models</span>
+          </td>
+          <td>
+            <button type="button" ng-click="vm.deleteSelectorModal(item)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
