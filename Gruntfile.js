@@ -1,6 +1,6 @@
 'use strict';
 
-/* Gruntfile for apigility.admin.ui.js
+/* Gruntfile for zf-apigility-admin-ui
  *
  * Primary Targets:
  * - test: run karma tests
@@ -266,7 +266,7 @@ module.exports = function(grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.unit.conf.js',
+        configFile: 'test/karma.conf.js',
         singleRun: true,
         autoWatch: false
       }

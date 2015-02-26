@@ -14,13 +14,12 @@
           });
         }
       }
-    }]); 
+    }]);
 
   config.$inject = [
     '$provide',
     '$stateProvider',
     '$urlRouterProvider',
-    //'localStorageServiceProvider',
     '$httpProvider'
   ];
 
@@ -60,9 +59,6 @@
     });
 
     $urlRouterProvider.otherwise('/');
-
-    //localStorageServiceProvider
-    //.setPrefix('ag');
   }
 
 })();

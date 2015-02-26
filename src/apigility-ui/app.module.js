@@ -22,13 +22,5 @@
       'unsavedChanges',
       'ngTagsInput',
       'checklist-model'
-
-      /*
-      'ui-sortable',
-      'ui-select2',
-      'toggle-switch',
-      */
-      //'templates-main' // the "js/templates.js" created by minifying all templates
-
     ]);
 })();

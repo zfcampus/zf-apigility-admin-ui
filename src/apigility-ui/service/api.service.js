@@ -235,7 +235,7 @@
         rest.fields = [];
         var i = 0;
         if (response._embedded) {
-          while (typeof response._embedded.input_filters[0][i] !== 'undefined') {
+          while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
             rest.fields[i] = response._embedded.input_filters[0][i];
             i++;
           }
@@ -468,7 +468,7 @@
         rpc.fields = [];
         var i = 0;
         if (response._embedded) {
-          while (typeof response._embedded.input_filters[0][i] !== 'undefined') {
+          while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
             rpc.fields[i] = response._embedded.input_filters[0][i];
             i++;
           }

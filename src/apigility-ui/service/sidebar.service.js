@@ -70,13 +70,12 @@
     };
 
     var removeApi = function(apiName) {
-      var newApis = [];
-      apis.forEach(function(api) {
-        if (api.name != apiName) {
-          newApis.push(api);
+      for(var i = 0; i < apis.length; i++) {
+        if (apis[i].name === apiName) {
+          apis.splice(i,1);
+          return;
         }
-      });
-      apis = newApis;
+      }
     };
 
     var getApis = function(){
@@ -107,7 +106,7 @@
       var newApis = [];
       apis.forEach(function(api){
         if (api.name == apiName) {
-          api.rpc.splice(api.rpc.indexOf(serviceName)-1,1);
+          api.rpc.splice(api.rpc.indexOf(serviceName),1);
         }
         newApis.push(api);
       })

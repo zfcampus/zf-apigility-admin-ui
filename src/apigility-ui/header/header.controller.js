@@ -13,7 +13,7 @@
     var vm = this;
     vm.setSelected = SidebarService.setSelected;
 
-    vm.apigilityVersion = '1.1';
+    vm.apigilityVersion = '1.1dev';
 
     vm.aboutModal = function() {
       var modalInstance = $modal.open({
@@ -27,6 +27,5 @@
         }
       });
     };
-
   }
 })();

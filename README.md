@@ -1,7 +1,27 @@
-Apigility Admin UI
-==================
+Apigility Admin UI (develop branch)
+===================================
 
-This is the source code for the Apigility Admin user interface.
+This is the source code for the new Apigility Admin User Interface.
+We rewrote from scratch the UI in [AngularJS](https://angularjs.org/) with performance improvement and usability.
+
+We added some new features:
+
+- Doctrine support for DB connected REST service;
+- DB autodiscovering for table and fields;
+- Build package API file, ready for deployment (develop in progress, see [TODO list](TODO.md));
+- Per-API authentication (develop in progress, see [TODO list](TODO.md));
+
+> **Note**
+>
+> To be able to run the new UI you need to use the **develop** branch of [zf-apigility-skeleton](https://github.com/zfcampus/zf-apigility-skeleton)
+> For instance, you can install the develop branch using composer:
+>
+> ```sh
+> composer create-project zfcampus/zf-apigility-skeleton apigility dev-develop
+> ```
+>
+> This command install the zf-apigility-skeleton application in the apigility local folder. 
+
 
 Requirements
 ------------
@@ -58,7 +78,7 @@ to run tests automatically as files are changed.
 Invoking the Admin
 ------------------
 
-There are three ways to invoke the Admin UI: as part of an Apigility project, 
+There are three ways to invoke the Admin UI: as part of an Apigility project,
 standalone via [node](https://nodejs.org), or via source using grunt.
 
 ### Via Apigility
@@ -90,8 +110,7 @@ navigation item can point to it.
 Fire up the admin UI using:
 
 ```console
-$ node index.js --api=<URI to Apigility Admin API (ends in /apigility/api)> \
-> --doc=<URI to API documentation>
+$ node index.js --src --api=<URI to Apigility Admin API (ends in /apigility/api)>
 ```
 
 (For help with options, see `node index.js -h`.)
@@ -120,19 +139,17 @@ To develop the Admin UI (e.g., to add features or fix a bug), you will need to
 run the server using the source, not distribution, files. This means using
 `grunt serve` to develop.
 
-All changes to the admin UI code should be made in the `src/` directory. 
+All changes to the admin UI code should be made in the `src/` directory.
 
 Once you are happy with the changes you have made, you will need to rebuild the
 distribution files. Run the following from this directory:
 
 ```console
-$ grunt build
+$ grunt clean && grunt build
 ```
 
 Test that everything is working against the distribution on completion.
 
-Commit only the files under `ui`; maintainers will rebuild the distribution
-when merging.
 
 Adding JS/CSS Dependencies
 --------------------------

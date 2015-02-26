@@ -6,6 +6,7 @@
       'ui.bootstrap',
       'ui.router',
       'ngTagsInput',
-      'LocalStorageModule'
+      'LocalStorageModule',
+      'templates-main'
     ]);
 })();
