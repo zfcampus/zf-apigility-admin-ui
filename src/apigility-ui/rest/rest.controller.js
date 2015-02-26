@@ -106,8 +106,6 @@
     }
 
     vm.saveGeneral = function() {
-      console.log('Changed 0', vm.changed[0]);
-      console.log('Changed 1', vm.changed[1]);
       if (!vm.changed[0] && !vm.changed[1]) {
         return;
       }
