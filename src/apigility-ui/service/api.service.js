@@ -227,8 +227,9 @@
       });
     };
 
-    this.getRest = function(module, version, rest, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
+    this.getRest = function(module, version, rest, hasDoctrine, callback) {
+      var restPath = hasDoctrine ? '/doctrine/' : '/rest/';
+      xhr.get(agApiPath + '/module/' + module + restPath + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
       .then(function (response) {
         // Create the fields property in the response
         var rest = angular.copy(response);

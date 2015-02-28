@@ -22,6 +22,7 @@
       content_type_whitelist : []
     };
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
+    vm.hasDoctrine = false;
 
     function initGeneral() {
       api.getHydrators(function(result){
@@ -34,47 +35,57 @@
 
       api.getDoctrineAdapters(function(err, response) {
         vm.doctrine = response.doctrine_adapter;
+        vm.hasDoctrine = response.doctrine_adapter.length > 0;
       });
 
-      api.getRest(vm.apiName, vm.version, vm.restName, function(result){
-        vm.rest = result;
-        vm.isDoctrine = result.object_manager !== undefined;
 
-        vm.rest.accept_whitelist.forEach(function(entry){
-          vm.tags.accept_whitelist.push({ text : entry });
-        });
-        vm.rest.content_type_whitelist.forEach(function(entry){
-          vm.tags.content_type_whitelist.push({ text : entry });
-        });
-
-        if (vm.isDoctrine) {
-          api.getRestDoctrineMetadata(result.object_manager, result.entity_class, function(err, response) {
-            if (err) {
-              console.log(response);
-              return;
-            }
-            vm.doctrineMetadata = response;
+      api.getDoctrineAdapters(function(err, response) {
+        if (response.doctrine_adapter.length <= 0) {
+          api.getDatabase(function(err, result){
+            vm.db = result;
           });
+        } else {
+          vm.hasDoctrine = true;
         }
-        if (vm.rest.hasOwnProperty('table_name')) {
-          for (var i = 0; i < vm.db.db_adapter.length; i++) {
-            if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
-              vm.adapter = vm.db.db_adapter[i];
-              break;
+        api.getRest(vm.apiName, vm.version, vm.restName, vm.hasDoctrine, function(result){
+          vm.rest = result;
+          vm.isDoctrine = (result.object_manager != "");
+
+          vm.rest.accept_whitelist.forEach(function(entry){
+            vm.tags.accept_whitelist.push({ text : entry });
+          });
+          vm.rest.content_type_whitelist.forEach(function(entry){
+            vm.tags.content_type_whitelist.push({ text : entry });
+          });
+
+          if (vm.isDoctrine) {
+            api.getRestDoctrineMetadata(result.object_manager, result.entity_class, function(err, response) {
+              if (err) {
+                return;
+              }
+              vm.doctrineMetadata = response;
+            });
+          }
+          if (vm.rest.hasOwnProperty('table_name')) {
+            for (var i = 0; i < vm.db.db_adapter.length; i++) {
+              if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
+                vm.adapter = vm.db.db_adapter[i];
+                break;
+              }
             }
           }
-        }
-        vm.rest.source_code = [
-          { name : 'Collection Class', classname: vm.rest.collection_class },
-          { name : 'Entity Class', classname: vm.rest.entity_class },
-        ];
-        if (vm.rest.resource_class) {
-          vm.rest.source_code.push(
-            { name : 'Resource Class', classname: vm.rest.resource_class },
-            { name : 'Resource Factory', classname: vm.rest.resource_class + 'Factory' }
-          );
-        }
-        vm.getSourceCode(vm.rest.source_code[0].classname);
+          vm.rest.source_code = [
+            { name : 'Collection Class', classname: vm.rest.collection_class },
+            { name : 'Entity Class', classname: vm.rest.entity_class },
+          ];
+          if (vm.rest.resource_class) {
+            vm.rest.source_code.push(
+              { name : 'Resource Class', classname: vm.rest.resource_class },
+              { name : 'Resource Factory', classname: vm.rest.resource_class + 'Factory' }
+            );
+          }
+          vm.getSourceCode(vm.rest.source_code[0].classname);
+        });
       });
 
       api.getContentNegotiation(function(result){
