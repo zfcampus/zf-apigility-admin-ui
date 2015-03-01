@@ -22,22 +22,11 @@
       content_type_whitelist : []
     };
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
-    vm.hasDoctrine = false;
 
     function initGeneral() {
       api.getHydrators(function(result){
         vm.hydrators = result;
       });
-
-      api.getDatabase(function(err, response){
-        vm.db = response;
-      });
-
-      api.getDoctrineAdapters(function(err, response) {
-        vm.doctrine = response.doctrine_adapter;
-        vm.hasDoctrine = response.doctrine_adapter.length > 0;
-      });
-
 
       api.getDoctrineAdapters(function(err, response) {
         if (response.doctrine_adapter.length <= 0) {
@@ -45,11 +34,11 @@
             vm.db = result;
           });
         } else {
-          vm.hasDoctrine = true;
+          vm.doctrine = response.doctrine_adapter;
         }
-        api.getRest(vm.apiName, vm.version, vm.restName, vm.hasDoctrine, function(result){
+        api.getRest(vm.apiName, vm.version, vm.restName, angular.isDefined(vm.doctrine), function(result){
           vm.rest = result;
-          vm.isDoctrine = (result.object_manager != "");
+          vm.isDoctrine = (result.object_manager !== null);
 
           vm.rest.accept_whitelist.forEach(function(entry){
             vm.tags.accept_whitelist.push({ text : entry });

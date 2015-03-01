@@ -152,21 +152,21 @@
               <div class="col-sm-8">
                 <table class="table table-bordered">
                   <thead>
-                    <tr>
-                      <th class="col-md-3">Field</th>
-                      <th class="col-md-8">Strategy</th>
-                      <th class="col-md-1">&nbsp;</th>
-                    </tr>
+                  <tr>
+                    <th class="col-md-3">Field</th>
+                    <th class="col-md-8">Strategy</th>
+                    <th class="col-md-1">&nbsp;</th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <tr ng-if="vm.rest.strategies.length == 0">
-                      <td colspan="3">No hydrator strategy configured<span ng-hide="vm.disabled">, <a ng-click="vm.newDoctrineStrategyModal()">create the first one</a></span></td>
-                    </tr>
-                    <tr ng-repeat="(k,v) in vm.rest.strategies">
-                      <td>{{k}}</td>
-                      <td>{{v}}</td>
-                      <td><button type="button" class="btn btn-xs btn-danger" ng-click="vm.removeStrategy(k)"><span class="glyphicon glyphicon-minus"></span></button></td>
-                    </tr>
+                  <tr ng-if="vm.rest.strategies.length == 0">
+                    <td colspan="3">No hydrator strategy configured<span ng-hide="vm.disabled">, <a ng-click="vm.newDoctrineStrategyModal()">create the first one</a></span></td>
+                  </tr>
+                  <tr ng-repeat="(k,v) in vm.rest.strategies">
+                    <td>{{k}}</td>
+                    <td>{{v}}</td>
+                    <td><button type="button" class="btn btn-xs btn-danger" ng-click="vm.removeStrategy(k)"><span class="glyphicon glyphicon-minus"></span></button></td>
+                  </tr>
                   </tbody>
                 </table>
               </div>

@@ -647,11 +647,7 @@
         'driver_options'
       ];
       var data = filterData(db, allowed);
-<<<<<<< HEAD
-      xhr.update(agApiPath + '/db-adapter/' + db.adapter_name, data.value, data.key)
-=======
       xhr.update(agApiPath + '/db-adapter/' + encodeURIComponent(db.adapter_name), data.value, data.key)
->>>>>>> jguittard/master
       .then(function (response) {
         if (response.hasOwnProperty('_links')) {
           delete response._links;
@@ -664,11 +660,7 @@
     };
 
     this.deleteDatabase = function(name, callback) {
-<<<<<<< HEAD
-      xhr.remove(agApiPath + '/db-adapter/' + name)
-=======
       xhr.remove(agApiPath + '/db-adapter/' + encodeURIComponent(name))
->>>>>>> jguittard/master
       .then(function (response) {
         return callback(false, response);
       })
