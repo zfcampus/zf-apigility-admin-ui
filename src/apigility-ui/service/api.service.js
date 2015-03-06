@@ -227,8 +227,9 @@
       });
     };
 
-    this.getRest = function(module, version, rest, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
+    this.getRest = function(module, version, rest, hasDoctrine, callback) {
+      var restPath = hasDoctrine ? '/doctrine/' : '/rest/';
+      xhr.get(agApiPath + '/module/' + module + restPath + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
       .then(function (response) {
         // Create the fields property in the response
         var rest = angular.copy(response);
@@ -646,7 +647,7 @@
         'driver_options'
       ];
       var data = filterData(db, allowed);
-      xhr.update(agApiPath + '/db-adapter/' + db.adapter_name, data.value, data.key)
+      xhr.update(agApiPath + '/db-adapter/' + encodeURIComponent(db.adapter_name), data.value, data.key)
       .then(function (response) {
         if (response.hasOwnProperty('_links')) {
           delete response._links;
@@ -659,7 +660,7 @@
     };
 
     this.deleteDatabase = function(name, callback) {
-      xhr.remove(agApiPath + '/db-adapter/' + name)
+      xhr.remove(agApiPath + '/db-adapter/' + encodeURIComponent(name))
       .then(function (response) {
         return callback(false, response);
       })
