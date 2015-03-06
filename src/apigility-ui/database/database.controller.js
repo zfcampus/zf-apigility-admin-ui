@@ -16,10 +16,10 @@
       'IbmDb2',
       'Mysqli',
       'Oci8',
-      'PDO_Mysql',
-      'PDO_Oci',
-      'PDO_Pgsql',
-      'PDO_Sqlite',
+      'Pdo_Mysql',
+      'Pdo_Oci',
+      'Pdo_Pgsql',
+      'Pdo_Sqlite',
       'Pgsql',
       'Sqlsrv'
     ];
