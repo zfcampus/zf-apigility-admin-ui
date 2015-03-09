@@ -206,7 +206,7 @@ angular.module("apigility-ui/authentication/authentication.html", []).run(["$tem
     "            <div class=\"form-group\">\n" +
     "              <label for=\"oauth2_route\" class=\"col-sm-2 control-label\">OAuth2 route</label>\n" +
     "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"password\" class=\"form-control\" id=\"oauth2_route\" placeholder=\"/oauth\">\n" +
+    "                <input type=\"text\" class=\"form-control\" id=\"oauth2_route\" placeholder=\"/oauth\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
@@ -496,7 +496,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
-    "      <a ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a><span id=\"version\"><a ng-click=\"vm.aboutModal()\">version {{vm.apigilityVersion}}</a></span>\n" +
+    "      <a ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a><span id=\"version\"><a ng-click=\"vm.aboutModal()\">v {{vm.apigilityVersion}}</a></span>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"navbar-collapse collapse\">\n" +
@@ -1666,6 +1666,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
+    "              <div class=\"col-sm-offset-2 col-sm-6\">\n" +
+    "                <div class=\"checkbox\">\n" +
+    "                  <label>\n" +
+    "                    <input type=\"checkbox\" ng-model=\"vm.rest.by_value\">Hydrate by value\n" +
+    "                  </label>\n" +
+    "                </div>\n" +
+    "              </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"form-group\">\n" +
     "              <label class=\"col-sm-2 control-label\">Hydrator strategies<br><button type=\"button\" class=\"btn btn-xs btn-primary\" ng-click=\"vm.newDoctrineStrategyModal()\"><span class=\"glyphicon glyphicon-plus\"></span></button></label>\n" +
     "              <div class=\"col-sm-8\">\n" +
     "                <table class=\"table table-bordered\">\n" +
@@ -1677,7 +1686,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                    </tr>\n" +
     "                  </thead>\n" +
     "                  <tbody>\n" +
-    "                    <tr ng-if=\"vm.rest.strategies.length == 0\">\n" +
+    "                    <tr ng-hide=\"vm.hasProperties(vm.rest.strategies)\">\n" +
     "                      <td colspan=\"3\">No hydrator strategy configured<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newDoctrineStrategyModal()\">create the first one</a></span></td>\n" +
     "                    </tr>\n" +
     "                    <tr ng-repeat=\"(k,v) in vm.rest.strategies\">\n" +
@@ -1689,13 +1698,6 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                </table>\n" +
     "              </div>\n" +
     "            </div>\n" +
-    "              <div class=\"col-sm-offset-2 col-sm-6\">\n" +
-    "                <div class=\"checkbox\">\n" +
-    "                  <label>\n" +
-    "                    <input type=\"checkbox\" ng-model=\"vm.rest.by_value\">Hydrate by value\n" +
-    "                  </label>\n" +
-    "                </div>\n" +
-    "              </div>\n" +
     "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
     "              <div class=\"col-sm-offset-3 col-sm-4\">\n" +
     "                <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.resetGeneral()\" unsaved-warning-clear>Reset</button>\n" +

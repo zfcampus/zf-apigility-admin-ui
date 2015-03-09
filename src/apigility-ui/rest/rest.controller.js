@@ -38,7 +38,7 @@
 
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){
         vm.rest = result;
-        vm.isDoctrine = result.object_manager !== undefined;
+        vm.isDoctrine = angular.isDefined(result.object_manager);
 
         vm.rest.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
@@ -48,6 +48,9 @@
         });
 
         if (vm.isDoctrine) {
+          if (vm.rest.strategies.length == 0) {
+            vm.rest.strategies = {};
+          }
           api.getRestDoctrineMetadata(result.object_manager, result.entity_class, function(err, response) {
             if (err) {
               console.log(response);
@@ -106,8 +109,6 @@
     }
 
     vm.saveGeneral = function() {
-      console.log('Changed 0', vm.changed[0]);
-      console.log('Changed 1', vm.changed[1]);
       if (!vm.changed[0] && !vm.changed[1]) {
         return;
       }
@@ -155,6 +156,15 @@
       delete vm.rest.strategies[key];
       vm.changed[1] = true;
     };
+
+    vm.hasProperties = function(obj) {
+      for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+          return true;
+      }
+
+      return false;
+    }
 
     vm.saveContentNegotiation = function() {
       if (!vm.changed[1]) {

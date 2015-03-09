@@ -139,6 +139,15 @@
               </div>
             </div>
             <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="vm.rest.by_value">Hydrate by value
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <label class="col-sm-2 control-label">Hydrator strategies<br><button type="button" class="btn btn-xs btn-primary" ng-click="vm.newDoctrineStrategyModal()"><span class="glyphicon glyphicon-plus"></span></button></label>
               <div class="col-sm-8">
                 <table class="table table-bordered">
@@ -150,7 +159,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-if="vm.rest.strategies.length == 0">
+                    <tr ng-hide="vm.hasProperties(vm.rest.strategies)">
                       <td colspan="3">No hydrator strategy configured<span ng-hide="vm.disabled">, <a ng-click="vm.newDoctrineStrategyModal()">create the first one</a></span></td>
                     </tr>
                     <tr ng-repeat="(k,v) in vm.rest.strategies">
@@ -162,13 +171,6 @@
                 </table>
               </div>
             </div>
-              <div class="col-sm-offset-2 col-sm-6">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" ng-model="vm.rest.by_value">Hydrate by value
-                  </label>
-                </div>
-              </div>
             <div class="form-group" style="margin-top:30px">
               <div class="col-sm-offset-3 col-sm-4">
                 <button type="button" class="btn btn-default" ng-click="vm.resetGeneral()" unsaved-warning-clear>Reset</button>
