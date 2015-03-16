@@ -1,6 +1,6 @@
 {
   "name": "apigility.admin.ui.php",
-  "version": "0.1.0dev",
+  "version": "1.1dev",
   "homepage": "http://apigility.org/",
   "authors": [
     "Matthew Weier O'Phinney <matthew@zend.com>",
