@@ -32,7 +32,7 @@ if (isset($opts->h)) {
     exit(0);
 }
 
-if ((!isset($opts->d) && !isset($opts->p))
+if ((! isset($opts->d) && ! isset($opts->p))
     || (isset($opts->d) && isset($opts->p))
 ) {
     echo "Please select one of EITHER --dev OR --production.\n";
@@ -58,11 +58,13 @@ echo "Done!\n";
 function updateFile($file, $from, $to)
 {
     echo "    Updating $file\n";
-    $content = file_get_contents($file);
-    $pattern = '/\/(' . $from . ')\//';
+
+    $content     = file_get_contents($file);
+    $pattern     = '#/(' . $from . ')/#';
     $replacement = '/' . $to . '/';
-    $content = preg_replace($pattern, $replacement, $content);
-    if (!empty($content)) {
+    $content     = preg_replace($pattern, $replacement, $content);
+
+    if (! empty($content)) {
       file_put_contents($file, $content);
     }
 }
