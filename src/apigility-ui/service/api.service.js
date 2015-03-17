@@ -48,7 +48,6 @@
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the API module, please check if already exists');
-            break;
         }
         return callback(true, 'I cannot create the API module, please enter a valid name (alpha characters)');
       });
@@ -84,7 +83,6 @@
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the REST service, please check if already exists');
-            break;
         }
         return callback(true, 'I cannot create the REST service, please enter a valid name (alpha characters)');
       });
@@ -138,7 +136,7 @@
       .catch(function (err) {
         return callback(true, 'Error during the update of the REST service');
       });
-    }
+    };
 
     this.deleteRest = function(module, version, name, isDoctrine, recursive, callback) {
       var path = isDoctrine ? 'doctrine' : 'rest';
@@ -154,17 +152,18 @@
     this.getAuthorizationRest = function(module, version, name, callback) {
       xhr.get(agApiPath + '/module/' + module + '/authorization')
       .then(function (response) {
+        var method;
         var data = {};
         data.collection = [];
         data.entity = [];
         var collection = response[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__collection__'];
-        for (var method in collection) {
+        for (method in collection) {
           if (collection[method]) {
             data.collection.push(method);
           }
         }
         var entity = response[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__entity__'];
-        for (var method in entity) {
+        for (method in entity) {
           if (entity[method]) {
             data.entity.push(method);
           }
@@ -262,8 +261,8 @@
         })
         .catch(function(err) {
           return callback(true, 'I cannot retrieve entity metadata');
-        })
-    }
+        });
+    };
 
     this.getHydrators = function(callback) {
       xhr.get(agApiPath + '/hydrators', 'hydrators' )
@@ -300,7 +299,7 @@
       .catch(function (err) {
         return callback(true, 'I cannot create the Selector, please enter a valid name (alpha characters)');
       });
-    }
+    };
 
     this.deleteSelector = function(name, callback) {
       xhr.remove(agApiPath + '/content-negotiation/' + name)
@@ -364,7 +363,7 @@
         delete response._links;
         delete response.input_filter_name;
         // Transform the key/values in array
-        response = Object.keys(response).map(function(key) { return response[key] });
+        response = Object.keys(response).map(function(key) { return response[key]; });
         return callback(false, response);
       })
       .catch(function (err) {
@@ -412,7 +411,7 @@
         delete response._links;
         delete response.input_filter_name;
         // Transform the key/values in array
-        response = Object.keys(response).map(function(key) { return response[key] });
+        response = Object.keys(response).map(function(key) { return response[key]; });
         return callback(false, response);
       })
       .catch(function (err) {
@@ -430,7 +429,7 @@
       .catch(function (err) {
         return callback(true, 'Error during the API communication');
       });
-    }
+    };
 
     this.saveRpcDoc = function(module, version, rpcname, doc, callback) {
       xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/doc', doc)
@@ -442,7 +441,7 @@
       .catch(function (err) {
         return callback(true, 'Error during the API communication');
       });
-    }
+    };
 
     this.newRpc = function(module, service, route, callback) {
       var allowed = [ 'service_name', 'route_match' ];
@@ -454,7 +453,6 @@
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the RPC service, please check if already exists');
-            break;
           }
         return callback(true, 'I cannot create the RPC service, please enter a valid name (alpha characters)');
       });
@@ -505,7 +503,7 @@
       .catch(function (err) {
         return callback(true, 'Error during the update of the RPC service');
       });
-    }
+    };
 
     this.deleteRpc = function(module, version, name, recursive, callback) {
       xhr.remove(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
@@ -568,7 +566,6 @@
         switch (err.status) {
           case 422 :
             return callback(true, err.validation_messages.htpasswd[0]);
-            break;
           }
         return callback(true, 'Error saving the basic authentication');
       });
@@ -599,7 +596,7 @@
         .then(function (response) {
           response.db_adapter.forEach(function(entry){
             delete entry._links;
-          })
+          });
           return callback(true, response);
         })
         .catch(function (err) {
@@ -676,7 +673,7 @@
         })
         .catch(function (err) {
           return callback(true, null);
-        })
+        });
     };
 
     this.newDbConnected = function(module, adapter, table, callback) {
@@ -689,7 +686,6 @@
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the DB-Connected service, please check if already exists');
-            break;
         }
         return callback(true, 'I cannot create the DB-Connected service, please check your database server');
       });
@@ -700,7 +696,7 @@
        .then(function (response) {
          response.doctrine_adapter.forEach(function(entry){
            delete entry._links;
-         })
+         });
          return callback(true, response);
        })
        .catch(function (err) {
@@ -718,7 +714,6 @@
           switch (err.status) {
             case 500 :
               return callback(true, 'I cannot create the Doctrine-Connected service, please check if already exists');
-              break;
           }
           return callback(true, 'I cannot create the Doctrine-Connected service, please check your database server');
         });
@@ -769,12 +764,12 @@
       xhr.create(agApiPath + '/package', data, allowed)
         .then(function (response) {
           if (!response) {
-            return callback(true, 'Error during the build of the package');
+            return callback(true, 'Error occurred building the package');
           }
           return callback(false, response);
         })
         .catch(function (err) {
-          return callback(true, 'Error during the build of the package');
+          return callback(true, 'Error occurred building the package');
         });
     };
 
