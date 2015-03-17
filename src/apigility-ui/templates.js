@@ -1446,7 +1446,7 @@ angular.module("apigility-ui/package/package.html", []).run(["$templateCache", f
     "      <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
     "    </div>\n" +
     "    <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form ng-hide=\"vm.apis.length == 0\">\n" +
-    "      <p>Here you can package your APIs, building a file (ZIP, TAR, TGZ or ZPK) ready for deployment. For more information about the deployment of Apigility projects <a href=\"https://apigility.org/documentation/deployment/intro\" target=\"_blank\">read the documentation</a>.</p>\n" +
+    "      <p>Package your API for deployment! This tool will build a deployment file in the format you specify (ZIP, TAR, TGZ or ZPK). For more information about deploying Apigility projects <a href=\"https://apigility.org/documentation/deployment/intro\" target=\"_blank\">read the documentation</a>.</p>\n" +
     "      <br />\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-3 control-label\">Package format</label>\n" +
@@ -1454,7 +1454,7 @@ angular.module("apigility-ui/package/package.html", []).run(["$templateCache", f
     "          <select class=\"form-control\" ng-model=\"vm.package.format\" ng-options=\"format for format in vm.formats\" ng-disabled=\"vm.loading\"></select>\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-6\">\n" +
-    "          <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> ZPK is the file format of <a href=\"http://www.zend.com/en/products/server\" target=\"_blank\">Zend Server</a></span>\n" +
+    "          <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> ZPK packages are for deployment on <a href=\"http://www.zend.com/en/products/server\" target=\"_blank\">Zend Server</a></span>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\">\n" +
@@ -1487,7 +1487,7 @@ angular.module("apigility-ui/package/package.html", []).run(["$templateCache", f
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
-    "            <label class=\"col-sm-3 control-label\">Directory containing ZPK package assets</label>\n" +
+    "            <label class=\"col-sm-3 control-label\">Directory containing ZPK package assets (deployment.xml, scripts)</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
     "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.package.zpk.assets\" placeholder=\"Insert the path of directory containing ZPK package assets (optional)\" ng-disabled=\"vm.loading\"><br />\n" +
     "            </div>\n" +
