@@ -7,7 +7,7 @@
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
     </div>
     <form class="form-horizontal" role="form" unsaved-warning-form ng-hide="vm.apis.length == 0">
-      <p>Here you can package your APIs, building a file (ZIP, TAR, TGZ or ZPK) ready for deployment. For more information about the deployment of Apigility projects <a href="https://apigility.org/documentation/deployment/intro" target="_blank">read the documentation</a>.</p>
+      <p>Package your API for deployment! This tool will build a deployment file in the format you specify (ZIP, TAR, TGZ or ZPK). For more information about deploying Apigility projects <a href="https://apigility.org/documentation/deployment/intro" target="_blank">read the documentation</a>.</p>
       <br />
       <div class="form-group">
         <label class="col-sm-3 control-label">Package format</label>
@@ -15,7 +15,7 @@
           <select class="form-control" ng-model="vm.package.format" ng-options="format for format in vm.formats" ng-disabled="vm.loading"></select>
         </div>
         <div class="col-sm-6">
-          <span class="help-block"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ZPK is the file format of <a href="http://www.zend.com/en/products/server" target="_blank">Zend Server</a></span>
+          <span class="help-block"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ZPK packages are for deployment on <a href="http://www.zend.com/en/products/server" target="_blank">Zend Server</a></span>
         </div>
       </div>
       <div class="form-group">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label">Directory containing ZPK package assets</label>
+            <label class="col-sm-3 control-label">Directory containing ZPK package assets (deployment.xml, scripts)</label>
             <div class="col-sm-8">
               <input type="text" class="form-control" ng-model="vm.package.zpk.assets" placeholder="Insert the path of directory containing ZPK package assets (optional)" ng-disabled="vm.loading"><br />
             </div>
