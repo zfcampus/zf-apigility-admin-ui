@@ -756,6 +756,28 @@
         });
     };
 
+    this.buildPackage = function(build, apis, callback) {
+      var allowed = [ 'format', 'apis', 'composer', 'config', 'zpk_xml', 'zpk_assets', 'zpk_version' ];
+      var selectApis = {};
+      apis.forEach(function(entry){
+        selectApis[entry.name] = build.modules.indexOf(entry.name) >= 0;
+      });
+      var data = [ build.format, selectApis, build.composer, build.config ];
+      if (build.format === 'zpk') {
+        data.push.apply(data, [ build.zpk.xml, build.zpk.assets, build.zpk.version ]);
+      }
+      xhr.create(agApiPath + '/package', data, allowed)
+        .then(function (response) {
+          if (!response) {
+            return callback(true, 'Error during the build of the package');
+          }
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          return callback(true, 'Error during the build of the package');
+        });
+    };
+
     function filterData(data, allowed){
       var result = { key : [], value : [] };
       allowed.forEach(function(entry){

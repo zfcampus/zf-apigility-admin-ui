@@ -20,10 +20,11 @@
     '$provide',
     '$stateProvider',
     '$urlRouterProvider',
-    '$httpProvider'
+    '$httpProvider',
+    'localStorageServiceProvider'
   ];
 
-  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider) {
+  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider) {
 
     $provide.value(
       'agApiPath',
@@ -59,6 +60,10 @@
     });
 
     $urlRouterProvider.otherwise('/');
+    
+    localStorageServiceProvider
+      .setPrefix('apigility');
+
   }
 
 })();
