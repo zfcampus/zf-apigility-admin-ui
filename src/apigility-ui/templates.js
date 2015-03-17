@@ -1442,79 +1442,67 @@ angular.module("apigility-ui/package/package.html", []).run(["$templateCache", f
     "    <h3 class=\"panel-title\">Package</h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
-    "    <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form>\n" +
+    "    <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "      <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "    </div>\n" +
+    "    <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form ng-hide=\"vm.apis.length == 0\">\n" +
+    "      <p>Package your API for deployment! This tool will build a deployment file in the format you specify (ZIP, TAR, TGZ or ZPK). For more information about deploying Apigility projects <a href=\"https://apigility.org/documentation/deployment/intro\" target=\"_blank\">read the documentation</a>.</p>\n" +
+    "      <br />\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-3 control-label\">Package format</label>\n" +
     "        <div class=\"col-sm-2\">\n" +
-    "          <select class=\"form-control\" ng-model=\"vm.format\">\n" +
-    "            <option>ZIP</option>\n" +
-    "            <option>TAR</option>\n" +
-    "            <option>TGZ (tar.gz)</option>\n" +
-    "            <option>ZPK</option>\n" +
-    "          </select>\n" +
+    "          <select class=\"form-control\" ng-model=\"vm.package.format\" ng-options=\"format for format in vm.formats\" ng-disabled=\"vm.loading\"></select>\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-6\">\n" +
-    "          <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> ZPK is the file format of <a href=\"http://www.zend.com/en/products/server\" target=\"_blank\">Zend Server</a></span>\n" +
+    "          <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> ZPK packages are for deployment on <a href=\"http://www.zend.com/en/products/server\" target=\"_blank\">Zend Server</a></span>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-3 control-label\">APIs to include in the package</label>\n" +
     "        <div class=\"col-sm-8\">\n" +
     "          <span ng-repeat=\"api in vm.apis\">\n" +
-    "            <input type=\"checkbox\" checklist-model=\"vm.modules\" checklist-value=\"api.name\" ng-change=\"vm.change()\"> {{api.name}}\n" +
+    "            <input type=\"checkbox\" checklist-model=\"vm.package.modules\" checklist-value=\"api.name\" ng-change=\"vm.change()\" ng-disabled=\"vm.loading\"> {{api.name}}\n" +
     "          </span>\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <label class=\"col-sm-3 control-label\">Include the <i>vendor</i> folder?</label>\n" +
-    "        <div class=\"col-sm-2\">\n" +
-    "          <input type=\"checkbox\" ng-model=\"vm.vendor\" value=\"Yes\"><br />\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-3 control-label\">Execute composer?</label>\n" +
     "        <div class=\"col-sm-2\">\n" +
-    "          <input type=\"checkbox\" ng-model=\"vm.composer\" value=\"Yes\"><br />\n" +
-    "        </div>\n" +
-    "      </div>\n" +
-    "      <div class=\"form-group\">\n" +
-    "        <label class=\"col-sm-3 control-label\">Parse the .gitignore to exclude files?</label>\n" +
-    "        <div class=\"col-sm-2\">\n" +
-    "          <input type=\"checkbox\" ng-model=\"vm.gitignore\" value=\"Yes\"><br />\n" +
+    "          <input type=\"checkbox\" ng-model=\"vm.package.composer\" ng-disabled=\"vm.loading\"><br />\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\">\n" +
     "        <label class=\"col-sm-3 control-label\">Application config to include</label>\n" +
     "        <div class=\"col-sm-8\">\n" +
-    "          <input type=\"text\" class=\"form-control\" ng-model=\"vm.config\" placeholder=\"Insert the path of the config files to include\"><br />\n" +
+    "          <input type=\"text\" class=\"form-control\" ng-model=\"vm.package.config\" placeholder=\"Insert the path of the config files to include\" ng-disabled=\"vm.loading\"><br />\n" +
     "        </div>\n" +
     "      </div>\n" +
-    "      <div class=\"panel panel-default\" ng-if=\"vm.format === 'ZPK'\">\n" +
+    "      <div class=\"panel panel-default\" ng-if=\"vm.package.format === 'ZPK'\">\n" +
     "        <div class=\"panel-heading\">Zend Server ZPK options</div>\n" +
     "        <div class=\"panel-body\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"col-sm-3 control-label\">Path to a custom deployment.xml</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.xml\" placeholder=\"Insert the path of deployment.xml (optional)\"><br />\n" +
+    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.package.zpk.xml\" placeholder=\"Insert the path of deployment.xml (optional)\" ng-disabled=\"vm.loading\"><br />\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
-    "            <label class=\"col-sm-3 control-label\">Directory containing ZPK package assets</label>\n" +
+    "            <label class=\"col-sm-3 control-label\">Directory containing ZPK package assets (deployment.xml, scripts)</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.zpkpackage\" placeholder=\"Insert the path of directory containing ZPK package assets (optional)\"><br />\n" +
+    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.package.zpk.assets\" placeholder=\"Insert the path of directory containing ZPK package assets (optional)\" ng-disabled=\"vm.loading\"><br />\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"col-sm-3 control-label\">Application version</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
-    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.zpkversion\" placeholder=\"Insert the application version to be used in ZPK package (optional)\"><br />\n" +
+    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.package.zpk.version\" placeholder=\"Insert the application version to be used in ZPK package (optional)\" ng-disabled=\"vm.loading\"><br />\n" +
     "            </div>\n" +
     "          </div>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "      <div class=\"form-group\" style=\"margin-top:30px\">\n" +
-    "        <div class=\"col-sm-offset-3 col-sm-4\">\n" +
-    "          <button type=\"submit\" class=\"btn btn-success\" ng-click=\"vm.saveGeneral()\" ladda=\"vm.loading\">Generate package</button>\n" +
+    "        <div class=\"col-sm-offset-3\">\n" +
+    "          <button type=\"submit\" class=\"btn btn-success\" ladda=\"vm.loading\" ng-click=\"vm.buildPackage()\">Generate package</button> <span ng-show=\"vm.loading && vm.package.composer\" style=\"color:gray\">Please wait, the building process can take some time <span ng-show=\"vm.package.time\">(last build took {{vm.package.time}} sec)</span></span>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </form>\n" +
