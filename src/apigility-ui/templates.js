@@ -1513,11 +1513,11 @@ angular.module("apigility-ui/package/package.html", []).run(["$templateCache", f
 
 angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/rest/rest.html",
-    "<div class=\"panel panel-default\">\n" +
+    "<div class=\"panel panel-default service\" name=\"{{vm.restName}}\" data-api=\"{{vm.apiName}}\" data-api-version=\"{{vm.version}}\" data-service-type=\"REST\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.restName}} (v{{vm.version}})\n" +
-    "      <button class=\"btn btn-danger pull-right\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button>\n" +
+    "      <div class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></div>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -1906,7 +1906,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "          </form>\n" +
     "          <br clear=\"left\">\n" +
     "          <div class=\"panel panel-default\">\n" +
-    "            <div class=\"panel-heading\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
+    "            <div class=\"panel-heading code-button\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
     "            <div class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
     "          </div>\n" +
     "        </tab>\n" +
@@ -1919,11 +1919,11 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
 
 angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/rpc/rpc.html",
-    "<div class=\"panel panel-default\">\n" +
+    "<div class=\"panel panel-default service\" name=\"{{vm.rpcName}}\" data-api=\"{{vm.apiName}}\" data-api-version=\"{{vm.version}}\" data-service-type=\"RPC\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.rpcName}} (v{{vm.version}})\n" +
-    "      <button class=\"btn btn-danger pull-right\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button>\n" +
+    "      <div class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></div>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2107,7 +2107,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "        </form>\n" +
     "        <br clear=\"left\">\n" +
     "        <div class=\"panel panel-default\">\n" +
-    "          <div class=\"panel-heading\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
+    "          <div class=\"panel-heading code-button\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
     "          <div class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
     "        </div>\n" +
     "      </tab>\n" +
