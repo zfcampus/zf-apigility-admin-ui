@@ -1,8 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default service" name="{{vm.restName}}" data-api="{{vm.apiName}}" data-api-version="{{vm.version}}" data-service-type="REST">
   <div class="panel-heading">
     <h3 class="panel-title">
       <span class="glyphicon glyphicon-leaf"></span> REST service: {{vm.restName}} (v{{vm.version}})
-      <button class="btn btn-danger pull-right" ng-click="vm.deleteRestModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete service</button>
+      <div class="service-button pull-right"><button class="btn btn-danger" ng-click="vm.deleteRestModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete service</button></div>
     </h3>
   </div>
   <div class="panel-body">
@@ -391,7 +391,7 @@
           </form>
           <br clear="left">
           <div class="panel panel-default">
-            <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
+            <div class="panel-heading code-button"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
             <div class="panel-body" ng-bind-html="vm.sourcecode"></div>
           </div>
         </tab>
