@@ -1130,15 +1130,15 @@ angular.module("apigility-ui/modal/new-db.html", []).run(["$templateCache", func
     "    </div>\n" +
     "  </div>\n" +
     "  <label class=\"control-label\">Hostname</label>\n" +
-    "  <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.hostname\" placeholder=\"(Optional) Hostname\"><br />\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.hostname\" placeholder=\"(Optional) Hostname\"><br />\n" +
     "  <div class=\"row\">\n" +
     "    <div class=\"col-sm-6\">\n" +
     "      <label class=\"control-label\">Port</label>\n" +
-    "      <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.port\" placeholder=\"(Optional) Port\"><br />\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.port\" placeholder=\"(Optional) Port\"><br />\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-6\">\n" +
     "      <label class=\"control-label\">Charset</label>\n" +
-    "      <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.charset\" placeholder=\"(Optional) Charset\"><br />\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.charset\" placeholder=\"(Optional) Charset\"><br />\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +

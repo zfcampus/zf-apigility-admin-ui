@@ -34,6 +34,9 @@
     });
 
     api.getDoctrineAdapters(function(err, response) {
+      if (err) {
+        return;
+      }
       vm.doctrine = response.doctrine_adapter;
     });
 
