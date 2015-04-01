@@ -1531,47 +1531,47 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              </div>\n" +
     "              <label for=\"rest_page_size\" class=\"col-sm-2 control-label\">Page size</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"rest_page_size\" ng-model=\"vm.rest.page_size\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" id=\"rest_page_size\" ng-model=\"vm.rest.page_size\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
     "              <label class=\"col-sm-2 control-label\">Route matches</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.route_match\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.route_match\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "              <label class=\"col-sm-2 control-label\">HTTP Entity Methods</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rest.entity_http_methods\" checklist-value=\"http\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.rest.entity_http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
     "              <label class=\"col-sm-2 control-label\">Route identifier name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.route_identifier_name\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.route_identifier_name\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "              <label class=\"col-sm-2 control-label\">HTTP Collection Methods</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rest.collection_http_methods\" checklist-value=\"http\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.rest.collection_http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
     "              <label for=\"rest_entity_id\" class=\"col-sm-2 control-label\">Entity identifier name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"rest_entity_id\" ng-model=\"vm.rest.entity_identifier_name\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" id=\"rest_entity_id\" ng-model=\"vm.rest.entity_identifier_name\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "              <label for=\"rest_page_size_parameter\" class=\"col-sm-2 control-label\">Page Size Parameter</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"rest_page_size_parameter\" ng-model=\"vm.rest.page_size_param\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" id=\"rest_page_size_parameter\" ng-model=\"vm.rest.page_size_param\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\" ng-if=\"!vm.isDoctrine\">\n" +
     "              <label for=\"rest_hydrator\" class=\"col-sm-2 control-label\">Hydrator Service Name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <select class=\"form-control\" ng-model=\"vm.rest.hydrator_name\" ng-options=\"hydrator for hydrator in vm.hydrators\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <select class=\"form-control\" ng-model=\"vm.rest.hydrator_name\" ng-options=\"hydrator for hydrator in vm.hydrators\" ng-disabled=\"vm.disabled\"></select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -1580,7 +1580,6 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                <tags-input\n" +
     "                    ng-model=\"vm.rest.collection_query_whitelist\"\n" +
     "                    ng-hide=\"vm.disabled\"\n" +
-    "                    ng-change=\"vm.change(0)\"\n" +
     "                    placeholder=\"Insert query whitelist\"\n" +
     "                    add-on-space=\"true\"\n" +
     "                    add-on-enter=\"true\"\n" +
@@ -1590,17 +1589,17 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              </div>\n" +
     "              <label for=\"rest_collection_name\" class=\"col-sm-2 control-label\">Collection Name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.collection_name\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.collection_name\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
     "              <label for=\"rest_entity_class\" class=\"col-sm-2 control-label\">Entity Class</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.entity_class\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.entity_class\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "              <label for=\"rest_collection_class\" class=\"col-sm-2 control-label\">Collection Class</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.collection_class\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.collection_class\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
@@ -1616,13 +1615,13 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"db_adapter_name\" class=\"col-sm-2 control-label\">Adapter name</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" id=\"db_adapter_name\" ng-model=\"vm.adapter\" ng-options=\"db.adapter_name for db in vm.db.db_adapter\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <select class=\"form-control\" id=\"db_adapter_name\" ng-model=\"vm.adapter\" ng-options=\"db.adapter_name for db in vm.db.db_adapter\" ng-disabled=\"vm.disabled\"></select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
     "              <label for=\"table_name\" class=\"col-sm-2 control-label\">Table name</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <input type=\"text\" id=\"table_name\" class=\"form-control\" ng-model=\"vm.rest.table_name\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "                <input type=\"text\" id=\"table_name\" class=\"form-control\" ng-model=\"vm.rest.table_name\" ng-disabled=\"vm.disabled\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -1644,7 +1643,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"doctrine_object_manager\" class=\"col-sm-2 control-label\">Object Manager</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" id=\"doctrine_object_manager\" ng-model=\"vm.rest.object_manager\" ng-options=\"om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager\" ng-change=\"vm.change(1)\"></select>\n" +
+    "                <select class=\"form-control\" id=\"doctrine_object_manager\" ng-model=\"vm.rest.object_manager\" ng-options=\"om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager\"></select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -1699,7 +1698,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"rest_content_negotiation\" class=\"col-sm-2 control-label\">Content Negotiation Selector</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" ng-model=\"vm.rest.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-change=\"vm.change(2)\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <select class=\"form-control\" ng-model=\"vm.rest.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-disabled=\"vm.disabled\"></select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -1707,8 +1706,6 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <div class=\"col-sm-8\">\n" +
     "                <tags-input\n" +
     "                    ng-hide=\"vm.disabled\"\n" +
-    "                    ng-click=\"vm.change(2)\"\n" +
-    "                    ng-change=\"vm.change(1)\"\n" +
     "                    ng-model=\"vm.tags.accept_whitelist\"\n" +
     "                    placeholder=\"Add a mediatype\"\n" +
     "                    add-on-space=\"true\"\n" +
@@ -1723,8 +1720,6 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <div class=\"col-sm-8\">\n" +
     "                <tags-input\n" +
     "                    ng-hide=\"vm.disabled\"\n" +
-    "                    ng-click=\"vm.change(2)\"\n" +
-    "                    ng-change=\"vm.change(2)\"\n" +
     "                    ng-model=\"vm.tags.content_type_whitelist\"\n" +
     "                    placeholder=\"Add a content type\"\n" +
     "                    add-on-space=\"true\"\n" +
@@ -1791,7 +1786,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">Entity authorization</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth.entity\" checklist-value=\"http\" ng-change=\"vm.change(3)\" ng-disabled=\"vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.auth.entity\" checklist-value=\"http\" ng-disabled=\"vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -1799,7 +1794,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">Collection authorization</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth.collection\" checklist-value=\"http\" ng-change=\"vm.change(3)\" ng-disabled=\"vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.auth.collection\" checklist-value=\"http\" ng-disabled=\"vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -1816,7 +1811,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label class=\"col-sm-2 control-label\">REST service description</label>\n" +
     "              <div class=\"col-sm-10\">\n" +
-    "                <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.description\" placeholder=\"Insert the description here\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.description\" placeholder=\"Insert the description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -1825,7 +1820,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                  <div class=\"form-group\">\n" +
     "                    <label class=\"col-sm-2 control-label\">Description</label>\n" +
     "                    <div class=\"col-sm-10\">\n" +
-    "                      <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection.description\" placeholder=\"Insert the Collection description here\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                      <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection.description\" placeholder=\"Insert the Collection description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                    </div>\n" +
     "                  </div>\n" +
     "                  <div class=\"form-group\">\n" +
@@ -1834,19 +1829,19 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Description</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].description\" placeholder=\"Insert the description here\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].description\" placeholder=\"Insert the description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\" ng-if=\"http !== 'GET'\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].request\" placeholder=\"Insert the request specification\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].response\" placeholder=\"Insert the response specification\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                      </tab>\n" +
@@ -1857,7 +1852,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                  <div class=\"form-group\">\n" +
     "                    <label class=\"col-sm-2 control-label\">Description</label>\n" +
     "                    <div class=\"col-sm-10\">\n" +
-    "                      <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity.description\" placeholder=\"Insert the Entity description here\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                      <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity.description\" placeholder=\"Insert the Entity description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                    </div>\n" +
     "                  </div>\n" +
     "                  <div class=\"form-group\">\n" +
@@ -1866,19 +1861,19 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Description</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[$index].description\" placeholder=\"Insert the description here\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[http].description\" placeholder=\"Insert the description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\" ng-if=\"http !== 'GET'\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[$index].request\" placeholder=\"Insert the request specification\" ng-change=\"vm.change(3)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
-    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[$index].response\" placeholder=\"Insert the response specification\" ng-change=\"vm.change(4)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                      </tab>\n" +
@@ -1939,21 +1934,21 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "          <div class=\"form-group\">\n" +
     "            <label class=\"col-sm-2 control-label\">Route to match</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
-    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.rpc.route_match\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\">\n" +
+    "              <input type=\"text\" class=\"form-control\" ng-model=\"vm.rpc.route_match\" ng-disabled=\"vm.disabled\">\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"col-sm-2 control-label\">Allowed HTTP Methods</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rpc.http_methods\" checklist-value=\"http\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.rpc.http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
     "            <label for=\"rest_content_negotiation\" class=\"col-sm-2 control-label\">Content Negotiation Selector</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
-    "              <select class=\"form-control\" ng-model=\"vm.rpc.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-change=\"vm.change(0)\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "              <select class=\"form-control\" ng-model=\"vm.rpc.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-disabled=\"vm.disabled\"></select>\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
@@ -1961,8 +1956,6 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "            <div class=\"col-sm-10\">\n" +
     "              <tags-input\n" +
     "              ng-hide=\"vm.disabled\"\n" +
-    "              ng-click=\"vm.change(0)\"\n" +
-    "              ng-change=\"vm.change(0)\"\n" +
     "              ng-model=\"vm.tags.accept_whitelist\"\n" +
     "              placeholder=\"Add a mediatype\"\n" +
     "              add-on-space=\"true\"\n" +
@@ -1977,8 +1970,6 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "            <div class=\"col-sm-10\">\n" +
     "              <tags-input\n" +
     "              ng-hide=\"vm.disabled\"\n" +
-    "              ng-click=\"vm.change(0)\"\n" +
-    "              ng-change=\"vm.change(0)\"\n" +
     "              ng-model=\"vm.tags.content_type_whitelist\"\n" +
     "              placeholder=\"Add a content type\"\n" +
     "              add-on-space=\"true\"\n" +
@@ -2044,7 +2035,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "            <label class=\"col-sm-2 control-label\">Authorization</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth\" checklist-value=\"http\" ng-change=\"vm.change(1)\" ng-disabled=\"vm.rpc.http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <input type=\"checkbox\" checklist-model=\"vm.auth\" checklist-value=\"http\" ng-disabled=\"vm.rpc.http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
     "              </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
@@ -2061,7 +2052,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "          <div class=\"form-group\">\n" +
     "            <label class=\"col-sm-2 control-label\">RPC service description</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
-    "              <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation.description\" placeholder=\"Insert the description here\" ng-change=\"vm.change(2)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "              <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation.description\" placeholder=\"Insert the description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
@@ -2070,19 +2061,19 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "                <div class=\"form-group\">\n" +
     "                  <label class=\"col-sm-2 control-label\">Description</label>\n" +
     "                  <div class=\"col-sm-10\">\n" +
-    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].description\" placeholder=\"Insert the description here\" ng-change=\"vm.change(2)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].description\" placeholder=\"Insert the description here\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                  </div>\n" +
     "                </div>\n" +
     "                <div class=\"form-group\" ng-if=\"http !== 'GET'\">\n" +
     "                  <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                  <div class=\"col-sm-10\">\n" +
-    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].request\" placeholder=\"Insert the request specification\" ng-change=\"vm.change(2)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                  </div>\n" +
     "                </div>\n" +
     "                <div class=\"form-group\">\n" +
     "                  <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                  <div class=\"col-sm-10\">\n" +
-    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].response\" placeholder=\"Insert the response specification\" ng-change=\"vm.change(2)\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
     "                  </div>\n" +
     "                </div>\n" +
     "              </tab>\n" +
