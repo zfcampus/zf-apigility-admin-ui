@@ -233,12 +233,14 @@
         var rest = angular.copy(response);
         rest.fields = [];
         var i = 0;
-        if (response._embedded) {
-          while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
-            rest.fields[i] = response._embedded.input_filters[0][i];
-            i++;
+        if (response.hasOwnProperty('_embedded')) {
+          if (response._embedded.hasOwnProperty('input_filters')) {
+            while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
+              rest.fields[i] = response._embedded.input_filters[0][i];
+              i++;
+            }
           }
-          if (response._embedded.documentation) {
+          if (response._embedded.hasOwnProperty('documentation')) {
             delete response._embedded.documentation._links;
             rest.documentation = response._embedded.documentation;
           }

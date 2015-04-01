@@ -16,14 +16,14 @@
     vm.version = $stateParams.ver;
     vm.restName = $stateParams.rest;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
-    vm.changed = [false, false, false, false];
-    vm.tags = {
-      accept_whitelist : [],
-      content_type_whitelist : []
-    };
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     function initGeneral() {
+      vm.tags = {
+        accept_whitelist : [],
+        content_type_whitelist : []
+      };
+
       api.getHydrators(function(result){
         vm.hydrators = result;
       });
@@ -82,10 +82,12 @@
 
       api.getContentNegotiation(function(result){
         vm.content_negotiation = result;
-        for (var i = 0; i < result.length; i++) {
-          if (vm.rest.selector.content_name === result[i].content_name) {
-            vm.rest.selector = result[i];
-            break;
+        if (vm.rest.hasOwnProperty('selector')) {
+          for (var i = 0; i < result.length; i++) {
+            if (vm.rest.selector.content_name === result[i].content_name) {
+              vm.rest.selector = result[i];
+              break;
+            }
           }
         }
       });
@@ -104,14 +106,7 @@
     initGeneral();
     initAuthorization();
 
-    vm.change = function(tab) {
-      vm.changed[parseInt(tab)] = true;
-    }
-
     vm.saveGeneral = function() {
-      if (!vm.changed[0] && !vm.changed[1]) {
-        return;
-      }
       vm.loading = true;
       if (vm.adapter) {
         vm.rest.adapter_name = vm.adapter.adapter_name;
@@ -122,16 +117,11 @@
           vm.alert = result;
           return;
         }
-        vm.changed[0] = false;
       });
     };
 
     vm.resetGeneral = function() {
-      if (vm.changed[0] || vm.changed[1]) {
-        initGeneral();
-        vm.changed[0] = false;
-        vm.changed[1] = false;
-      }
+      initGeneral();
     };
 
     vm.newDoctrineStrategyModal = function () {
@@ -147,14 +137,12 @@
       });
 
       modalInstance.result.then(function (response) {
-        vm.changed[1] = true;
         vm.rest.strategies[response.field] = response.strategy;
       });
     };
 
     vm.removeStrategy = function(key) {
       delete vm.rest.strategies[key];
-      vm.changed[1] = true;
     };
 
     vm.hasProperties = function(obj) {
@@ -167,9 +155,6 @@
     }
 
     vm.saveContentNegotiation = function() {
-      if (!vm.changed[1]) {
-        return;
-      }
       vm.loading = true;
       vm.rest.accept_whitelist = vm.tags.accept_whitelist.map(api.mapTagInput);
       vm.rest.content_type_whitelist = vm.tags.content_type_whitelist.map(api.mapTagInput);
@@ -179,21 +164,14 @@
           vm.alert = result;
           return;
         }
-        vm.changed[2] = false;
       });
     };
 
     vm.resetContentNegotiation = function() {
-      if (vm.changed[1]) {
-        initGeneral();
-        vm.changed[2] = false;
-      }
+      initGeneral();
     };
 
     vm.saveAuthorization = function() {
-      if (!vm.changed[3]) {
-        return;
-      }
       vm.loading = true;
       api.saveAuthorizationRest(vm.apiName, vm.version, vm.restName, vm.auth, function(err, result){
         vm.loading = false;
@@ -201,36 +179,25 @@
           vm.alert = result;
           return;
         }
-        vm.changed[2] = false;
       });
     };
 
     vm.resetAuthorization = function() {
-      if (vm.changed[3]) {
-        initAuthorization();
-        vm.changed[3] = false;
-      }
+      initAuthorization();
     };
 
     vm.saveDocumentation = function() {
-      if (!vm.changed[4]) {
-        return;
-      }
       api.saveRestDoc(vm.apiName, vm.version, vm.restName, vm.rest.documentation, function(err,result){
         vm.loading = false;
         if (err) {
           vm.alert = result;
           return;
         }
-        vm.changed = false;
       });
     };
 
     vm.resetDocumentation = function() {
-      if (vm.changed[4]) {
-        initGeneral();
-        vm.changed[4] = false;
-      }
+      initGeneral();
     };
 
     vm.deleteRestModal = function() {
