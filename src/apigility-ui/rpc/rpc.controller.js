@@ -16,14 +16,14 @@
     vm.version = $stateParams.ver;
     vm.rpcName = $stateParams.rpc;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
-    vm.changed = [false, false, false, false];
-    vm.tags = {
-      accept_whitelist : [],
-      content_type_whitelist : []
-    };
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     function initGeneral() {
+      vm.tags = {
+        accept_whitelist : [],
+        content_type_whitelist : []
+      };
+
       api.getRpc(vm.apiName, vm.version, vm.rpcName, function(err, result){
         if (err) {
           vm.alert = 'The RPC service doesn\'t exist. Try to choose a different version!';
@@ -69,14 +69,7 @@
     initGeneral();
     initAuthorization();
 
-    vm.change = function(tab) {
-      vm.changed[parseInt(tab)] = true;
-    }
-
     vm.saveGeneral = function() {
-      if (!vm.changed[0]) {
-        return;
-      }
       vm.loading = true;
       vm.rpc.accept_whitelist = vm.tags.accept_whitelist.map(api.mapTagInput);
       vm.rpc.content_type_whitelist = vm.tags.content_type_whitelist.map(api.mapTagInput);
@@ -86,21 +79,14 @@
           vm.alert = result;
           return;
         }
-        vm.changed[0] = false;
       });
     };
 
     vm.resetGeneral = function() {
-      if (vm.changed[0]) {
-        initGeneral();
-        vm.changed[0] = false;
-      }
+      initGeneral();
     };
 
     vm.saveAuthorization = function() {
-      if (!vm.changed[1]) {
-        return;
-      }
       vm.loading = true;
       api.saveAuthorizationRpc(vm.apiName, vm.version, vm.rpcName, vm.auth, function(err, result){
         vm.loading = false;
@@ -108,21 +94,15 @@
           vm.alert = result;
           return;
         }
-        vm.changed[1] = false;
       });
     };
 
     vm.resetAuthorization = function() {
-      if (vm.changed[1]) {
-        initAuthorization();
-        vm.changed[1] = false;
-      }
+      initAuthorization();
     };
 
     vm.saveDocumentation = function() {
-      if (!vm.changed[2]) {
-        return;
-      }
+      vm.loading = true;
       api.saveRpcDoc(vm.apiName, vm.version, vm.rpcName, vm.rpc.documentation, function(err,result){
         vm.loading = false;
         if (err) {
@@ -130,15 +110,11 @@
           vm.alert = result;
           return;
         }
-        vm.changed = false;
       });
     };
 
     vm.resetDocumentation = function() {
-      if (vm.changed[2]) {
-        initGeneral();
-        vm.changed[2] = false;
-      }
+      initGeneral();
     };
 
     vm.deleteRpcModal = function() {
