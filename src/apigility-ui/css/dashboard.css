@@ -36,6 +36,43 @@ body {
   margin:10px;
 }
 
+/* See https://coderwall.com/p/wpjw4w/change-the-bootstrap-navbar-breakpoint 
+ * and http://www.bootply.com/120604
+ */
+@media (max-width: 1024px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-header a.logo {
+        display: block;
+        float: left;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+        position: fixed;
+        top: 8px;
+        right: 15px;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
+
 /*
  * Sidebar
  */
