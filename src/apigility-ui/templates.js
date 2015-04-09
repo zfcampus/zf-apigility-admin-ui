@@ -2120,22 +2120,29 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "<div class=\"row\" id=\"version\">\n" +
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
-    "<div class=\"row\">\n" +
-    "  <form class=\"navbar-form\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
-    "    <div class=\"form-group has-feedback\">\n" +
+    "\n" +
+    "<form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
+    "  <div class=\"row\">\n" +
+    "    <div class=\"input-group has-feedback\">\n" +
     "      <input\n" +
-    "      class=\"form-control\"\n" +
-    "      type=\"search\"\n" +
-    "      placeholder=\"Search for a service\"\n" +
-    "      ng-model=\"vm.search\"\n" +
-    "      ng-disabled=\"vm.loading\"\n" +
-    "      typeahead=\"service for service in vm.services | filter:$viewValue | limitTo:8\">\n" +
+    "        class=\"form-control\"\n" +
+    "        type=\"search\"\n" +
+    "        placeholder=\"Search for a service\"\n" +
+    "        ng-model=\"vm.search\"\n" +
+    "        ng-disabled=\"vm.loading\"\n" +
+    "        typeahead=\"service for service in vm.services | filter:$viewValue | limitTo:8\">\n" +
+    "\n" +
     "      <span class=\"glyphicon glyphicon-remove form-control-feedback\" ng-hide=\"!vm.search\" ng-click=\"vm.searchApi('')\"></span>\n" +
+    "\n" +
+    "      <span class=\"input-group-btn\">\n" +
+    "        <button type=\"submit\" class=\"pull-right btn btn-success\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +
+    "      </span>\n" +
     "    </div>\n" +
-    "    <button type=\"submit\" class=\"btn btn-success btn-sm\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +
-    "  </form>\n" +
-    "</div>\n" +
+    "  </div>\n" +
+    "</form>\n" +
+    "\n" +
     "<br />\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "  <div class=\"col-sm-12 text-right\">\n" +
     "    <span class=\"pull-left\" ng-hide=\"vm.loading\"><strong>API LIST</strong></span>\n" +
@@ -2144,7 +2151,9 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "    <button type=\"button\" id=\"new_service\" class=\"btn btn-info btn-sm\" ng-click=\"vm.newServiceModal()\" ng-disabled=\"vm.loading || vm.apis.length == 0\">New Service</button>\n" +
     "  </div>\n" +
     "</div>\n" +
+    "\n" +
     "<br />\n" +
+    "\n" +
     "<div ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
     "  <ol ui-tree-nodes=\"options\" ng-model=\"vm.apis\" class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\">\n" +
     "    <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"item in vm.apis\" ui-tree-node=\"\">\n" +
@@ -2170,9 +2179,11 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "    </li>\n" +
     "  </ol>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"alert alert-info\" role=\"alert\" ng-show=\"vm.apis.length == 0 && !vm.search && !vm.loading\">\n" +
     "  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> No APIs configured, <a ng-click=\"vm.newApiModal()\">would you like to create one?</a>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"alert alert-danger\" role=\"alert\" ng-show=\"vm.apis.length == 0 && vm.search\">\n" +
     "  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> No services found, try with a new search\n" +
     "</div>\n" +

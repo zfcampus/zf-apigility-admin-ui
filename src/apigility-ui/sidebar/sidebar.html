@@ -1,22 +1,29 @@
 <div class="row" id="version">
   <a ng-click="vm.aboutModal()">v{{vm.apigilityVersion}}</a>
 </div>
-<div class="row">
-  <form class="navbar-form" ng-submit="vm.searchApi(vm.search)">
-    <div class="form-group has-feedback">
+
+<form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
+  <div class="row">
+    <div class="input-group has-feedback">
       <input
-      class="form-control"
-      type="search"
-      placeholder="Search for a service"
-      ng-model="vm.search"
-      ng-disabled="vm.loading"
-      typeahead="service for service in vm.services | filter:$viewValue | limitTo:8">
+        class="form-control"
+        type="search"
+        placeholder="Search for a service"
+        ng-model="vm.search"
+        ng-disabled="vm.loading"
+        typeahead="service for service in vm.services | filter:$viewValue | limitTo:8">
+
       <span class="glyphicon glyphicon-remove form-control-feedback" ng-hide="!vm.search" ng-click="vm.searchApi('')"></span>
+
+      <span class="input-group-btn">
+        <button type="submit" class="pull-right btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </span>
     </div>
-    <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
-  </form>
-</div>
+  </div>
+</form>
+
 <br />
+
 <div class="row">
   <div class="col-sm-12 text-right">
     <span class="pull-left" ng-hide="vm.loading"><strong>API LIST</strong></span>
@@ -25,7 +32,9 @@
     <button type="button" id="new_service" class="btn btn-info btn-sm" ng-click="vm.newServiceModal()" ng-disabled="vm.loading || vm.apis.length == 0">New Service</button>
   </div>
 </div>
+
 <br />
+
 <div ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
   <ol ui-tree-nodes="options" ng-model="vm.apis" class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes">
     <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis" ui-tree-node="">
@@ -51,9 +60,11 @@
     </li>
   </ol>
 </div>
+
 <div class="alert alert-info" role="alert" ng-show="vm.apis.length == 0 && !vm.search && !vm.loading">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No APIs configured, <a ng-click="vm.newApiModal()">would you like to create one?</a>
 </div>
+
 <div class="alert alert-danger" role="alert" ng-show="vm.apis.length == 0 && vm.search">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No services found, try with a new search
 </div>
