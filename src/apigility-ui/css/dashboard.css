@@ -284,3 +284,9 @@ form#doctrine-params > .form-group {
     min-height: 0;
     border: none;
 }
+
+#dashboard img.hero {
+    margin-top: 2em;
+    max-width: 100%;
+    max-height: 100%;
+}

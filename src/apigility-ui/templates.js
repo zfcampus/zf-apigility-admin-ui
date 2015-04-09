@@ -264,16 +264,23 @@ angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache
     "  <div class=\"row\">\n" +
     "    <div class=\"col-sm-8\">\n" +
     "      <h1>Welcome to Apigility!</h1>\n" +
-    "      <br /><br />\n" +
+    "\n" +
     "      <p class=\"lead\">\n" +
-    "        <strong>Apigility</strong> is an API Builder, designed to simplify creating and maintaining useful, easy to consume, and well-structured APIs.<br />\n" +
+    "        <strong>Apigility</strong> is an API Builder, designed to simplify\n" +
+    "        creating and maintaining useful, easy to consume, and well-structured\n" +
+    "        APIs.<br />\n" +
     "      </p>\n" +
+    "\n" +
     "      <p class=\"lead\">\n" +
-    "        If this is the first time using <strong>Apigility</strong> we suggest to read this <a href=\"https://apigility.org/documentation/intro/getting-started\" target=\"_blank\">introduction</a> or watch this getting started <a href=\"https://apigility.org/video\" target=\"_blank\">video</a>.\n" +
+    "        If this is the first time using <strong>Apigility</strong> we suggest\n" +
+    "        you read the <a href=\"https://apigility.org/documentation/intro/getting-started\"\n" +
+    "          target=\"_blank\">introduction</a> or watch the <a\n" +
+    "          href=\"https://apigility.org/video\" target=\"_blank\">getting started video</a>.\n" +
     "      </p>\n" +
     "    </div>\n" +
+    "\n" +
     "    <div class=\"col-sm-4\">\n" +
-    "      <img src=\"apigility-ui/img/ag-hero.png\" class=\"pull-right\">\n" +
+    "      <img class=\"hero\" src=\"apigility-ui/img/ag-hero.png\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
