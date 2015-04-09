@@ -12,10 +12,24 @@
     /* jshint validthis:true */
     var vm = this;
 
+    vm.apigilityVersion = '1.1dev';
     vm.apis = SidebarService.getApis();
     vm.getSelected = SidebarService.getSelected;
     vm.setSelected = SidebarService.setSelected;
     vm.changeVersion = SidebarService.setSelectedVersion;
+
+    vm.aboutModal = function() {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/about.html',
+        controller: 'About',
+        controllerAs: 'vm',
+        resolve : {
+          version : function() {
+            return vm.apigilityVersion;
+          }
+        }
+      });
+    };
 
     // Make an API call if the list of APIs is empty
     if (vm.apis.length == 0) {

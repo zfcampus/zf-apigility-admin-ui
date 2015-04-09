@@ -6,26 +6,11 @@
     .module('apigility')
     .controller('Header', Header);
 
-  Header.$inject = [ 'SidebarService', '$modal' ];
+  Header.$inject = [ 'SidebarService' ];
 
-  function Header(SidebarService, $modal){
+  function Header(SidebarService){
     /* jshint validthis:true */
     var vm = this;
     vm.setSelected = SidebarService.setSelected;
-
-    vm.apigilityVersion = '1.1dev';
-
-    vm.aboutModal = function() {
-      var modalInstance = $modal.open({
-        templateUrl: 'apigility-ui/modal/about.html',
-        controller: 'About',
-        controllerAs: 'vm',
-        resolve : {
-          version : function() {
-            return vm.apigilityVersion;
-          }
-        }
-      });
-    };
   }
 })();

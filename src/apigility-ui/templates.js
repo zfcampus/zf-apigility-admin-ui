@@ -496,7 +496,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
-    "      <a ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a><span id=\"version\"><a ng-click=\"vm.aboutModal()\">v {{vm.apigilityVersion}}</a></span>\n" +
+    "      <a ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"navbar-collapse collapse\">\n" +
@@ -2110,6 +2110,9 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
 
 angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/sidebar/sidebar.html",
+    "<div class=\"row\" id=\"version\">\n" +
+    "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
+    "</div>\n" +
     "<div class=\"row\">\n" +
     "  <form class=\"navbar-form\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
     "    <div class=\"form-group has-feedback\">\n" +
