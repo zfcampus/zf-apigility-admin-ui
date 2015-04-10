@@ -1259,9 +1259,6 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "          <select class=\"form-control\" id=\"db_adapter_name\" ng-model=\"vm.adapter\" ng-options=\"db.adapter_name for db in vm.db.db_adapter\" ng-change=\"vm.discoverDb()\">\n" +
     "            <option value=\"\" disabled>- Choose an adapter -</option>\n" +
     "          </select>\n" +
-    "          <!--<br />\n" +
-    "          <label for=\"rtable_name\" class=\"control-label\">Table name</label>\n" +
-    "          <input type=\"text\" class=\"form-control\" ng-model=\"vm.table_name\" ng-disabled=\"vm.loading\" placeholder=\"Insert the table name\">-->\n" +
     "        </div>\n" +
     "        <div ui-tree class=\"angular-ui-tree\" id=\"db-tables-tree\" data-max-depth=\"2\" ng-if=\"(vm.tables && vm.tables.length > 0) || vm.discovering\">\n" +
     "          <label class=\"control-label\">Tables<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
@@ -1304,29 +1301,43 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "            </li>\n" +
     "          </ol>\n" +
     "        </div>\n" +
+    "        <div ng-if=\"vm.tables && vm.tables.length == 0 && !vm.discovering && !vm.loading\">\n" +
+    "          <h3>No tables found</h3>\n" +
+    "          <p>Autodiscovery could not find any existing tables, or those tables have already been exposed through DB-connected services.</p>\n" +
+    "        </div>\n" +
     "      </tab>\n" +
-    "      <tab heading=\"Doctrine Connected\" ng-if=\"vm.doctrine\" active=\"vm.tabs.doctrine\">\n" +
-    "        <div class=\"form-group\">\n" +
+    "      <tab heading=\"Doctrine Connected\" ng-if=\"vm.hasDoctrine\" active=\"vm.tabs.doctrine\">\n" +
+    "        <div ng-if=\"vm.doctrine.doctrine_adapter.length === 0\">\n" +
+    "          <h3>Doctrine configuration broken</h3>\n" +
+    "          <p>You have not yet configured any Doctrine connection, and thus cannot create a Doctrine-Connected service.<br><br>Please refer to the <a href=\"#\">documentation page</a> and define validation configuration for your Doctrine connection.\n" +
+    "        </div>\n" +
+    "        <div class=\"form-group\" ng-if=\"vm.doctrine.doctrine_adapter.length > 0\">\n" +
     "          <label for=\"doctrine_entity_manager\" class=\"control-label\">Entity Manager</label>\n" +
-    "          <select class=\"form-control\" id=\"doctrine_entity_manager\" ng-model=\"vm.doctrineAdapter\" ng-options=\"doctrine.adapter_name for doctrine in vm.doctrine\" ng-change=\"vm.discoverDoctrine()\" ng-disabled=\"vm.discovering\">\n" +
+    "          <select class=\"form-control\" id=\"doctrine_entity_manager\" ng-model=\"vm.doctrineAdapter\" ng-options=\"doctrine.adapter_name for doctrine in vm.doctrine.doctrine_adapter\" ng-change=\"vm.discoverDoctrine()\" ng-disabled=\"vm.discovering\">\n" +
     "            <option value=\"\" disabled>- Choose an adapter -</option>\n" +
     "          </select>\n" +
     "        </div>\n" +
-    "        <div ui-tree class=\"angular-ui-tree\" id=\"db-entities-tree\" data-max-depth=\"2\" ng-if=\"(vm.entities && vm.entities.length > 0 ) || vm.discovering\">\n" +
-    "          <label class=\"control-label\">Entities<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
-    "          <ol ui-tree-nodes=\"options\" ng-model=\"vm.entities\" class=\"angular-ui-tree-nodes\">\n" +
-    "            <li class=\"angular-ui-tree-node\" ng-repeat=\"entity in vm.entities\" ui-tree-node>\n" +
-    "              <div class=\"tree-node\">\n" +
-    "                <div class=\"pull-left tree-handle angular-ui-tree-handle\" ui-tree-handle>\n" +
-    "                  <span class=\"glyphicon glyphicon-list\"></span>\n" +
+    "        <div ng-if=\"vm.doctrine.doctrine_adapter.length > 0\">\n" +
+    "          <div ui-tree class=\"angular-ui-tree\" id=\"db-entities-tree\" data-max-depth=\"2\" ng-if=\"(vm.entities && vm.entities.length > 0 ) || vm.discovering\">\n" +
+    "            <label class=\"control-label\">Entities<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
+    "            <ol ui-tree-nodes=\"options\" ng-model=\"vm.entities\" class=\"angular-ui-tree-nodes\">\n" +
+    "              <li class=\"angular-ui-tree-node\" ng-repeat=\"entity in vm.entities\" ui-tree-node>\n" +
+    "                <div class=\"tree-node\">\n" +
+    "                  <div class=\"pull-left tree-handle angular-ui-tree-handle\" ui-tree-handle>\n" +
+    "                    <span class=\"glyphicon glyphicon-list\"></span>\n" +
+    "                  </div>\n" +
+    "                  <div class=\"tree-node-content\">\n" +
+    "                    <span>{{entity.entity_class}}</span>\n" +
+    "                    <input type=\"checkbox\" class=\"pull-right\" checklist-model=\"vm.doctrineEntities\" checklist-value=\"entity\">\n" +
+    "                  </div>\n" +
     "                </div>\n" +
-    "                <div class=\"tree-node-content\">\n" +
-    "                  <span>{{entity.entity_class}}</span>\n" +
-    "                  <input type=\"checkbox\" class=\"pull-right\" checklist-model=\"vm.doctrineEntities\" checklist-value=\"entity\">\n" +
-    "                </div>\n" +
-    "              </div>\n" +
-    "            </li>\n" +
-    "          </ol>\n" +
+    "              </li>\n" +
+    "            </ol>\n" +
+    "          </div>\n" +
+    "          <div ng-if=\"vm.entities && vm.entities.length == 0 && !vm.discovering\">\n" +
+    "            <h3>No entities found</h3>\n" +
+    "            <p>Autodiscovery could not find any existing entities, or those entities have already been exposed through Doctrine-connected services.</p>\n" +
+    "          </div>\n" +
     "        </div>\n" +
     "      </tab>\n" +
     "    </tabset>\n" +
