@@ -2123,8 +2123,8 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
     "\n" +
-    "<form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
-    "  <div class=\"row\">\n" +
+    "<div class=\"row\">\n" +
+    "  <form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
     "    <div class=\"input-group has-feedback\">\n" +
     "      <input\n" +
     "        class=\"form-control\"\n" +
@@ -2140,14 +2140,14 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "        <button type=\"submit\" class=\"pull-right btn btn-success\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +
     "      </span>\n" +
     "    </div>\n" +
-    "  </div>\n" +
-    "</form>\n" +
+    "  </form>\n" +
+    "</div>\n" +
     "\n" +
     "<br />\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "  <div class=\"col-sm-12 text-right\">\n" +
-    "    <span class=\"pull-left\" ng-hide=\"vm.loading\"><strong>API LIST</strong></span>\n" +
+    "    <span class=\"pull-left sidebar-list\" ng-hide=\"vm.loading\"><strong>API LIST</strong></span>\n" +
     "    <span class=\"pull-left\" ng-show=\"vm.loading\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
     "    <button type=\"button\" id=\"new_api\" class=\"btn btn-primary btn-sm\" ng-click=\"vm.newApiModal()\" ng-disabled=\"vm.loading\">New API</button>\n" +
     "    <button type=\"button\" id=\"new_service\" class=\"btn btn-info btn-sm\" ng-click=\"vm.newServiceModal()\" ng-disabled=\"vm.loading || vm.apis.length == 0\">New Service</button>\n" +

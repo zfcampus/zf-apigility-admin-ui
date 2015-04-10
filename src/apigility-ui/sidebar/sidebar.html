@@ -2,8 +2,8 @@
   <a ng-click="vm.aboutModal()">v{{vm.apigilityVersion}}</a>
 </div>
 
-<form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
-  <div class="row">
+<div class="row">
+  <form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
     <div class="input-group has-feedback">
       <input
         class="form-control"
@@ -19,14 +19,14 @@
         <button type="submit" class="pull-right btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>
       </span>
     </div>
-  </div>
-</form>
+  </form>
+</div>
 
 <br />
 
 <div class="row">
   <div class="col-sm-12 text-right">
-    <span class="pull-left" ng-hide="vm.loading"><strong>API LIST</strong></span>
+    <span class="pull-left sidebar-list" ng-hide="vm.loading"><strong>API LIST</strong></span>
     <span class="pull-left" ng-show="vm.loading"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
     <button type="button" id="new_api" class="btn btn-primary btn-sm" ng-click="vm.newApiModal()" ng-disabled="vm.loading">New API</button>
     <button type="button" id="new_service" class="btn btn-info btn-sm" ng-click="vm.newServiceModal()" ng-disabled="vm.loading || vm.apis.length == 0">New Service</button>
