@@ -12,5 +12,6 @@
     /* jshint validthis:true */
     var vm = this;
     vm.setSelected = SidebarService.setSelected;
+    vm.isCollapsed = true;
   }
 })();

@@ -497,7 +497,8 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "  <div class=\"container-fluid\">\n" +
     "    <div class=\"navbar-header col-sm-4 col-md-3\">\n" +
-    "      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
+    "      <button type=\"button\" class=\"navbar-toggle\"\n" +
+    "        ng-click=\"vm.isCollapsed = !vm.isCollapsed\">\n" +
     "        <span class=\"sr-only\">Toggle navigation</span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
@@ -507,7 +508,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "      <a class=\"logo\" ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"navbar-collapse collapse\">\n" +
+    "    <div class=\"navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
     "      <ul class=\"nav nav-pills\">\n" +
     "        <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
     "        <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
