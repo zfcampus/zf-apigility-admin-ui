@@ -1,8 +1,8 @@
 <div class="panel panel-default service" name="{{vm.restName}}" data-api="{{vm.apiName}}" data-api-version="{{vm.version}}" data-service-type="REST">
   <div class="panel-heading">
     <h3 class="panel-title">
+      <span class="service-button pull-right"><button class="btn btn-danger" ng-click="vm.deleteRestModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete service</button></span>
       <span class="glyphicon glyphicon-leaf"></span> REST service: {{vm.restName}} (v{{vm.version}})
-      <div class="service-button pull-right"><button class="btn btn-danger" ng-click="vm.deleteRestModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete service</button></div>
     </h3>
   </div>
   <div class="panel-body">

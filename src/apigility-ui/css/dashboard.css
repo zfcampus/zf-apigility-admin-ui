@@ -2,11 +2,19 @@
  * Base structure
  */
 
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.bottom, .row-offcanvas {
+  height: 100%;
+}
+
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 70px;
 }
-
 
 /*
  * Global add-ons
@@ -32,35 +40,208 @@ body {
   color: white;
 }
 
+.navbar-brand {
+  float: none;
+}
+
+.sidebar-toggle {
+  display: block;
+  position: fixed;
+  top: 8px;
+  left: 15px;
+  margin-top: 8px;
+  margin-left: 15px;
+  margin-bottom: 8px;
+  padding: 9px 10px;
+}
+
 #logo {
+  display: block;
   margin:10px;
 }
+
+@media (max-width: 768px) {
+  #logo {
+    margin-left: 75px;
+  }
+}
+
+/* See https://coderwall.com/p/wpjw4w/change-the-bootstrap-navbar-breakpoint 
+ * and http://www.bootply.com/120604
+ */
+@media (max-width: 1024px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-header a.logo {
+        display: block;
+        float: left;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+        position: fixed;
+        top: 8px;
+        right: 15px;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
 
 /*
  * Sidebar
  */
 
-/* Hide for mobile, show later */
 .sidebar {
-  display: none;
-  margin-top:18px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-right: 1px solid #428bca;
+  -webkit-box-shadow: 5px 0 3px -2px #888;
+  box-shadow: 5px 0 3px -2px #888;
 }
-@media (min-width: 768px) {
-  .sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #428bca;
-    -webkit-box-shadow: 5px 0 3px -2px #888;
-    box-shadow: 5px 0 3px -2px #888;
+
+.sidebar-list {
+  font-size: 1.5em;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ * Greater thav 768px shows the menu by default and also flips the semantics
+ * The issue is to show menu for large screens and to hide for small
+ * Also need to do something clever to turn off the tabs for when the navigation is hidden
+ * Otherwise keyboard users cannot find the focus point
+ * (For now I will ignore that for mobile users and also not worry about
+ * screen re-sizing popping the menu out.)
+ */
+@media screen and (min-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
   }
+
+  .row-offcanvas-right {
+    right: 25%;
+  }
+
+  .row-offcanvas-left {
+    left: 25%;
+  }
+
+  .row-offcanvas-right .sidebar-offcanvas {
+    right: -25%; /* 3 columns */
+    background-color: rgb(255, 255, 255);
+  }
+
+  .row-offcanvas-left .sidebar-offcanvas {
+    left: -25%; /* 3 columns */
+    background-color: rgb(255, 255, 255);
+  }
+
+  .row-offcanvas-right.active {
+    right: 0; /* 3 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 0; /* 3 columns */
+  }
+
+  .row-offcanvas-right.active .sidebar-offcanvas {
+    background-color: rgb(254, 254, 254);
+  }
+  .row-offcanvas-left.active .sidebar-offcanvas {
+    background-color: rgb(254, 254, 254);
+  }
+
+.row-offcanvas .content {
+    width: 75%; /* 9 columns */
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+
+  }
+
+  .row-offcanvas.active .content {
+    width: 100%; /* 12 columns */
+  }
+       
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 25%; /* 3 columns */
+  }
+}
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+.sidebar .search {
+  margin-bottom: 1em;
+}
+
+.sidebar .search .glyphicon-remove {
+  top: 0;
+}
+
+.sidebar .api-tree {
+  margin-top: 1em;
 }
 
 /* Sidebar navigation */
@@ -95,17 +276,13 @@ body {
 
 .main {
   padding: 20px;
+  overflow: auto;
+  height: 100%;
 }
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
+
 .main .page-header {
   margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
@@ -157,6 +334,9 @@ h3.panel-title {
   font-size: 2.0em;
 }
 
+.panel.service ul {
+  margin-bottom: 0;
+}
 
 /**
  * Tree view customization
@@ -197,10 +377,13 @@ h3.panel-title {
 }
 
 #version {
-  color: #eeeeee;
-  margin-left: 15px;
+  margin-top: 0.5em;
+  text-align: center;
 }
 
+#version a {
+  color: #111111;
+}
 
 .icon-database {
     background-image: url("/apigility-ui/img/icon-database.png");
@@ -280,4 +463,10 @@ form#doctrine-params > .form-group {
 .angular-ui-tree-empty {
     min-height: 0;
     border: none;
+}
+
+#dashboard img.hero {
+    margin-top: 2em;
+    max-width: 100%;
+    max-height: 100%;
 }

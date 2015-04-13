@@ -39,23 +39,21 @@
   <body data-ag-api-path="%API_BASE%">
     <ui-view name="header"></ui-view>
 
-    <div class="container-fluid">
-      <div class="row">
-
-        <div class="col-sm-4 col-md-3 sidebar">
-          <ui-view name="sidebar"></ui-view>
-        </div>
-
-        <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
-          <div style="margin-top: 20px" ui-view name="content"></div>
-          <footer>
-              <hr>
-              <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd</div>
-              <div class="pull-right" align="right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
-          </footer>
-        </div>
+    <div class="container-fluid bottom"><div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-6 col-sm-5 sidebar sidebar-offcanvas" role="navigation">
+        <ui-view name="sidebar"></ui-view>
       </div>
-    </div>
+
+      <div class="col-xs-12 col-sm-7 main">
+        <div style="margin-top: 20px" ui-view name="content"></div>
+
+        <footer>
+          <hr>
+          <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd</div>
+          <div class="pull-right" align="right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
+        </footer>
+      </div>
+    </div></div>
 
     <!-- build:js apigility-ui/vendor.js -->
     <script src="vendor/jquery/dist/jquery.min.js"></script>
@@ -154,5 +152,20 @@
 
     <script src="apigility-ui/templates.js"></script>
     <!-- endbuild -->
+
+    <script>
+      $(document).ready(function () {
+        $('[data-toggle=offcanvas]').click(function () {
+          if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
+            $('.list-group-item').attr('tabindex', '-1');
+          } else {
+            $('.list-group-item').attr('tabindex', '');
+          }
+          $('.row-offcanvas').toggleClass('active');
+          $('.sidebar-toggle span.glyphicon')
+            .toggleClass('glyphicon-chevron-left glyphicon-chevron-right');
+        });
+      });
+    </script>
   </body>
 </html>

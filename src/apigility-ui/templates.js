@@ -264,16 +264,23 @@ angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache
     "  <div class=\"row\">\n" +
     "    <div class=\"col-sm-8\">\n" +
     "      <h1>Welcome to Apigility!</h1>\n" +
-    "      <br /><br />\n" +
+    "\n" +
     "      <p class=\"lead\">\n" +
-    "        <strong>Apigility</strong> is an API Builder, designed to simplify creating and maintaining useful, easy to consume, and well-structured APIs.<br />\n" +
+    "        <strong>Apigility</strong> is an API Builder, designed to simplify\n" +
+    "        creating and maintaining useful, easy to consume, and well-structured\n" +
+    "        APIs.<br />\n" +
     "      </p>\n" +
+    "\n" +
     "      <p class=\"lead\">\n" +
-    "        If this is the first time using <strong>Apigility</strong> we suggest to read this <a href=\"https://apigility.org/documentation/intro/getting-started\" target=\"_blank\">introduction</a> or watch this getting started <a href=\"https://apigility.org/video\" target=\"_blank\">video</a>.\n" +
+    "        If this is the first time using <strong>Apigility</strong> we suggest\n" +
+    "        you read the <a href=\"https://apigility.org/documentation/intro/getting-started\"\n" +
+    "          target=\"_blank\">introduction</a> or watch the <a\n" +
+    "          href=\"https://apigility.org/video\" target=\"_blank\">getting started video</a>.\n" +
     "      </p>\n" +
     "    </div>\n" +
+    "\n" +
     "    <div class=\"col-sm-4\">\n" +
-    "      <img src=\"apigility-ui/img/ag-hero.png\" class=\"pull-right\">\n" +
+    "      <img class=\"hero\" src=\"apigility-ui/img/ag-hero.png\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
@@ -490,22 +497,32 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "  <div class=\"container-fluid\">\n" +
     "    <div class=\"navbar-header col-sm-4 col-md-3\">\n" +
-    "      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n" +
+    "      <button type=\"button\" class=\"navbar-toggle\"\n" +
+    "        ng-click=\"vm.isCollapsed = !vm.isCollapsed\">\n" +
     "        <span class=\"sr-only\">Toggle navigation</span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
-    "      <a ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a><span id=\"version\"><a ng-click=\"vm.aboutModal()\">v {{vm.apigilityVersion}}</a></span>\n" +
+    "\n" +
+    "      <button type=\"button\" class=\"btn btn-info hidden-md hidden-lg sidebar-toggle\"\n" +
+    "        data-toggle=\"offcanvas\">\n" +
+    "        <span class=\"sr-only\">Toggle sidebar</span>\n" +
+    "        <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
+    "      </button>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"navbar-collapse collapse\">\n" +
-    "      <ul class=\"nav nav-pills nav-justified\">\n" +
-    "        <li ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content negotiation</a></li>\n" +
-    "        <li ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
-    "        <li ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
-    "        <li ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
-    "        <li ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
+    "    <a class=\"logo\" ui-sref=\"ag\"\n" +
+    "      ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
+    "      src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
+    "\n" +
+    "    <div class=\"navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
+    "      <ul class=\"nav nav-pills\">\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
     "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -1516,8 +1533,8 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "<div class=\"panel panel-default service\" name=\"{{vm.restName}}\" data-api=\"{{vm.apiName}}\" data-api-version=\"{{vm.version}}\" data-service-type=\"REST\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
+    "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
     "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.restName}} (v{{vm.version}})\n" +
-    "      <div class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></div>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -1917,8 +1934,8 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "<div class=\"panel panel-default service\" name=\"{{vm.rpcName}}\" data-api=\"{{vm.apiName}}\" data-api-version=\"{{vm.version}}\" data-service-type=\"RPC\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
+    "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
     "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.rpcName}} (v{{vm.version}})\n" +
-    "      <div class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></div>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2110,32 +2127,41 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
 
 angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/sidebar/sidebar.html",
-    "<div class=\"row\">\n" +
-    "  <form class=\"navbar-form\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
-    "    <div class=\"form-group has-feedback\">\n" +
-    "      <input\n" +
-    "      class=\"form-control\"\n" +
-    "      type=\"search\"\n" +
-    "      placeholder=\"Search for a service\"\n" +
-    "      ng-model=\"vm.search\"\n" +
-    "      ng-disabled=\"vm.loading\"\n" +
-    "      typeahead=\"service for service in vm.services | filter:$viewValue | limitTo:8\">\n" +
-    "      <span class=\"glyphicon glyphicon-remove form-control-feedback\" ng-hide=\"!vm.search\" ng-click=\"vm.searchApi('')\"></span>\n" +
-    "    </div>\n" +
-    "    <button type=\"submit\" class=\"btn btn-success btn-sm\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +
-    "  </form>\n" +
+    "<div class=\"row\" id=\"version\">\n" +
+    "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
-    "<br />\n" +
+    "\n" +
+    "<div class=\"row search\"><div class=\"col-sm-12\">\n" +
+    "  <form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
+    "    <div class=\"input-group\">\n" +
+    "      <input\n" +
+    "        class=\"form-control\"\n" +
+    "        type=\"search\"\n" +
+    "        placeholder=\"Search for a service\"\n" +
+    "        ng-model=\"vm.search\"\n" +
+    "        ng-disabled=\"vm.loading\"\n" +
+    "        typeahead=\"service for service in vm.services | filter:$viewValue | limitTo:8\">\n" +
+    "\n" +
+    "      <span class=\"glyphicon glyphicon-remove input-group-addon\"\n" +
+    "        ng-hide=\"!vm.search\" ng-click=\"vm.searchApi('')\"></span>\n" +
+    "\n" +
+    "      <span class=\"input-group-btn\">\n" +
+    "        <button type=\"submit\" class=\"pull-right btn btn-success\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +
+    "      </span>\n" +
+    "    </div>\n" +
+    "  </form>\n" +
+    "</div></div>\n" +
+    "\n" +
     "<div class=\"row\">\n" +
     "  <div class=\"col-sm-12 text-right\">\n" +
-    "    <span class=\"pull-left\" ng-hide=\"vm.loading\"><strong>API LIST</strong></span>\n" +
+    "    <span class=\"pull-left sidebar-list\" ng-hide=\"vm.loading\"><strong>API LIST</strong></span>\n" +
     "    <span class=\"pull-left\" ng-show=\"vm.loading\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
     "    <button type=\"button\" id=\"new_api\" class=\"btn btn-primary btn-sm\" ng-click=\"vm.newApiModal()\" ng-disabled=\"vm.loading\">New API</button>\n" +
     "    <button type=\"button\" id=\"new_service\" class=\"btn btn-info btn-sm\" ng-click=\"vm.newServiceModal()\" ng-disabled=\"vm.loading || vm.apis.length == 0\">New Service</button>\n" +
     "  </div>\n" +
     "</div>\n" +
-    "<br />\n" +
-    "<div ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
+    "\n" +
+    "<div class=\"api-tree\" ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
     "  <ol ui-tree-nodes=\"options\" ng-model=\"vm.apis\" class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\">\n" +
     "    <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"item in vm.apis\" ui-tree-node=\"\">\n" +
     "      <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name === vm.getSelected() }\">\n" +
@@ -2160,9 +2186,11 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "    </li>\n" +
     "  </ol>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"alert alert-info\" role=\"alert\" ng-show=\"vm.apis.length == 0 && !vm.search && !vm.loading\">\n" +
     "  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> No APIs configured, <a ng-click=\"vm.newApiModal()\">would you like to create one?</a>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"alert alert-danger\" role=\"alert\" ng-show=\"vm.apis.length == 0 && vm.search\">\n" +
     "  <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> No services found, try with a new search\n" +
     "</div>\n" +
