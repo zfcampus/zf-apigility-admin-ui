@@ -504,9 +504,17 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        <span class=\"icon-bar\"></span>\n" +
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
-    "      \n" +
-    "      <a class=\"logo\" ui-sref=\"ag\" ng-click=\"vm.setSelected('')\"><img id=\"logo\" src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
+    "\n" +
+    "      <button type=\"button\" class=\"btn btn-info hidden-md hidden-lg sidebar-toggle\"\n" +
+    "        data-toggle=\"offcanvas\">\n" +
+    "        <span class=\"sr-only\">Toggle sidebar</span>\n" +
+    "        <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
+    "      </button>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <a class=\"logo\" ui-sref=\"ag\"\n" +
+    "      ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
+    "      src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "\n" +
     "    <div class=\"navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
     "      <ul class=\"nav nav-pills\">\n" +

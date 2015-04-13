@@ -8,9 +8,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
-      <a class="logo" ui-sref="ag" ng-click="vm.setSelected('')"><img id="logo" src="apigility-ui/img/logo.png" alt="Apigility"></a>
+
+      <button type="button" class="btn btn-info hidden-md hidden-lg sidebar-toggle"
+        data-toggle="offcanvas">
+        <span class="sr-only">Toggle sidebar</span>
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </button>
     </div>
+
+    <a class="logo" ui-sref="ag"
+      ng-click="vm.setSelected('')"><img id="logo"
+      src="apigility-ui/img/logo.png" alt="Apigility"></a>
 
     <div class="navbar-collapse bs-js-navbar-collapse" collapse="vm.isCollapsed">
       <ul class="nav nav-pills">

@@ -45,12 +45,6 @@
       </div>
 
       <div class="col-xs-12 col-sm-7 main">
-        <p class="hidden-md hidden-lg pull-left sidebar-toggle">
-          <button class="btn btn-info btn-xs" type="button"
-            data-toggle="offcanvas"><span
-              class="glyphicon glyphicon-chevron-left"></span></button>
-        </p>
-
         <div style="margin-top: 20px" ui-view name="content"></div>
 
         <footer>
@@ -168,6 +162,8 @@
             $('.list-group-item').attr('tabindex', '');
           }
           $('.row-offcanvas').toggleClass('active');
+          $('.sidebar-toggle span.glyphicon')
+            .toggleClass('glyphicon-chevron-left glyphicon-chevron-right');
         });
       });
     </script>
