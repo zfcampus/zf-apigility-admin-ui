@@ -2,9 +2,9 @@
   <a ng-click="vm.aboutModal()">v{{vm.apigilityVersion}}</a>
 </div>
 
-<div class="row">
+<div class="row search">
   <form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
-    <div class="input-group has-feedback">
+    <div class="input-group">
       <input
         class="form-control"
         type="search"
@@ -13,7 +13,8 @@
         ng-disabled="vm.loading"
         typeahead="service for service in vm.services | filter:$viewValue | limitTo:8">
 
-      <span class="glyphicon glyphicon-remove form-control-feedback" ng-hide="!vm.search" ng-click="vm.searchApi('')"></span>
+      <span class="glyphicon glyphicon-remove input-group-addon"
+        ng-hide="!vm.search" ng-click="vm.searchApi('')"></span>
 
       <span class="input-group-btn">
         <button type="submit" class="pull-right btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>

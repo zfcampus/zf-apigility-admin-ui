@@ -2123,9 +2123,9 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"row\">\n" +
+    "<div class=\"row search\">\n" +
     "  <form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
-    "    <div class=\"input-group has-feedback\">\n" +
+    "    <div class=\"input-group\">\n" +
     "      <input\n" +
     "        class=\"form-control\"\n" +
     "        type=\"search\"\n" +
@@ -2134,7 +2134,8 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "        ng-disabled=\"vm.loading\"\n" +
     "        typeahead=\"service for service in vm.services | filter:$viewValue | limitTo:8\">\n" +
     "\n" +
-    "      <span class=\"glyphicon glyphicon-remove form-control-feedback\" ng-hide=\"!vm.search\" ng-click=\"vm.searchApi('')\"></span>\n" +
+    "      <span class=\"glyphicon glyphicon-remove input-group-addon\"\n" +
+    "        ng-hide=\"!vm.search\" ng-click=\"vm.searchApi('')\"></span>\n" +
     "\n" +
     "      <span class=\"input-group-btn\">\n" +
     "        <button type=\"submit\" class=\"pull-right btn btn-success\"><span class=\"glyphicon glyphicon-search\"></span> Search</button>\n" +

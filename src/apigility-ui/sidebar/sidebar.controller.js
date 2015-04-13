@@ -17,6 +17,7 @@
     vm.getSelected = SidebarService.getSelected;
     vm.setSelected = SidebarService.setSelected;
     vm.changeVersion = SidebarService.setSelectedVersion;
+    vm.search = '';
 
     vm.aboutModal = function() {
       var modalInstance = $modal.open({
@@ -32,7 +33,7 @@
     };
 
     // Make an API call if the list of APIs is empty
-    if (vm.apis.length == 0) {
+    if (vm.apis.length === 0) {
       vm.loading = true;
       api.getApiList(function(err, result){
         vm.loading = false;
