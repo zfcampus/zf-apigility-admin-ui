@@ -316,6 +316,9 @@ h3.panel-title {
   font-size: 2.0em;
 }
 
+.panel.service ul {
+  margin-bottom: 0;
+}
 
 /**
  * Tree view customization
