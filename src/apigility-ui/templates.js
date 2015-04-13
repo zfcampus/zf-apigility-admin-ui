@@ -2123,7 +2123,7 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"row search\">\n" +
+    "<div class=\"row search\"><div class=\"col-sm-12\">\n" +
     "  <form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
     "    <div class=\"input-group\">\n" +
     "      <input\n" +
@@ -2142,9 +2142,7 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "      </span>\n" +
     "    </div>\n" +
     "  </form>\n" +
-    "</div>\n" +
-    "\n" +
-    "<br />\n" +
+    "</div></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "  <div class=\"col-sm-12 text-right\">\n" +
@@ -2155,9 +2153,7 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "  </div>\n" +
     "</div>\n" +
     "\n" +
-    "<br />\n" +
-    "\n" +
-    "<div ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
+    "<div class=\"api-tree\" ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
     "  <ol ui-tree-nodes=\"options\" ng-model=\"vm.apis\" class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\">\n" +
     "    <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"item in vm.apis\" ui-tree-node=\"\">\n" +
     "      <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name === vm.getSelected() }\">\n" +

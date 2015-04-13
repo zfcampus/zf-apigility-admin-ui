@@ -210,8 +210,16 @@ body {
   }
 }
 
+.sidebar .search {
+  margin-bottom: 1em;
+}
+
 .sidebar .search .glyphicon-remove {
   top: 0;
+}
+
+.sidebar .api-tree {
+  margin-top: 1em;
 }
 
 /* Sidebar navigation */

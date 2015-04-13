@@ -2,7 +2,7 @@
   <a ng-click="vm.aboutModal()">v{{vm.apigilityVersion}}</a>
 </div>
 
-<div class="row search">
+<div class="row search"><div class="col-sm-12">
   <form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
     <div class="input-group">
       <input
@@ -21,9 +21,7 @@
       </span>
     </div>
   </form>
-</div>
-
-<br />
+</div></div>
 
 <div class="row">
   <div class="col-sm-12 text-right">
@@ -34,9 +32,7 @@
   </div>
 </div>
 
-<br />
-
-<div ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
+<div class="api-tree" ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
   <ol ui-tree-nodes="options" ng-model="vm.apis" class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes">
     <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis" ui-tree-node="">
       <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name === vm.getSelected() }">
