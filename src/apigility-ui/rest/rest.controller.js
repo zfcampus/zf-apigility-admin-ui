@@ -33,6 +33,7 @@
       });
 
       api.getDoctrineAdapters(function(err, response) {
+
         vm.doctrine = response.doctrine_adapter;
       });
 

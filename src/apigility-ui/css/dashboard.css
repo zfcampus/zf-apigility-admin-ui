@@ -57,16 +57,18 @@ body {
 
 #logo {
   display: block;
-  margin:10px;
+  margin:0px;
+  height: 50px;
 }
 
 @media (max-width: 768px) {
   #logo {
-    margin-left: 75px;
+    margin-left: 55px;
+    height: 30px;
   }
 }
 
-/* See https://coderwall.com/p/wpjw4w/change-the-bootstrap-navbar-breakpoint 
+/* See https://coderwall.com/p/wpjw4w/change-the-bootstrap-navbar-breakpoint
  * and http://www.bootply.com/120604
  */
 @media (max-width: 1024px) {
@@ -99,6 +101,10 @@ body {
     }
     .collapse.in{
         display:block !important;
+    }
+    #logo {
+      margin-left: 55px;
+      height: 30px;
     }
 }
 
@@ -184,7 +190,7 @@ body {
   .row-offcanvas.active .content {
     width: 100%; /* 12 columns */
   }
-       
+
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
