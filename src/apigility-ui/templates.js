@@ -260,9 +260,13 @@ angular.module("apigility-ui/content-negotiation/content-negotiation.html", []).
 
 angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/dashboard/dashboard.html",
-    "<div id=\"dashboard\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div class=\"col-sm-8\">\n" +
+    "<div class=\"row\" id=\"dashboard\">\n" +
+    "  <div class=\"col-xs-12\">\n" +
+    "    <div class=\"hero pull-right\">\n" +
+    "      <img src=\"apigility-ui/img/ag-hero.png\">\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div>\n" +
     "      <h1>Welcome to Apigility!</h1>\n" +
     "\n" +
     "      <p class=\"lead\">\n" +
@@ -277,11 +281,7 @@ angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache
     "          target=\"_blank\">introduction</a> or watch the <a\n" +
     "          href=\"https://apigility.org/video\" target=\"_blank\">getting started video</a>.\n" +
     "      </p>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"col-sm-4\">\n" +
-    "      <img class=\"hero\" src=\"apigility-ui/img/ag-hero.png\">\n" +
-    "    </div>\n" +
+    "  </div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
@@ -510,7 +510,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "\n" +
     "      <button type=\"button\" class=\"btn btn-info hidden-md hidden-lg sidebar-toggle\"\n" +
-    "        data-toggle=\"offcanvas\">\n" +
+    "        data-toggle=\"sidebar\">\n" +
     "        <span class=\"sr-only\">Toggle sidebar</span>\n" +
     "        <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
     "      </button>\n" +
