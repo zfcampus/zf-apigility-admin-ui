@@ -84,6 +84,7 @@
     }
 
     promise.then(function success (res) {
+
       var data = res.data;
 
       if (key && data.hasOwnProperty(key)) {

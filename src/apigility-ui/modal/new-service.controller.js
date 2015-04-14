@@ -16,6 +16,7 @@
     vm.apis = SidebarService.getApis();
     vm.tabs = {};
     vm.apiname = vm.apis[0];
+    vm.hasDoctrine = false;
 
     // We use the selected API, if any
     for (var i = 0; i < vm.apis.length; i++) {
@@ -34,10 +35,11 @@
     });
 
     api.getDoctrineAdapters(function(err, response) {
-      if (err) {
+      if (err && response == 204) {
         return;
       }
-      vm.doctrine = response.doctrine_adapter;
+      vm.hasDoctrine = true;
+      vm.doctrine = response;
     });
 
     vm.discoverDb = function() {

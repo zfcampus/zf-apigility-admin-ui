@@ -6,9 +6,12 @@
     .module('apigility.service')
     .service('api', Api);
 
-  Api.$inject = [ 'xhr', 'agApiPath' ];
+  Api.$inject = [ 'xhr', 'agApiPath', '$http', '$q' ];
 
-  function Api(xhr, agApiPath) {
+  function Api(xhr, agApiPath, $http, $q) {
+
+    this.http = $http;
+    this.q    = $q;
 
     var httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
@@ -693,17 +696,39 @@
       });
     };
 
-    this.getDoctrineAdapters = function(callback) {
-      xhr.get(agApiPath + '/doctrine-adapter', '_embedded')
-       .then(function (response) {
-         response.doctrine_adapter.forEach(function(entry){
-           delete entry._links;
-         });
-         return callback(true, response);
-       })
-       .catch(function (err) {
-         return callback(true, null);
-      });
+    this.getDoctrineAdapters = function (callback) {
+      var httpOptions = {
+        method  : 'GET',
+        url     : agApiPath + '/doctrine-adapter',
+        headers : { Accept: 'application/json' },
+        cache   : false
+      };
+      var
+        deferred = $q.defer(),
+        promise  = $http(httpOptions),
+        key = '_embedded',
+        response;
+
+      promise
+        .then(function success (res) {
+          if (res.status == 204) {
+            return callback(true, res.status);
+          }
+          var data = res.data;
+          deferred.resolve(data[key]);
+
+          if (data.hasOwnProperty(key)) {
+            response = data[key];
+            response.doctrine_adapter.forEach(function(entry) {
+              delete entry._links;
+            });
+            return callback(false, response);
+          }
+        })
+        .catch(function error (err) {
+          deferred.reject(err);
+        });
+
     };
 
     this.newDoctrine = function(module, adapter, entity, callback) {
