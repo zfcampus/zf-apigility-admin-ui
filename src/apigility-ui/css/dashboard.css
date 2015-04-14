@@ -55,16 +55,15 @@ body {
   padding: 9px 10px;
 }
 
-#logo {
+.logo {
   display: block;
-  margin:0px;
-  height: 50px;
+  margin: 10px 0 10px 10px;
+  max-height: 55px;
 }
 
 @media (max-width: 768px) {
-  #logo {
-    margin-left: 55px;
-    height: 30px;
+  .logo {
+    margin-left: 75px;
   }
 }
 
@@ -101,10 +100,6 @@ body {
     }
     .collapse.in{
         display:block !important;
-    }
-    #logo {
-      margin-left: 55px;
-      height: 30px;
     }
 }
 
