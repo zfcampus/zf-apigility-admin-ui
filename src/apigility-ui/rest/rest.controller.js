@@ -79,6 +79,7 @@
           );
         }
         vm.getSourceCode(vm.rest.source_code[0].classname);
+        vm.source = vm.rest.source_code[0];
       });
 
       api.getContentNegotiation(function(result){

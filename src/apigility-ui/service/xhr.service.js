@@ -20,42 +20,46 @@
     this.save   = save;
   }
 
-  function get(path, key) {
+  function get(path, key, version) {
     /* jshint validthis: true */
-    var promise = send(this.http, this.q, 'GET', path, { key: key });
+    var promise = send(this.http, this.q, 'GET', path, { key: key }, version);
     return promise;
   }
 
-  function create(path, args, allowed, key) {
+  function create(path, args, allowed, key, version) {
     /* jshint validthis: true */
     return send(this.http, this.q, 'POST', path, {
       data: marshalData(allowed, args),
       key: key
-    });
+    }, version);
   }
 
-  function update(path, args, allowed, key) {
+  function update(path, args, allowed, key, version) {
     /* jshint validthis: true */
     return send(this.http, this.q, 'PATCH', path, {
       data: marshalData(allowed, args),
       key: key
-    });
+    }, version);
   }
 
-  function save(path, data) {
+  function save(path, data, version) {
     /* jshint validthis: true */
     return send(this.http, this.q, 'PUT', path, {
       data: data
-    });
+    }, version);
   }
 
-  function remove(path) {
+  function remove(path, version) {
     /* jshint validthis: true */
-    return send(this.http, this.q, 'DELETE', path);
+    return send(this.http, this.q, 'DELETE', path, null, version);
   }
 
-  function send($http, $q, method, path, options) {
-    var headers = { Accept: 'application/json' };
+  function send($http, $q, method, path, options, version) {
+    if (version) {
+      var headers = { Accept: 'application/vnd.apigility.v2+json' };
+    } else {
+      var headers = { Accept: 'application/json' };
+    }
     if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
       headers['Content-Type'] = 'application/json';
     }

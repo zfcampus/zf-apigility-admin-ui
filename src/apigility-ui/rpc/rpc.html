@@ -175,9 +175,7 @@
         <form class="form-inline">
           <div class="form-group">
             <label class="control-label">Select the file to open</label>
-            <select class="form-control">
-              <option ng-click="vm.getSourceCode(source.classname)" ng-repeat="source in vm.rpc.source_code">{{source.name}}</option>
-            </select>
+            <select ng-model="vm.source" class="form-control" ng-change="vm.getSourceCode(vm.source.classname)" ng-options="source.name for source in vm.rpc.source_code"></select>
           </div>
         </form>
         <br clear="left">

@@ -67,13 +67,15 @@ body {
 
 .logo {
   display: block;
-  margin: 10px 0 10px 10px;
-  max-height: 55px;
+  margin: 5px 0px 5px 20px;
+  max-height: 70px;
+  width: 320px;
 }
 
 @media (max-width: 768px) {
   .logo {
     margin-left: 75px;
+    max-height: 30px;
   }
 }
 
@@ -107,6 +109,7 @@ body {
 
 .sidebar .search {
   margin-bottom: 1em;
+  margin-top: 30px;
 }
 
 .sidebar .search .glyphicon-remove {
@@ -132,8 +135,7 @@ body {
  */
 
 .main {
-  position: absolute;
-  top: 70px;
+  position: relative;
   left: 0;
   padding: 20px;
   height: 100%;
@@ -267,15 +269,6 @@ h3.panel-title {
 
 .selected {
   background : #dddddd;
-}
-
-#version {
-  margin-top: 0.5em;
-  text-align: center;
-}
-
-#version a {
-  color: #111111;
 }
 
 .icon-database {
