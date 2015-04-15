@@ -1,8 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
+      <span class="pull-right"><button class="btn btn-danger" ng-click="vm.deleteApiModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete API</button></span>
       API: {{vm.apiName}} (v{{vm.version}})
-      <button class="btn btn-danger pull-right" ng-click="vm.deleteApiModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete API</button>
     </h3>
   </div>
   <div class="panel-body">

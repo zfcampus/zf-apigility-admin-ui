@@ -471,9 +471,11 @@
         rpc.fields = [];
         var i = 0;
         if (response._embedded) {
-          while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
-            rpc.fields[i] = response._embedded.input_filters[0][i];
-            i++;
+          if (response._embedded.input_filters) {
+            while (!angular.isUndefined(response._embedded.input_filters[0][i])) {
+              rpc.fields[i] = response._embedded.input_filters[0][i];
+              i++;
+            }
           }
           if (response._embedded.documentation) {
             delete response._embedded.documentation._links;

@@ -5,8 +5,8 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "<div class=\"panel panel-default\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
+    "      <span class=\"pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteApiModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete API</button></span>\n" +
     "      API: {{vm.apiName}} (v{{vm.version}})\n" +
-    "      <button class=\"btn btn-danger pull-right\" ng-click=\"vm.deleteApiModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete API</button>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -260,9 +260,13 @@ angular.module("apigility-ui/content-negotiation/content-negotiation.html", []).
 
 angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/dashboard/dashboard.html",
-    "<div id=\"dashboard\">\n" +
-    "  <div class=\"row\">\n" +
-    "    <div class=\"col-sm-8\">\n" +
+    "<div class=\"row\" id=\"dashboard\">\n" +
+    "  <div class=\"col-xs-12\">\n" +
+    "    <div class=\"hero pull-right\">\n" +
+    "      <img src=\"apigility-ui/img/ag-hero.png\">\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div>\n" +
     "      <h1>Welcome to Apigility!</h1>\n" +
     "\n" +
     "      <p class=\"lead\">\n" +
@@ -277,11 +281,7 @@ angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache
     "          target=\"_blank\">introduction</a> or watch the <a\n" +
     "          href=\"https://apigility.org/video\" target=\"_blank\">getting started video</a>.\n" +
     "      </p>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"col-sm-4\">\n" +
-    "      <img class=\"hero\" src=\"apigility-ui/img/ag-hero.png\">\n" +
-    "    </div>\n" +
+    "  </div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
@@ -505,25 +505,25 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        <span class=\"icon-bar\"></span>\n" +
     "      </button>\n" +
     "\n" +
+    "      <a class=\"logo\" ui-sref=\"ag\"\n" +
+    "        ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
+    "        src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
+    "\n" +
     "      <button type=\"button\" class=\"btn btn-info hidden-md hidden-lg sidebar-toggle\"\n" +
-    "        data-toggle=\"offcanvas\">\n" +
+    "        data-toggle=\"sidebar\">\n" +
     "        <span class=\"sr-only\">Toggle sidebar</span>\n" +
     "        <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
     "      </button>\n" +
-    "\n" +
-    "      <a class=\"navbar-brand logo\" ui-sref=\"ag\"\n" +
-    "      ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
-    "      src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"collapse navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
-    "          <ul class=\"nav nav-bar nav-pills\">\n" +
-    "            <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
-    "            <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
-    "            <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
-    "            <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
-    "            <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
-    "          </ul>\n" +
+    "    <div class=\"navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
+    "      <ul class=\"nav nav-bar nav-pills\">\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
+    "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</nav>\n" +
@@ -2138,7 +2138,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
 
 angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/sidebar/sidebar.html",
-    "<div class=\"row\" id=\"version\">\n" +
+    "<div id=\"version\">\n" +
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
     "\n" +
