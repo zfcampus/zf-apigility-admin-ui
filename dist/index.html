@@ -14,7 +14,7 @@
 
     <link rel="icon" href="apigility-ui/img/favicon.png">
 
-    <link rel="stylesheet" href="apigility-ui/css/d7bbe600.apigility.min.css"/>
+    <link rel="stylesheet" href="apigility-ui/css/915f69d8.apigility.min.css"/>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,16 +41,22 @@
       </footer>
     </div>
 
-    <script src="apigility-ui/624f9237.vendor.js" charset="utf-8"></script>
+    <script src="apigility-ui/f1e29873.vendor.js" charset="utf-8"></script>
 
-    <script src="apigility-ui/b67e474c.apigility.js" charset="utf-8"></script>
+    <script src="apigility-ui/bbc34e64.apigility.js" charset="utf-8"></script>
 
     <script>
       $(document).ready(function () {
+        $('[data-toggle=navbar]').click(function () {
+          $('.nav-pills').toggleClass('nav-stacked');
+          $('.header-toggle span.glyphicon')
+            .toggleClass('header-toggled');
+        });
+
         $('[data-toggle=sidebar]').click(function () {
-          $('.sidebar').toggleClass('active');
+          $('.sidebar').toggleClass('sidebar-active');
           $('.sidebar-toggle span.glyphicon')
-            .toggleClass('toggled');
+            .toggleClass('sidebar-toggled');
         });
       });
     </script>
