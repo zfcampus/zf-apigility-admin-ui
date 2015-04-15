@@ -70,6 +70,7 @@
     <!-- endbuild -->
 
     <!-- build:js apigility-ui/apigility.js -->
+    <script src="apigility-ui/utility.js"></script>
     <script src="apigility-ui/app.module.js"></script>
     <script src="apigility-ui/app.config.js"></script>
 
@@ -109,7 +110,12 @@
     <script src="apigility-ui/modal/delete-dboption.controller.js"></script>
     <script src="apigility-ui/modal/view-doctrineparams.controller.js"></script>
     <script src="apigility-ui/modal/new-doctrinestrategy.controller.js"></script>
-    <script src="apigility-ui/modal/about.controller.js"></script>
+    <script src="apigility-ui/modal/new-auth.controller.js"></script>
+    <script src="apigility-ui/modal/edit-auth.controller.js"></script>
+    <script src="apigility-ui/modal/delete-auth.controller.js"></script>
+    <script src="apigility-ui/modal/add-authoption.controller.js"></script>
+    <script src="apigility-ui/modal/edit-authoption.controller.js"></script>
+    <script src="apigility-ui/modal/delete-authoption.controller.js"></script>
 
     <script src="apigility-ui/api-module/api-module.module.js"></script>
     <script src="apigility-ui/api-module/api-module.config.js"></script>
@@ -143,6 +149,10 @@
     <script src="apigility-ui/package/package.config.js"></script>
     <script src="apigility-ui/package/package.controller.js"></script>
 
+    <script src="apigility-ui/about/about.module.js"></script>
+    <script src="apigility-ui/about/about.config.js"></script>
+    <script src="apigility-ui/about/about.controller.js"></script>
+
     <script src="apigility-ui/service/service.module.js"></script>
     <script src="apigility-ui/service/api.service.js"></script>
     <script src="apigility-ui/service/sidebar.service.js"></script>
@@ -153,10 +163,16 @@
 
     <script>
       $(document).ready(function () {
+        $('[data-toggle=navbar]').click(function () {
+          $('.nav-pills').toggleClass('nav-stacked');
+          $('.header-toggle span.glyphicon')
+            .toggleClass('header-toggled');
+        });
+
         $('[data-toggle=sidebar]').click(function () {
-          $('.sidebar').toggleClass('active');
+          $('.sidebar').toggleClass('sidebar-active');
           $('.sidebar-toggle span.glyphicon')
-            .toggleClass('toggled');
+            .toggleClass('sidebar-toggled');
         });
       });
     </script>

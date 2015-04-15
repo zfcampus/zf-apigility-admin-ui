@@ -1,3 +1,4 @@
+/*csslint box-sizing: false*/
 /*
  * Base structure
  */
@@ -26,9 +27,11 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
+  box-sizing: border-box;
   border: 1px;
   border-color: #428bca;
   background: #105d8a;
+  height: 70px;
 }
 
 .navbar-fixed-top a {
@@ -36,8 +39,15 @@ body {
   color: white;
 }
 
-.navbar-brand {
-  float: none;
+.header-toggle {
+  display: block;
+  position: fixed;
+  top: 8px;
+  right: 15px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  padding: 9px 10px;
 }
 
 .sidebar-toggle {
@@ -51,29 +61,42 @@ body {
   padding: 9px 10px;
 }
 
-.sidebar-toggle span.glyphicon {
+.sidebar-toggle .glyphicon,
+.header-toggle .glyphicon {
   -webkit-transition: transform .5s;
      -moz-transition: transform .5s;
       -ms-transition: transform .5s;
+       -o-transition: transform .5s;
           transition: transform .5s;
 }
 
-.sidebar-toggle span.glyphicon.toggled {
+.header-toggled {
   -webkit-transform: rotate(180deg);
      -moz-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
+       -o-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+
+.sidebar-toggled {
+  -webkit-transform: rotate(-180deg);
+     -moz-transform: rotate(-180deg);
+      -ms-transform: rotate(-180deg);
+       -o-transform: rotate(-180deg);
+          transform: rotate(-180deg);
 }
 
 .logo {
   display: block;
-  margin: 10px 0 10px 10px;
-  max-height: 55px;
+  margin: 5px 0 5px 20px;
+  max-height: 70px;
+  width: 320px;
 }
 
 @media (max-width: 768px) {
   .logo {
     margin-left: 75px;
+    max-height: 30px;
   }
 }
 
@@ -86,10 +109,12 @@ body {
   -webkit-transition: all .25s ease-out;
      -moz-transition: all .25s ease-out;
       -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
           transition: all .25s ease-out;
   display: block;
   top: 70px;
   left: 0;
+  box-sizing: border-box;
   height: 100%;
   width: 320px;
   padding-left: 20px;
@@ -98,6 +123,8 @@ body {
   background-color: #f5f5f5;
   border-right: 1px solid #428bca;
   -webkit-box-shadow: 5px 0 3px -2px #888;
+     -moz-box-shadow: 5px 0 3px -2px #888;
+       -o-box-shadow: 5px 0 3px -2px #888;
           box-shadow: 5px 0 3px -2px #888;
 }
 
@@ -107,6 +134,7 @@ body {
 
 .sidebar .search {
   margin-bottom: 1em;
+  margin-top: 30px;
 }
 
 .sidebar .search .glyphicon-remove {
@@ -132,9 +160,9 @@ body {
  */
 
 .main {
-  position: absolute;
-  top: 70px;
+  position: relative;
   left: 0;
+  box-sizing: border-box;
   padding: 20px;
   height: 100%;
 }
@@ -148,6 +176,41 @@ body {
 }
 
 /*
+ * Responsive navbar
+ */
+@media screen and (min-width: 1096px) {
+  .nav-pills {
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 1096px) {
+  /* Push navbar offscreen */
+  .nav-pills {
+    position: absolute;
+    display: block;
+    top: 70px;
+    right: -320px;
+    z-index: -1;
+    width: 320px;
+    height: 100vh;
+    margin-top: 0;
+    background: #105d8a;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+        -ms-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  /* Except when active */
+  .nav-stacked {
+    right: 0;
+    z-index: 100;
+  }
+}
+
+/*
  * Responsive sidebar
  */
 
@@ -156,23 +219,35 @@ body {
   .main {
     margin-left: 340px;
   }
+
+  .sidebar-toggle {
+    display: none;
+  }
 }
 
 /* Small displays (small tablets, phones */
 @media screen and (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+
   /* Push sidebar offscreen */
   .sidebar {
     left: -320px;
     z-index: -1;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+         -o-box-shadow: none;
+            box-shadow: none;
   }
 
   /* Except when active */
-  .sidebar.active {
+  .sidebar-active {
     left: 0;
     z-index: 100;
     -webkit-box-shadow: 5px 0 3px -2px #888;
+       -moz-box-shadow: 5px 0 3px -2px #888;
+         -o-box-shadow: 5px 0 3px -2px #888;
             box-shadow: 5px 0 3px -2px #888;
   }
 }
@@ -180,35 +255,6 @@ body {
 /*
  * Placeholder dashboard ideas
  */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
-}
-
-
-.right-inner-addon {
-    position: relative;
-}
-.right-inner-addon input {
-    padding-right: 30px;
-}
-.right-inner-addon i {
-    position: absolute;
-    right: 0px;
-    padding: 20px 20px;
-    pointer-events: none;
-}
 
 .tab-content {
     margin-top: 20px;
@@ -223,11 +269,11 @@ label.method-checkbox input[type=checkbox] {
   margin-right: 0.25em;
 }
 
-h3.panel-title {
+.panel-title {
   font-size: 2.0em;
 }
 
-.panel.service ul {
+.service ul {
   margin-bottom: 0;
 }
 
@@ -254,7 +300,7 @@ h3.panel-title {
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 20px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .nav-tabs {
@@ -269,15 +315,6 @@ h3.panel-title {
   background : #dddddd;
 }
 
-#version {
-  margin-top: 0.5em;
-  text-align: center;
-}
-
-#version a {
-  color: #111111;
-}
-
 .icon-database {
     background-image: url("/apigility-ui/img/icon-database.png");
     background-position: center center;
@@ -286,13 +323,15 @@ h3.panel-title {
     line-height: 19px;
 }
 
-form#doctrine-params > .form-group {
+.doctrine-params > .form-group {
     margin-bottom: 0;
 }
 
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;
-    animation: spin 1000ms infinite linear;
+       -moz-animation: spin 1000ms infinite linear;
+         -o-animation: spin 1000ms infinite linear;
+            animation: spin 1000ms infinite linear;
     display: inline-block;
     margin: 0 10px;
 }
@@ -317,7 +356,7 @@ form#doctrine-params > .form-group {
     }
 }
 
-#db-tables-tree {
+.db-tables-tree {
     margin-top: 20px;
 }
 
@@ -359,15 +398,15 @@ form#doctrine-params > .form-group {
     border: none;
 }
 
-#dashboard .hero {
+.dashboard .hero {
     margin-top: 2em;
 }
 
-#dashboard .hero img {
+.dashboard .hero img {
     padding-left: 2em;
 }
 
-.main-panel h1 {
+h1 {
   font-size: 4em;
   font-weight: bolder;
 }

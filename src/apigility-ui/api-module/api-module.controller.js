@@ -27,6 +27,18 @@
       vm.rpc = result;
     });
 
+    api.getAuthenticationTypes(function(result){
+      vm.auth_types = result;
+    });
+
+    api.getModuleAuthentication(vm.apiName, vm.version, function(result){
+      if (result === false) {
+        vm.auth_type = 'None';
+      } else {
+        vm.auth_type = result;
+      }
+    });
+
     var apis = SidebarService.getApis();
     for (var i = 0; i < apis.length; i++) {
         if (apis[i].name === vm.apiName) {
@@ -93,6 +105,27 @@
           return;
         }
       })
+    };
+
+    vm.saveAuthentication = function(auth) {
+      vm.loading = true;
+      if (auth.toLowerCase()  === 'none') {
+        api.deleteModuleAuthentication(vm.apiName, vm.version, function(err,response){
+          vm.loading = false;
+          if (err) {
+            vm.alert = response;
+            return;
+          }
+        });
+      } else {
+        api.saveModuleAuthentication(vm.apiName, vm.version, auth, function(err, response){
+          vm.loading = false;
+          if (err) {
+            vm.alert = response;
+            return;
+          }
+        });
+      }
     };
   }
 })();

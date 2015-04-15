@@ -12,43 +12,120 @@
     /* jshint validthis:true */
     var vm = this;
 
-    vm.changed = [false, false, false];
-    var emptyBasic = false;
+    vm.auth_types = [
+      'HTTP Basic',
+      'HTTP Digest',
+      'OAuth2 PDO',
+      'OAuth2 Mongo'
+    ];
 
-    function initBasic() {
-      api.getAuthentication(function(err,result){
-        vm.basic = result;
-        emptyBasic = (!result.htpasswd);
+    api.getAuthenticationAdapters(function(err, result){
+      vm.adapters = result;
+    });
+
+    vm.newAuthModal = function() {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/new-auth.html',
+        controller: 'NewAuth',
+        controllerAs: 'vm',
+        resolve : {
+          auth_types : function() {
+            return vm.auth_types;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+        vm.adapters.push(response);
       });
     };
 
-    initBasic();
+    vm.deleteAuthModal = function(auth) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/delete-auth.html',
+        controller: 'DeleteAuth',
+        controllerAs: 'vm',
+        resolve : {
+          auth : function() {
+            return auth;
+          }
+        }
+      });
 
-    vm.change = function(tab) {
-      vm.changed[parseInt(tab)] = true;
+      modalInstance.result.then(function (response) {
+        for (var i = 0; i < vm.adapters.length; i++) {
+          if (vm.adapters[i].name === response) {
+            vm.adapters.splice(i, 1);
+            break;
+          }
+        }
+      });
+    };
+
+    vm.editAuthModal = function(auth) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/edit-auth.html',
+        controller: 'EditAuth',
+        controllerAs: 'vm',
+        resolve : {
+          auth : function() {
+            return auth;
+          },
+          auth_types : function() {
+            return vm.auth_types;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+
+      });
+    };
+
+    vm.addAuthOptionModal = function(auth) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/add-authoption.html',
+        controller: 'AddAuthOption',
+        controllerAs: 'vm',
+        resolve : {
+          auth : function() {
+            return auth;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+        updateAuth(response);
+      });
     }
 
-    vm.saveBasic = function() {
-      if (!vm.changed[0]) {
-        return;
-      }
-      vm.loading = true;
-      api.updateBasicAuthentication(vm.basic, function(err, result){
-        vm.loading = false;
-        if (err) {
-          vm.alert = result;
-          return;
+    vm.editAuthOptionModal = function(auth, option) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/edit-authoption.html',
+        controller: 'EditAuthOption',
+        controllerAs: 'vm',
+        resolve : {
+          auth : function() {
+            return auth;
+          },
+          option : function() {
+            return option;
+          }
         }
-        vm.changed[0] = false;
       });
-    };
 
-    vm.resetBasic = function() {
-      if (vm.changed[0]) {
-        initBasic();
-        vm.changed[0] = false;
+      modalInstance.result.then(function (response) {
+        updateAuth(response);
+      });
+    }
+
+    function updateAuth(auth) {
+      for (var i = 0; i < vm.adapters.length; i++) {
+        if (vm.adapters[i].name === auth.name) {
+          vm.adapters[i] = auth;
+          break;
+        }
       }
-    };
-
+    }
   }
 })();
