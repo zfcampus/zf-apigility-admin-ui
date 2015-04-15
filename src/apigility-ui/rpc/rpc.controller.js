@@ -41,6 +41,7 @@
           { name : 'Controller Factory', classname: vm.rpc.controller_class + 'Factory' }
         ];
         vm.getSourceCode(vm.rpc.source_code[0].classname);
+        vm.source = vm.rpc.source_code[0];
       });
 
       if (vm.hasOwnProperty('rpc')) {

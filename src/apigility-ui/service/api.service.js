@@ -802,6 +802,166 @@
         });
     };
 
+    this.getAuthenticationAdapters = function(callback) {
+      xhr.get(agApiPath + '/authentication', '_embedded', 2)
+        .then(function (response) {
+          response.items.forEach(function(entry){
+            delete entry._links;
+          });
+          return callback(true, response.items);
+        })
+        .catch(function (err) {
+          return callback(true, null);
+        });
+    }
+
+    this.addAuthenticationAdapter = function(auth, callback) {
+      var result = getAuthenticationDataForAPI(auth);
+      for(var i=0; i < result.data.length; i++) {
+        if (angular.isUndefined(result.data[i])) {
+          result.data.splice(i, 1);
+          result.allowed.splice(i, 1);
+        }
+      }
+      xhr.create(agApiPath + '/authentication', result.data, result.allowed, null, 2)
+        .then(function (response) {
+          if (response.hasOwnProperty('_links')) {
+            delete response._links;
+          }
+          return callback(false, response);
+        })
+        .catch(function (err) {
+          if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
+            return callback(true, err.data.detail);
+          }
+          return callback(true, 'Error on authentication adapter save');
+        });
+    };
+
+    this.saveAuthenticationAdapter = function(auth, callback) {
+      var result = getAuthenticationDataForAPI(auth);
+      var newAuth = {};
+      for(var i=0; i < result.data.length; i++) {
+        if (!angular.isUndefined(result.data[i])) {
+          newAuth[result.allowed[i]] = result.data[i];
+        }
+      }
+      xhr.save(agApiPath + '/authentication/' + auth.name, newAuth, 2)
+      .then(function(response) {
+        // Remove unused properties from the response
+        delete response._links;
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, 'Error during the authentication adapter API save');
+      });
+    };
+
+    this.saveOptionsAuthenticationAdapter = function(auth, callback) {
+      xhr.save(agApiPath + '/authentication/' + auth.name, auth, 2)
+      .then(function(response) {
+        // Remove unused properties from the response
+        delete response._links;
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true, 'Error during the authentication adapter API save');
+      });
+    };
+
+    this.deleteAuthenticationAdapter = function(name, callback) {
+      xhr.remove(agApiPath + '/authentication/' + name, 2)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
+    };
+
+    this.getAuthenticationTypes = function (callback) {
+      xhr.get(agApiPath + '/auth-type', 'auth-types', 2)
+      .then(function (response) {
+        var result = [];
+        for(var i = 0; i < response.length; i++){
+          if (response[i].endsWith('-basic')) {
+            var value = response[i].slice(0, -6);
+            var key   = value + ' (basic)';
+          } else if (response[i].endsWith('-digest')) {
+            var value = response[i].slice(0, -7);
+            var key   = value + ' (digest)';
+          } else {
+            var value = response[i];
+            var key   = value + ' (oauth2)';
+          }
+          result[i] = { key : key, value: value };
+        }
+        return callback(result);
+      })
+      .catch(function (err) {
+        console.log('Failed to get the list of authentication types', err);
+        return false;
+      });
+    }
+
+    this.getModuleAuthentication = function (module, version, callback) {
+      xhr.get(agApiPath + '/module/' + module + '/authentication?version=' + version, 'authentication', 2)
+      .then(function (response) {
+        return callback(response);
+      })
+      .catch(function (err) {
+        console.log('Failed to get the list of authentication types', err);
+        return false;
+      });
+    }
+
+    this.saveModuleAuthentication = function (module, version, auth, callback) {
+      var data = { 'authentication' : auth };
+      xhr.save(agApiPath + '/module/' + module + '/authentication?version=' + version, data, 2)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
+    };
+
+    this.deleteModuleAuthentication = function (module, version, callback) {
+      xhr.remove(agApiPath + '/module/' + module + '/authentication?version=' + version, 2)
+      .then(function (response) {
+        return callback(false, response);
+      })
+      .catch(function (err) {
+        return callback(true);
+      });
+    }
+
+    function getAuthenticationDataForAPI(auth) {
+      switch(auth.type){
+        case 'HTTP Basic':
+          var allowed = [ 'name', 'type', 'realm', 'htpasswd' ];
+          var basic = auth.basic;
+          var data = [ auth.name, 'basic', basic.realm, basic.htpasswd ];
+          break;
+        case 'HTTP Digest':
+          var allowed = [ 'name', 'type', 'realm', 'digest_domains', 'nonce_timeout', 'htdigest' ];
+          var digest = auth.digest;
+          var data = [ auth.name, 'digest', digest.realm, digest.digest_domains, digest.nonce_timeout, digest.htdigest ];
+          break;
+        case 'OAuth2 PDO':
+          var allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_username', 'oauth2_password', 'oauth2_options' ];
+          var pdo = auth.pdo;
+          var data = [ auth.name, 'oauth2', 'pdo', pdo.oauth2_route, pdo.oauth2_dsn, pdo.oauth2_username, pdo.oauth2_password, pdo.oauth2_options ];
+          break;
+        case 'OAuth2 Mongo':
+          var allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_database', 'oauth2_locator_name', 'oauth2_options' ];
+          var mongo = auth.mongo;
+          var data = [ auth.name, 'oauth2', 'mongo', mongo.oauth2_route, mongo.oauth2_dsn, mongo.oauth2_database, mongo.oauth2_locator_name, mongo.oauth2_options ];
+          break;
+      }
+      return { data : data, allowed : allowed };
+    }
+
     function filterData(data, allowed){
       var result = { key : [], value : [] };
       allowed.forEach(function(entry){

@@ -14,6 +14,7 @@
       'apigility.database',
       'apigility.documentation',
       'apigility.package',
+      'apigility.about',
 
       'ui.bootstrap',
       'ui.router',

@@ -1,4 +1,24 @@
-angular.module('templates-main', ['apigility-ui/api-module/api-module.html', 'apigility-ui/authentication/authentication.html', 'apigility-ui/content-negotiation/content-negotiation.html', 'apigility-ui/dashboard/dashboard.html', 'apigility-ui/database/database.html', 'apigility-ui/documentation/documentation-api.html', 'apigility-ui/documentation/documentation-list.html', 'apigility-ui/documentation/documentation-service.html', 'apigility-ui/documentation/documentation.html', 'apigility-ui/header/header.html', 'apigility-ui/modal/about.html', 'apigility-ui/modal/add-dboption.html', 'apigility-ui/modal/add-filter.html', 'apigility-ui/modal/add-validator.html', 'apigility-ui/modal/delete-api.html', 'apigility-ui/modal/delete-db.html', 'apigility-ui/modal/delete-dboption.html', 'apigility-ui/modal/delete-field.html', 'apigility-ui/modal/delete-filter.html', 'apigility-ui/modal/delete-rest.html', 'apigility-ui/modal/delete-rpc.html', 'apigility-ui/modal/delete-selector.html', 'apigility-ui/modal/delete-validator.html', 'apigility-ui/modal/delete-viewmodel.html', 'apigility-ui/modal/edit-db.html', 'apigility-ui/modal/edit-dboption.html', 'apigility-ui/modal/edit-field.html', 'apigility-ui/modal/edit-filter.html', 'apigility-ui/modal/edit-validator.html', 'apigility-ui/modal/edit-viewmodel.html', 'apigility-ui/modal/new-api.html', 'apigility-ui/modal/new-db.html', 'apigility-ui/modal/new-doctrinestrategy.html', 'apigility-ui/modal/new-field.html', 'apigility-ui/modal/new-selector.html', 'apigility-ui/modal/new-service.html', 'apigility-ui/modal/new-version.html', 'apigility-ui/modal/new-viewmodel.html', 'apigility-ui/modal/view-doctrineparams.html', 'apigility-ui/package/package.html', 'apigility-ui/rest/rest.html', 'apigility-ui/rpc/rpc.html', 'apigility-ui/sidebar/sidebar.html']);
+angular.module('templates-main', ['apigility-ui/about/about.html', 'apigility-ui/api-module/api-module.html', 'apigility-ui/authentication/authentication.html', 'apigility-ui/content-negotiation/content-negotiation.html', 'apigility-ui/dashboard/dashboard.html', 'apigility-ui/database/database.html', 'apigility-ui/documentation/documentation-api.html', 'apigility-ui/documentation/documentation-list.html', 'apigility-ui/documentation/documentation-service.html', 'apigility-ui/documentation/documentation.html', 'apigility-ui/header/header.html', 'apigility-ui/modal/add-authoption.html', 'apigility-ui/modal/add-dboption.html', 'apigility-ui/modal/add-filter.html', 'apigility-ui/modal/add-validator.html', 'apigility-ui/modal/delete-api.html', 'apigility-ui/modal/delete-auth.html', 'apigility-ui/modal/delete-authoption.html', 'apigility-ui/modal/delete-db.html', 'apigility-ui/modal/delete-dboption.html', 'apigility-ui/modal/delete-field.html', 'apigility-ui/modal/delete-filter.html', 'apigility-ui/modal/delete-rest.html', 'apigility-ui/modal/delete-rpc.html', 'apigility-ui/modal/delete-selector.html', 'apigility-ui/modal/delete-validator.html', 'apigility-ui/modal/delete-viewmodel.html', 'apigility-ui/modal/edit-auth.html', 'apigility-ui/modal/edit-authoption.html', 'apigility-ui/modal/edit-db.html', 'apigility-ui/modal/edit-dboption.html', 'apigility-ui/modal/edit-field.html', 'apigility-ui/modal/edit-filter.html', 'apigility-ui/modal/edit-validator.html', 'apigility-ui/modal/edit-viewmodel.html', 'apigility-ui/modal/new-api.html', 'apigility-ui/modal/new-auth.html', 'apigility-ui/modal/new-db.html', 'apigility-ui/modal/new-doctrinestrategy.html', 'apigility-ui/modal/new-field.html', 'apigility-ui/modal/new-selector.html', 'apigility-ui/modal/new-service.html', 'apigility-ui/modal/new-version.html', 'apigility-ui/modal/new-viewmodel.html', 'apigility-ui/modal/view-doctrineparams.html', 'apigility-ui/package/package.html', 'apigility-ui/rest/rest.html', 'apigility-ui/rpc/rpc.html', 'apigility-ui/sidebar/sidebar.html']);
+
+angular.module("apigility-ui/about/about.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/about/about.html",
+    "<div class=\"panel panel-default\">\n" +
+    "  <div class=\"panel-heading\">\n" +
+    "    <h3 class=\"panel-title\">Apigility  {{vm.version}}</h3>\n" +
+    "  </div>\n" +
+    "  <div class=\"panel-body\">\n" +
+    "      <div class=\"hero pull-right\">\n" +
+    "        <img src=\"apigility-ui/img/ag-hero.png\">\n" +
+    "      </div>\n" +
+    "      <p><strong>Apigility</strong> is the open source API builder for PHP, designed to simplify creating and maintaining useful, easy to consume, and well structured APIs. Regardless of your experience in API building, with <strong>Apigility</strong> you can build APIs that enable mobile apps, developer communities, and any other consumer controlled access to your applications.</p>\n" +
+    "      <p><strong>Key features:</strong> RESTful or RPC services; JSON (specifically, <a href=\"http://tools.ietf.org/html/draft-kelly-json-hal-06\" target=\"_blank\">HAL</a>); Problem Details for HTTP APIs; Versioning; Normalisation and Validation; Authentication (HTTP Basic/Digest, <a href=\"http://oauth.net/2/\" target=\"_blank\">OAuth2</a>); Documentation (HTML, <a href=\"http://swagger.io/\" target=\"_blank\">Swagger</a>).</p>\n" +
+    "      <p><strong>Apigility</strong> is made using <a href=\"http://framework.zend.com\" target=\"_blank\">Zend Framework 2</a>, <a href=\"https://angularjs.org/\" target=\"_blank\">AngularJS</a> and <a href=\"http://getbootstrap.com/\" target=\"_blank\">Bootstrap</a>.</p>\n" +
+    "      <p>If you want to contribute you can <a href=\"https://github.com/zfcampus\" target=\"_blank\">fork the project on github</a>.</p>\n" +
+    "      <p>The official web site of the project is <a href=\"https://apigility.org\" target=\"_blank\">apigility.org</a>.</p>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "");
+}]);
 
 angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/api-module/api-module.html",
@@ -20,15 +40,13 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "        <form class=\"form-inline\" role=\"form\" unsaved-warning-form>\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"control-label\">Set authentication type</label>\n" +
-    "            <select class=\"form-control\" ng-model=\"vm.authentication_type\" ng-disabled=\"vm.disabled\">\n" +
-    "              <option>None</option>\n" +
-    "              <option>Basic</option>\n" +
-    "              <option>Digest</option>\n" +
-    "              <option>OAuth2</option>\n" +
+    "            <select class=\"form-control\" ng-model=\"vm.auth_type\" ng-disabled=\"vm.disabled\">\n" +
+    "              <option value=\"None\">None</option>\n" +
+    "              <option ng-repeat=\"type in vm.auth_types\" value=\"{{type.value}}\">{{type.key}}</option>\n" +
     "            </select>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
-    "            <button type=\"submit\" class=\"btn btn-success btn-sm\" ng-hide=\"vm.disabled\">Save</span></button>\n" +
+    "            <button type=\"submit\" class=\"btn btn-success btn-sm\" ng-hide=\"vm.disabled\" ng-click=\"vm.saveAuthentication(vm.auth_type)\">Save</span></button>\n" +
     "          </div>\n" +
     "        </form>\n" +
     "      </div>\n" +
@@ -107,116 +125,29 @@ angular.module("apigility-ui/authentication/authentication.html", []).run(["$tem
     "    <h3 class=\"panel-title\">Authentication</h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
-    "    <div class=\"form-group\">\n" +
-    "      <tabset justified=\"true\">\n" +
-    "        <!-- BASIC -->\n" +
-    "        <tab heading=\"Basic\" active=\"vm.tabs.basic\">\n" +
-    "          <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form>\n" +
-    "            <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
-    "              <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_basic_realm\" class=\"col-sm-2 control-label\">Authentication Realm</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.basic.realm\" placeholder=\"Insert the Realm\" ng-change=\"vm.change(0)\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_basic_htpasswd\" class=\"col-sm-2 control-label\">Path of htpasswd file</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"vm.basic.htpasswd\" placeholder=\"Insert the path of htpasswd\" ng-change=\"vm.change(0)\">\n" +
-    "                <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you need to create a <i>htpasswd</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-basic\" target=\"_blank\">guide</a></span>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
-    "              <div class=\"col-sm-offset-2 col-sm-10\">\n" +
-    "                <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.resetBasic()\" unsaved-warning-clear>Reset</button>\n" +
-    "                <button type=\"submit\" class=\"btn btn-success\" ng-click=\"vm.saveBasic()\" ladda=\"vm.loading\">Save</button>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "          </form>\n" +
-    "        </tab>\n" +
-    "\n" +
-    "        <!-- DIGEST -->\n" +
-    "        <tab heading=\"Digest\" active=\"vm.tabs.digest\">\n" +
-    "          <form class=\"form-horizontal\" role=\"form\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_digest_realm\" class=\"col-sm-2 control-label\">Authentication Realm</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"auth_digest_realm\" placeholder=\"Insert the Realm\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_digest_htpasswd\" class=\"col-sm-2 control-label\">Path of htdigest file</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"auth_digest_htdigest\" placeholder=\"Insert the path of htdigest\">\n" +
-    "                <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you need to create a <i>htdigest</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-digest\" target=\"_blank\">guide</a></span>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_digest_domains\" class=\"col-sm-2 control-label\">Digest domains</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"auth_digest_domains\" placeholder=\"Insert the digest domains\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"auth_digest_timeout\" class=\"col-sm-2 control-label\">Nonce timeout</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"auth_digest_timeout\" placeholder=\"Insert the timeout\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
-    "              <div class=\"col-sm-offset-2 col-sm-10\">\n" +
-    "                <button type=\"button\" class=\"btn btn-success\">Save</button>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "          </form>\n" +
-    "        </tab>\n" +
-    "\n" +
-    "        <!-- OAUTH2 -->\n" +
-    "        <tab heading=\"OAuth2\" active=\"vm.tabs.oauth2\">\n" +
-    "          <form class=\"form-horizontal\" role=\"form\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"oauth2_adapter\" class=\"col-sm-2 control-label\">Select adapter</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <select class=\"form-control\" name=\"type\" id=\"oauth2_adapter\">\n" +
-    "                  <option>PDO</option>\n" +
-    "                  <option>Mongo</option>\n" +
-    "                </select>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"oauth2_pdo_dsn\" class=\"col-sm-2 control-label\">PDO DSN</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"oauth2_pdo_dsn\" placeholder=\"DSN\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"oauth2_username\" class=\"col-sm-2 control-label\">Username</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"oauth2_username\" placeholder=\"Username\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"oauth2_password\" class=\"col-sm-2 control-label\">Password</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"password\" class=\"form-control\" id=\"oauth2_password\" placeholder=\"Password\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\">\n" +
-    "              <label for=\"oauth2_route\" class=\"col-sm-2 control-label\">OAuth2 route</label>\n" +
-    "              <div class=\"col-sm-10\">\n" +
-    "                <input type=\"text\" class=\"form-control\" id=\"oauth2_route\" placeholder=\"/oauth\">\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"form-group\" style=\"margin-top:30px\">\n" +
-    "              <div class=\"col-sm-offset-2 col-sm-10\">\n" +
-    "                <button type=\"button\" class=\"btn btn-success\">Save</button>\n" +
-    "              </div>\n" +
-    "            </div>\n" +
-    "          </form>\n" +
-    "        </tab>\n" +
-    "      </tabset>\n" +
+    "    <div class=\"col-sm-12\">\n" +
+    "      <h3>Adapters <button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" ng-click=\"vm.newAuthModal()\">New adapter</button></h3>\n" +
+    "      <table class=\"table table-bordered col-sm-12\">\n" +
+    "        <thead>\n" +
+    "          <tr>\n" +
+    "            <th class=\"col-sm-3\">Name</th>\n" +
+    "            <th class=\"col-sm-2\">Type</th>\n" +
+    "            <th class=\"col-sm-4\">Options</th>\n" +
+    "            <th class=\"col-sm-3\">Actions</th>\n" +
+    "          </tr>\n" +
+    "        </thead>\n" +
+    "        <tr ng-repeat=\"item in vm.adapters\">\n" +
+    "          <td>{{item.name}}</td>\n" +
+    "          <td>{{item.type}} <span ng-show=\"item.type == 'oauth2'\">({{item.oauth2_type}})</span></td>\n" +
+    "          <td>\n" +
+    "            <button ng-show=\"item.type == 'oauth2'\" type=\"button\" class=\"btn btn-primary btn-xs\" ng-click=\"vm.addAuthOptionModal(item)\"><span class=\"glyphicon glyphicon-plus\"></span></button>\n" +
+    "            <span ng-repeat=\"(option, value) in item.oauth2_options\"><a ng-click=\"vm.editAuthOptionModal(item, option)\">{{option}} = {{value}}</a>, </span>\n" +
+    "          </td>\n" +
+    "          <td>\n" +
+    "            <button type=\"button\" ng-click=\"vm.editAuthModal(item)\" class=\"btn btn-success btn-xs\"><i class=\"glyphicon glyphicon-pencil\"></i> edit</button> <button type=\"button\" ng-click=\"vm.deleteAuthModal(item)\" class=\"btn btn-danger btn-xs\"><i class=\"glyphicon glyphicon-trash\"></i> delete</button>\n" +
+    "          </td>\n" +
+    "        </tr>\n" +
+    "      </table>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
@@ -496,7 +427,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
   $templateCache.put("apigility-ui/header/header.html",
     "<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "  <div class=\"container-fluid\">\n" +
-    "    <div class=\"navbar-header col-sm-4 col-md-3\">\n" +
+    "    <div class=\"navbar-header logo\">\n" +
     "      <button type=\"button\" class=\"navbar-toggle\"\n" +
     "        ng-click=\"vm.isCollapsed = !vm.isCollapsed\">\n" +
     "        <span class=\"sr-only\">Toggle navigation</span>\n" +
@@ -523,6 +454,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "        <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
     "        <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
     "        <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
+    "        <li role=\"presentation\" ng-class=\"{active: ('ag.about' | includedByState)}\"><a ui-sref=\"ag.about\" ng-click=\"vm.setSelected('')\">About</a></li>\n" +
     "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -530,20 +462,23 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "");
 }]);
 
-angular.module("apigility-ui/modal/about.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("apigility-ui/modal/about.html",
+angular.module("apigility-ui/modal/add-authoption.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/add-authoption.html",
     "<div class=\"modal-header\">\n" +
-    "  <h4 class=\"modal-title\"><strong>Apigility {{vm.version}}</strong></h4>\n" +
+    "  <h4 class=\"modal-title\">Add OAuth2 option for <strong>{{vm.auth.name}}</strong></h4>\n" +
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
-    "  <p align=\"center\"><img src=\"apigility-ui/img/ag-hero.png\"></p>\n" +
-    "  <p style=\"margin-top:20px\">Apigility is the open source API builder for PHP, the world's easiest way to create high-quality APIs.</p>\n" +
-    "  <p>Apigility is made using <a href=\"http://framework.zend.com\" target=\"_blank\">Zend Framework 2</a>, <a href=\"https://angularjs.org/\" target=\"_blank\">AngularJS</a> and <a href=\"http://getbootstrap.com/\" target=\"_blank\">Bootstrap</a>.</p>\n" +
-    "  <p>The official web site of the project is <a href=\"https://apigility.org\" target=\"_blank\">apigility.org</a>. If you want to contribute you can <a href=\"https://github.com/zfcampus\" target=\"_blank\">fork the project on github</a>.\n" +
+    "  <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "  </div>\n" +
+    "  <label class=\"control-label\">Option</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.option\" placeholder=\"Insert the option name\" autofocus>\n" +
+    "  <label class=\"control-label\">Value</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.value\" placeholder=\"Insert the option value\">\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
-    "  <p class=\"pull-left\">&copy; 2013-2015 by <a href=\"http://www.zend.com\">Zend Technologies</a> Ltd</p>\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">Close</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</span></button>\n" +
     "</div>\n" +
     "");
 }]);
@@ -705,6 +640,36 @@ angular.module("apigility-ui/modal/delete-api.html", []).run(["$templateCache", 
     "");
 }]);
 
+angular.module("apigility-ui/modal/delete-auth.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/delete-auth.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\" id=\"myModalDeleteAuth\"><span class=\"glyphicon glyphicon-trash\"></span> Delete authentication adapter</h4>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <p class=\"modal_msg\">Are you sure to delete the authentication adapter <strong>{{vm.auth.name}}</strong>?</p>\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-primary btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Yes</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("apigility-ui/modal/delete-authoption.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/delete-authoption.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\"><span class=\"glyphicon glyphicon-trash\"></span> Delete OAuth2 option</h4>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <p class=\"modal_msg\">Are you sure to delete the OAuth2 option <strong>{{vm.option}}</strong>?</p>\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-primary btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Yes</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
 angular.module("apigility-ui/modal/delete-db.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/modal/delete-db.html",
     "<div class=\"modal-header\">\n" +
@@ -844,6 +809,152 @@ angular.module("apigility-ui/modal/delete-viewmodel.html", []).run(["$templateCa
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
     "  <button type=\"button\" class=\"btn btn-primary btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Yes</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/edit-auth.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\">Edit Authentication Adapter</h4>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "  </div>\n" +
+    "  <div class=\"row\">\n" +
+    "    <div class=\"col-sm-6\">\n" +
+    "      <label class=\"control-label\">Adapter Name</label>\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.name\" readonly><br />\n" +
+    "    </div>\n" +
+    "    <div class=\"col-sm-6\">\n" +
+    "      <label class=\"control-label\">Type</label>\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.type\" readonly>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- HTTP Basic -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'HTTP Basic'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Realm</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.realm\" placeholder=\"Insert the realm attribute\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">htpasswd file</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.htpasswd\" placeholder=\"Insert the htpasswd file path\">\n" +
+    "        <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you don't know how to create a <i>htpasswd</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-basic\" target=\"_blank\">guide</a></span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- HTTP Digest -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'HTTP Digest'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Realm</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.realm\" placeholder=\"Insert the realm attribute (optional)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Digest domains</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"Insert the digest domains value (optional)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Nonce timeout</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.nonce_timeout\" placeholder=\"Insert the nonce timeout in secoond (optional)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">htdigest file</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.htdigest\" placeholder=\"Insert the htdigest file path\">\n" +
+    "        <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you don't know how to create a <i>htdigest</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-digest\" target=\"_blank\">guide</a></span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- OAuth2 PDO -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'OAuth2 PDO'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">DSN</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_dsn\" placeholder=\"Insert the PDO database source name (DSN)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Username</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_username\" placeholder=\"Username for OAuth2 database credentials (required if not using SQLite)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Password</label>\n" +
+    "        <input type=\"password\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_password\" placeholder=\"Password for the username listed (required if not using SQLite)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_route\" placeholder=\"Base URI to use as the OAuth2 server endpoint\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- OAuth2 Mongo -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'OAuth2 Mongo'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">DSN</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_dsn\" placeholder=\"Insert the Mongo database source name (DSN)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Locator name</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_locator_name\" placeholder=\"Insert the locator name (optional)\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Database</label>\n" +
+    "        <input type=\"test\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_database\" placeholder=\"The Mongo database name\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.oauth2.mongo.route\" placeholder=\"Base URI to use as the OAuth2 server endpoint\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">Close</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("apigility-ui/modal/edit-authoption.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/edit-authoption.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\">Edit OAuth2 option for <strong>{{vm.auth.name}}</strong> <button type=\"button\" class=\"btn btn-danger btn-sm pull-right\" ng-click=\"vm.deleteAuthOptionModal(vm.auth, vm.option)\"><span class=\"glyphicon glyphicon-trash\"></span> Delete option</button></h4>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "  </div>\n" +
+    "  <label class=\"control-label\">Option</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.option\" placeholder=\"Insert the option name\" readonly>\n" +
+    "  <label class=\"control-label\">Value</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.value\" placeholder=\"Insert the option value\">\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">Close</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</span></button>\n" +
     "</div>\n" +
     "");
 }]);
@@ -1109,6 +1220,141 @@ angular.module("apigility-ui/modal/new-api.html", []).run(["$templateCache", fun
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\" ng-disabled=\"vm.loading\">Close</button>\n" +
     "  <button type=\"button\" class=\"btn btn-primary\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Create</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("apigility-ui/modal/new-auth.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/new-auth.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\">New Authentication Adapter</h4>\n" +
+    "</div>\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "  </div>\n" +
+    "  <div class=\"row\">\n" +
+    "    <div class=\"col-sm-6\">\n" +
+    "      <label class=\"control-label\">Adapter Name</label>\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.name\" placeholder=\"Insert the adapter name\"><br />\n" +
+    "    </div>\n" +
+    "    <div class=\"col-sm-6\">\n" +
+    "      <label class=\"control-label\">Type</label>\n" +
+    "      <select class=\"form-control\" ng-model=\"vm.auth.type\" ng-options=\"option as option for option in vm.auth_types\"></select>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- HTTP Basic -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'HTTP Basic'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Realm</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.realm\" placeholder=\"api\">\n" +
+    "        <span class=\"help-block\">HTTP authentication realm</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">htpasswd file</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.htpasswd\" placeholder=\"Insert the htpasswd file path\">\n" +
+    "        <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you don't know how to create a <i>htpasswd</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-basic\" target=\"_blank\">guide</a></span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- HTTP Digest -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'HTTP Digest'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Realm</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.realm\" placeholder=\"api\">\n" +
+    "        <span class=\"help-block\">HTTP authentication realm</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Digest domains</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"(optional) Add a path\">\n" +
+    "        <span class=\"help-block\">Space-separated list of URI paths for which authentication will be applied</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Nonce timeout</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.nonce_timeout\" placeholder=\"3600\">\n" +
+    "        <span class=\"help-block\">Expiration in seconds for inactive authentication</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">htdigest file</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.htdigest\" placeholder=\"Insert the htdigest file path\">\n" +
+    "        <span class=\"help-block\"><span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span> If you don't know how to create a <i>htdigest</i> file, read this <a href=\"https://apigility.org/documentation/auth/authentication-http-digest\" target=\"_blank\">guide</a></span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- OAuth2 PDO -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'OAuth2 PDO'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">DSN</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_dsn\" placeholder=\"sqlite::memory:\">\n" +
+    "        <span class=\"help-block\">The PDO database source name (DSN).</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Username</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_username\" placeholder=\"(optional) username\">\n" +
+    "        <span class=\"help-block\">Username for OAuth2 database credentials (required if not using SQLite)</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Password</label>\n" +
+    "        <input type=\"password\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_password\" placeholder=\"(optional) password\">\n" +
+    "        <span class=\"help-block\">Password for the username listed (required if not using SQLite)</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">OAuth2 route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_route\" placeholder=\"/oauth\">\n" +
+    "        <span class=\"help-block\">Base URI to use as the OAuth2 server endpoint</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "  <!-- OAuth2 Mongo -->\n" +
+    "  <div ng-show=\"vm.auth.type == 'OAuth2 Mongo'\">\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">DSN</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_dsn\" placeholder=\"Insert the Mongo database source name (DSN)\">\n" +
+    "        <span class=\"help-block\">The MongoClient server connection string; if not provided, \"mongodb://localhost:27017\" will be used. \"mongodb://\" may be omitted from the string.</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Locator name</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_locator_name\" placeholder=\"(optional) Insert the locator name\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">Database</label>\n" +
+    "        <input type=\"test\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_database\" placeholder=\"The Mongo database name\">\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"row\">\n" +
+    "      <div class=\"col-sm-12\">\n" +
+    "        <label class=\"control-label\">OAuth2 route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_route\" placeholder=\"/oauth\">\n" +
+    "        <span class=\"help-block\">Base URI to use as the OAuth2 server endpoint</span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">Close</button>\n" +
+    "  <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</span></button>\n" +
     "</div>\n" +
     "");
 }]);
@@ -1922,9 +2168,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "          <form class=\"form-inline\">\n" +
     "            <div class=\"form-group\">\n" +
     "              <label class=\"control-label\">Select the file to open</label>\n" +
-    "              <select class=\"form-control\">\n" +
-    "                <option ng-click=\"vm.getSourceCode(source.classname)\" ng-repeat=\"source in vm.rest.source_code\">{{source.name}}</option>\n" +
-    "              </select>\n" +
+    "              <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rest.source_code\"></select>\n" +
     "            </div>\n" +
     "          </form>\n" +
     "          <br clear=\"left\">\n" +
@@ -2119,9 +2363,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "        <form class=\"form-inline\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"control-label\">Select the file to open</label>\n" +
-    "            <select class=\"form-control\">\n" +
-    "              <option ng-click=\"vm.getSourceCode(source.classname)\" ng-repeat=\"source in vm.rpc.source_code\">{{source.name}}</option>\n" +
-    "            </select>\n" +
+    "            <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rpc.source_code\"></select>\n" +
     "          </div>\n" +
     "        </form>\n" +
     "        <br clear=\"left\">\n" +
@@ -2138,10 +2380,6 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
 
 angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/sidebar/sidebar.html",
-    "<div id=\"version\">\n" +
-    "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
-    "</div>\n" +
-    "\n" +
     "<div class=\"row search\"><div class=\"col-sm-12\">\n" +
     "  <form class=\"form-horizontal\" ng-submit=\"vm.searchApi(vm.search)\">\n" +
     "    <div class=\"input-group\">\n" +

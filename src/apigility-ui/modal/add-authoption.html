@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add OAuth2 option for <strong>{{vm.auth.name}}</strong></h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Option</label>
+  <input type="text" class="form-control" ng-model="vm.option" placeholder="Insert the option name" autofocus>
+  <label class="control-label">Value</label>
+  <input type="text" class="form-control" ng-model="vm.value" placeholder="Insert the option value">
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</span></button>
+</div>
