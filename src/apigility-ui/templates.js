@@ -426,38 +426,32 @@ angular.module("apigility-ui/documentation/documentation.html", []).run(["$templ
 angular.module("apigility-ui/header/header.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/header/header.html",
     "<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
-    "  <div class=\"container-fluid\">\n" +
-    "    <div class=\"navbar-header\">\n" +
-    "      <button type=\"button\" class=\"navbar-toggle\"\n" +
-    "        ng-click=\"vm.isCollapsed = !vm.isCollapsed\">\n" +
-    "        <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "        <span class=\"icon-bar\"></span>\n" +
-    "      </button>\n" +
+    "  <div class=\"navbar-header\">\n" +
+    "    <button type=\"button\" class=\"btn btn-info header-toggle\"\n" +
+    "      data-toggle=\"navbar\">\n" +
+    "      <span class=\"sr-only\">Toggle navigation</span>\n" +
+    "      <span class=\"glyphicon glyphicon-chevron-right\"></span>\n" +
+    "    </button>\n" +
     "\n" +
-    "      <a class=\"logo\" ui-sref=\"ag\"\n" +
-    "        ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
-    "        src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
+    "    <a class=\"logo\" ui-sref=\"ag\"\n" +
+    "      ng-click=\"vm.setSelected('')\"><img id=\"logo\"\n" +
+    "      src=\"apigility-ui/img/logo.png\" alt=\"Apigility\"></a>\n" +
     "\n" +
-    "      <button type=\"button\" class=\"btn btn-info hidden-md hidden-lg sidebar-toggle\"\n" +
-    "        data-toggle=\"sidebar\">\n" +
-    "        <span class=\"sr-only\">Toggle sidebar</span>\n" +
-    "        <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
-    "      </button>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"navbar-collapse bs-js-navbar-collapse\" collapse=\"vm.isCollapsed\">\n" +
-    "      <ul class=\"nav nav-bar nav-pills\">\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
-    "        <li role=\"presentation\" ng-class=\"{active: ('ag.about' | includedByState)}\"><a ui-sref=\"ag.about\" ng-click=\"vm.setSelected('')\">About</a></li>\n" +
-    "      </ul>\n" +
-    "    </div>\n" +
+    "    <button type=\"button\" class=\"btn btn-info sidebar-toggle\"\n" +
+    "      data-toggle=\"sidebar\">\n" +
+    "      <span class=\"sr-only\">Toggle sidebar</span>\n" +
+    "      <span class=\"glyphicon glyphicon-chevron-left\"></span>\n" +
+    "    </button>\n" +
     "  </div>\n" +
+    "\n" +
+    "  <ul class=\"nav nav-pills\">\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.content' | includedByState)}\"><a ui-sref=\"ag.content\" ng-click=\"vm.setSelected('')\">Content Negotiation</a></li>\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.authentication' | includedByState)}\"><a ui-sref=\"ag.authentication\" ng-click=\"vm.setSelected('')\">Authentication</a></li>\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.database' | includedByState)}\"><a ui-sref=\"ag.database\" ng-click=\"vm.setSelected('')\">Database</a></li>\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.documentation' | includedByState)}\"><a ui-sref=\"ag.documentation({api : null, ver : null})\" ng-click=\"vm.setSelected('')\">Documentation</a></li>\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.package' | includedByState)}\"><a ui-sref=\"ag.package\" ng-click=\"vm.setSelected('')\">Package</a></li>\n" +
+    "    <li role=\"presentation\" ng-class=\"{active: ('ag.about' | includedByState)}\"><a ui-sref=\"ag.about\" ng-click=\"vm.setSelected('')\">About</a></li>\n" +
+    "  </ul>\n" +
     "</nav>\n" +
     "");
 }]);

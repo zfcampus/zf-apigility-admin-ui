@@ -163,6 +163,12 @@
 
     <script>
       $(document).ready(function () {
+        $('[data-toggle=navbar]').click(function () {
+          $('.nav-pills').toggleClass('nav-stacked');
+          $('.header-toggle span.glyphicon')
+            .toggleClass('header-toggled');
+        });
+
         $('[data-toggle=sidebar]').click(function () {
           $('.sidebar').toggleClass('sidebar-active');
           $('.sidebar-toggle span.glyphicon')

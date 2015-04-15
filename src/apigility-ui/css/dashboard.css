@@ -27,14 +27,27 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
+  box-sizing: border-box;
   border: 1px;
   border-color: #428bca;
   background: #105d8a;
+  height: 70px;
 }
 
 .navbar-fixed-top a {
   font-size: 18px;
   color: white;
+}
+
+.header-toggle {
+  display: block;
+  position: fixed;
+  top: 8px;
+  right: 15px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  padding: 9px 10px;
 }
 
 .sidebar-toggle {
@@ -48,7 +61,8 @@ body {
   padding: 9px 10px;
 }
 
-.sidebar-toggle .glyphicon {
+.sidebar-toggle .glyphicon,
+.header-toggle .glyphicon {
   -webkit-transition: transform .5s;
      -moz-transition: transform .5s;
       -ms-transition: transform .5s;
@@ -56,7 +70,7 @@ body {
           transition: transform .5s;
 }
 
-.sidebar-toggled {
+.header-toggled {
   -webkit-transform: rotate(180deg);
      -moz-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
@@ -64,7 +78,15 @@ body {
           transform: rotate(180deg);
 }
 
-.log {
+.sidebar-toggled {
+  -webkit-transform: rotate(-180deg);
+     -moz-transform: rotate(-180deg);
+      -ms-transform: rotate(-180deg);
+       -o-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+
+.logo {
   display: block;
   margin: 5px 0 5px 20px;
   max-height: 70px;
@@ -154,6 +176,41 @@ body {
 }
 
 /*
+ * Responsive navbar
+ */
+@media screen and (min-width: 1096px) {
+  .nav-pills {
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 1096px) {
+  /* Push navbar offscreen */
+  .nav-pills {
+    position: absolute;
+    display: block;
+    top: 70px;
+    right: -320px;
+    z-index: -1;
+    width: 320px;
+    height: 100vh;
+    margin-top: 0;
+    background: #105d8a;
+    -webkit-transition: all .25s ease-out;
+       -moz-transition: all .25s ease-out;
+        -ms-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  /* Except when active */
+  .nav-stacked {
+    right: 0;
+    z-index: 100;
+  }
+}
+
+/*
  * Responsive sidebar
  */
 
@@ -162,10 +219,18 @@ body {
   .main {
     margin-left: 340px;
   }
+
+  .sidebar-toggle {
+    display: none;
+  }
 }
 
 /* Small displays (small tablets, phones */
 @media screen and (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+
   /* Push sidebar offscreen */
   .sidebar {
     left: -320px;
