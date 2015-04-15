@@ -14,7 +14,7 @@
 
     <link rel="icon" href="apigility-ui/img/favicon.png">
 
-    <link rel="stylesheet" href="apigility-ui/css/a82ebd18.apigility.min.css"/>
+    <link rel="stylesheet" href="apigility-ui/css/7d939503.apigility.min.css"/>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,37 +27,30 @@
   <body data-ag-api-path="%API_BASE%">
     <ui-view name="header"></ui-view>
 
-    <div class="container-fluid bottom"><div class="row row-offcanvas row-offcanvas-left">
-      <div class="col-xs-6 col-sm-5 sidebar sidebar-offcanvas" role="navigation">
-        <ui-view name="sidebar"></ui-view>
-      </div>
+    <div class="sidebar" role="navigation">
+      <ui-view name="sidebar"></ui-view>
+    </div>
 
-      <div class="col-xs-12 col-sm-7 main">
-        <div style="margin-top: 20px" ui-view="" name="content"></div>
+    <div class="main">
+      <div class="main-panel container-fluid" ui-view="" name="content"></div>
 
-        <footer>
-          <hr>
-          <div class="pull-left">&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd</div>
-          <div class="pull-right" align="right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
-        </footer>
-      </div>
-    </div></div>
+      <footer class="container-fluid">
+        <hr>
+        <div class="pull-right" align="right">For more information visit <a href="https://apigility.org" target="_blank">apigility.org</a></div>
+        <div>&copy; 2013 - 2015 by <a href="http://www.zend.com" target="_blank">Zend Technologies</a> Ltd</div>
+      </footer>
+    </div>
 
-    <script src="apigility-ui/624f9237.vendor.js" charset="utf-8"></script>
+    <script src="apigility-ui/ce9cc275.vendor.js" charset="utf-8"></script>
 
-    <script src="apigility-ui/be84525a.apigility.js" charset="utf-8"></script>
+    <script src="apigility-ui/f1cc97b1.apigility.js" charset="utf-8"></script>
 
     <script>
       $(document).ready(function () {
-        $('[data-toggle=offcanvas]').click(function () {
-          if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
-            $('.list-group-item').attr('tabindex', '-1');
-          } else {
-            $('.list-group-item').attr('tabindex', '');
-          }
-          $('.row-offcanvas').toggleClass('active');
+        $('[data-toggle=sidebar]').click(function () {
+          $('.sidebar').toggleClass('active');
           $('.sidebar-toggle span.glyphicon')
-            .toggleClass('glyphicon-chevron-left glyphicon-chevron-right');
+            .toggleClass('toggled');
         });
       });
     </script>
