@@ -191,7 +191,7 @@ angular.module("apigility-ui/content-negotiation/content-negotiation.html", []).
 
 angular.module("apigility-ui/dashboard/dashboard.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/dashboard/dashboard.html",
-    "<div class=\"row\" id=\"dashboard\">\n" +
+    "<div class=\"row dashboard\">\n" +
     "  <div class=\"col-xs-12\">\n" +
     "    <div class=\"hero pull-right\">\n" +
     "      <img src=\"apigility-ui/img/ag-hero.png\">\n" +
@@ -427,7 +427,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
   $templateCache.put("apigility-ui/header/header.html",
     "<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "  <div class=\"container-fluid\">\n" +
-    "    <div class=\"navbar-header logo\">\n" +
+    "    <div class=\"navbar-header\">\n" +
     "      <button type=\"button\" class=\"navbar-toggle\"\n" +
     "        ng-click=\"vm.isCollapsed = !vm.isCollapsed\">\n" +
     "        <span class=\"sr-only\">Toggle navigation</span>\n" +
@@ -1523,7 +1523,7 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "            <option value=\"\" disabled>- Choose an adapter -</option>\n" +
     "          </select>\n" +
     "        </div>\n" +
-    "        <div ui-tree class=\"angular-ui-tree\" id=\"db-tables-tree\" data-max-depth=\"2\" ng-if=\"(vm.tables && vm.tables.length > 0) || vm.discovering\">\n" +
+    "        <div ui-tree class=\"angular-ui-tree db-tables-tree\" data-max-depth=\"2\" ng-if=\"(vm.tables && vm.tables.length > 0) || vm.discovering\">\n" +
     "          <label class=\"control-label\">Tables<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
     "          <ol ui-tree-nodes=\"options\" ng-model=\"vm.tables\" class=\"angular-ui-tree-nodes\">\n" +
     "            <li class=\"angular-ui-tree-node\" ng-repeat=\"table in vm.tables\" ui-tree-node collapsed=\"true\">\n" +
@@ -1665,7 +1665,7 @@ angular.module("apigility-ui/modal/view-doctrineparams.html", []).run(["$templat
     "  <h4 class=\"modal-title\">View Doctrine Adapter Parameters</h4>\n" +
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
-    "  <form class=\"form-horizontal\" id=\"doctrine-params\">\n" +
+    "  <form class=\"form-horizontal doctrine-params\">\n" +
     "    <div class=\"form-group\">\n" +
     "      <label class=\"col-sm-3 control-label\">Driver Class:</label>\n" +
     "      <div class=\"col-sm-9\">\n" +
@@ -1706,7 +1706,8 @@ angular.module("apigility-ui/modal/view-doctrineparams.html", []).run(["$templat
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"vm.ok()\">Close</button>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("apigility-ui/package/package.html", []).run(["$templateCache", function($templateCache) {

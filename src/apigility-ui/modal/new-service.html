@@ -35,7 +35,7 @@
             <option value="" disabled>- Choose an adapter -</option>
           </select>
         </div>
-        <div ui-tree class="angular-ui-tree" id="db-tables-tree" data-max-depth="2" ng-if="(vm.tables && vm.tables.length > 0) || vm.discovering">
+        <div ui-tree class="angular-ui-tree db-tables-tree" data-max-depth="2" ng-if="(vm.tables && vm.tables.length > 0) || vm.discovering">
           <label class="control-label">Tables<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
           <ol ui-tree-nodes="options" ng-model="vm.tables" class="angular-ui-tree-nodes">
             <li class="angular-ui-tree-node" ng-repeat="table in vm.tables" ui-tree-node collapsed="true">
