@@ -5,8 +5,8 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "<div class=\"panel panel-default\">\n" +
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
+    "      <span class=\"pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteApiModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete API</button></span>\n" +
     "      API: {{vm.apiName}} (v{{vm.version}})\n" +
-    "      <button class=\"btn btn-danger pull-right\" ng-click=\"vm.deleteApiModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete API</button>\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2138,7 +2138,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
 
 angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/sidebar/sidebar.html",
-    "<div class=\"row\" id=\"version\">\n" +
+    "<div id=\"version\">\n" +
     "  <a ng-click=\"vm.aboutModal()\">v{{vm.apigilityVersion}}</a>\n" +
     "</div>\n" +
     "\n" +
