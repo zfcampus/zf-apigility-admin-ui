@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalDeleteService"><span class="glyphicon glyphicon-trash"></span> Delete validator</h4>
+</div>
+<div class="modal-body">
+  <p class="modal_msg">Are you sure to delete the validator <strong>{{vm.validator.name}}</strong>?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">No</button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Yes</span></button>
+</div>

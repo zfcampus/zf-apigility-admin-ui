@@ -1,8 +1,9 @@
 composer.lock
 node_modules/
-srce/zf-apigility-admin/vendor/
+src/vendor/
 vendor/
 .project
 .buildpath
 .settings
 .tmp/
+.idea/

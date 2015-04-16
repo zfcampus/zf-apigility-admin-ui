@@ -1,0 +1,28 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="btn btn-info header-toggle"
+      data-toggle="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+
+    <a class="logo" ui-sref="ag"
+      ng-click="vm.setSelected('')"><img id="logo"
+      src="apigility-ui/img/logo.png" alt="Apigility"></a>
+
+    <button type="button" class="btn btn-info sidebar-toggle"
+      data-toggle="sidebar">
+      <span class="sr-only">Toggle sidebar</span>
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </button>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li role="presentation" ng-class="{active: ('ag.content' | includedByState)}"><a ui-sref="ag.content" ng-click="vm.setSelected('')">Content Negotiation</a></li>
+    <li role="presentation" ng-class="{active: ('ag.authentication' | includedByState)}"><a ui-sref="ag.authentication" ng-click="vm.setSelected('')">Authentication</a></li>
+    <li role="presentation" ng-class="{active: ('ag.database' | includedByState)}"><a ui-sref="ag.database" ng-click="vm.setSelected('')">Database</a></li>
+    <li role="presentation" ng-class="{active: ('ag.documentation' | includedByState)}"><a ui-sref="ag.documentation({api : null, ver : null})" ng-click="vm.setSelected('')">Documentation</a></li>
+    <li role="presentation" ng-class="{active: ('ag.package' | includedByState)}"><a ui-sref="ag.package" ng-click="vm.setSelected('')">Package</a></li>
+    <li role="presentation" ng-class="{active: ('ag.about' | includedByState)}"><a ui-sref="ag.about" ng-click="vm.setSelected('')">About</a></li>
+  </ul>
+</nav>

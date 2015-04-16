@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalDeleteService"><span class="glyphicon glyphicon-trash"></span> Delete API</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <p class="modal_msg">Are you sure to delete the <strong>{{vm.apiName}}</strong> API?</p>
+  <p>By default, deleting the API only removes the API module from the application configuration.
+  You can re-enable it by re-adding the module to your application configuration at a later date.</p>
+
+  <p><input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading"> Delete all files associated with this API?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">No</button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Yes</span></button>
+</div>
