@@ -42,9 +42,7 @@
         ];
         vm.getSourceCode(vm.rpc.source_code[0].classname);
         vm.source = vm.rpc.source_code[0];
-      });
 
-      if (vm.hasOwnProperty('rpc')) {
         api.getContentNegotiation(function(result){
           vm.content_negotiation = result;
           for (var i = 0; i < result.length; i++) {
@@ -54,7 +52,7 @@
             }
           }
         });
-      }
+      });
     }
 
     function initAuthorization() {
