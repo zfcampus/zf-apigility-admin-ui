@@ -178,13 +178,16 @@ body {
 /*
  * Responsive navbar
  */
-@media screen and (min-width: 1096px) {
+@media screen and (min-width: 1124px) {
   .nav-pills {
     display: inline-block;
   }
+  .header-toggle {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 1096px) {
+@media screen and (max-width: 1124px) {
   /* Push navbar offscreen */
   .nav-pills {
     position: absolute;
@@ -207,6 +210,9 @@ body {
   .nav-stacked {
     right: 0;
     z-index: 100;
+  }
+  .header-toggle {
+    display: block;
   }
 }
 
