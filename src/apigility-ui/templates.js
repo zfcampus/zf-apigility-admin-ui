@@ -430,7 +430,7 @@ angular.module("apigility-ui/header/header.html", []).run(["$templateCache", fun
     "    <button type=\"button\" class=\"btn btn-info header-toggle\"\n" +
     "      data-toggle=\"navbar\">\n" +
     "      <span class=\"sr-only\">Toggle navigation</span>\n" +
-    "      <span class=\"glyphicon glyphicon-chevron-right\"></span>\n" +
+    "      <span class=\"glyphicon glyphicon-menu-hamburger\"></span>\n" +
     "    </button>\n" +
     "\n" +
     "    <a class=\"logo\" ui-sref=\"ag\"\n" +
