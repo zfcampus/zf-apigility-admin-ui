@@ -115,7 +115,7 @@ body {
   top: 70px;
   left: 0;
   box-sizing: border-box;
-  height: 100%;
+  height: 100vh;
   width: 320px;
   padding-left: 20px;
   padding-right: 20px;
@@ -164,7 +164,6 @@ body {
   left: 0;
   box-sizing: border-box;
   padding: 20px;
-  height: 100%;
 }
 
 .main-panel {
@@ -182,6 +181,7 @@ body {
   .nav-pills {
     display: inline-block;
   }
+
   .header-toggle {
     display: none;
   }
@@ -211,6 +211,7 @@ body {
     right: 0;
     z-index: 100;
   }
+
   .header-toggle {
     display: block;
   }
