@@ -26,7 +26,7 @@
     "angular": "~1.2.26",
     "sass-bootstrap-glyphicons": "~1.0.0",
     "angular-ui-bootstrap-bower": "~0.11.2",
-    "bootstrap": "~3.2.0",
+    "bootstrap": "~3.3.2",
     "jquery": "~2.1.1",
     "angular-ui-router": "~0.2.13",
     "humps": "~0.4.2",
