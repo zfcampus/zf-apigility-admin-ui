@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Database Adapter</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Adapter Name</label>
+  <input type="text" class="form-control" ng-model="vm.db.adapter_name" readonly><br />
+  <div class="row">
+    <div class="col-sm-6">
+      <label class="control-label">Driver Type</label>
+      <select class="form-control" ng-model="vm.db.driver" ng-options="option as option for option in vm.driver_types"></select>
+    </div>
+    <div class="col-sm-6">
+      <label class="control-label">Database</label>
+      <input type="text" class="form-control" ng-model="vm.db.database" placeholder="Insert the database name"><br />
+    </div>
+  </div>
+  <label class="control-label">DSN</label>
+  <input type="text" class="form-control" ng-model="vm.db.dsn" placeholder="(Optional) DSN for database"><br />
+  <div class="row">
+    <div class="col-sm-6">
+      <label class="control-label">Username</label>
+      <input type="text" class="form-control" ng-model="vm.db.username" placeholder="(Optional) Username"><br />
+    </div>
+    <div class="col-sm-6">
+      <label class="control-label">Password</label>
+      <input type="password" class="form-control" ng-model="vm.db.password" placeholder="(Optional) Password"><br />
+    </div>
+  </div>
+  <label class="control-label">Hostname</label>
+  <input type="password" class="form-control" ng-model="vm.db.hostname" placeholder="(Optional) Hostname"><br />
+  <div class="row">
+    <div class="col-sm-6">
+      <label class="control-label">Port</label>
+      <input type="password" class="form-control" ng-model="vm.db.port" placeholder="(Optional) Port"><br />
+    </div>
+    <div class="col-sm-6">
+      <label class="control-label">Charset</label>
+      <input type="password" class="form-control" ng-model="vm.db.charset" placeholder="(Optional) Charset"><br />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</button>
+</div>

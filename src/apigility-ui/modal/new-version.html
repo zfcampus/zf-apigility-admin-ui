@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalVersion">New API version</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <p class="modal_msg">Do you want to create <strong>version {{vm.newVersion}}</strong> for <strong>{{vm.apiName}}</strong> API?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">No</button>
+  <button type="button" class="btn btn-primary btn-sm"  ng-click="vm.ok()" ladda="vm.loading">Yes</button>
+</div>

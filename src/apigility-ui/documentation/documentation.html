@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Documentation <span ng-if="vm.apiName"> of <strong>{{vm.apiName}}</strong> (v{{vm.version}})</span></h3>
+  </div>
+  <div class="panel-body">
+    <ng-include src="'apigility-ui/documentation/documentation-list.html'" ng-if="!vm.apiName"></ng-include>
+    <ng-include src="'apigility-ui/documentation/documentation-api.html'" ng-if="vm.apiName"></ng-include>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="col-md-4">API name</th>
+      <th class="col-md-8">Versions</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="api in vm.doc">
+    <td>{{api.name}}</td>
+    <td>
+      <span ng-repeat="ver in api.versions"><a ui-sref="ag.documentation({api: api.name, ver: ver})">Ver. {{ver}}</a>, </span>
+    </td>
+  </tr>
+</table>

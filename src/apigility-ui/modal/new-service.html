@@ -1,0 +1,124 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create a new service</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <div role="tabpanel">
+    <label class="control-label">API</label>
+    <select class="form-control" ng-model="vm.apiname" ng-options="api.name for api in vm.apis" ng-disabled="vm.loading"></select>
+    <br />
+    <label class="control-label">Select the type of service to create</label>
+    <br />
+    <!-- Nav tabs -->
+    <tabset justified="true">
+      <tab heading="REST" active="vm.tabs.rest">
+        <label for="rest_service_name" class="control-label">Service name</label>
+        <input type="text" id="rest_service_name" class="form-control" ng-model="vm.restname" ng-disabled="vm.loading" placeholder="Insert the service name" autofocus>
+      </tab>
+      <tab heading="RPC" active="vm.tabs.rpc">
+        <label for="rpc_service_name" class="control-label">Service name</label>
+        <input type="text" id="rpc_service_name" class="form-control" ng-model="vm.rpcname" ng-disabled="vm.loading" placeholder="Insert the service name">
+        <br />
+        <label for="route_match" class="control-label">Route to match</label>
+        <input type="text" id="route_match" class="form-control" ng-model="vm.route" ng-disabled="vm.loading" placeholder="Insert the route to match">
+      </tab>
+      <tab heading="DB Connected" active="vm.tabs.db">
+        <div ng-if="vm.db.db_adapter.length === 0">
+          <h3>No DB Adapters Present</h3>
+          <p>You have not yet configured any database adapters, and thus cannot create a DB-Connected service. You can create adapters on the <a ui-sref="ag.database" ng-click="vm.cancel()">Database Adapters</a> setting page.
+        </div>
+        <div ng-if="vm.db.db_adapter.length > 0">
+          <label for="db_adapter_name" class="control-label">DB adapter name</label>
+          <select class="form-control" id="db_adapter_name" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-change="vm.discoverDb()">
+            <option value="" disabled>- Choose an adapter -</option>
+          </select>
+        </div>
+        <div ui-tree class="angular-ui-tree db-tables-tree" data-max-depth="2" ng-if="(vm.tables && vm.tables.length > 0) || vm.discovering">
+          <label class="control-label">Tables<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
+          <ol ui-tree-nodes="options" ng-model="vm.tables" class="angular-ui-tree-nodes">
+            <li class="angular-ui-tree-node" ng-repeat="table in vm.tables" ui-tree-node collapsed="true">
+              <div class="tree-node">
+                <div class="pull-left tree-handle angular-ui-tree-handle" ui-tree-handle>
+                  <span class="glyphicon glyphicon-list"></span>
+                </div>
+                <div class="tree-node-content">
+                  <a class="btn btn-default btn-xs" ng-click="vm.toggle(this)" data-nodrag="">
+                    <span ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" class="glyphicon glyphicon-chevron-down"></span>
+                  </a>
+                  <span>{{table.table_name}}</span>
+                  <input type="checkbox" class="pull-right" checklist-model="vm.dbServices" checklist-value="table">
+                  <div class="clearfix"></div>
+                  <div ng-class="{hidden: collapsed}">
+                    <table class="table table-bordered">
+                      <caption>Fields</caption>
+                      <thead>
+                      <tr>
+                        <th class="col-sm-3">Column</th>
+                        <th class="col-sm-4">Type (Length)</th>
+                        <th class="col-sm-2">Required</th>
+                        <th class="col-sm-3">Constraints</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="column in table.columns">
+                        <td>{{column.name}}</td>
+                        <td>{{column.type}}<span ng-show="column['length']"> ({{column['length']}})</span></td>
+                        <td><i class="glyphicon glyphicon-ok" ng-if="!!column.required"></i></td>
+                        <td>{{column.constraints.join(', ')}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div ng-if="vm.tables && vm.tables.length == 0 && !vm.discovering && !vm.loading">
+          <h3>No tables found</h3>
+          <p>Autodiscovery could not find any existing tables, or those tables have already been exposed through DB-connected services.</p>
+        </div>
+      </tab>
+      <tab heading="Doctrine Connected" ng-if="vm.hasDoctrine" active="vm.tabs.doctrine">
+        <div ng-if="vm.doctrine.doctrine_adapter.length === 0">
+          <h3>Doctrine configuration broken</h3>
+          <p>You have not yet configured any Doctrine connection, and thus cannot create a Doctrine-Connected service.<br><br>Please refer to the <a href="#">documentation page</a> and define validation configuration for your Doctrine connection.
+        </div>
+        <div class="form-group" ng-if="vm.doctrine.doctrine_adapter.length > 0">
+          <label for="doctrine_entity_manager" class="control-label">Entity Manager</label>
+          <select class="form-control" id="doctrine_entity_manager" ng-model="vm.doctrineAdapter" ng-options="doctrine.adapter_name for doctrine in vm.doctrine.doctrine_adapter" ng-change="vm.discoverDoctrine()" ng-disabled="vm.discovering">
+            <option value="" disabled>- Choose an adapter -</option>
+          </select>
+        </div>
+        <div ng-if="vm.doctrine.doctrine_adapter.length > 0">
+          <div ui-tree class="angular-ui-tree" id="db-entities-tree" data-max-depth="2" ng-if="(vm.entities && vm.entities.length > 0 ) || vm.discovering">
+            <label class="control-label">Entities<span class="glyphicon glyphicon-refresh glyphicon-spin" ng-if="vm.discovering"></span></label>
+            <ol ui-tree-nodes="options" ng-model="vm.entities" class="angular-ui-tree-nodes">
+              <li class="angular-ui-tree-node" ng-repeat="entity in vm.entities" ui-tree-node>
+                <div class="tree-node">
+                  <div class="pull-left tree-handle angular-ui-tree-handle" ui-tree-handle>
+                    <span class="glyphicon glyphicon-list"></span>
+                  </div>
+                  <div class="tree-node-content">
+                    <span>{{entity.entity_class}}</span>
+                    <input type="checkbox" class="pull-right" checklist-model="vm.doctrineEntities" checklist-value="entity">
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div ng-if="vm.entities && vm.entities.length == 0 && !vm.discovering">
+            <h3>No entities found</h3>
+            <p>Autodiscovery could not find any existing entities, or those entities have already been exposed through Doctrine-connected services.</p>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">Close</button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Create service</span></button>
+</div>

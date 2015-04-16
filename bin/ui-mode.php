@@ -1,5 +1,10 @@
 #!/usr/bin/env php
 <?php
+/**
+ * Enable development or production usage
+ *
+ * Usage: ui-mode.php --dev|--production
+ */
 
 use Zend\Console\Exception\RuntimeException;
 use Zend\Console\Getopt;
@@ -27,7 +32,7 @@ if (isset($opts->h)) {
     exit(0);
 }
 
-if ((!isset($opts->d) && !isset($opts->p))
+if ((! isset($opts->d) && ! isset($opts->p))
     || (isset($opts->d) && isset($opts->p))
 ) {
     echo "Please select one of EITHER --dev OR --production.\n";
@@ -37,31 +42,29 @@ if ((!isset($opts->d) && !isset($opts->p))
 
 if (isset($opts->d)) {
     echo "Enabling development mode\n";
-    $version = 'src';
+    $from = 'dist';
+    $to   = 'src';
 } else {
     echo "Enabling production mode\n";
-    $version = 'dist';
+    $from = 'src';
+    $to   = 'dist';
 }
 
-updateConfig($configfile, $version);
-updateView($viewfile, $version);
+updateFile($configfile, $from, $to);
+updateFile($viewfile, $from, $to);
 
 echo "Done!\n";
 
-function updateView($viewfile, $version)
+function updateFile($file, $from, $to)
 {
-    echo "    Updating view\n";
-    $view  = file_get_contents($viewfile);
-    $regex = '/^(\$version\s+=\s+\')([^\']+)/m';
-    $view  = preg_replace($regex, '$1' . $version, $view);
-    file_put_contents($viewfile, $view);
-}
+    echo "    Updating $file\n";
 
-function updateConfig($configfile, $version)
-{
-    echo "    Updating config\n";
-    $config = file_get_contents($configfile);
-    $regex  = '#(\'ui\'\s+=>\s+.*?\'\/\.\.\/)([^\']+)#m';
-    $config = preg_replace($regex, '$1' . $version, $config);
-    file_put_contents($configfile, $config);
+    $content     = file_get_contents($file);
+    $pattern     = '#/(' . $from . ')/#';
+    $replacement = '/' . $to . '/';
+    $content     = preg_replace($pattern, $replacement, $content);
+
+    if (! empty($content)) {
+      file_put_contents($file, $content);
+    }
 }

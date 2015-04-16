@@ -1,0 +1,63 @@
+<div class="row search"><div class="col-sm-12">
+  <form class="form-horizontal" ng-submit="vm.searchApi(vm.search)">
+    <div class="input-group">
+      <input
+        class="form-control"
+        type="search"
+        placeholder="Search for a service"
+        ng-model="vm.search"
+        ng-disabled="vm.loading"
+        typeahead="service for service in vm.services | filter:$viewValue | limitTo:8">
+
+      <span class="glyphicon glyphicon-remove input-group-addon"
+        ng-hide="!vm.search" ng-click="vm.searchApi('')"></span>
+
+      <span class="input-group-btn">
+        <button type="submit" class="pull-right btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </span>
+    </div>
+  </form>
+</div></div>
+
+<div class="row">
+  <div class="col-sm-12 text-right">
+    <span class="pull-left sidebar-list" ng-hide="vm.loading"><strong>API LIST</strong></span>
+    <span class="pull-left" ng-show="vm.loading"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
+    <button type="button" id="new_api" class="btn btn-primary btn-sm" ng-click="vm.newApiModal()" ng-disabled="vm.loading">New API</button>
+    <button type="button" id="new_service" class="btn btn-info btn-sm" ng-click="vm.newServiceModal()" ng-disabled="vm.loading || vm.apis.length == 0">New Service</button>
+  </div>
+</div>
+
+<div class="api-tree" ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
+  <ol ui-tree-nodes="options" ng-model="vm.apis" class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes">
+    <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis" ui-tree-node="">
+      <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name === vm.getSelected() }">
+        <a class="btn btn-default btn-xs" ng-click="vm.toggle(this)" data-nodrag="">
+          <span ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+        <a ng-click="vm.apiname=item.name;vm.setSelected('api'+item.name)" ui-sref="ag.apimodule({api: item.name, ver: item.selected_version})">{{item.name}}</a> - version <select ng-model="item.selected_version" ng-options="ver for ver in item.versions" ng-change="vm.changeVersion(item.name, item.selected_version);vm.setSelected('api'+item.name)"></select>
+        <span class="badge pull-right">{{item.rest.length + item.rpc.length}}</span>
+      </div>
+      <ol class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes" ng-class="{hidden: collapsed}">
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest">
+          <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rest'+subItem === vm.getSelected() }">
+            <span class="glyphicon glyphicon-leaf"></span> <a ui-sref="ag.rest({api: item.name, ver: item.selected_version, rest: subItem})" ng-click="vm.setSelected('api'+item.name+'rest'+subItem)">{{subItem}}</a>
+          </div>
+        </li>
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc">
+          <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rpc'+subItem === vm.getSelected() }">
+            <span class="glyphicon glyphicon-fire"></span> <a ui-sref="ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem})" ng-click="vm.setSelected('api'+item.name+'rpc'+subItem)">{{subItem}}</a>
+          </div>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+<div class="alert alert-info" role="alert" ng-show="vm.apis.length == 0 && !vm.search && !vm.loading">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No APIs configured, <a ng-click="vm.newApiModal()">would you like to create one?</a>
+</div>
+
+<div class="alert alert-danger" role="alert" ng-show="vm.apis.length == 0 && vm.search">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No services found, try with a new search
+</div>

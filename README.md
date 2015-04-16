@@ -1,7 +1,27 @@
-Apigility Admin UI
-==================
+Apigility Admin UI (develop branch)
+===================================
 
-This is the source code for the Apigility Admin user interface.
+This is the source code for the new Apigility Admin User Interface.
+We rewrote from scratch the UI in [AngularJS](https://angularjs.org/) with performance improvement and usability.
+
+We added some new features:
+
+- Doctrine support for DB connected REST service;
+- DB autodiscovering for table and fields;
+- Build package API file, ready for deployment (develop in progress, see [TODO list](TODO.md));
+- Per-API authentication (develop in progress, see [TODO list](TODO.md));
+
+> **Note**
+>
+> To be able to run the new UI you need to use the **develop** branch of [zf-apigility-skeleton](https://github.com/zfcampus/zf-apigility-skeleton)
+> For instance, you can install the develop branch using composer:
+>
+> ```sh
+> composer create-project zfcampus/zf-apigility-skeleton apigility dev-develop
+> ```
+>
+> This command install the zf-apigility-skeleton application in the apigility local folder. 
+
 
 Requirements
 ------------
@@ -9,6 +29,8 @@ Requirements
 - [npm](https://npmjs.org/), for installing the various development
   requirements, which primarily includes [Grunt](http://gruntjs.com) and
   [Bower](http://bower.io/), and tools these to utilize.
+- [Grunt](http://gruntjs.com/) must be installed globally in order to allow using
+  it to serve a source build and run tests.
 - [Bower](http://bower.io/) must be installed globally in order to allow using
   it to install development dependencies.
 
@@ -16,6 +38,12 @@ Run the following command from this directory to install dependencies:
 
 ```sh
 npm install
+```
+
+If you have not yet installed Grunt, please do so:
+
+```sh
+sudo npm install -g grunt
 ```
 
 If you have not yet installed Bower, please do so:
@@ -30,11 +58,28 @@ Finally, invoke Bower to install the relevant CSS and JS libraries:
 bower install
 ```
 
+Running tests
+-------------
+
+Once dependencies are installed, you may run tests using:
+
+```sh
+grunt test
+```
+
+Alternately, fire up a terminal and run:
+
+```sh
+grunt watch
+```
+
+to run tests automatically as files are changed.
+
 Invoking the Admin
 ------------------
 
-There are two ways to invoke the Admin UI: as part of an Apigility project, or
-standalone via [node](https://nodejs.org).
+There are three ways to invoke the Admin UI: as part of an Apigility project,
+standalone via [node](https://nodejs.org), or via source using grunt.
 
 ### Via Apigility
 
@@ -65,8 +110,7 @@ navigation item can point to it.
 Fire up the admin UI using:
 
 ```console
-$ node index.js --api=<URI to Apigility Admin API (ends in /apigility/api)> \
-> --doc=<URI to API documentation>
+$ node index.js --src --api=<URI to Apigility Admin API (ends in /apigility/api)>
 ```
 
 (For help with options, see `node index.js -h`.)
@@ -74,72 +118,45 @@ $ node index.js --api=<URI to Apigility Admin API (ends in /apigility/api)> \
 By default, if you do not specify a port, the server will run on port 3000; you
 can specify a port with the `--port=<port>` option.
 
+### Source invocation via Grunt
+
+The `grunt serve` command does several things:
+
+- Runs `grunt watch`, which looks for file changes and runs tasks such as jshint, unit tests, and combining partials into JS templates.
+- Runs a livereload, static HTTP server; any file change will force it to reload, and trigger any browser windows with the UI loaded to reload.
+
+The grunt server runs in the same way as the standalone server: it accepts the same options, and has the same CORS limitations. As an example:
+
+```console
+$ grunt serve --api=<URI to Apigility Admin API (ends in /apigility/api)> \
+> --doc=<URI to API documentation> --port=3001 --host=ag.dev
+```
+
 Workflow
 --------
 
 To develop the Admin UI (e.g., to add features or fix a bug), you will need to
-run the server using the source, not distribution, files. How you do this will
-depend on whether you are running the UI via an Apigility application or
-standalone.
+run the server using the source, not distribution, files. This means using
+`grunt serve` to develop.
 
-### Via Apigility
-
-You will need to run the following command to enable the application to serve
-the development files for the UI:
-
-```sh
-(asset) $ ../bin/ui-mode.php --dev
-```
-
-(Note that the above command assumes you are in the directory where this README
-file lives.)
-
-### Standalone
-
-To develop standalone, pass the `--src` switch when firing up the server:
-
-```console
-$ node index.js --src \
-> --api=<URI to Apigility Admin API (ends in /apigility/api)> \
-> --doc=<URI to API documentation>
-```
-
-### All methods
-
-All changes to the admin UI code should be made in the `src/zf-apigility-admin/`
-directory. We recommend running `grunt watch` during development so that you may
-be alerted of JS syntax errors, LESS compilation errors, etc.
-
-If running in standalone mode, we recommend using [nodemon](http://nodemon.io)
-when firing up your server; this utility will restart the server as it sees file
-changes.
+All changes to the admin UI code should be made in the `src/` directory.
 
 Once you are happy with the changes you have made, you will need to rebuild the
 distribution files. Run the following from this directory:
 
-```sh
-(asset) $ grunt clean && grunt build
-```
-
-If developing within an Apigility application, re-enable production mode:
-
-```sh
-(asset) $ ../bin/ui-mode.php --production
+```console
+$ grunt clean && grunt build
 ```
 
 Test that everything is working against the distribution on completion.
 
-Be sure to commit both the `src` and `dist` files when done.
 
 Adding JS/CSS Dependencies
 --------------------------
 
 If you need to add any new JS or CSS dependencies, please do so as follows:
 
-- Edit the `bower.json` file and add the dependency
-- Execute `bower install`
-- Add the files to `src/zf-apigility-admin/index.html` in the appropriate
-  section of the file.
-- Execute `grunt clean && grunt build`.
+- Edit the `bower.json` file and add the dependency.
+- Execute `bower install`.
+- Add the files to `src/index.html` in the appropriate section of the file.
 - Commit your changes.
-

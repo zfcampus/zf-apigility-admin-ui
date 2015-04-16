@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalDeleteService"><span class="glyphicon glyphicon-trash"></span> Delete RPC</h4>
+</div>
+<div class="modal-body">
+  <p class="modal_msg">Are you sure to delete the RPC service <strong>{{vm.rpcName}}</strong>?</p>
+  <p><input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading"> Delete all files and directories for this service</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">No</button>
+  <button type="button" class="btn btn-primary btn-sm" ng-click="vm.ok()" ladda="vm.loading">Yes</span></button>
+</div>

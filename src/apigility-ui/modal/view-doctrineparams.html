@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title">View Doctrine Adapter Parameters</h4>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal doctrine-params">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Driver Class:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.driverClass}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Host:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.params.host}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Port:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.params.port}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Charset:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.params.charset}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">User:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.params.user}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Database:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{vm.adapter.params.dbname}}</p>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-sm" ng-click="vm.ok()">Close</button>
+</div>

@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title">Validator for <strong>{{vm.field.name}}</strong> field <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="vm.deleteValidatorModal()" ng-hide="vm.disabled"><span class="glyphicon glyphicon-trash"></span> Delete validator</button></h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Validator</label>
+  <input type="text" class="form-control" ng-model="vm.validator.name" readonly>
+  <br />
+  <div class="form-group">
+    <label for="rest_validator_option" class="col-sm-2 control-label">Option</label>
+    <div class="col-sm-8">
+      <select class="form-control" ng-model="vm.option.name" ng-options="name as name for (name, value) in vm.options" ng-change="vm.option.value=''" ng-disabled="vm.disabled"></select>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success btn-sm" ng-click="vm.addOption()" ng-hide="vm.disabled">Add option</span></button>
+    </div>
+  </div>
+  <br />
+  <div class="form-group" ng-disabled="vm.disabled">
+    <label class="control-label col-sm-2">Value</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" ng-model="vm.option.value" placeholder="Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})" ng-disabled="vm.disabled">
+    </div>
+  </div>
+  <br /><br />
+  <table class="table table-bordered col-md-12">
+    <thead>
+      <tr>
+        <th class="col-md-5">Option</th>
+        <th class="col-md-5">Value</th>
+        <th class="col-md-2">Action</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="(option, value) in vm.validator.options">
+      <td>{{option}}</td>
+      <td>{{value}}</td>
+      <td><button type="button" ng-click="vm.deleteOption(option)" class="btn btn-danger btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-trash"></i> delete</button></td>
+    </tr>
+    <tr ng-show="vm.validator.options | emptyObject">
+      <td colspan="3">
+        No options have been defined</a>
+      </td>
+    </tr>
+  </table>
+  <br clear="left" />
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading" ng-hide="vm.disabled">Save</span></button>
+</div>

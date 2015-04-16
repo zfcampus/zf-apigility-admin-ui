@@ -1,0 +1,120 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Authentication Adapter</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label class="control-label">Adapter Name</label>
+      <input type="text" class="form-control" ng-model="vm.auth.name" readonly><br />
+    </div>
+    <div class="col-sm-6">
+      <label class="control-label">Type</label>
+      <input type="text" class="form-control" ng-model="vm.auth.type" readonly>
+    </div>
+  </div>
+  <!-- HTTP Basic -->
+  <div ng-show="vm.auth.type == 'HTTP Basic'">
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Realm</label>
+        <input type="text" class="form-control" ng-model="vm.auth.basic.realm" placeholder="Insert the realm attribute">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">htpasswd file</label>
+        <input type="text" class="form-control" ng-model="vm.auth.basic.htpasswd" placeholder="Insert the htpasswd file path">
+        <span class="help-block"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> If you don't know how to create a <i>htpasswd</i> file, read this <a href="https://apigility.org/documentation/auth/authentication-http-basic" target="_blank">guide</a></span>
+      </div>
+    </div>
+  </div>
+  <!-- HTTP Digest -->
+  <div ng-show="vm.auth.type == 'HTTP Digest'">
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Realm</label>
+        <input type="text" class="form-control" ng-model="vm.auth.digest.realm" placeholder="Insert the realm attribute (optional)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Digest domains</label>
+        <input type="text" class="form-control" ng-model="vm.auth.digest.digest_domains" placeholder="Insert the digest domains value (optional)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Nonce timeout</label>
+        <input type="text" class="form-control" ng-model="vm.auth.digest.nonce_timeout" placeholder="Insert the nonce timeout in secoond (optional)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">htdigest file</label>
+        <input type="text" class="form-control" ng-model="vm.auth.digest.htdigest" placeholder="Insert the htdigest file path">
+        <span class="help-block"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> If you don't know how to create a <i>htdigest</i> file, read this <a href="https://apigility.org/documentation/auth/authentication-http-digest" target="_blank">guide</a></span>
+      </div>
+    </div>
+  </div>
+  <!-- OAuth2 PDO -->
+  <div ng-show="vm.auth.type == 'OAuth2 PDO'">
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">DSN</label>
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_dsn" placeholder="Insert the PDO database source name (DSN)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Username</label>
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_username" placeholder="Username for OAuth2 database credentials (required if not using SQLite)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Password</label>
+        <input type="password" class="form-control" ng-model="vm.auth.pdo.oauth2_password" placeholder="Password for the username listed (required if not using SQLite)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Route</label>
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_route" placeholder="Base URI to use as the OAuth2 server endpoint">
+      </div>
+    </div>
+  </div>
+  <!-- OAuth2 Mongo -->
+  <div ng-show="vm.auth.type == 'OAuth2 Mongo'">
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">DSN</label>
+        <input type="text" class="form-control" ng-model="vm.auth.mongo.oauth2_dsn" placeholder="Insert the Mongo database source name (DSN)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Locator name</label>
+        <input type="text" class="form-control" ng-model="vm.auth.mongo.oauth2_locator_name" placeholder="Insert the locator name (optional)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Database</label>
+        <input type="test" class="form-control" ng-model="vm.auth.mongo.oauth2_database" placeholder="The Mongo database name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="control-label">Route</label>
+        <input type="text" class="form-control" ng-model="vm.auth.oauth2.mongo.route" placeholder="Base URI to use as the OAuth2 server endpoint">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</span></button>
+</div>

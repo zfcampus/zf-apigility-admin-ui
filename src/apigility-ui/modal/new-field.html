@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">New Field</h4>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+  <label class="control-label">Name</label>
+  <input type="text" class="form-control" ng-model="vm.field.name" placeholder="Insert the Field name" autofocus><br />
+  <label class="control-label">Description</label>
+  <textarea class="form-control" ng-model="vm.field.description" rows="3" placeholder="Insert the description"></textarea><br />
+  <label class="col-sm-4 control-label">File upload?</label>
+  <input type="checkbox" ng-model="vm.field.type" value="Zend\InputFilter\FileInput" class="col-sm-2 control-label">
+  <label class="col-sm-4 control-label">Required</label>
+  <input type="checkbox" ng-model="vm.field.required" value="Yes" class="col-sm-2 control-label"><br />
+  <label class="col-sm-4 control-label">Allow Empty</label>
+  <input type="checkbox" ng-model="vm.field.allow_empty" value="Yes" class="col-sm-2 control-label">
+  <label class="col-sm-4 control-label">Continue if Empty</label>
+  <input type="checkbox" ng-model="vm.field.continue_if_empty" value="Yes" class="col-sm-2 control-label"><br /><br />
+  <label class="control-label">Validation Failure Message</label>
+  <textarea class="form-control" ng-model="vm.field.error_message" rows="3" placeholder="Insert the failure message"></textarea>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+  <button type="button" class="btn btn-success btn-sm" ng-click="vm.ok()" ladda="vm.loading">Save</span></button>
+</div>

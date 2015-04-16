@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Authentication</h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-sm-12">
+      <h3>Adapters <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-click="vm.newAuthModal()">New adapter</button></h3>
+      <table class="table table-bordered col-sm-12">
+        <thead>
+          <tr>
+            <th class="col-sm-3">Name</th>
+            <th class="col-sm-2">Type</th>
+            <th class="col-sm-4">Options</th>
+            <th class="col-sm-3">Actions</th>
+          </tr>
+        </thead>
+        <tr ng-repeat="item in vm.adapters">
+          <td>{{item.name}}</td>
+          <td>{{item.type}} <span ng-show="item.type == 'oauth2'">({{item.oauth2_type}})</span></td>
+          <td>
+            <button ng-show="item.type == 'oauth2'" type="button" class="btn btn-primary btn-xs" ng-click="vm.addAuthOptionModal(item)"><span class="glyphicon glyphicon-plus"></span></button>
+            <span ng-repeat="(option, value) in item.oauth2_options"><a ng-click="vm.editAuthOptionModal(item, option)">{{option}} = {{value}}</a>, </span>
+          </td>
+          <td>
+            <button type="button" ng-click="vm.editAuthModal(item)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteAuthModal(item)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
