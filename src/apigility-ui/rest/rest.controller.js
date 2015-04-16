@@ -80,19 +80,21 @@
         }
         vm.getSourceCode(vm.rest.source_code[0].classname);
         vm.source = vm.rest.source_code[0];
-      });
 
-      api.getContentNegotiation(function(result){
-        vm.content_negotiation = result;
-        if (vm.rest.hasOwnProperty('selector')) {
-          for (var i = 0; i < result.length; i++) {
-            if (vm.rest.selector.content_name === result[i].content_name) {
-              vm.rest.selector = result[i];
-              break;
+        api.getContentNegotiation(function(result){
+          vm.content_negotiation = result;
+          if (vm.rest.hasOwnProperty('selector')) {
+            for (var i = 0; i < result.length; i++) {
+              if (vm.rest.selector === result[i].content_name) {
+                vm.rest.selector = result[i];
+                break;
+              }
             }
           }
-        }
+        });
       });
+
+
     }
 
     function initAuthorization() {
