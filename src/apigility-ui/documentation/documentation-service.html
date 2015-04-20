@@ -9,14 +9,14 @@
                 <tr>
                   <th>Field</th>
                   <th>Description</th>
-                  <th class="center-block">Required</th>
+                  <th class="table-center">Required</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="(field, data) in service.fields">
+                <tr ng-repeat="(field, data) in service.fields.input_filter">
                   <td>{{field}}</td>
                   <td>{{data.description}}</td>
-                  <td class="center-block"><span ng-if="data.required" class="glyphicon glyphicon-ok"></span></td>
+                  <td class="table-center">&nbsp;<span ng-show="data.required" class="glyphicon glyphicon-ok"></span>&nbsp;</td>
                 </tr>
               </tbody>
             </table>
