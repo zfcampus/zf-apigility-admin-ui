@@ -417,3 +417,7 @@ h1 {
   font-size: 4em;
   font-weight: bolder;
 }
+
+.table-center {
+  text-align: center;
+}
