@@ -6,9 +6,9 @@
     .module('apigility.rpc')
     .controller('Rpc', Rpc);
 
-  Rpc.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce'];
+  Rpc.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce', 'documentation'];
 
-  function Rpc(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce) {
+  function Rpc(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce, documentation) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -298,6 +298,18 @@
         vm.sourcecode = $sce.trustAsHtml(response.source);
         vm.file = response.file;
       });
+    };
+
+    vm.generateFromConfiguration = function(method, direction) {
+      return documentation.fromConfiguration(
+        method,
+        direction,
+        null,
+        vm.rpc.fields,
+        vm.tags.accept_whitelist,
+        vm.rpc.route_match,
+        null
+      );
     };
   }
 })();

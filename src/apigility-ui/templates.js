@@ -2105,12 +2105,18 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                          <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
     "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rest.documentation.collection[http].request = vm.generateFromConfiguration(http, 'request', 'collection')\" type=\"button\">\n" +
+    "                              <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                            </button>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
     "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.collection[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rest.documentation.collection[http].response = vm.generateFromConfiguration(http, 'response', 'collection')\" type=\"button\">\n" +
+    "                              <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                            </button>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                      </tab>\n" +
@@ -2137,12 +2143,18 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                          <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
     "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rest.documentation.entity[http].request = vm.generateFromConfiguration(http, 'request', 'entity')\" type=\"button\">\n" +
+    "                              <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                            </button>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"form-group\">\n" +
     "                          <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                          <div class=\"col-sm-10\">\n" +
     "                            <textarea class=\"form-control\" ng-model=\"vm.rest.documentation.entity[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                            <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rest.documentation.entity[http].response = vm.generateFromConfiguration(http, 'response', 'entity')\" type=\"button\">\n" +
+    "                              <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                            </button>\n" +
     "                          </div>\n" +
     "                        </div>\n" +
     "                      </tab>\n" +
@@ -2335,12 +2347,18 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "                  <label class=\"col-sm-2 control-label\">Request Body</label>\n" +
     "                  <div class=\"col-sm-10\">\n" +
     "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].request\" placeholder=\"Insert the request specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                    <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rpc.documentation[http].request = vm.generateFromConfiguration(http, 'request')\" type=\"button\">\n" +
+    "                      <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                    </button>\n" +
     "                  </div>\n" +
     "                </div>\n" +
     "                <div class=\"form-group\">\n" +
     "                  <label class=\"col-sm-2 control-label\">Response Body</label>\n" +
     "                  <div class=\"col-sm-10\">\n" +
     "                    <textarea class=\"form-control\" ng-model=\"vm.rpc.documentation[http].response\" placeholder=\"Insert the response specification\" ng-disabled=\"vm.disabled\"></textarea>\n" +
+    "                    <button class=\"btn btn-default btn-xs pull-right\" ng-click=\"vm.rpc.documentation[http].response = vm.generateFromConfiguration(http, 'response')\" type=\"button\">\n" +
+    "                      <i class=\"glyphicon glyphicon-refresh\"></i> generate from configuration\n" +
+    "                    </button>\n" +
     "                  </div>\n" +
     "                </div>\n" +
     "              </tab>\n" +
