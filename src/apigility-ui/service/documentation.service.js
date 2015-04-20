@@ -10,18 +10,42 @@
   function DocumentationService() {
 
     function hasHalMediaType (mediatypes) {
+      console.log('In hasHalMediaType with mediatypes', mediatypes);
       if (! Array.isArray(mediatypes)) {
+        console.log('Did not receive an array; returning false');
         return false;
       }
 
+      /* In some cases, the mediatypes will be arrays of strings, in other
+       * cases, arrays of objects that have a "text" property.
+       */
       var type;
       for (var i = 0; i < mediatypes.length; i += 1) {
         type = mediatypes[i];
+        console.log('Examining mediatype', type);
+        if (typeof type === 'object') {
+          console.log('Is an object');
+          if (! type.hasOwnProperty('text')) {
+            console.log('Does not have text property; moving on');
+            continue;
+          }
+          console.log('Casting type to text property');
+          type = type.text;
+        }
+
+        if (typeof type !== 'string') {
+          console.log('Type is still not a string', type);
+          continue;
+        }
+
+        console.log('Examining mediatype', type);
         if (type === 'application/hal+json') {
+          console.log('Found HAL!');
           return true;
         }
       }
 
+      console.log('Did not find HAL!');
       return false;
     }
 
