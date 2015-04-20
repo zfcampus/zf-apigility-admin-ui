@@ -6,9 +6,9 @@
     .module('apigility.rest')
     .controller('Rest', Rest);
 
-  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce'];
+  Rest.$inject = [ 'api', '$modal', '$stateParams', '$rootScope', 'SidebarService', '$state', '$scope', '$sce', 'documentation'];
 
-  function Rest(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce) {
+  function Rest(api, $modal, $stateParams, $rootScope, SidebarService, $state, $scope, $sce, documentation) {
     /* jshint validthis:true */
     var vm = this;
 
@@ -389,6 +389,18 @@
         vm.sourcecode = $sce.trustAsHtml(response.source);
         vm.file = response.file;
       });
+    };
+
+    vm.generateFromConfiguration = function(method, direction, restPart) {
+      return documentation.fromConfiguration(
+        method,
+        direction,
+        restPart,
+        vm.rest.fields,
+        vm.tags.accept_whitelist,
+        vm.rest.route_match,
+        vm.rest.collection_name
+      );
     };
   }
 })();
