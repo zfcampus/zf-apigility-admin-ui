@@ -21,7 +21,17 @@
   <div class="form-group">
     <label class="control-label col-sm-2">Value</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" ng-model="vm.option.value" placeholder="Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})" ng-disabled="vm.disabled">
+      <toggle-switch type="checkbox"
+        class="switch-info switch-small"
+        model="vm.option.value"
+        ng-disabled="vm.disabled"
+        ng-show="vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'"></toggle-switch>
+
+      <input type="text" class="form-control"
+        ng-model="vm.option.value"
+        ng-hide="vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'"
+        ng-disabled="vm.disabled"
+        placeholder="Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})">
     </div>
   </div>
   <br /><br />
