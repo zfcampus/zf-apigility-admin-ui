@@ -523,7 +523,15 @@ angular.module("apigility-ui/modal/add-filter.html", []).run(["$templateCache", 
     "  <div class=\"form-group\">\n" +
     "    <label class=\"control-label col-sm-2\">Value</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.option.value\" placeholder=\"Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})\">\n" +
+    "      <toggle-switch type=\"checkbox\"\n" +
+    "        class=\"switch-info switch-small\"\n" +
+    "        model=\"vm.option.value\"\n" +
+    "        ng-show=\"vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'\"></toggle-switch>\n" +
+    "\n" +
+    "      <input type=\"text\" class=\"form-control\"\n" +
+    "        ng-model=\"vm.option.value\"\n" +
+    "        ng-hide=\"vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'\"\n" +
+    "        placeholder=\"Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <br /><br />\n" +
@@ -580,7 +588,15 @@ angular.module("apigility-ui/modal/add-validator.html", []).run(["$templateCache
     "  <div class=\"form-group\">\n" +
     "    <label class=\"control-label col-sm-2\">Value</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.option.value\" placeholder=\"Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})\">\n" +
+    "      <toggle-switch type=\"checkbox\"\n" +
+    "        class=\"switch-info switch-small\"\n" +
+    "        model=\"vm.option.value\"\n" +
+    "        ng-show=\"vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'\"></toggle-switch>\n" +
+    "\n" +
+    "      <input type=\"text\" class=\"form-control\"\n" +
+    "        ng-model=\"vm.option.value\"\n" +
+    "        ng-hide=\"vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'\"\n" +
+    "        placeholder=\"Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <br /><br />\n" +
@@ -1083,7 +1099,17 @@ angular.module("apigility-ui/modal/edit-filter.html", []).run(["$templateCache",
     "  <div class=\"form-group\">\n" +
     "    <label class=\"control-label col-sm-2\">Value</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.option.value\" placeholder=\"Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})\" ng-disabled=\"vm.disabled\">\n" +
+    "      <toggle-switch type=\"checkbox\"\n" +
+    "        class=\"switch-info switch-small\"\n" +
+    "        model=\"vm.option.value\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        ng-show=\"vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'\"></toggle-switch>\n" +
+    "\n" +
+    "      <input type=\"text\" class=\"form-control\"\n" +
+    "        ng-model=\"vm.option.value\"\n" +
+    "        ng-hide=\"vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        placeholder=\"Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <br /><br />\n" +
@@ -1140,7 +1166,16 @@ angular.module("apigility-ui/modal/edit-validator.html", []).run(["$templateCach
     "  <div class=\"form-group\" ng-disabled=\"vm.disabled\">\n" +
     "    <label class=\"control-label col-sm-2\">Value</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.option.value\" placeholder=\"Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})\" ng-disabled=\"vm.disabled\">\n" +
+    "      <toggle-switch type=\"checkbox\"\n" +
+    "        model=\"vm.option.value\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        ng-show=\"vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'\"></toggle-switch>\n" +
+    "\n" +
+    "      <input type=\"text\" class=\"form-control\"\n" +
+    "        ng-model=\"vm.option.value\"\n" +
+    "        ng-hide=\"vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        placeholder=\"Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})\">\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <br /><br />\n" +

@@ -22,6 +22,7 @@
       'angular-ladda',
       'unsavedChanges',
       'ngTagsInput',
-      'checklist-model'
+      'checklist-model',
+      'toggle-switch'
     ]);
 })();
