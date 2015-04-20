@@ -335,14 +335,14 @@ angular.module("apigility-ui/documentation/documentation-service.html", []).run(
     "                <tr>\n" +
     "                  <th>Field</th>\n" +
     "                  <th>Description</th>\n" +
-    "                  <th class=\"center-block\">Required</th>\n" +
+    "                  <th class=\"table-center\">Required</th>\n" +
     "                </tr>\n" +
     "              </thead>\n" +
     "              <tbody>\n" +
-    "                <tr ng-repeat=\"(field, data) in service.fields\">\n" +
+    "                <tr ng-repeat=\"(field, data) in service.fields.input_filter\">\n" +
     "                  <td>{{field}}</td>\n" +
     "                  <td>{{data.description}}</td>\n" +
-    "                  <td class=\"center-block\"><span ng-if=\"data.required\" class=\"glyphicon glyphicon-ok\"></span></td>\n" +
+    "                  <td class=\"table-center\">&nbsp;<span ng-show=\"data.required\" class=\"glyphicon glyphicon-ok\"></span>&nbsp;</td>\n" +
     "                </tr>\n" +
     "              </tbody>\n" +
     "            </table>\n" +
