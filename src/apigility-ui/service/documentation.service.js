@@ -10,22 +10,24 @@
   function DocumentationService() {
 
     function hasHalMediaType (mediatypes) {
-      if (typeof mediatypes !== 'object' || !Array.isArray(mediatypes)) {
+      if (! Array.isArray(mediatypes)) {
         return false;
       }
-      var types = [];
-      mediatypes.forEach(function(entry){
-        types.push(entry.text);
-      });
-      if (types.lastIndexOf('application/hal+json') === -1) {
-        return false;
+
+      var type;
+      for (var i = 0; i < mediatypes.length; i += 1) {
+        type = mediatypes[i];
+        if (type === 'application/hal+json') {
+          return true;
+        }
       }
-      return true;
-    };
+
+      return false;
+    }
 
     function tab (num) {
       return new Array(num * 4).join(' ');
-    };
+    }
 
     function createLink (rel, routeMatch, indent, append, type) {
       if (type == 'collection') {
@@ -35,11 +37,11 @@
         routeMatch += append;
       }
       return tab(indent) + '"' + rel + '": {\n' + tab(indent + 1) + '"href": "' + routeMatch + '"\n' + tab(indent) + '}';
-    };
+    }
 
     function createLinks (links, indent) {
       return tab(indent) + '"_links": {\n' + links.join(',\n') + '\n' + tab(indent) + '}\n';
-    };
+    }
 
     function createCollection (collectionName, routeMatch, params) {
       var entityLinks = [ createLink('self', routeMatch, 5) ];
@@ -47,9 +49,9 @@
       collection += createLinks(entityLinks, 4);
       collection += params.join(',\n') + '\n' + tab(3) + '}\n' + tab(2) + ']\n' + tab(1) + '}';
       return collection;
-    };
+    }
 
-    this.fromConfiguration = function(method, direction, restPart, fields, whitelist, route, collection_name) {
+    this.fromConfiguration = function (method, direction, restPart, fields, whitelist, route, collection_name) {
       var doctext   = '';
       var docparams = [];
       var isHal     = false;
