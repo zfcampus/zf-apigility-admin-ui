@@ -11,7 +11,15 @@
   <div class="form-group">
     <label for="rest_validator_option" class="col-sm-2 control-label">Option</label>
     <div class="col-sm-8">
-      <select class="form-control" ng-model="vm.option.name" ng-options="name as name for (name, value) in vm.options" ng-change="vm.option.value=''" ng-disabled="vm.disabled"></select>
+      <ui-select
+        ng-model="vm.option.name"
+        ng-disabled="vm.disabled"
+        on-select="vm.selectOption($item, $model)">
+        <ui-select-match placeholder="Select an option...">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="option in vm.optionNames | filter: $select.search">
+          <div ng-bind-html="option | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
     </div>
     <div class="col-sm-2">
       <button type="button" class="btn btn-success btn-sm" ng-click="vm.addOption()" ng-hide="vm.disabled">Add option</span></button>

@@ -16,9 +16,11 @@
       'apigility.package',
       'apigility.about',
 
+      'ngSanitize',
       'ui.bootstrap',
       'ui.router',
       'ui.tree',
+      'ui.select',
       'angular-ladda',
       'unsavedChanges',
       'ngTagsInput',

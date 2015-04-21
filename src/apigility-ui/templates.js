@@ -508,12 +508,27 @@ angular.module("apigility-ui/modal/add-filter.html", []).run(["$templateCache", 
     "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
     "  </div>\n" +
     "  <label class=\"control-label\">Filter</label>\n" +
-    "  <select class=\"form-control\" ng-model=\"vm.filter.name\" ng-options=\"name as name for (name, value) in vm.filters\" ng-change=\"vm.selectFilter()\"></select>\n" +
+    "  <ui-select\n" +
+    "    ng-model=\"vm.filter.name\"\n" +
+    "    on-select=\"vm.selectFilter($item, $model)\">\n" +
+    "    <ui-select-match placeholder=\"Select Filter...\">{{$select.selected}}</ui-select-match>\n" +
+    "    <ui-select-choices\n" +
+    "      repeat=\"filter in vm.filterNames | filter: $select.search\">\n" +
+    "      <div ng-bind-html=\"filter | highlight: $select.search\"></div>\n" +
+    "    </ui-select-choices>\n" +
+    "  </ui-select>\n" +
     "  <br />\n" +
     "  <div class=\"form-group\">\n" +
     "    <label for=\"rest_validator_option\" class=\"col-sm-2 control-label\">Option</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <select class=\"form-control\" ng-model=\"vm.option.name\" ng-options=\"name as name for (name, value) in vm.options\" ng-change=\"vm.option.value=''\"></select>\n" +
+    "      <ui-select\n" +
+    "        ng-model=\"vm.option.name\"\n" +
+    "        on-select=\"vm.selectOption($item, $model)\">\n" +
+    "        <ui-select-match placeholder=\"Select an option...\">{{$select.selected}}</ui-select-match>\n" +
+    "        <ui-select-choices repeat=\"option in vm.optionNames | filter: $select.search\">\n" +
+    "          <div ng-bind-html=\"option | highlight: $select.search\"></div>\n" +
+    "        </ui-select-choices>\n" +
+    "      </ui-select>\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-2\">\n" +
     "      <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.addOption()\">Add option</span></button>\n" +
@@ -573,12 +588,27 @@ angular.module("apigility-ui/modal/add-validator.html", []).run(["$templateCache
     "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
     "  </div>\n" +
     "  <label class=\"control-label\">Validator</label>\n" +
-    "  <select class=\"form-control\" ng-model=\"vm.validator.name\" ng-options=\"name as name for (name, value) in vm.validators\" ng-change=\"vm.selectValidator()\"></select>\n" +
+    "  <ui-select\n" +
+    "    ng-model=\"vm.validator.name\"\n" +
+    "    on-select=\"vm.selectValidator($item, $model)\">\n" +
+    "    <ui-select-match placeholder=\"Select Validator...\">{{$select.selected}}</ui-select-match>\n" +
+    "    <ui-select-choices\n" +
+    "      repeat=\"validator in vm.validatorNames | filter: $select.search\">\n" +
+    "      <div ng-bind-html=\"validator | highlight: $select.search\"></div>\n" +
+    "    </ui-select-choices>\n" +
+    "  </ui-select>\n" +
     "  <br />\n" +
     "  <div class=\"form-group\">\n" +
     "    <label for=\"rest_validator_option\" class=\"col-sm-2 control-label\">Option</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <select class=\"form-control\" ng-model=\"vm.option.name\" ng-options=\"name as name for (name, value) in vm.options\" ng-change=\"vm.option.value=''\"></select>\n" +
+    "      <ui-select\n" +
+    "        ng-model=\"vm.option.name\"\n" +
+    "        on-select=\"vm.selectOption($item, $model)\">\n" +
+    "        <ui-select-match placeholder=\"Select an option...\">{{$select.selected}}</ui-select-match>\n" +
+    "        <ui-select-choices repeat=\"option in vm.optionNames | filter: $select.search\">\n" +
+    "          <div ng-bind-html=\"option | highlight: $select.search\"></div>\n" +
+    "        </ui-select-choices>\n" +
+    "      </ui-select>\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-2\">\n" +
     "      <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.addOption()\">Add option</span></button>\n" +
@@ -1089,7 +1119,15 @@ angular.module("apigility-ui/modal/edit-filter.html", []).run(["$templateCache",
     "  <div class=\"form-group\">\n" +
     "    <label class=\"col-sm-2 control-label\">Option</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <select class=\"form-control\" ng-model=\"vm.option.name\" ng-options=\"name as name for (name, value) in vm.options\" ng-change=\"vm.option.value=''\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "      <ui-select\n" +
+    "        ng-model=\"vm.option.name\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        on-select=\"vm.selectOption($item, $model)\">\n" +
+    "        <ui-select-match placeholder=\"Select an option...\">{{$select.selected}}</ui-select-match>\n" +
+    "        <ui-select-choices repeat=\"option in vm.optionNames | filter: $select.search\">\n" +
+    "          <div ng-bind-html=\"option | highlight: $select.search\"></div>\n" +
+    "        </ui-select-choices>\n" +
+    "      </ui-select>\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-2\">\n" +
     "      <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.addOption()\" ng-hide=\"vm.disabled\">Add option</span></button>\n" +
@@ -1156,7 +1194,15 @@ angular.module("apigility-ui/modal/edit-validator.html", []).run(["$templateCach
     "  <div class=\"form-group\">\n" +
     "    <label for=\"rest_validator_option\" class=\"col-sm-2 control-label\">Option</label>\n" +
     "    <div class=\"col-sm-8\">\n" +
-    "      <select class=\"form-control\" ng-model=\"vm.option.name\" ng-options=\"name as name for (name, value) in vm.options\" ng-change=\"vm.option.value=''\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "      <ui-select\n" +
+    "        ng-model=\"vm.option.name\"\n" +
+    "        ng-disabled=\"vm.disabled\"\n" +
+    "        on-select=\"vm.selectOption($item, $model)\">\n" +
+    "        <ui-select-match placeholder=\"Select an option...\">{{$select.selected}}</ui-select-match>\n" +
+    "        <ui-select-choices repeat=\"option in vm.optionNames | filter: $select.search\">\n" +
+    "          <div ng-bind-html=\"option | highlight: $select.search\"></div>\n" +
+    "        </ui-select-choices>\n" +
+    "      </ui-select>\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-2\">\n" +
     "      <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.addOption()\" ng-hide=\"vm.disabled\">Add option</span></button>\n" +
@@ -1886,7 +1932,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\" ng-if=\"!vm.isDoctrine\">\n" +
     "              <label for=\"rest_hydrator\" class=\"col-sm-2 control-label\">Hydrator Service Name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <select class=\"form-control\" ng-model=\"vm.rest.hydrator_name\" ng-options=\"hydrator for hydrator in vm.hydrators\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <ui-select\n" +
+    "                  ng-model=\"vm.rest.hydrator_name\"\n" +
+    "                  ng-disabled=\"vm.disabled\">\n" +
+    "                  <ui-select-match placeholder=\"Select Hydrator...\">{{$select.selected}}</ui-select-match>\n" +
+    "                  <ui-select-choices\n" +
+    "                    repeat=\"hydrator in vm.hydrators | filter: $select.search\">\n" +
+    "                    <div ng-bind-html=\"hydrator | highlight: $select.search\"></div>\n" +
+    "                  </ui-select-choices>\n" +
+    "                </ui-select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +

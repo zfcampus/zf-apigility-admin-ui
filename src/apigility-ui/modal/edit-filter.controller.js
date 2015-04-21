@@ -16,13 +16,15 @@
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
     vm.field = field;
+    vm.options = {};
+    vm.optionNames = [];
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     vm.cancel = $modalInstance.dismiss;
 
     vm.filter = angular.copy(filter);
     // If options is empty array change it in empty object
-    if (vm.filter.options.length == 0) {
+    if (vm.filter.options.length === 0) {
       vm.filter.options = {};
     }
 
@@ -30,19 +32,23 @@
     api.getFilters(function(result){
       vm.filters = result;
       vm.options = result[vm.filter.name];
+      vm.optionNames = [];
+      for (var property in vm.options) {
+        vm.optionNames.push(property);
+      }
     });
 
     vm.addOption = function() {
       if (!vm.filter.options.hasOwnProperty(vm.option.name)) {
         vm.filter.options[vm.option.name] = vm.option.value;
       }
-    }
+    };
 
     vm.deleteOption = function(option) {
       if (vm.filter.options.hasOwnProperty(option)) {
         delete vm.filter.options[option];
       }
-    }
+    };
 
     vm.deleteFilterModal = function() {
       var modalInstance = $modal.open({
@@ -85,7 +91,6 @@
     }
 
     vm.ok = function() {
-      vm.loading = true;
       var newFields = angular.copy(fields);
       updateFilter(newFields, field, vm.filter);
       if (type === 'rest') {
@@ -107,6 +112,6 @@
           $modalInstance.close(response);
         });
       }
-    }
+    };
   }
 })();

@@ -16,13 +16,15 @@
     vm.version = $stateParams.ver;
     vm.restName = $stateParams.rest;
     vm.field = field;
+    vm.options = {};
+    vm.optionNames = [];
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
 
     vm.cancel = $modalInstance.dismiss;
 
     vm.validator = angular.copy(validator);
     // If options is empty array change it in empty object
-    if (vm.validator.options.length == 0) {
+    if (vm.validator.options.length === 0) {
       vm.validator.options = {};
     }
 
@@ -30,19 +32,23 @@
     api.getValidators(function(result){
       vm.validators = result;
       vm.options = result[vm.validator.name];
+      vm.optionNames = [];
+      for (var property in vm.options) {
+        vm.optionNames.push(property);
+      }
     });
 
     vm.addOption = function() {
       if (!vm.validator.options.hasOwnProperty(vm.option.name)) {
         vm.validator.options[vm.option.name] = vm.option.value;
       }
-    }
+    };
 
     vm.deleteOption = function(option) {
       if (vm.validator.options.hasOwnProperty(option)) {
         delete vm.validator.options[option];
       }
-    }
+    };
 
     vm.deleteValidatorModal = function() {
       var modalInstance = $modal.open({
@@ -107,7 +113,6 @@
           $modalInstance.close(response);
         });
       }
-
-    }
+    };
   }
 })();

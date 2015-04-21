@@ -13,7 +13,7 @@
             $element[0].focus();
           });
         }
-      }
+      };
     }]);
 
   config.$inject = [
@@ -21,10 +21,11 @@
     '$stateProvider',
     '$urlRouterProvider',
     '$httpProvider',
-    'localStorageServiceProvider'
+    'localStorageServiceProvider',
+    'uiSelectConfig'
   ];
 
-  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider) {
+  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider, uiSelectConfig) {
 
     $provide.value(
       'agApiPath',
@@ -33,6 +34,7 @@
       '/api'
     );
 
+    /* jshint validthis: true */
     $stateProvider.state({
       name : 'ag',
       url : '/',
@@ -42,19 +44,19 @@
           templateUrl: 'apigility-ui/header/header.html',
           controller: 'Header',
           controllerAs: 'vm',
-          parent : this
+          parent: this
         },
         'sidebar@': {
           templateUrl: 'apigility-ui/sidebar/sidebar.html',
           controller: 'Sidebar',
           controllerAs: 'vm',
-          parent : this
+          parent: this
         },
         'content@': {
           templateUrl: 'apigility-ui/dashboard/dashboard.html',
           controller: 'Dashboard',
           controllerAs: 'vm',
-          parent : this
+          parent: this
         }
       }
     });
@@ -64,6 +66,7 @@
     localStorageServiceProvider
       .setPrefix('apigility');
 
+    uiSelectConfig.theme = 'bootstrap';
   }
 
 })();
