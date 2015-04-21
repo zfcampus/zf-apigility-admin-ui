@@ -6,12 +6,27 @@
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
   </div>
   <label class="control-label">Validator</label>
-  <select class="form-control" ng-model="vm.validator.name" ng-options="name as name for (name, value) in vm.validators" ng-change="vm.selectValidator()"></select>
+  <ui-select
+    ng-model="vm.validator.name"
+    on-select="vm.selectValidator($item, $model)">
+    <ui-select-match placeholder="Select Validator...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices
+      repeat="validator in vm.validatorNames | filter: $select.search">
+      <div ng-bind-html="validator.name | highlight: $select.search"></div>
+    </ui-select-choices>
+  </ui-select>
   <br />
   <div class="form-group">
     <label for="rest_validator_option" class="col-sm-2 control-label">Option</label>
     <div class="col-sm-8">
-      <select class="form-control" ng-model="vm.option.name" ng-options="name as name for (name, value) in vm.options" ng-change="vm.option.value=''"></select>
+      <ui-select
+        ng-model="vm.option.name"
+        on-select="vm.selectOption($item, $model)">
+        <ui-select-match placeholder="Select an option...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="option in vm.optionNames | filter: $select.search">
+          <div ng-bind-html="option.name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
     </div>
     <div class="col-sm-2">
       <button type="button" class="btn btn-success btn-sm" ng-click="vm.addOption()">Add option</span></button>
@@ -24,12 +39,12 @@
       <toggle-switch type="checkbox"
         class="switch-info switch-small"
         model="vm.option.value"
-        ng-show="vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'"></toggle-switch>
+        ng-show="vm.validator.name && vm.validators[vm.validator.name.name][vm.option.name.name] == 'bool'"></toggle-switch>
 
       <input type="text" class="form-control"
         ng-model="vm.option.value"
-        ng-hide="vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'"
-        placeholder="Insert the option value ({{vm.validators[vm.validator.name][vm.option.name]}})">
+        ng-hide="vm.validator.name && vm.validators[vm.validator.name.name][vm.option.name.name] == 'bool'"
+        placeholder="Insert the option value ({{vm.validators[vm.validator.name.name][vm.option.name.name]}})">
     </div>
   </div>
   <br /><br />

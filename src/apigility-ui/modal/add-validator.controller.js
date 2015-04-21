@@ -14,6 +14,9 @@
     vm.apiName = $stateParams.api;
     vm.version = $stateParams.ver;
     vm.field = field;
+    vm.validators = {};
+    vm.validatorNames = [];
+    vm.optionNames = [];
 
     vm.cancel = $modalInstance.dismiss;
     vm.validator = { name : '', options : {} };
@@ -29,27 +32,42 @@
       for (var property in result) {
         if (fieldValidators.indexOf(property) > -1) {
           delete vm.validators[property];
+          continue;
         }
+        vm.validatorNames.push({ name: property });
       }
     });
 
-    vm.selectValidator = function() {
-      vm.options = vm.validators[vm.validator.name];
-    }
+    vm.selectValidator = function(item, model) {
+      vm.options = vm.validators[item.name];
+      vm.optionNames = [];
+      for (var property in vm.options) {
+        vm.optionNames.push({ name: property });
+      }
+    };
+
+    vm.selectOption = function(item, model) {
+      console.log('Validator', vm.validator);
+      console.log('Option', vm.option);
+      vm.option.value = '';
+    };
 
     vm.addOption = function() {
-      if (!vm.validator.options.hasOwnProperty(vm.option.name)) {
-        vm.validator.options[vm.option.name] = vm.option.value;
+      /* since option.name is a model, it's nested; pull nested name */
+      if (!vm.validator.options.hasOwnProperty(vm.option.name.name)) {
+        vm.validator.options[vm.option.name.name] = vm.option.value;
       }
-    }
+    };
 
     vm.deleteOption = function(option) {
       if (vm.validator.options.hasOwnProperty(option)) {
         delete vm.validator.options[option];
       }
-    }
+    };
 
     function addValidator(fields, field, validator){
+      /* since validator.name is a model, it's nested; pull nested name */
+      validator.name = validator.name.name;
       for(var i = 0; i < fields.length; i++) {
         if (fields[i].name == field.name) {
           fields[i].validators.push(validator);
@@ -81,7 +99,6 @@
           $modalInstance.close(response);
         });
       }
-
-    }
+    };
   }
 })();
