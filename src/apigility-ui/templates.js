@@ -1932,7 +1932,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\" ng-if=\"!vm.isDoctrine\">\n" +
     "              <label for=\"rest_hydrator\" class=\"col-sm-2 control-label\">Hydrator Service Name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
-    "                <select class=\"form-control\" ng-model=\"vm.rest.hydrator_name\" ng-options=\"hydrator for hydrator in vm.hydrators\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <ui-select\n" +
+    "                  ng-model=\"vm.rest.hydrator_name\"\n" +
+    "                  ng-disabled=\"vm.disabled\">\n" +
+    "                  <ui-select-match placeholder=\"Select Hydrator...\">{{$select.selected}}</ui-select-match>\n" +
+    "                  <ui-select-choices\n" +
+    "                    repeat=\"hydrator in vm.hydrators | filter: $select.search\">\n" +
+    "                    <div ng-bind-html=\"hydrator | highlight: $select.search\"></div>\n" +
+    "                  </ui-select-choices>\n" +
+    "                </ui-select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +

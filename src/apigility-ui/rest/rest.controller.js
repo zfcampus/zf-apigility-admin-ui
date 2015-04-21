@@ -39,6 +39,7 @@
 
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){
         vm.rest = result;
+        console.log(vm.rest);
         vm.isDoctrine = angular.isDefined(result.object_manager);
 
         vm.rest.accept_whitelist.forEach(function(entry){
@@ -49,7 +50,7 @@
         });
 
         if (vm.isDoctrine) {
-          if (vm.rest.strategies.length == 0) {
+          if (vm.rest.strategies.length === 0) {
             vm.rest.strategies = {};
           }
           api.getRestDoctrineMetadata(result.object_manager, result.entity_class, function(err, response) {
@@ -60,7 +61,8 @@
             vm.doctrineMetadata = response;
           });
         }
-        if (vm.rest.hasOwnProperty('table_name')) {
+        if (vm.rest.hasOwnProperty('table_name') &&
+            vm.rest.hasOwnProperty('db')) {
           for (var i = 0; i < vm.db.db_adapter.length; i++) {
             if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
               vm.adapter = vm.db.db_adapter[i];
@@ -95,6 +97,9 @@
       });
     }
 
+    vm.selectHydrator = function($item, $model) {
+    };
+
     function initAuthorization() {
       api.getAuthorizationRest(vm.apiName, vm.version, vm.restName, function(err, result){
         if (err) {
@@ -112,6 +117,9 @@
       vm.loading = true;
       if (vm.adapter) {
         vm.rest.adapter_name = vm.adapter.adapter_name;
+      }
+      if (vm.rest.hydrator_name.name) {
+        vm.rest.hydrator_name = vm.rest.hydrator_name.name;
       }
       api.updateGeneralRest(vm.apiName, vm.version, vm.restName, vm.rest, vm.isDoctrine, function(err, result){
         vm.loading = false;
@@ -154,7 +162,7 @@
       }
 
       return false;
-    }
+    };
 
     vm.saveContentNegotiation = function() {
       vm.loading = true;
