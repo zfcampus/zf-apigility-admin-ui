@@ -22,10 +22,11 @@
     '$urlRouterProvider',
     '$httpProvider',
     'localStorageServiceProvider',
-    'uiSelectConfig'
+    'uiSelectConfig',
+    'growlProvider'
   ];
 
-  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider, uiSelectConfig) {
+  function config ($provide, $stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider, uiSelectConfig, growlProvider) {
 
     $provide.value(
       'agApiPath',
@@ -62,11 +63,16 @@
     });
 
     $urlRouterProvider.otherwise('/');
-    
+
     localStorageServiceProvider
       .setPrefix('apigility');
 
     uiSelectConfig.theme = 'bootstrap';
+
+    growlProvider.globalReversedOrder(true);
+    growlProvider.globalTimeToLive(5000);
+    growlProvider.globalDisableCountDown(true);
+    growlProvider.onlyUniqueMessages(false);
   }
 
 })();

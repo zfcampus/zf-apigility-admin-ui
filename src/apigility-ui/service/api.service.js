@@ -6,9 +6,9 @@
     .module('apigility.service')
     .service('api', Api);
 
-  Api.$inject = [ 'xhr', 'agApiPath', '$http', '$q' ];
+  Api.$inject = [ 'xhr', 'agApiPath', '$http', '$q', 'growl' ];
 
-  function Api(xhr, agApiPath, $http, $q) {
+  function Api(xhr, agApiPath, $http, $q, growl) {
 
     this.http = $http;
     this.q    = $q;
@@ -27,6 +27,7 @@
           return callback(false, response.module);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch dashboard!', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -37,6 +38,7 @@
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch API details!', {ttl: -1});
         return callback(true, err.detail);
       });
     };
@@ -45,6 +47,7 @@
       var allowed = [ 'name' ];
       xhr.create(agApiPath + '/module', [ name ], allowed)
       .then(function (response) {
+        growl.success('API created');
         return callback(false, response);
       })
       .catch(function (err) {
@@ -59,9 +62,11 @@
     this.deleteApi = function(name, recursive, callback) {
       xhr.remove(agApiPath + '/module/' + name + '?recursive=' + (recursive ? 1 : 0))
       .then(function (response) {
+        growl.success('API removed');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to delete API', {ttl: -1});
         return callback(true);
       });
     };
@@ -80,9 +85,11 @@
       var allowed = [ 'service_name' ];
       xhr.create(agApiPath + '/module/' + module + '/rest', [ service ], allowed)
       .then(function (response) {
+        growl.success('Service created');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to create service', {ttl: -1});
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the REST service, please check if already exists');
@@ -117,9 +124,11 @@
       var path = isDoctrine ? '/doctrine/' : '/rest/';
       xhr.update(agApiPath + '/module/' + module + path + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
+        growl.success('Service updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating service', {ttl: -1});
         return callback(true, 'Error during the update of the REST service');
       });
     };
@@ -134,9 +143,11 @@
       var result = filterData(data, allowed);
       xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
+        growl.success('Content negotiation updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to update content negotiation', {ttl: -1});
         return callback(true, 'Error during the update of the REST service');
       });
     };
@@ -145,9 +156,11 @@
       var path = isDoctrine ? 'doctrine' : 'rest';
       xhr.remove(agApiPath + '/module/' + module + '/' + path + '/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
         .then(function (response) {
+          growl.success('Service deleted');
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Unable to delete service', {ttl: -1});
           return callback(true);
         });
     };
@@ -174,6 +187,7 @@
         return callback(false, data);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch API authorization details', {ttl: -1});
         return callback(true, err.detail);
       });
     };
@@ -190,9 +204,11 @@
       data[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__entity__'] = entity;
       xhr.save(agApiPath + '/module/' + module + '/authorization', data)
       .then(function (response) {
+        growl.success('Authorization saved');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to save authorization', {ttl: -1});
         return callback(true);
       });
     };
@@ -208,6 +224,7 @@
           return callback(response.rest);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch REST services', {ttl: -1});
           console.log('Failed to get the list of REST services', err);
           return false;
         });
@@ -224,6 +241,7 @@
         return callback(response.rpc);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch RPC services', {ttl: -1});
         console.log('Failed to get the list of RPC services', err);
         return false;
       });
@@ -254,6 +272,7 @@
         return callback(rest);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch service', {ttl: -1});
         console.log('Failed to get the REST service', err);
         return false;
       });
@@ -265,6 +284,7 @@
           return callback(false, response);
         })
         .catch(function(err) {
+          growl.error('Unable to fetch Doctrine metadata', {ttl: -1});
           return callback(true, 'I cannot retrieve entity metadata');
         });
     };
@@ -275,6 +295,7 @@
         return callback(response);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch hydrators', {ttl: -1});
         console.log('Failed to get the list of Hydrators', err);
         return false;
       });
@@ -289,6 +310,7 @@
         return callback(response.selectors);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch content-negotiation details', {ttl: -1});
         console.log('Failed to get the list of Content Negotiation', err);
         return false;
       });
@@ -298,10 +320,12 @@
       var allowed = [ 'content_name' ];
       xhr.create(agApiPath + '/content-negotiation', [ name ], allowed)
       .then(function (response) {
+        growl.success('Selector created');
         delete response._links;
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to create content-negotiation selector', {ttl: -1});
         return callback(true, 'I cannot create the Selector, please enter a valid name (alpha characters)');
       });
     };
@@ -309,9 +333,11 @@
     this.deleteSelector = function(name, callback) {
       xhr.remove(agApiPath + '/content-negotiation/' + name)
       .then(function (response) {
+        growl.success('Content-negotiation selector deleted');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Unable to delete content-negotiation selector', {ttl: -1});
         return callback(true);
       });
     };
@@ -322,6 +348,7 @@
       delete data.content_name;
       xhr.update(agApiPath + '/content-negotiation/' + selector.content_name, [ data ], allowed )
       .then(function(response) {
+        growl.success('Selector updated');
         delete response._links;
         return callback(false, response);
       })
@@ -331,10 +358,12 @@
             if (err.data.hasOwnProperty('validation_messages') &&
                 err.data.validation_messages.hasOwnProperty('selectors') &&
                 err.data.validation_messages.selectors.hasOwnProperty('classNotFound')) {
+              growl.error('Unable to update selector due to validation errors', {ttl: -1});
               return callback(true, err.data.validation_messages.selectors.classNotFound);
             }
             break;
           }
+        growl.error('Error updating selector', {ttl: -1});
         return callback(true, 'Error during the API communication');
       });
     };
@@ -345,6 +374,7 @@
         return callback(response);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch validator list', {ttl: -1});
         console.log('Failed to get the list of Validators', err);
         return false;
       });
@@ -356,6 +386,7 @@
         return callback(response);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch filter list', {ttl: -1});
         console.log('Failed to get the list of Filters', err);
         return false;
       });
@@ -364,6 +395,7 @@
     this.saveRestField = function(module, version, restname, fields, callback) {
       xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/input-filter', fields)
       .then(function(response) {
+        growl.success('Saved field');
         // Remove unused properties from the response
         delete response._links;
         delete response.input_filter_name;
@@ -372,6 +404,7 @@
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error saving field', {ttl: -1});
         return callback(true, 'Error during the API communication');
       });
     };
@@ -389,6 +422,7 @@
         return callback(false, data);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch authorization details', {ttl: -1});
         return callback(true, err.detail);
       });
     };
@@ -402,9 +436,11 @@
       data[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name] = http;
       xhr.save(agApiPath + '/module/' + module + '/authorization', data)
       .then(function (response) {
+        growl.success('Authorization updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error saving authorization details', {ttl: -1});
         return callback(true);
       });
     };
@@ -412,6 +448,7 @@
     this.saveRpcField = function(module, version, rpcname, fields, callback) {
       xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/input-filter', fields)
       .then(function(response) {
+        growl.success('Field saved');
         // Remove unused properties from the response
         delete response._links;
         delete response.input_filter_name;
@@ -420,6 +457,7 @@
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error saving field', {ttl: -1});
         return callback(true, 'Error during the API communication');
       });
     };
@@ -427,11 +465,13 @@
     this.saveRestDoc = function(module, version, restname, doc, callback) {
       xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/doc', doc)
       .then(function(response) {
+        growl.success('Documentation saved');
         // Remove unused properties from the response
         delete response._links;
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error saving documentation', {ttl: -1});
         return callback(true, 'Error during the API communication');
       });
     };
@@ -439,11 +479,13 @@
     this.saveRpcDoc = function(module, version, rpcname, doc, callback) {
       xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/doc', doc)
       .then(function(response) {
+        growl.success('Documentation saved');
         // Remove unused properties from the response
         delete response._links;
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error saving documentation', {ttl: -1});
         return callback(true, 'Error during the API communication');
       });
     };
@@ -452,9 +494,11 @@
       var allowed = [ 'service_name', 'route_match' ];
       xhr.create(agApiPath + '/module/' + module + '/rpc', [ service, route ], allowed)
       .then(function (response) {
+        growl.success('Service created');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error creating service', {ttl: -1});
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the RPC service, please check if already exists');
@@ -488,6 +532,7 @@
         return callback(false, rpc);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch service', {ttl: -1});
         return callback(true, 'Error getting the RPC service');
       });
     };
@@ -505,9 +550,11 @@
       var result = filterData(data, allowed);
       xhr.update(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', result.value, result.key)
       .then(function(response) {
+        growl.success('Service updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating service', {ttl: -1});
         return callback(true, 'Error during the update of the RPC service');
       });
     };
@@ -515,9 +562,11 @@
     this.deleteRpc = function(module, version, name, recursive, callback) {
       xhr.remove(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
       .then(function (response) {
+        growl.success('Service deleted');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error deleting service', {ttl: -1});
         return callback(true);
       });
     };
@@ -531,6 +580,7 @@
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch authentication details', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -547,12 +597,14 @@
       auth.accept_schemes.push('basic');
       xhr.create(agApiPath + '/authentication/http-basic', [ auth.accept_schemes, auth.htpasswd, auth.realm ], allowed)
       .then(function (response) {
+        growl.success('HTTP Basic authentication adapter created');
         if (response.hasOwnProperty('_links')) {
           delete response._links;
         }
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error creating HTTP Basic authentication adapter', {ttl: -1});
         return callback(true, null);
       });
     };
@@ -564,6 +616,7 @@
       ];
       xhr.update(agApiPath + '/authentication/http-basic', [ auth.htpasswd, auth.realm ], allowed)
       .then(function (response) {
+        growl.success('Authentication updated');
         if (response.hasOwnProperty('_links')) {
           delete response._links;
         }
@@ -572,8 +625,10 @@
       .catch(function (err) {
         switch (err.status) {
           case 422 :
+            growl.error('Unable to update authentication due to validation errors', {ttl: -1});
             return callback(true, err.validation_messages.htpasswd[0]);
-          }
+        }
+        growl.error('Unable to update authentication', {ttl: -1});
         return callback(true, 'Error saving the basic authentication');
       });
     };
@@ -584,6 +639,7 @@
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch documentation', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -594,6 +650,7 @@
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch documentation', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -607,6 +664,7 @@
           return callback(true, response);
         })
         .catch(function (err) {
+          growl.error('Unable to fetch database adapters', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -627,12 +685,14 @@
       var data = filterData(db, allowed);
       xhr.create(agApiPath + '/db-adapter', data.value, data.key)
       .then(function (response) {
+        growl.success('Database adapter created');
         if (response.hasOwnProperty('_links')) {
           delete response._links;
         }
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error creating database adapter', {ttl: -1});
         return callback(true, null);
       });
     };
@@ -652,12 +712,14 @@
       var data = filterData(db, allowed);
       xhr.update(agApiPath + '/db-adapter/' + db.adapter_name, data.value, data.key)
       .then(function (response) {
+        growl.success('Database adapter updated');
         if (response.hasOwnProperty('_links')) {
           delete response._links;
         }
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating database adapter', {ttl: -1});
         return callback(true, null);
       });
     };
@@ -665,9 +727,11 @@
     this.deleteDatabase = function(name, callback) {
       xhr.remove(agApiPath + '/db-adapter/' + name)
       .then(function (response) {
+        growl.success('Database adapter removed');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error removing database adapter', {ttl: -1});
         return callback(true);
       });
     };
@@ -676,9 +740,11 @@
       var doctrine_route = isDoctrine ? 'doctrine/' : '';
       xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + doctrine_route + name)
         .then(function (response) {
+          growl.success('Doctrine service(s) created');
           return callback(true, response);
         })
         .catch(function (err) {
+          growl.error('Error creating Doctrine service(s)', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -687,9 +753,11 @@
       var allowed = [ 'adapter_name', 'table_name' ];
       xhr.create(agApiPath + '/module/' + module + '/rest', [ adapter, table ], allowed)
       .then(function (response) {
+        growl.success('DB-Connected service(s) created');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error creating DB-Connected service(s)', {ttl: -1});
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the DB-Connected service, please check if already exists');
@@ -728,6 +796,7 @@
           }
         })
         .catch(function error (err) {
+          growl.error('Unable to fetch Doctrine adapters', {ttl: -1});
           deferred.reject(err);
         });
 
@@ -737,9 +806,11 @@
       var allowed = [ 'object_manager', 'entity_class', 'service_name' ];
       xhr.create(agApiPath + '/module/' + module + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
         .then(function (response) {
+          growl.success('Doctrine-connected service created');
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Error creating Doctrine-connected service', {ttl: -1});
           switch (err.status) {
             case 500 :
               return callback(true, 'I cannot create the Doctrine-Connected service, please check if already exists');
@@ -752,9 +823,11 @@
       var allowed = [ 'module' ];
       xhr.update(agApiPath + '/versioning', [ module ], allowed)
       .then(function (response) {
+        growl.success('New API version created');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error creating new API version', {ttl: -1});
         return callback(true, null);
       });
     };
@@ -763,9 +836,11 @@
       var allowed = [ 'module', 'version' ];
       xhr.update(agApiPath + '/default-version', [ module, version ], allowed)
       .then(function (response) {
+        growl.success('API default version updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating default API version', {ttl: -1});
         return callback(true, null);
       });
     };
@@ -776,6 +851,7 @@
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Error fetching source code', {ttl: -1});
           return callback(true, null);
         });
     };
@@ -793,11 +869,14 @@
       xhr.create(agApiPath + '/package', data, allowed)
         .then(function (response) {
           if (!response) {
+            growl.error('Error occurred when building package', {ttl: -1});
             return callback(true, 'Error occurred building the package');
           }
+          growl.success('Package creation initiated');
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Error occurred when building package', {ttl: -1});
           return callback(true, 'Error occurred building the package');
         });
     };
@@ -811,9 +890,10 @@
           return callback(true, response.items);
         })
         .catch(function (err) {
+          growl.error('Error fetching authentication adapters', {ttl: -1});
           return callback(true, null);
         });
-    }
+    };
 
     this.addAuthenticationAdapter = function(auth, callback) {
       var result = getAuthenticationDataForAPI(auth);
@@ -825,12 +905,14 @@
       }
       xhr.create(agApiPath + '/authentication', result.data, result.allowed, null, 2)
         .then(function (response) {
+          growl.success('Authentication adapter created');
           if (response.hasOwnProperty('_links')) {
             delete response._links;
           }
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Error creating authentication adapter', {ttl: -1});
           if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
             return callback(true, err.data.detail);
           }
@@ -848,11 +930,13 @@
       }
       xhr.save(agApiPath + '/authentication/' + auth.name, newAuth, 2)
       .then(function(response) {
+        growl.success('Authentication adapter updated');
         // Remove unused properties from the response
         delete response._links;
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating authentication adapter', {ttl: -1});
         return callback(true, 'Error during the authentication adapter API save');
       });
     };
@@ -860,11 +944,13 @@
     this.saveOptionsAuthenticationAdapter = function(auth, callback) {
       xhr.save(agApiPath + '/authentication/' + auth.name, auth, 2)
       .then(function(response) {
+        growl.success('Authentication adapter options updated');
         // Remove unused properties from the response
         delete response._links;
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating authentication adapter options', {ttl: -1});
         return callback(true, 'Error during the authentication adapter API save');
       });
     };
@@ -872,9 +958,11 @@
     this.deleteAuthenticationAdapter = function(name, callback) {
       xhr.remove(agApiPath + '/authentication/' + name, 2)
       .then(function (response) {
+        growl.success('Authentication adapter removed');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error removing authentication adapter', {ttl: -1});
         return callback(true);
       });
     };
@@ -883,26 +971,29 @@
       xhr.get(agApiPath + '/auth-type', 'auth-types', 2)
       .then(function (response) {
         var result = [];
+        var value;
+        var key;
         for(var i = 0; i < response.length; i++){
           if (response[i].endsWith('-basic')) {
-            var value = response[i].slice(0, -6);
-            var key   = value + ' (basic)';
+            value = response[i].slice(0, -6);
+            key   = value + ' (basic)';
           } else if (response[i].endsWith('-digest')) {
-            var value = response[i].slice(0, -7);
-            var key   = value + ' (digest)';
+            value = response[i].slice(0, -7);
+            key   = value + ' (digest)';
           } else {
-            var value = response[i];
-            var key   = value + ' (oauth2)';
+            value = response[i];
+            key   = value + ' (oauth2)';
           }
           result[i] = { key : key, value: value };
         }
         return callback(result);
       })
       .catch(function (err) {
+        growl.error('Error fetching authentication types', {ttl: -1});
         console.log('Failed to get the list of authentication types', err);
         return false;
       });
-    }
+    };
 
     this.getModuleAuthentication = function (module, version, callback) {
       xhr.get(agApiPath + '/module/' + module + '/authentication?version=' + version, 'authentication', 2)
@@ -910,18 +1001,21 @@
         return callback(response);
       })
       .catch(function (err) {
+        growl.error('Unable to fetch API authentication details', {ttl: -1});
         console.log('Failed to get the list of authentication types', err);
         return false;
       });
-    }
+    };
 
     this.saveModuleAuthentication = function (module, version, auth, callback) {
       var data = { 'authentication' : auth };
       xhr.save(agApiPath + '/module/' + module + '/authentication?version=' + version, data, 2)
       .then(function (response) {
+        growl.success('API authentication adapter updated');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating API authentication adapter', {ttl: -1});
         return callback(true);
       });
     };
@@ -929,34 +1023,37 @@
     this.deleteModuleAuthentication = function (module, version, callback) {
       xhr.remove(agApiPath + '/module/' + module + '/authentication?version=' + version, 2)
       .then(function (response) {
+        growl.success('API authentication adapter removed');
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error removing API authentication adapter', {ttl: -1});
         return callback(true);
       });
-    }
+    };
 
     function getAuthenticationDataForAPI(auth) {
+      var allowed, basic, data, digest, pdo, mongo;
       switch(auth.type){
         case 'HTTP Basic':
-          var allowed = [ 'name', 'type', 'realm', 'htpasswd' ];
-          var basic = auth.basic;
-          var data = [ auth.name, 'basic', basic.realm, basic.htpasswd ];
+          allowed = [ 'name', 'type', 'realm', 'htpasswd' ];
+          basic = auth.basic;
+          data = [ auth.name, 'basic', basic.realm, basic.htpasswd ];
           break;
         case 'HTTP Digest':
-          var allowed = [ 'name', 'type', 'realm', 'digest_domains', 'nonce_timeout', 'htdigest' ];
-          var digest = auth.digest;
-          var data = [ auth.name, 'digest', digest.realm, digest.digest_domains, digest.nonce_timeout, digest.htdigest ];
+          allowed = [ 'name', 'type', 'realm', 'digest_domains', 'nonce_timeout', 'htdigest' ];
+          digest = auth.digest;
+          data = [ auth.name, 'digest', digest.realm, digest.digest_domains, digest.nonce_timeout, digest.htdigest ];
           break;
         case 'OAuth2 PDO':
-          var allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_username', 'oauth2_password', 'oauth2_options' ];
-          var pdo = auth.pdo;
-          var data = [ auth.name, 'oauth2', 'pdo', pdo.oauth2_route, pdo.oauth2_dsn, pdo.oauth2_username, pdo.oauth2_password, pdo.oauth2_options ];
+          allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_username', 'oauth2_password', 'oauth2_options' ];
+          pdo = auth.pdo;
+          data = [ auth.name, 'oauth2', 'pdo', pdo.oauth2_route, pdo.oauth2_dsn, pdo.oauth2_username, pdo.oauth2_password, pdo.oauth2_options ];
           break;
         case 'OAuth2 Mongo':
-          var allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_database', 'oauth2_locator_name', 'oauth2_options' ];
-          var mongo = auth.mongo;
-          var data = [ auth.name, 'oauth2', 'mongo', mongo.oauth2_route, mongo.oauth2_dsn, mongo.oauth2_database, mongo.oauth2_locator_name, mongo.oauth2_options ];
+          allowed = [ 'name', 'type', 'oauth2_type', 'oauth2_route', 'oauth2_dsn', 'oauth2_database', 'oauth2_locator_name', 'oauth2_options' ];
+          mongo = auth.mongo;
+          data = [ auth.name, 'oauth2', 'mongo', mongo.oauth2_route, mongo.oauth2_dsn, mongo.oauth2_database, mongo.oauth2_locator_name, mongo.oauth2_options ];
           break;
       }
       return { data : data, allowed : allowed };
