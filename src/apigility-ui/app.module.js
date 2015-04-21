@@ -25,6 +25,7 @@
       'unsavedChanges',
       'ngTagsInput',
       'checklist-model',
-      'toggle-switch'
+      'toggle-switch',
+      'angular-growl'
     ]);
 })();
