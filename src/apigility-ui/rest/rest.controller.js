@@ -17,6 +17,7 @@
     vm.restName = $stateParams.rest;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
+    vm.selectorNames = [];
 
     function initGeneral() {
       vm.tags = {
@@ -84,13 +85,8 @@
 
         api.getContentNegotiation(function(result){
           vm.content_negotiation = result;
-          if (vm.rest.hasOwnProperty('selector')) {
-            for (var i = 0; i < result.length; i++) {
-              if (vm.rest.selector === result[i].content_name) {
-                vm.rest.selector = result[i];
-                break;
-              }
-            }
+          for (var property in result) {
+            vm.selectorNames.push(result[property].content_name);
           }
         });
       });
