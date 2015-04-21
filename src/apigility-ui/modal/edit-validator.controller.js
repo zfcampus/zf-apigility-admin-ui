@@ -34,14 +34,13 @@
       vm.options = result[vm.validator.name];
       vm.optionNames = [];
       for (var property in vm.options) {
-        vm.optionNames.push({ name: property });
+        vm.optionNames.push(property);
       }
     });
 
     vm.addOption = function() {
-      /* since option.name is a model, it's nested; pull nested name */
-      if (!vm.validator.options.hasOwnProperty(vm.option.name.name)) {
-        vm.validator.options[vm.option.name.name] = vm.option.value;
+      if (!vm.validator.options.hasOwnProperty(vm.option.name)) {
+        vm.validator.options[vm.option.name] = vm.option.value;
       }
     };
 

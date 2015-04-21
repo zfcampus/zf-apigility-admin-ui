@@ -28,21 +28,22 @@
 
     api.getFilters(function(result){
       vm.filters = result;
+      vm.filterNames = [];
       // Remove the validators already present in the field
       for (var property in result) {
         if (fieldFilters.indexOf(property) > -1) {
           delete vm.filters[property];
           continue;
         }
-        vm.filterNames.push({ name: property });
+        vm.filterNames.push(property);
       }
     });
 
     vm.selectFilter = function(item, model) {
-      vm.options = vm.filters[item.name];
+      vm.options = vm.filters[item];
       vm.optionNames = [];
       for (var property in vm.options) {
-        vm.optionNames.push({ name: property });
+        vm.optionNames.push(property);
       }
     };
 
@@ -51,9 +52,8 @@
     };
 
     vm.addOption = function() {
-      /* since option.name is a model, it's nested; pull nested name */
-      if (!vm.filter.options.hasOwnProperty(vm.option.name.name)) {
-        vm.filter.options[vm.option.name.name] = vm.option.value;
+      if (!vm.filter.options.hasOwnProperty(vm.option.name)) {
+        vm.filter.options[vm.option.name] = vm.option.value;
       }
     };
 
@@ -64,8 +64,6 @@
     };
 
     function addFilter(fields, field, filter){
-      /* since filter.name is a model, it's nested; pull nested name */
-      filter.name = filter.name.name;
       for(var i = 0; i < fields.length; i++) {
         if (fields[i].name == field.name) {
           fields[i].filters.push(filter);

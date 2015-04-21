@@ -34,28 +34,25 @@
           delete vm.validators[property];
           continue;
         }
-        vm.validatorNames.push({ name: property });
+        vm.validatorNames.push(property);
       }
     });
 
     vm.selectValidator = function(item, model) {
-      vm.options = vm.validators[item.name];
+      vm.options = vm.validators[item];
       vm.optionNames = [];
       for (var property in vm.options) {
-        vm.optionNames.push({ name: property });
+        vm.optionNames.push(property);
       }
     };
 
     vm.selectOption = function(item, model) {
-      console.log('Validator', vm.validator);
-      console.log('Option', vm.option);
       vm.option.value = '';
     };
 
     vm.addOption = function() {
-      /* since option.name is a model, it's nested; pull nested name */
-      if (!vm.validator.options.hasOwnProperty(vm.option.name.name)) {
-        vm.validator.options[vm.option.name.name] = vm.option.value;
+      if (!vm.validator.options.hasOwnProperty(vm.option.name)) {
+        vm.validator.options[vm.option.name] = vm.option.value;
       }
     };
 
@@ -66,8 +63,6 @@
     };
 
     function addValidator(fields, field, validator){
-      /* since validator.name is a model, it's nested; pull nested name */
-      validator.name = validator.name.name;
       for(var i = 0; i < fields.length; i++) {
         if (fields[i].name == field.name) {
           fields[i].validators.push(validator);

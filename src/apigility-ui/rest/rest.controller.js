@@ -39,7 +39,6 @@
 
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){
         vm.rest = result;
-        console.log(vm.rest);
         vm.isDoctrine = angular.isDefined(result.object_manager);
 
         vm.rest.accept_whitelist.forEach(function(entry){

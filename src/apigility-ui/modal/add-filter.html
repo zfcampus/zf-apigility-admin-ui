@@ -9,10 +9,10 @@
   <ui-select
     ng-model="vm.filter.name"
     on-select="vm.selectFilter($item, $model)">
-    <ui-select-match placeholder="Select Filter...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-match placeholder="Select Filter...">{{$select.selected}}</ui-select-match>
     <ui-select-choices
       repeat="filter in vm.filterNames | filter: $select.search">
-      <div ng-bind-html="filter.name | highlight: $select.search"></div>
+      <div ng-bind-html="filter | highlight: $select.search"></div>
     </ui-select-choices>
   </ui-select>
   <br />
@@ -22,9 +22,9 @@
       <ui-select
         ng-model="vm.option.name"
         on-select="vm.selectOption($item, $model)">
-        <ui-select-match placeholder="Select an option...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-match placeholder="Select an option...">{{$select.selected}}</ui-select-match>
         <ui-select-choices repeat="option in vm.optionNames | filter: $select.search">
-          <div ng-bind-html="option.name | highlight: $select.search"></div>
+          <div ng-bind-html="option | highlight: $select.search"></div>
         </ui-select-choices>
       </ui-select>
     </div>
@@ -39,12 +39,12 @@
       <toggle-switch type="checkbox"
         class="switch-info switch-small"
         model="vm.option.value"
-        ng-show="vm.filter.name && vm.filters[vm.filter.name.name][vm.option.name.name] == 'bool'"></toggle-switch>
+        ng-show="vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'"></toggle-switch>
 
       <input type="text" class="form-control"
         ng-model="vm.option.value"
         ng-hide="vm.filter.name && vm.filters[vm.filter.name][vm.option.name] == 'bool'"
-        placeholder="Insert the option value ({{vm.filters[vm.filter.name.name][vm.option.name.name]}})">
+        placeholder="Insert the option value ({{vm.filters[vm.filter.name][vm.option.name]}})">
     </div>
   </div>
   <br /><br />
