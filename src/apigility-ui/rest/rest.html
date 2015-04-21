@@ -67,7 +67,15 @@
             <div class="form-group" ng-if="!vm.isDoctrine">
               <label for="rest_hydrator" class="col-sm-2 control-label">Hydrator Service Name</label>
               <div class="col-sm-4">
-                <select class="form-control" ng-model="vm.rest.hydrator_name" ng-options="hydrator for hydrator in vm.hydrators" ng-disabled="vm.disabled"></select>
+                <ui-select
+                  ng-model="vm.rest.hydrator_name"
+                  ng-disabled="vm.disabled">
+                  <ui-select-match placeholder="Select Hydrator...">{{$select.selected}}</ui-select-match>
+                  <ui-select-choices
+                    repeat="hydrator in vm.hydrators | filter: $select.search">
+                    <div ng-bind-html="hydrator | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
             </div>
             <div class="form-group">

@@ -6,12 +6,27 @@
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
   </div>
   <label class="control-label">Filter</label>
-  <select class="form-control" ng-model="vm.filter.name" ng-options="name as name for (name, value) in vm.filters" ng-change="vm.selectFilter()"></select>
+  <ui-select
+    ng-model="vm.filter.name"
+    on-select="vm.selectFilter($item, $model)">
+    <ui-select-match placeholder="Select Filter...">{{$select.selected}}</ui-select-match>
+    <ui-select-choices
+      repeat="filter in vm.filterNames | filter: $select.search">
+      <div ng-bind-html="filter | highlight: $select.search"></div>
+    </ui-select-choices>
+  </ui-select>
   <br />
   <div class="form-group">
     <label for="rest_validator_option" class="col-sm-2 control-label">Option</label>
     <div class="col-sm-8">
-      <select class="form-control" ng-model="vm.option.name" ng-options="name as name for (name, value) in vm.options" ng-change="vm.option.value=''"></select>
+      <ui-select
+        ng-model="vm.option.name"
+        on-select="vm.selectOption($item, $model)">
+        <ui-select-match placeholder="Select an option...">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="option in vm.optionNames | filter: $select.search">
+          <div ng-bind-html="option | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
     </div>
     <div class="col-sm-2">
       <button type="button" class="btn btn-success btn-sm" ng-click="vm.addOption()">Add option</span></button>
