@@ -17,6 +17,7 @@
     vm.rpcName = $stateParams.rpc;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
+    vm.selectorNames = [];
 
     function initGeneral() {
       vm.tags = {
@@ -45,11 +46,8 @@
 
         api.getContentNegotiation(function(result){
           vm.content_negotiation = result;
-          for (var i = 0; i < result.length; i++) {
-            if (vm.rpc.selector === result[i].content_name) {
-              vm.rpc.selector = result[i];
-              break;
-            }
+          for (var property in result) {
+            vm.selectorNames.push(result[property].content_name);
           }
         });
       });

@@ -2067,7 +2067,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"rest_content_negotiation\" class=\"col-sm-2 control-label\">Content Negotiation Selector</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" ng-model=\"vm.rest.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <ui-select\n" +
+    "                  ng-model=\"vm.rest.selector\"\n" +
+    "                  ng-disabled=\"vm.disabled\">\n" +
+    "                  <ui-select-match placeholder=\"Select content negotiation type...\">{{$select.selected}}</ui-select-match>\n" +
+    "                  <ui-select-choices\n" +
+    "                    repeat=\"selector in vm.selectorNames | filter: $select.search\">\n" +
+    "                    <div ng-bind-html=\"selector | highlight: $select.search\"></div>\n" +
+    "                  </ui-select-choices>\n" +
+    "                </ui-select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
@@ -2345,7 +2353,15 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "          <div class=\"form-group\">\n" +
     "            <label for=\"rest_content_negotiation\" class=\"col-sm-2 control-label\">Content Negotiation Selector</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
-    "              <select class=\"form-control\" ng-model=\"vm.rpc.selector\" ng-options=\"selector.content_name for selector in vm.content_negotiation\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "              <ui-select\n" +
+    "                ng-model=\"vm.rpc.selector\"\n" +
+    "                ng-disabled=\"vm.disabled\">\n" +
+    "                <ui-select-match placeholder=\"Select content negotiation type...\">{{$select.selected}}</ui-select-match>\n" +
+    "                <ui-select-choices\n" +
+    "                  repeat=\"selector in vm.selectorNames | filter: $select.search\">\n" +
+    "                  <div ng-bind-html=\"selector | highlight: $select.search\"></div>\n" +
+    "                </ui-select-choices>\n" +
+    "              </ui-select>\n" +
     "            </div>\n" +
     "          </div>\n" +
     "          <div class=\"form-group\">\n" +
