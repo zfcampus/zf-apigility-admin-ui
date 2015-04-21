@@ -1846,7 +1846,12 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">HTTP Entity Methods</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rest.entity_http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.rest.entity_http_methods\"\n" +
+    "                    checklist-value=\"http\" ng-disabled=\"vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -1858,7 +1863,13 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">HTTP Collection Methods</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rest.collection_http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.rest.collection_http_methods\"\n" +
+    "                    checklist-value=\"http\"\n" +
+    "                    ng-disabled=\"vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -2090,7 +2101,13 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">Entity authorization</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth.entity\" checklist-value=\"http\" ng-disabled=\"vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.auth.entity\"\n" +
+    "                    checklist-value=\"http\"\n" +
+    "                    ng-disabled=\"vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -2098,7 +2115,13 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label class=\"col-sm-2 control-label\">Collection authorization</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth.collection\" checklist-value=\"http\" ng-disabled=\"vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.auth.collection\"\n" +
+    "                    checklist-value=\"http\"\n" +
+    "                    ng-disabled=\"vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -2255,7 +2278,13 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "            <label class=\"col-sm-2 control-label\">Allowed HTTP Methods</label>\n" +
     "            <div class=\"col-sm-10\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.rpc.http_methods\" checklist-value=\"http\" ng-disabled=\"vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.rpc.http_methods\"\n" +
+    "                    checklist-value=\"http\"\n" +
+    "                    ng-disabled=\"vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
@@ -2349,7 +2378,13 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "            <label class=\"col-sm-2 control-label\">Authorization</label>\n" +
     "            <div class=\"col-sm-8\">\n" +
     "              <span ng-repeat=\"http in vm.httpMethods\">\n" +
-    "                <input type=\"checkbox\" checklist-model=\"vm.auth\" checklist-value=\"http\" ng-disabled=\"vm.rpc.http_methods.indexOf(http) < 0 || vm.disabled\"> {{http}}\n" +
+    "                <label class=\"http-method\">\n" +
+    "                  <input type=\"checkbox\"\n" +
+    "                    checklist-model=\"vm.auth\"\n" +
+    "                    checklist-value=\"http\"\n" +
+    "                    ng-disabled=\"vm.rpc.http_methods.indexOf(http) < 0 || vm.disabled\">\n" +
+    "                  {{http}}\n" +
+    "                </label>\n" +
     "              </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
