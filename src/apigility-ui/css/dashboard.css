@@ -421,3 +421,7 @@ h1 {
 .table-center {
   text-align: center;
 }
+
+.http-method {
+  margin-right: 1em;
+}

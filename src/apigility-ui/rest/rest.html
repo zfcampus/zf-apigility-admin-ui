@@ -27,7 +27,12 @@
               <label class="col-sm-2 control-label">HTTP Entity Methods</label>
               <div class="col-sm-4">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.rest.entity_http_methods" checklist-value="http" ng-disabled="vm.disabled"> {{http}}
+                <label class="http-method">
+                  <input type="checkbox"
+                    checklist-model="vm.rest.entity_http_methods"
+                    checklist-value="http" ng-disabled="vm.disabled">
+                  {{http}}
+                </label>
               </span>
               </div>
             </div>
@@ -39,7 +44,13 @@
               <label class="col-sm-2 control-label">HTTP Collection Methods</label>
               <div class="col-sm-4">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.rest.collection_http_methods" checklist-value="http" ng-disabled="vm.disabled"> {{http}}
+                <label class="http-method">
+                  <input type="checkbox"
+                    checklist-model="vm.rest.collection_http_methods"
+                    checklist-value="http"
+                    ng-disabled="vm.disabled">
+                  {{http}}
+                </label>
               </span>
               </div>
             </div>
@@ -271,7 +282,13 @@
               <label class="col-sm-2 control-label">Entity authorization</label>
               <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.entity" checklist-value="http" ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <label class="http-method">
+                  <input type="checkbox"
+                    checklist-model="vm.auth.entity"
+                    checklist-value="http"
+                    ng-disabled="vm.rest.entity_http_methods.indexOf(http) < 0 || vm.disabled">
+                  {{http}}
+                </label>
               </span>
               </div>
             </div>
@@ -279,7 +296,13 @@
               <label class="col-sm-2 control-label">Collection authorization</label>
               <div class="col-sm-8">
               <span ng-repeat="http in vm.httpMethods">
-                <input type="checkbox" checklist-model="vm.auth.collection" checklist-value="http" ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled"> {{http}}
+                <label class="http-method">
+                  <input type="checkbox"
+                    checklist-model="vm.auth.collection"
+                    checklist-value="http"
+                    ng-disabled="vm.rest.collection_http_methods.indexOf(http) < 0 || vm.disabled">
+                  {{http}}
+                </label>
               </span>
               </div>
             </div>
