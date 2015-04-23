@@ -912,6 +912,7 @@
           return callback(false, response);
         })
         .catch(function (err) {
+          growl.error('Error creating authentication adapter', {ttl: -1});
           if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
             return callback(true, err.data.detail);
           }
@@ -935,6 +936,7 @@
         return callback(false, response);
       })
       .catch(function (err) {
+        growl.error('Error updating authentication adapter', {ttl: -1});
         if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
           return callback(true, err.data.detail);
         }
