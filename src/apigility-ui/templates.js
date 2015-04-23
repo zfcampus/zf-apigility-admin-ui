@@ -877,7 +877,8 @@ angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", f
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Realm</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.realm\" placeholder=\"Insert the realm attribute\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.basic.realm\" placeholder=\"api\">\n" +
+    "        <span class=\"help-block\">HTTP authentication realm</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
@@ -893,19 +894,22 @@ angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", f
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Realm</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.realm\" placeholder=\"Insert the realm attribute (optional)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.realm\" placeholder=\"api\">\n" +
+    "        <span class=\"help-block\">HTTP authentication realm</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Digest domains</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"Insert the digest domains value (optional)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"Add a path\">\n" +
+    "        <span class=\"help-block\">Space-separated list of URI paths for which authentication will be applied</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Nonce timeout</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.nonce_timeout\" placeholder=\"Insert the nonce timeout in secoond (optional)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.nonce_timeout\" placeholder=\"3600\">\n" +
+    "        <span class=\"help-block\">Expiration in seconds for inactive authentication</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
@@ -921,25 +925,29 @@ angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", f
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">DSN</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_dsn\" placeholder=\"Insert the PDO database source name (DSN)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_dsn\" placeholder=\"sqlite::memory:\">\n" +
+    "        <span class=\"help-block\">The PDO database source name (DSN).</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Username</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_username\" placeholder=\"Username for OAuth2 database credentials (required if not using SQLite)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_username\" placeholder=\"(optional) username\">\n" +
+    "        <span class=\"help-block\">Username for OAuth2 database credentials (required if not using SQLite)</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Password</label>\n" +
-    "        <input type=\"password\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_password\" placeholder=\"Password for the username listed (required if not using SQLite)\">\n" +
+    "        <input type=\"password\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_password\" placeholder=\"(optional) password\">\n" +
+    "        <span class=\"help-block\">Password for the username listed (required if not using SQLite)</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
-    "        <label class=\"control-label\">Route</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_route\" placeholder=\"Base URI to use as the OAuth2 server endpoint\">\n" +
+    "        <label class=\"control-label\">OAuth2 route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.pdo.oauth2_route\" placeholder=\"/oauth\">\n" +
+    "        <span class=\"help-block\">Base URI to use as the OAuth2 server endpoint</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -949,12 +957,13 @@ angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", f
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">DSN</label>\n" +
     "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_dsn\" placeholder=\"Insert the Mongo database source name (DSN)\">\n" +
+    "        <span class=\"help-block\">The MongoClient server connection string; if not provided, \"mongodb://localhost:27017\" will be used. \"mongodb://\" may be omitted from the string.</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Locator name</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_locator_name\" placeholder=\"Insert the locator name (optional)\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.mongo.oauth2_locator_name\" placeholder=\"(optional) Insert the locator name\">\n" +
     "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
@@ -965,8 +974,9 @@ angular.module("apigility-ui/modal/edit-auth.html", []).run(["$templateCache", f
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
-    "        <label class=\"control-label\">Route</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.oauth2.mongo.route\" placeholder=\"Base URI to use as the OAuth2 server endpoint\">\n" +
+    "        <label class=\"control-label\">OAuth2 route</label>\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.oauth2.mongo.route\" placeholder=\"/oauth\">\n" +
+    "        <span class=\"help-block\">Base URI to use as the OAuth2 server endpoint</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -1347,7 +1357,7 @@ angular.module("apigility-ui/modal/new-auth.html", []).run(["$templateCache", fu
     "    <div class=\"row\">\n" +
     "      <div class=\"col-sm-12\">\n" +
     "        <label class=\"control-label\">Digest domains</label>\n" +
-    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"(optional) Add a path\">\n" +
+    "        <input type=\"text\" class=\"form-control\" ng-model=\"vm.auth.digest.digest_domains\" placeholder=\"Add a path\">\n" +
     "        <span class=\"help-block\">Space-separated list of URI paths for which authentication will be applied</span>\n" +
     "      </div>\n" +
     "    </div>\n" +
