@@ -912,11 +912,10 @@
           return callback(false, response);
         })
         .catch(function (err) {
-          growl.error('Error creating authentication adapter', {ttl: -1});
           if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
             return callback(true, err.data.detail);
           }
-          return callback(true, 'Error on authentication adapter save');
+          return callback(true, 'Error creating authentication adapter');
         });
     };
 
@@ -936,8 +935,10 @@
         return callback(false, response);
       })
       .catch(function (err) {
-        growl.error('Error updating authentication adapter', {ttl: -1});
-        return callback(true, 'Error during the authentication adapter API save');
+        if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
+          return callback(true, err.data.detail);
+        }
+        return callback(true, 'Error updating authentication adapter');
       });
     };
 

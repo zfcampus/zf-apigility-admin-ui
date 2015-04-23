@@ -20,7 +20,8 @@
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Realm</label>
-        <input type="text" class="form-control" ng-model="vm.auth.basic.realm" placeholder="Insert the realm attribute">
+        <input type="text" class="form-control" ng-model="vm.auth.basic.realm" placeholder="api">
+        <span class="help-block">HTTP authentication realm</span>
       </div>
     </div>
     <div class="row">
@@ -36,19 +37,22 @@
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Realm</label>
-        <input type="text" class="form-control" ng-model="vm.auth.digest.realm" placeholder="Insert the realm attribute (optional)">
+        <input type="text" class="form-control" ng-model="vm.auth.digest.realm" placeholder="api">
+        <span class="help-block">HTTP authentication realm</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Digest domains</label>
-        <input type="text" class="form-control" ng-model="vm.auth.digest.digest_domains" placeholder="Insert the digest domains value (optional)">
+        <input type="text" class="form-control" ng-model="vm.auth.digest.digest_domains" placeholder="Add a path">
+        <span class="help-block">Space-separated list of URI paths for which authentication will be applied</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Nonce timeout</label>
-        <input type="text" class="form-control" ng-model="vm.auth.digest.nonce_timeout" placeholder="Insert the nonce timeout in secoond (optional)">
+        <input type="text" class="form-control" ng-model="vm.auth.digest.nonce_timeout" placeholder="3600">
+        <span class="help-block">Expiration in seconds for inactive authentication</span>
       </div>
     </div>
     <div class="row">
@@ -64,25 +68,29 @@
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">DSN</label>
-        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_dsn" placeholder="Insert the PDO database source name (DSN)">
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_dsn" placeholder="sqlite::memory:">
+        <span class="help-block">The PDO database source name (DSN).</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Username</label>
-        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_username" placeholder="Username for OAuth2 database credentials (required if not using SQLite)">
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_username" placeholder="(optional) username">
+        <span class="help-block">Username for OAuth2 database credentials (required if not using SQLite)</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Password</label>
-        <input type="password" class="form-control" ng-model="vm.auth.pdo.oauth2_password" placeholder="Password for the username listed (required if not using SQLite)">
+        <input type="password" class="form-control" ng-model="vm.auth.pdo.oauth2_password" placeholder="(optional) password">
+        <span class="help-block">Password for the username listed (required if not using SQLite)</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <label class="control-label">Route</label>
-        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_route" placeholder="Base URI to use as the OAuth2 server endpoint">
+        <label class="control-label">OAuth2 route</label>
+        <input type="text" class="form-control" ng-model="vm.auth.pdo.oauth2_route" placeholder="/oauth">
+        <span class="help-block">Base URI to use as the OAuth2 server endpoint</span>
       </div>
     </div>
   </div>
@@ -92,12 +100,13 @@
       <div class="col-sm-12">
         <label class="control-label">DSN</label>
         <input type="text" class="form-control" ng-model="vm.auth.mongo.oauth2_dsn" placeholder="Insert the Mongo database source name (DSN)">
+        <span class="help-block">The MongoClient server connection string; if not provided, "mongodb://localhost:27017" will be used. "mongodb://" may be omitted from the string.</span>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <label class="control-label">Locator name</label>
-        <input type="text" class="form-control" ng-model="vm.auth.mongo.oauth2_locator_name" placeholder="Insert the locator name (optional)">
+        <input type="text" class="form-control" ng-model="vm.auth.mongo.oauth2_locator_name" placeholder="(optional) Insert the locator name">
       </div>
     </div>
     <div class="row">
@@ -108,8 +117,9 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <label class="control-label">Route</label>
-        <input type="text" class="form-control" ng-model="vm.auth.oauth2.mongo.route" placeholder="Base URI to use as the OAuth2 server endpoint">
+        <label class="control-label">OAuth2 route</label>
+        <input type="text" class="form-control" ng-model="vm.auth.oauth2.mongo.route" placeholder="/oauth">
+        <span class="help-block">Base URI to use as the OAuth2 server endpoint</span>
       </div>
     </div>
   </div>
