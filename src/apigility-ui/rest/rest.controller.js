@@ -141,7 +141,11 @@
         controllerAs: 'vm',
         resolve : {
           fields : function() {
-            return vm.doctrineMetadata.fieldNames;
+            var fields = [];
+            angular.forEach(vm.doctrineMetadata.fieldNames, function(name) {
+              fields[name] = name;
+            });
+            return fields;
           }
         }
       });
