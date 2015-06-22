@@ -22,7 +22,8 @@
     function initGeneral() {
       vm.tags = {
         accept_whitelist : [],
-        content_type_whitelist : []
+        content_type_whitelist : [],
+        collection_query_whitelist : []
       };
 
       api.getHydrators(function(result){
@@ -47,6 +48,9 @@
         });
         vm.rest.content_type_whitelist.forEach(function(entry){
           vm.tags.content_type_whitelist.push({ text : entry });
+        });
+        vm.rest.collection_query_whitelist.forEach(function(entry){
+          vm.tags.collection_query_whitelist.push({ text : entry });
         });
 
         if (vm.isDoctrine) {
@@ -113,6 +117,7 @@
       if (vm.adapter) {
         vm.rest.adapter_name = vm.adapter.adapter_name;
       }
+      vm.rest.collection_query_whitelist = vm.tags.collection_query_whitelist.map(api.mapTagInput);
       if (vm.rest.hydrator_name.name) {
         vm.rest.hydrator_name = vm.rest.hydrator_name.name;
       }
