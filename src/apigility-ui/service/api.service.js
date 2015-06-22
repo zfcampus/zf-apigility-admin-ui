@@ -804,7 +804,7 @@
 
     this.newDoctrine = function(module, adapter, entity, callback) {
       var allowed = [ 'object_manager', 'entity_class', 'service_name' ];
-      xhr.create(agApiPath + '/module/' + module + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
+      xhr.create(agApiPath + '/module/' + module + '/doctrine/', [ adapter, entity.entity_class, entity.service_name ], allowed)
         .then(function (response) {
           growl.success('Doctrine-connected service created');
           return callback(false, response);
