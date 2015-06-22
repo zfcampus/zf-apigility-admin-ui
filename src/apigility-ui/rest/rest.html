@@ -82,14 +82,14 @@
               <label for="rest_query_white_list" class="col-sm-2 control-label">Collection Query String Whitelist</label>
               <div class="col-sm-4">
                 <tags-input
-                    ng-model="vm.rest.collection_query_whitelist"
+                    ng-model="vm.tags.collection_query_whitelist"
                     ng-hide="vm.disabled"
                     placeholder="Insert query whitelist"
                     add-on-space="true"
                     add-on-enter="true"
                     add-on-blur="true"
                     allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
-                <span ng-repeat="collection in vm.rest.collection_query_whitelist" ng-show="vm.disabled">{{collection.text}}, </span>
+                <span ng-repeat="collection in vm.tabs.collection_query_whitelist" ng-show="vm.disabled">{{collection.text}}, </span>
               </div>
               <label for="rest_collection_name" class="col-sm-2 control-label">Collection Name</label>
               <div class="col-sm-4">
