@@ -28,6 +28,12 @@
       vm.loading = true;
       var newFields = angular.copy(fields);
       newFields.push(vm.field);
+      // remove the type value if empty (required for File Upload)
+      for(var i=0; i < newFields.length; i++) {
+        if (!newFields[i].type) {
+          delete newFields[i].type;
+        }
+      }
       if (type === 'rest') {
         api.saveRestField(vm.apiName, vm.version, $stateParams.rest, newFields, function(err, response){
           vm.loading = false;

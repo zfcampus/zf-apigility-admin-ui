@@ -1043,15 +1043,15 @@ angular.module("apigility-ui/modal/edit-db.html", []).run(["$templateCache", fun
     "    </div>\n" +
     "  </div>\n" +
     "  <label class=\"control-label\">Hostname</label>\n" +
-    "  <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.hostname\" placeholder=\"(Optional) Hostname\"><br />\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.hostname\" placeholder=\"(Optional) Hostname\"><br />\n" +
     "  <div class=\"row\">\n" +
     "    <div class=\"col-sm-6\">\n" +
     "      <label class=\"control-label\">Port</label>\n" +
-    "      <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.port\" placeholder=\"(Optional) Port\"><br />\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.port\" placeholder=\"(Optional) Port\"><br />\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-6\">\n" +
     "      <label class=\"control-label\">Charset</label>\n" +
-    "      <input type=\"password\" class=\"form-control\" ng-model=\"vm.db.charset\" placeholder=\"(Optional) Charset\"><br />\n" +
+    "      <input type=\"text\" class=\"form-control\" ng-model=\"vm.db.charset\" placeholder=\"(Optional) Charset\"><br />\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
@@ -1097,7 +1097,7 @@ angular.module("apigility-ui/modal/edit-field.html", []).run(["$templateCache", 
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
-    "  <input type=\"checkbox\" ng-model=\"vm.field.type\" value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
+    "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.required\" value=\"Yes\" class=\"col-sm-2 control-label\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">Allow Empty</label>\n" +
@@ -1534,7 +1534,7 @@ angular.module("apigility-ui/modal/new-field.html", []).run(["$templateCache", f
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
-    "  <input type=\"checkbox\" ng-model=\"vm.field.type\" value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
+    "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.required\" value=\"Yes\" class=\"col-sm-2 control-label\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">Allow Empty</label>\n" +
