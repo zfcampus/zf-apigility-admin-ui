@@ -1957,14 +1957,14 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "              <label for=\"rest_query_white_list\" class=\"col-sm-2 control-label\">Collection Query String Whitelist</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
     "                <tags-input\n" +
-    "                    ng-model=\"vm.rest.collection_query_whitelist\"\n" +
+    "                    ng-model=\"vm.tags.collection_query_whitelist\"\n" +
     "                    ng-hide=\"vm.disabled\"\n" +
     "                    placeholder=\"Insert query whitelist\"\n" +
     "                    add-on-space=\"true\"\n" +
     "                    add-on-enter=\"true\"\n" +
     "                    add-on-blur=\"true\"\n" +
     "                    allowed-tags-pattern=\"^[a-zA-Z0-9_+.-]+$\"></tags-input>\n" +
-    "                <span ng-repeat=\"collection in vm.rest.collection_query_whitelist\" ng-show=\"vm.disabled\">{{collection.text}}, </span>\n" +
+    "                <span ng-repeat=\"collection in vm.tabs.collection_query_whitelist\" ng-show=\"vm.disabled\">{{collection.text}}, </span>\n" +
     "              </div>\n" +
     "              <label for=\"rest_collection_name\" class=\"col-sm-2 control-label\">Collection Name</label>\n" +
     "              <div class=\"col-sm-4\">\n" +
