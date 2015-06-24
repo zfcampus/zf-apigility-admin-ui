@@ -166,7 +166,7 @@
     };
 
     this.getAuthorizationRest = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization')
+      xhr.get(agApiPath + '/module/' + module + '/authorization?version=' + version)
       .then(function (response) {
         var method;
         var data = {};
@@ -410,7 +410,7 @@
     };
 
     this.getAuthorizationRpc = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization')
+      xhr.get(agApiPath + '/module/' + module + '/authorization?version=' + version)
       .then(function (response) {
         var data = [];
         var controller = response[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name];
