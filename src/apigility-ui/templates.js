@@ -761,10 +761,10 @@ angular.module("apigility-ui/modal/delete-field.html", []).run(["$templateCache"
 angular.module("apigility-ui/modal/delete-filter.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/modal/delete-filter.html",
     "<div class=\"modal-header\">\n" +
-    "  <h4 class=\"modal-title\"><span class=\"glyphicon glyphicon-trash\"></span> Delete driver option</h4>\n" +
+    "  <h4 class=\"modal-title\"><span class=\"glyphicon glyphicon-trash\"></span> Delete filter</h4>\n" +
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
-    "  <p class=\"modal_msg\">Are you sure to delete the driver option <strong>{{vm.option}}</strong>?</p>\n" +
+    "  <p class=\"modal_msg\">Are you sure to delete the filter <strong>{{vm.filter.name}}</strong>?</p>\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
@@ -826,7 +826,7 @@ angular.module("apigility-ui/modal/delete-selector.html", []).run(["$templateCac
 angular.module("apigility-ui/modal/delete-validator.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/modal/delete-validator.html",
     "<div class=\"modal-header\">\n" +
-    "  <h4 class=\"modal-title\" id=\"myModalDeleteService\"><span class=\"glyphicon glyphicon-trash\"></span> Delete validator</h4>\n" +
+    "  <h4 class=\"modal-title\"><span class=\"glyphicon glyphicon-trash\"></span> Delete validator</h4>\n" +
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
     "  <p class=\"modal_msg\">Are you sure to delete the validator <strong>{{vm.validator.name}}</strong>?</p>\n" +
