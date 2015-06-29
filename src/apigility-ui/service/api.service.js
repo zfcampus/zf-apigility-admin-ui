@@ -93,8 +93,10 @@
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the REST service, please check if already exists');
+          case 409 :
+            return callback(true, 'The service already exists, please choose a different name');
         }
-        return callback(true, 'I cannot create the REST service, please enter a valid name (alpha characters)');
+        return callback(true, 'I cannot create the REST service, please enter a valid name');
       });
     };
 
