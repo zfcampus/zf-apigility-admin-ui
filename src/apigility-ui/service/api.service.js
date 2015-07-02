@@ -91,10 +91,10 @@
       .catch(function (err) {
         growl.error('Unable to create service', {ttl: -1});
         switch (err.status) {
-          case 500 :
-            return callback(true, 'I cannot create the REST service, please check if already exists');
+          case 409 :
+            return callback(true, 'The service already exists, please choose a different name');
         }
-        return callback(true, 'I cannot create the REST service, please enter a valid name (alpha characters)');
+        return callback(true, 'I cannot create the REST service, please enter a valid name');
       });
     };
 
@@ -128,7 +128,11 @@
         return callback(false, response);
       })
       .catch(function (err) {
-        growl.error('Error updating service', {ttl: -1});
+        if (err.data.detail) {
+          growl.error(err.data.detail, {ttl: -1});
+        } else {
+          growl.error('Error updating service', {ttl: -1});
+        }
         return callback(true, 'Error during the update of the REST service');
       });
     };
@@ -500,10 +504,10 @@
       .catch(function (err) {
         growl.error('Error creating service', {ttl: -1});
         switch (err.status) {
-          case 500 :
-            return callback(true, 'I cannot create the RPC service, please check if already exists');
-          }
-        return callback(true, 'I cannot create the RPC service, please enter a valid name (alpha characters)');
+          case 409 :
+            return callback(true, 'The service already exists, please choose a different name');
+        }
+        return callback(true, 'I cannot create the RPC service, please enter a valid name');
       });
     };
 
@@ -554,7 +558,11 @@
         return callback(false, response);
       })
       .catch(function (err) {
-        growl.error('Error updating service', {ttl: -1});
+        if (err.data.detail) {
+          growl.error(err.data.detail, {ttl: -1});
+        } else {
+          growl.error('Error updating service', {ttl: -1});
+        }
         return callback(true, 'Error during the update of the RPC service');
       });
     };
