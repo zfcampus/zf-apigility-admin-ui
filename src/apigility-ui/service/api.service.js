@@ -170,7 +170,7 @@
     };
 
     this.getAuthorizationRest = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization?version=' + version)
+      xhr.get(agApiPath + '/module/' + module + '/authorization')
       .then(function (response) {
         var method;
         var data = {};
@@ -397,6 +397,11 @@
     };
 
     this.saveRestField = function(module, version, restname, fields, callback) {
+      angular.forEach(fields, function (field, key) {
+        if (field.hasOwnProperty('error_message') && ! field.error_message) {
+          delete field.error_message;
+        }
+      });
       xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/input-filter', fields)
       .then(function(response) {
         growl.success('Saved field');
@@ -414,7 +419,7 @@
     };
 
     this.getAuthorizationRpc = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization?version=' + version)
+      xhr.get(agApiPath + '/module/' + module + '/authorization')
       .then(function (response) {
         var data = [];
         var controller = response[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name];
@@ -450,6 +455,11 @@
     };
 
     this.saveRpcField = function(module, version, rpcname, fields, callback) {
+      angular.forEach(fields, function (field, key) {
+        if (field.hasOwnProperty('error_message') && ! field.error_message) {
+          delete field.error_message;
+        }
+      });
       xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/input-filter', fields)
       .then(function(response) {
         growl.success('Field saved');
@@ -812,7 +822,7 @@
 
     this.newDoctrine = function(module, adapter, entity, callback) {
       var allowed = [ 'object_manager', 'entity_class', 'service_name' ];
-      xhr.create(agApiPath + '/module/' + module + '/doctrine/', [ adapter, entity.entity_class, entity.service_name ], allowed)
+      xhr.create(agApiPath + '/module/' + module + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
         .then(function (response) {
           growl.success('Doctrine-connected service created');
           return callback(false, response);
@@ -924,7 +934,7 @@
           if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
             return callback(true, err.data.detail);
           }
-          return callback(true, 'Error creating authentication adapter');
+          return callback(true, 'Error on authentication adapter save');
         });
     };
 
@@ -945,10 +955,7 @@
       })
       .catch(function (err) {
         growl.error('Error updating authentication adapter', {ttl: -1});
-        if (err.hasOwnProperty('data') && err.data.hasOwnProperty('detail')) {
-          return callback(true, err.data.detail);
-        }
-        return callback(true, 'Error updating authentication adapter');
+        return callback(true, 'Error during the authentication adapter API save');
       });
     };
 
@@ -1083,7 +1090,6 @@
 
     function capitalizeFirstLetter(string)
     {
-      string = string.replace(/_(\w)/g, function(_,letter) { return letter.toUpperCase(); });
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
