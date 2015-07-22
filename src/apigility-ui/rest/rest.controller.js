@@ -17,9 +17,11 @@
     vm.restName = $stateParams.rest;
     vm.httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
     vm.disabled = !SidebarService.isLastVersion(vm.version, vm.apiName);
-    vm.selectorNames = [];
 
     function initGeneral() {
+      vm.selectorNames = [];
+      vm.adapterNames = [];
+
       vm.tags = {
         accept_whitelist : [],
         content_type_whitelist : [],
@@ -31,11 +33,12 @@
       });
 
       api.getDatabase(function(err, response){
-        vm.db = response;
+        for(var i in response.db_adapter){
+          vm.adapterNames.push(response.db_adapter[i].adapter_name);
+        }
       });
 
       api.getDoctrineAdapters(function(err, response) {
-
         vm.doctrine = response.doctrine_adapter;
       });
 
@@ -64,15 +67,6 @@
             }
             vm.doctrineMetadata = response;
           });
-        }
-        if (vm.rest.hasOwnProperty('table_name') &&
-            vm.rest.hasOwnProperty('db')) {
-          for (var i = 0; i < vm.db.db_adapter.length; i++) {
-            if (vm.db.db_adapter[i].adapter_name == vm.rest.adapter_name) {
-              vm.adapter = vm.db.db_adapter[i];
-              break;
-            }
-          }
         }
         vm.rest.source_code = [
           { name : 'Collection Class', classname: vm.rest.collection_class },

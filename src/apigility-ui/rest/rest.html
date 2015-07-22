@@ -119,7 +119,15 @@
             <div class="form-group">
               <label for="db_adapter_name" class="col-sm-2 control-label">Adapter name</label>
               <div class="col-sm-8">
-                <select class="form-control" id="db_adapter_name" ng-model="vm.adapter" ng-options="db.adapter_name for db in vm.db.db_adapter" ng-disabled="vm.disabled"></select>
+                <ui-select
+                  ng-model="vm.rest.adapter_name"
+                  ng-disabled="vm.disabled">
+                  <ui-select-match placeholder="Select db adapter name...">{{$select.selected}}</ui-select-match>
+                  <ui-select-choices
+                    repeat="adapter in vm.adapterNames | filter: $select.search">
+                    <div ng-bind-html="adapter | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
             </div>
             <div class="form-group">
