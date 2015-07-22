@@ -1651,7 +1651,8 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "        </div>\n" +
     "        <div ng-if=\"vm.tables && vm.tables.length == 0 && !vm.discovering && !vm.loading\">\n" +
     "          <h3>No tables found</h3>\n" +
-    "          <p>Autodiscovery could not find any existing tables, or those tables have already been exposed through DB-connected services.</p>\n" +
+    "          <p>Autodiscovery could not find any existing tables, you can insert the table name here:</p>\n" +
+    "          <input type=\"text\" class=\"form-control\" ng-model=\"vm.rest.table_name\" ng-disabled=\"vm.loading\" placeholder=\"Insert the table name\">\n" +
     "        </div>\n" +
     "      </tab>\n" +
     "      <tab heading=\"Doctrine Connected\" ng-if=\"vm.hasDoctrine\" active=\"vm.tabs.doctrine\">\n" +
@@ -1994,7 +1995,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"db_adapter_name\" class=\"col-sm-2 control-label\">Adapter name</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" id=\"db_adapter_name\" ng-model=\"vm.adapter\" ng-options=\"db.adapter_name for db in vm.db.db_adapter\" ng-disabled=\"vm.disabled\"></select>\n" +
+    "                <ui-select\n" +
+    "                  ng-model=\"vm.rest.adapter_name\"\n" +
+    "                  ng-disabled=\"vm.disabled\">\n" +
+    "                  <ui-select-match placeholder=\"Select db adapter name...\">{{$select.selected}}</ui-select-match>\n" +
+    "                  <ui-select-choices\n" +
+    "                    repeat=\"adapter in vm.adapterNames | filter: $select.search\">\n" +
+    "                    <div ng-bind-html=\"adapter | highlight: $select.search\"></div>\n" +
+    "                  </ui-select-choices>\n" +
+    "                </ui-select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
