@@ -78,7 +78,8 @@
         </div>
         <div ng-if="vm.tables && vm.tables.length == 0 && !vm.discovering && !vm.loading">
           <h3>No tables found</h3>
-          <p>Autodiscovery could not find any existing tables, or those tables have already been exposed through DB-connected services.</p>
+          <p>Autodiscovery could not find any existing tables, you can insert the table name here:</p>
+          <input type="text" class="form-control" ng-model="vm.rest.table_name" ng-disabled="vm.loading" placeholder="Insert the table name">
         </div>
       </tab>
       <tab heading="Doctrine Connected" ng-if="vm.hasDoctrine" active="vm.tabs.doctrine">

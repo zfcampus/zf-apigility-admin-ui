@@ -114,6 +114,9 @@
           vm.loading = false;
           return;
         }
+        if (vm.rest.table_name) {
+          vm.dbServices = [{ table_name : vm.rest.table_name, columns : [] }];
+        }
         if (vm.dbServices.length == 0) {
           vm.alert = 'Please choose at least one table';
           vm.loading = false;
