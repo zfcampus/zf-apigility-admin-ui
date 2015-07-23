@@ -758,11 +758,18 @@
       var doctrine_route = isDoctrine ? 'doctrine/' : '';
       xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + doctrine_route + name)
         .then(function (response) {
-          growl.success('Doctrine service(s) created');
           return callback(true, response);
         })
         .catch(function (err) {
-          growl.error('Error creating Doctrine service(s)', {ttl: -1});
+          if (err.data.detail) {
+            growl.error(err.data.detail, {ttl: -1});
+          } else {
+            if (isDoctrine) {
+              growl.error('Error getting Doctrine service(s)', {ttl: -1});
+            } else {
+              growl.error('Error getting db service(s)', {ttl: -1});
+            }
+          }
           return callback(true, null);
         });
     };
