@@ -51,9 +51,14 @@
         return callback(false, response);
       })
       .catch(function (err) {
+        console.log(err);
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the API module, please check if already exists');
+          case 409:
+            if (err.data.detail) {
+              return callback(true, err.data.detail);
+            }
         }
         return callback(true, 'I cannot create the API module, please enter a valid name (alpha characters)');
       });
