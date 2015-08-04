@@ -51,7 +51,6 @@
         return callback(false, response);
       })
       .catch(function (err) {
-        console.log(err);
         switch (err.status) {
           case 500 :
             return callback(true, 'I cannot create the API module, please check if already exists');
