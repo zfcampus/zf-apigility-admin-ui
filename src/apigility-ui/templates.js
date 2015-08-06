@@ -138,13 +138,20 @@ angular.module("apigility-ui/authentication/authentication.html", []).run(["$tem
     "        </thead>\n" +
     "        <tr ng-repeat=\"item in vm.adapters\">\n" +
     "          <td>{{item.name}}</td>\n" +
-    "          <td>{{item.type}} <span ng-show=\"item.type == 'oauth2'\">({{item.oauth2_type}})</span></td>\n" +
+    "          <td>{{item.type}} <span ng-show=\"item.type == 'oauth2'\" ng-if=\"item.oauth2_type\">({{item.oauth2_type}})</span></td>\n" +
     "          <td>\n" +
-    "            <button ng-show=\"item.type == 'oauth2'\" type=\"button\" class=\"btn btn-primary btn-xs\" ng-click=\"vm.addAuthOptionModal(item)\"><span class=\"glyphicon glyphicon-plus\"></span></button>\n" +
+    "            <button ng-show=\"item.type == 'oauth2' && item.oauth2_type != 'custom'\" type=\"button\" class=\"btn btn-primary btn-xs\" ng-click=\"vm.addAuthOptionModal(item)\"><span class=\"glyphicon glyphicon-plus\"></span></button>\n" +
     "            <span ng-repeat=\"(option, value) in item.oauth2_options\"><a ng-click=\"vm.editAuthOptionModal(item, option)\">{{option}} = {{value}}</a>, </span>\n" +
+    "            <span ng-if=\"item.oauth2_type == 'custom' && item.oauth2_route\">Route: {{item.oauth2_route}}</span>\n" +
+    "            <span ng-if=\"item.type == 'custom' && item.route\">Route: {{item.route}}</span>\n" +
     "          </td>\n" +
     "          <td>\n" +
-    "            <button type=\"button\" ng-click=\"vm.editAuthModal(item)\" class=\"btn btn-success btn-xs\"><i class=\"glyphicon glyphicon-pencil\"></i> edit</button> <button type=\"button\" ng-click=\"vm.deleteAuthModal(item)\" class=\"btn btn-danger btn-xs\"><i class=\"glyphicon glyphicon-trash\"></i> delete</button>\n" +
+    "            <span ng-if=\"item.type != 'custom' && item.oauth2_type != 'custom'\">\n" +
+    "              <button type=\"button\" ng-click=\"vm.editAuthModal(item)\" class=\"btn btn-success btn-xs\"><i class=\"glyphicon glyphicon-pencil\"></i> edit</button> <button type=\"button\" ng-click=\"vm.deleteAuthModal(item)\" class=\"btn btn-danger btn-xs\"><i class=\"glyphicon glyphicon-trash\"></i> delete</button>\n" +
+    "            </span>\n" +
+    "            <span ng-if=\"item.type == 'custom' || item.oauth2_type == 'custom'\">\n" +
+    "              No actions for custom adapter\n" +
+    "            </span>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "      </table>\n" +
