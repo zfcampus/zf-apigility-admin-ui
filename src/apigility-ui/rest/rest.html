@@ -231,7 +231,7 @@
                     add-on-space="true"
                     add-on-enter="true"
                     add-on-blur="true"
-                    allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+                    allowed-tags-pattern="^[a-zA-Z/0-9_+.-]+$"></tags-input>
                 <span ng-repeat="accept in vm.tags.accept_whitelist" ng-show="vm.disabled">{{accept.text}}, </span>
               </div>
             </div>
@@ -245,7 +245,7 @@
                     add-on-space="true"
                     add-on-enter="true"
                     add-on-blur="true"
-                    allowed-tags-pattern="^[a-zA-Z0-9_+.-]+$"></tags-input>
+                    allowed-tags-pattern="^[a-zA-Z/0-9_+.-]+$"></tags-input>
                 <span ng-repeat="content in vm.tags.content_type_whitelist" ng-show="vm.disabled">{{content.text}}, </span>
               </div>
             </div>
