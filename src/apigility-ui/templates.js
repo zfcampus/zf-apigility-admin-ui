@@ -1616,7 +1616,7 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "          </select>\n" +
     "        </div>\n" +
     "        <div ui-tree class=\"angular-ui-tree db-tables-tree\" data-max-depth=\"2\" ng-if=\"(vm.tables && vm.tables.length > 0) || vm.discovering\">\n" +
-    "          <label class=\"control-label\">Tables<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
+    "          <label class=\"control-label\">Tables (and views) <span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
     "          <ol ui-tree-nodes=\"options\" ng-model=\"vm.tables\" class=\"angular-ui-tree-nodes\">\n" +
     "            <li class=\"angular-ui-tree-node\" ng-repeat=\"table in vm.tables\" ui-tree-node collapsed=\"true\">\n" +
     "              <div class=\"tree-node\">\n" +
@@ -2182,7 +2182,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "          <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form>\n" +
     "            <h3>HTTP methods authorization</h3>\n" +
     "            <p ng-hide=\"vm.disabled\">In this page you can specify which HTTP methods to put under authentication, for your entity and collection service.\n" +
-    "              You can choose only the HTTP methods available for the service, if you want to change it go to <a href=\"\">General Settings</a>.\n" +
+    "              You can choose only the HTTP methods available for the service, if you want to change it choose the <i>General Settings</i> option in the tab above.\n" +
     "              The authentication type is defined per API in <a ui-sref=\"ag.apimodule({api: vm.apiName, ver: vm.version})\">this page</a>.</p>\n" +
     "            <br />\n" +
     "            <div class=\"form-group\">\n" +
@@ -2467,7 +2467,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "      <tab heading=\"Authorization\" active=\"vm.tabs.authorization\">\n" +
     "        <form class=\"form-horizontal\" role=\"form\" unsaved-warning-form>\n" +
     "          <h3>HTTP methods authorization</h3>\n" +
-    "          <p ng-hide=\"vm.disabled\">In this page you can specify which HTTP methods to put under authentication. You can choose only the HTTP methods available for the service, if you want to change it go to <a href=\"\">General Settings</a>.\n" +
+    "          <p ng-hide=\"vm.disabled\">In this page you can specify which HTTP methods to put under authentication. You can choose only the HTTP methods available for the service, if you want to change it choose the <i>General Settings</i> option in the tab above.\n" +
     "          The authentication type is defined per API in <a ui-sref=\"ag.apimodule({api: vm.apiName, ver: vm.version})\">this page</a>.</p>\n" +
     "          <br />\n" +
     "          <div class=\"form-group\">\n" +
