@@ -12,6 +12,6 @@
     /* jshint validthis:true */
     var vm = this;
 
-    vm.version = '1.1dev';
+    vm.version = '1.3.2';
   }
 })();

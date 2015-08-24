@@ -241,8 +241,8 @@ module.exports = function(grunt) {
             cwd: '<%= apigility.ui %>',
             dest: '<%= apigility.dist %>/apigility-ui/fonts',
             src: [
-              'vendor/bootstrap/dist/fonts/*.{eot,woff,ttf,svg}',
-              'vendor/sass-bootstrap-glyphicons/fonts/*.{eot,woff,ttf,svg}'
+              'vendor/bootstrap/dist/fonts/*.{eot,woff,woff2,ttf,svg}',
+              'vendor/sass-bootstrap-glyphicons/fonts/*.{eot,woff,woff2,ttf,svg}'
             ]
           }
         ]
