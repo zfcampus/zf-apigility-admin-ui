@@ -2114,7 +2114,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                    add-on-space=\"true\"\n" +
     "                    add-on-enter=\"true\"\n" +
     "                    add-on-blur=\"true\"\n" +
-    "                    allowed-tags-pattern=\"^[a-zA-Z0-9_+.-]+$\"></tags-input>\n" +
+    "                    allowed-tags-pattern=\"^[a-zA-Z-]+/[a-zA-Z0-9*_+.-]+$\"></tags-input>\n" +
     "                <span ng-repeat=\"accept in vm.tags.accept_whitelist\" ng-show=\"vm.disabled\">{{accept.text}}, </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -2128,7 +2128,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                    add-on-space=\"true\"\n" +
     "                    add-on-enter=\"true\"\n" +
     "                    add-on-blur=\"true\"\n" +
-    "                    allowed-tags-pattern=\"^[a-zA-Z0-9_+.-]+$\"></tags-input>\n" +
+    "                    allowed-tags-pattern=\"^[a-zA-Z-]+/[a-zA-Z0-9*_+.-]+$\"></tags-input>\n" +
     "                <span ng-repeat=\"content in vm.tags.content_type_whitelist\" ng-show=\"vm.disabled\">{{content.text}}, </span>\n" +
     "              </div>\n" +
     "            </div>\n" +
@@ -2400,7 +2400,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "              add-on-space=\"true\"\n" +
     "              add-on-enter=\"true\"\n" +
     "              add-on-blur=\"true\"\n" +
-    "              allowed-tags-pattern=\"^[a-zA-Z0-9_+.-]+$\"></tags-input>\n" +
+    "              allowed-tags-pattern=\"^[a-zA-Z-]+/[a-zA-Z0-9*_+.-]+$\"></tags-input>\n" +
     "              <span ng-repeat=\"accept in vm.tags.accept_whitelist\" ng-show=\"vm.disabled\">{{accept.text}}, </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
@@ -2414,7 +2414,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "              add-on-space=\"true\"\n" +
     "              add-on-enter=\"true\"\n" +
     "              add-on-blur=\"true\"\n" +
-    "              allowed-tags-pattern=\"^[a-zA-Z0-9_+.-]+$\"></tags-input>\n" +
+    "              allowed-tags-pattern=\"^[a-zA-Z-]+/[a-zA-Z0-9*_+.-]+$\"></tags-input>\n" +
     "              <span ng-repeat=\"accept in vm.tags.content_type_whitelist\" ng-show=\"vm.disabled\">{{accept.text}}, </span>\n" +
     "            </div>\n" +
     "          </div>\n" +
