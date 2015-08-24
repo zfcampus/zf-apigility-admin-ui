@@ -1616,7 +1616,7 @@ angular.module("apigility-ui/modal/new-service.html", []).run(["$templateCache",
     "          </select>\n" +
     "        </div>\n" +
     "        <div ui-tree class=\"angular-ui-tree db-tables-tree\" data-max-depth=\"2\" ng-if=\"(vm.tables && vm.tables.length > 0) || vm.discovering\">\n" +
-    "          <label class=\"control-label\">Tables<span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
+    "          <label class=\"control-label\">Tables (and views) <span class=\"glyphicon glyphicon-refresh glyphicon-spin\" ng-if=\"vm.discovering\"></span></label>\n" +
     "          <ol ui-tree-nodes=\"options\" ng-model=\"vm.tables\" class=\"angular-ui-tree-nodes\">\n" +
     "            <li class=\"angular-ui-tree-node\" ng-repeat=\"table in vm.tables\" ui-tree-node collapsed=\"true\">\n" +
     "              <div class=\"tree-node\">\n" +
