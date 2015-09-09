@@ -75,6 +75,11 @@
           vm.loading = false;
           return;
         }
+        if (!/^[a-z][a-z0-9]*$/.test(e.restname)) {
+          vm.alert = 'Invalid service name. Valid chars: a-z, 0-9.';
+          vm.loading = false;
+          return;
+        }
         api.newRest(vm.apiname.name, vm.restname, function(err, response) {
           if (err) {
             vm.alert = response;
