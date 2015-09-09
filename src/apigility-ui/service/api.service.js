@@ -1101,8 +1101,9 @@
 
     function capitalizeFirstLetter(string)
     {
-      string = string.replace(/_(\w)/g, function(_,letter) { return letter.toUpperCase(); });
-      return string.charAt(0).toUpperCase() + string.slice(1);
+      return (string || '').replace(/(\b|_)\w/g, function (m) {
+        return m.toUpperCase().replace(/_/, '');
+      });
     }
 
     this.mapTagInput = function(value) {
