@@ -30,7 +30,7 @@
     <label class="control-label col-sm-2">Value</label>
     <div class="col-sm-8">
       <toggle-switch type="checkbox"
-        model="vm.option.value"
+        ng-model="vm.option.value"
         ng-disabled="vm.disabled"
         ng-show="vm.validator.name && vm.validators[vm.validator.name][vm.option.name] == 'bool'"></toggle-switch>
 
