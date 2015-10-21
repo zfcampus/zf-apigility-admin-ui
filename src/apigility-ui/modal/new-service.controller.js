@@ -80,9 +80,10 @@
             vm.alert = response;
             vm.loading = false;
           } else {
+            vm.controller = response.controller_service_name;
             $timeout(function(){
               vm.loading = false;
-              $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.restname, 'ver' : lastversion });
+              $modalInstance.close({ 'api' : vm.apiname.name, 'rest' : vm.controller.replace(/\\/g, '-'), 'ver' : lastversion });
             }, 2000);
           }
         });
@@ -102,9 +103,10 @@
             vm.alert = response;
             vm.loading = false;
           } else {
+            vm.controller = response.controller_service_name.replace(/\\/g, '-');
             $timeout(function(){
               vm.loading = false;
-              $modalInstance.close({ 'api' : vm.apiname.name, 'rpc' : vm.rpcname, 'ver' : lastversion });
+              $modalInstance.close({ 'api' : vm.apiname.name, 'rpc' : vm.controller, 'ver' : lastversion });
             }, 2000);
           }
         });
@@ -130,6 +132,7 @@
               vm.alert = response;
               vm.loading = false;
             } else {
+              vm.controller = response.controller_service_name.replace(/\\/g, '-');
               var fields = [];
               table.columns.forEach(function(column) {
                 if (column.filters != undefined && column.validators != undefined) {
@@ -142,7 +145,7 @@
                 }
 
               });
-              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), table.table_name, fields, function(err, response) {
+              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), vm.controller, fields, function(err, response) {
                 if (err) {
                   //TODO: warn upon error
                 }
@@ -154,7 +157,7 @@
         });
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion });
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion, 'controller' : vm.controller });
         }, 2000);
       } else if (vm.tabs.doctrine) { // DOCTRINE-CONNECTED
         if (!vm.doctrineAdapter) {
@@ -175,7 +178,8 @@
               vm.alert = response;
               vm.loading = false;
             } else {
-              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), entity.service_name, entity.fields, function(err, response) {
+              vm.controller = response.controller_service_name.replace(/\\/g, '-');
+              api.saveRestField(vm.apiname.name, SidebarService.getSelectedVersion(vm.apiname.name), vm.controller, entity.fields, function(err, response) {
                 if (err) {
                   //TODO: warn upon error
                 }
@@ -187,7 +191,7 @@
         });
         $timeout(function(){
           vm.loading = false;
-          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion });
+          $modalInstance.close({ 'api' : vm.apiname.name, 'rests' : rests, 'ver' : lastversion, 'controller' : vm.controller });
         }, 2000);
       }
     }
