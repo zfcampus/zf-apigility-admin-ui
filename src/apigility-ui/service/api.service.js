@@ -256,7 +256,7 @@
     };
 
     this.getRest = function(module, version, rest, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
+      xhr.get(agApiPath + '/module/' + module + '/rest/' + rest )
       .then(function (response) {
         // Create the fields property in the response
         var rest = angular.copy(response);
@@ -526,7 +526,7 @@
     };
 
     this.getRpc = function(module, version, rpc, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller' )
+      xhr.get(agApiPath + '/module/' + module + '/rpc/' + rpc )
       .then(function (response) {
         // Create the fields property in the response
         var rpc = angular.copy(response);
