@@ -75,6 +75,11 @@
           vm.loading = false;
           return;
         }
+        if (!/^[a-zA-Z][a-zA-Z0-9_]*(\\\[a-zA-Z][a-zA-Z0-9_]*)*$/.test(vm.restname)) {
+          vm.alert = 'Invalid service name. A valid name starts with a letter followed by any number of letters, numbers, or underscores.';
+          vm.loading = false;
+          return;
+        }
         api.newRest(vm.apiname.name, vm.restname, function(err, response) {
           if (err) {
             vm.alert = response;
@@ -94,6 +99,11 @@
         }
         if (!vm.route) {
           vm.alert = 'The route to match cannot be empty';
+          vm.loading = false;
+          return;
+        }
+        if (!/^[a-zA-Z][a-zA-Z0-9_]*(\\\[a-zA-Z][a-zA-Z0-9_]*)*$/.test(vm.rpcname)) {
+          vm.alert = 'Invalid service name. A valid name starts with a letter followed by any number of letters, numbers, or underscores.';
           vm.loading = false;
           return;
         }
