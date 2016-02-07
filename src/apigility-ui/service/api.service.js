@@ -33,7 +33,8 @@
     };
 
     this.getApi = function(name, callback) {
-      xhr.get(agApiPath + '/module/' + name)
+      var moduleParam = this.normalizeModuleName(name);
+      xhr.get(agApiPath + '/module/' + moduleParam)
       .then(function (response) {
         return callback(false, response);
       })
@@ -64,7 +65,8 @@
     };
 
     this.deleteApi = function(name, recursive, callback) {
-      xhr.remove(agApiPath + '/module/' + name + '?recursive=' + (recursive ? 1 : 0))
+      var moduleParam = this.normalizeModuleName(name);
+      xhr.remove(agApiPath + '/module/' + moduleParam + '?recursive=' + (recursive ? 1 : 0))
       .then(function (response) {
         growl.success('API removed');
         return callback(false, response);
@@ -86,8 +88,9 @@
     };
 
     this.newRest = function(module, service, callback) {
-      var allowed = [ 'service_name' ];
-      xhr.create(agApiPath + '/module/' + module + '/rest', [ service ], allowed)
+      var allowed = [ 'service_name'],
+          moduleParam = this.normalizeModuleName(module);
+      xhr.create(agApiPath + '/module/' + moduleParam + '/rest', [ service ], allowed)
       .then(function (response) {
         growl.success('Service created');
         return callback(false, response);
@@ -126,7 +129,8 @@
       }
       var result = filterData(data, allowed);
       var path = isDoctrine ? '/doctrine/' : '/rest/';
-      xhr.update(agApiPath + '/module/' + module + path + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.update(agApiPath + '/module/' + moduleParam + path + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
         growl.success('Service updated');
         return callback(false, response);
@@ -148,8 +152,9 @@
         'accept_whitelist',
         'content_type_whitelist'
       ];
+      var moduleParam = this.normalizeModuleName(module);
       var result = filterData(data, allowed);
-      xhr.update(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
+      xhr.update(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
       .then(function(response) {
         growl.success('Content negotiation updated');
         return callback(false, response);
@@ -161,8 +166,9 @@
     };
 
     this.deleteRest = function(module, version, name, isDoctrine, recursive, callback) {
-      var path = isDoctrine ? 'doctrine' : 'rest';
-      xhr.remove(agApiPath + '/module/' + module + '/' + path + '/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
+      var path = isDoctrine ? 'doctrine' : 'rest',
+          moduleParam = this.normalizeModuleName(module);
+      xhr.remove(agApiPath + '/module/' + moduleParam + '/' + path + '/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
         .then(function (response) {
           growl.success('Service deleted');
           return callback(false, response);
@@ -174,7 +180,8 @@
     };
 
     this.getAuthorizationRest = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization')
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var method;
         var data = {};
@@ -203,6 +210,7 @@
     this.saveAuthorizationRest = function(module, version, name, auth, callback) {
       var collection = {};
       var entity = {};
+      var moduleParam = this.normalizeModuleName(module);
       httpMethods.forEach(function(method){
         collection[method] = (auth.collection.indexOf(method) > -1);
         entity[method] = (auth.entity.indexOf(method) > -1);
@@ -210,7 +218,7 @@
       var data = {};
       data[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__collection__'] = collection;
       data[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__entity__'] = entity;
-      xhr.save(agApiPath + '/module/' + module + '/authorization', data)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization saved');
         return callback(false, response);
@@ -222,7 +230,8 @@
     };
 
     this.getRestList = function(module, version, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest?version=' + version, '_embedded')
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/rest?version=' + version, '_embedded')
         .then(function (response) {
           response.rest.forEach(function(entry){
             if (entry.hasOwnProperty('_links')) {
@@ -239,7 +248,8 @@
     };
 
     this.getRpcList = function(module, version, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rpc?version=' + version, '_embedded')
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/rpc?version=' + version, '_embedded')
       .then(function (response) {
         response.rpc.forEach(function(entry){
           if (entry.hasOwnProperty('_links')) {
@@ -256,7 +266,8 @@
     };
 
     this.getRest = function(module, version, rest, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
       .then(function (response) {
         // Create the fields property in the response
         var rest = angular.copy(response);
@@ -401,12 +412,13 @@
     };
 
     this.saveRestField = function(module, version, restname, fields, callback) {
+      var moduleParam = this.normalizeModuleName(module);
       angular.forEach(fields, function (field, key) {
         if (field.hasOwnProperty('error_message') && ! field.error_message) {
           delete field.error_message;
         }
       });
-      xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/input-filter', fields)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/input-filter', fields)
       .then(function(response) {
         growl.success('Saved field');
         // Remove unused properties from the response
@@ -423,7 +435,8 @@
     };
 
     this.getAuthorizationRpc = function(module, version, name, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authorization')
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var data = [];
         var controller = response[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name];
@@ -441,13 +454,14 @@
     };
 
     this.saveAuthorizationRpc = function(module, version, name, auth, callback) {
-      var http = {};
+      var http = {},
+          moduleParam = this.normalizeModuleName(module);
       httpMethods.forEach(function(method){
         http[method] = (auth.indexOf(method) > -1);
       });
       var data = {};
       data[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name] = http;
-      xhr.save(agApiPath + '/module/' + module + '/authorization', data)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization updated');
         return callback(false, response);
@@ -459,12 +473,13 @@
     };
 
     this.saveRpcField = function(module, version, rpcname, fields, callback) {
+      var moduleParam = this.normalizeModuleName(module);
       angular.forEach(fields, function (field, key) {
         if (field.hasOwnProperty('error_message') && ! field.error_message) {
           delete field.error_message;
         }
       });
-      xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/input-filter', fields)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/input-filter', fields)
       .then(function(response) {
         growl.success('Field saved');
         // Remove unused properties from the response
@@ -481,7 +496,8 @@
     };
 
     this.saveRestDoc = function(module, version, restname, doc, callback) {
-      xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/doc', doc)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/doc', doc)
       .then(function(response) {
         growl.success('Documentation saved');
         // Remove unused properties from the response
@@ -495,7 +511,8 @@
     };
 
     this.saveRpcDoc = function(module, version, rpcname, doc, callback) {
-      xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/doc', doc)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/doc', doc)
       .then(function(response) {
         growl.success('Documentation saved');
         // Remove unused properties from the response
@@ -509,8 +526,9 @@
     };
 
     this.newRpc = function(module, service, route, callback) {
-      var allowed = [ 'service_name', 'route_match' ];
-      xhr.create(agApiPath + '/module/' + module + '/rpc', [ service, route ], allowed)
+      var allowed = [ 'service_name', 'route_match'],
+          moduleParam = this.normalizeModuleName(module);
+      xhr.create(agApiPath + '/module/' + moduleParam + '/rpc', [ service, route ], allowed)
       .then(function (response) {
         growl.success('Service created');
         return callback(false, response);
@@ -526,7 +544,8 @@
     };
 
     this.getRpc = function(module, version, rpc, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller' )
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller' )
       .then(function (response) {
         // Create the fields property in the response
         var rpc = angular.copy(response);
@@ -556,6 +575,7 @@
     };
 
     this.updateGeneralRpc = function(module, version, rpc, data, callback) {
+      var moduleParam = this.normalizeModuleName(module);
       var allowed = [
         'accept_whitelist',
         'content_type_whitelist',
@@ -566,7 +586,7 @@
         'service_name'
       ];
       var result = filterData(data, allowed);
-      xhr.update(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', result.value, result.key)
+      xhr.update(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', result.value, result.key)
       .then(function(response) {
         growl.success('Service updated');
         return callback(false, response);
@@ -582,7 +602,8 @@
     };
 
     this.deleteRpc = function(module, version, name, recursive, callback) {
-      xhr.remove(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.remove(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
       .then(function (response) {
         growl.success('Service deleted');
         return callback(false, response);
@@ -667,7 +688,8 @@
     };
 
     this.getApiDocument = function(apiName, version, callback) {
-      xhr.get(agApiPath + '/../documentation/' + apiName + '-v' + version)
+      var apiParam = this.normalizeModuleName(apiName);
+      xhr.get(agApiPath + '/../documentation/' + apiParam + '-v' + version)
         .then(function (response) {
           return callback(false, response);
         })
@@ -759,8 +781,9 @@
     };
 
     this.autodiscover = function(module, version, isDoctrine, name, callback) {
-      var doctrine_route = isDoctrine ? 'doctrine/' : '';
-      xhr.get(agApiPath + '/module/' + module + '/' + version + '/autodiscovery/' + doctrine_route + name)
+      var doctrine_route = isDoctrine ? 'doctrine/' : '',
+          moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/' + version + '/autodiscovery/' + doctrine_route + name)
         .then(function (response) {
           return callback(true, response);
         })
@@ -779,8 +802,9 @@
     };
 
     this.newDbConnected = function(module, adapter, table, callback) {
-      var allowed = [ 'adapter_name', 'table_name' ];
-      xhr.create(agApiPath + '/module/' + module + '/rest', [ adapter, table ], allowed)
+      var allowed = [ 'adapter_name', 'table_name'],
+          moduleParam = this.normalizeModuleName(module);
+      xhr.create(agApiPath + '/module/' + moduleParam + '/rest', [ adapter, table ], allowed)
       .then(function (response) {
         growl.success('DB-Connected service(s) created');
         return callback(false, response);
@@ -832,8 +856,9 @@
     };
 
     this.newDoctrine = function(module, adapter, entity, callback) {
-      var allowed = [ 'object_manager', 'entity_class', 'service_name' ];
-      xhr.create(agApiPath + '/module/' + module + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
+      var allowed = [ 'object_manager', 'entity_class', 'service_name'],
+          moduleParam = this.normalizeModuleName(module);
+      xhr.create(agApiPath + '/module/' + moduleParam + '/doctrine/' + entity.service_name, [ adapter, entity.entity_class, entity.service_name ], allowed)
         .then(function (response) {
           growl.success('Doctrine-connected service created');
           return callback(false, response);
@@ -875,7 +900,8 @@
     };
 
     this.getSourceCode = function(module, classname, callback) {
-      xhr.get(agApiPath + '/source?module=' + module + '&class=' + classname)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/source?module=' + moduleParam + '&class=' + classname)
         .then(function (response) {
           return callback(false, response);
         })
@@ -1025,7 +1051,8 @@
     };
 
     this.getModuleAuthentication = function (module, version, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/authentication?version=' + version, 'authentication', 2)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.get(agApiPath + '/module/' + moduleParam + '/authentication?version=' + version, 'authentication', 2)
       .then(function (response) {
         return callback(response);
       })
@@ -1037,8 +1064,9 @@
     };
 
     this.saveModuleAuthentication = function (module, version, auth, callback) {
-      var data = { 'authentication' : auth };
-      xhr.save(agApiPath + '/module/' + module + '/authentication?version=' + version, data, 2)
+      var data = { 'authentication' : auth},
+          moduleParam = this.normalizeModuleName(module);
+      xhr.save(agApiPath + '/module/' + moduleParam + '/authentication?version=' + version, data, 2)
       .then(function (response) {
         growl.success('API authentication adapter updated');
         return callback(false, response);
@@ -1050,7 +1078,8 @@
     };
 
     this.deleteModuleAuthentication = function (module, version, callback) {
-      xhr.remove(agApiPath + '/module/' + module + '/authentication?version=' + version, 2)
+      var moduleParam = this.normalizeModuleName(module);
+      xhr.remove(agApiPath + '/module/' + moduleParam + '/authentication?version=' + version, 2)
       .then(function (response) {
         growl.success('API authentication adapter removed');
         return callback(false, response);
@@ -1059,6 +1088,18 @@
         growl.error('Error removing API authentication adapter', {ttl: -1});
         return callback(true);
       });
+    };
+
+    /**
+     * URL-encodes the API's name to avoid back-slashes from being converted to forward-slashes
+     * @see https://code.google.com/p/chromium/issues/detail?id=25916
+     *
+     * @param {string} module
+     *
+     * @returns {string}
+     */
+    this.normalizeModuleName = function (module) {
+        return encodeURIComponent(module);
     };
 
     function getAuthenticationDataForAPI(auth) {
