@@ -36,26 +36,26 @@ Requirements
 
 Run the following command from this directory to install dependencies:
 
-```sh
-npm install
+```bash
+$ npm install
 ```
 
 If you have not yet installed Grunt, please do so:
 
-```sh
-sudo npm install -g grunt
+```bash
+$ sudo npm install -g grunt
 ```
 
 If you have not yet installed Bower, please do so:
 
-```sh
-sudo npm install -g bower
+```bash
+$ sudo npm install -g bower
 ```
 
 Finally, invoke Bower to install the relevant CSS and JS libraries:
 
-```sh
-bower install
+```bash
+$ bower install
 ```
 
 Invoking the Admin
@@ -68,7 +68,7 @@ standalone via [node](https://nodejs.org), or via source using grunt.
 
 Add the admin as a dev requirement to your project:
 
-```console
+```bash
 $ composer require-dev "zfcampus/zf-apigility-admin-ui:~1.0"
 ```
 
@@ -92,7 +92,7 @@ navigation item can point to it.
 
 Fire up the admin UI using:
 
-```console
+```bash
 $ node index.js --src --api=<URI to Apigility Admin API (ends in /apigility/api)>
 ```
 
@@ -105,12 +105,15 @@ can specify a port with the `--port=<port>` option.
 
 The `grunt serve` command does several things:
 
-- Runs `grunt watch`, which looks for file changes and runs tasks such as jshint, unit tests, and combining partials into JS templates.
-- Runs a livereload, static HTTP server; any file change will force it to reload, and trigger any browser windows with the UI loaded to reload.
+- Runs `grunt watch`, which looks for file changes and runs tasks such as
+  `jshint`, unit tests, and combining partials into JS templates.
+- Runs a livereload, static HTTP server; any file change will force it to
+  reload, and trigger any browser windows with the UI loaded to reload.
 
-The grunt server runs in the same way as the standalone server: it accepts the same options, and has the same CORS limitations. As an example:
+The grunt server runs in the same way as the standalone server: it accepts the
+same options, and has the same CORS limitations. As an example:
 
-```console
+```bash
 $ grunt serve --api=<URI to Apigility Admin API (ends in /apigility/api)> \
 > --doc=<URI to API documentation> --port=3001 --host=ag.dev
 ```

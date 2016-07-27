@@ -13,14 +13,14 @@ Once installed, you may run tests using:
 
 Once dependencies are installed, you may run tests using:
 
-```sh
-grunt test
+```bash
+$ grunt test
 ```
 
 Alternately, fire up a terminal and run:
 
-```sh
-grunt watch
+```bash
+$ grunt watch
 ```
 
 to run tests automatically as files are changed.
@@ -36,7 +36,7 @@ All changes to the admin UI code should be made in the `src/` directory.
 Once you are happy with the changes you have made, you will need to rebuild the
 distribution files. Run the following from this directory:
 
-```console
+```bash
 $ grunt clean && grunt build
 ```
 
