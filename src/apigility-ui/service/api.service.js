@@ -256,7 +256,7 @@
     };
 
     this.getRest = function(module, version, rest, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(rest) + '-Controller' )
+      xhr.get(agApiPath + '/module/' + module + '/rest/' + rest )
       .then(function (response) {
         // Create the fields property in the response
         var rest = angular.copy(response);
@@ -400,13 +400,13 @@
       });
     };
 
-    this.saveRestField = function(module, version, restname, fields, callback) {
+    this.saveRestField = function(module, version, controller, fields, callback) {
       angular.forEach(fields, function (field, key) {
         if (field.hasOwnProperty('error_message') && ! field.error_message) {
           delete field.error_message;
         }
       });
-      xhr.save(agApiPath + '/module/' + module + '/rest/' + module + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/input-filter', fields)
+      xhr.save(agApiPath + '/module/' + module + '/rest/' + controller + '/input-filter', fields)
       .then(function(response) {
         growl.success('Saved field');
         // Remove unused properties from the response
@@ -458,13 +458,13 @@
       });
     };
 
-    this.saveRpcField = function(module, version, rpcname, fields, callback) {
+    this.saveRpcField = function(module, version, controller, fields, callback) {
       angular.forEach(fields, function (field, key) {
         if (field.hasOwnProperty('error_message') && ! field.error_message) {
           delete field.error_message;
         }
       });
-      xhr.save(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/input-filter', fields)
+      xhr.save(agApiPath + '/module/' + module + '/rpc/' + controller + '/input-filter', fields)
       .then(function(response) {
         growl.success('Field saved');
         // Remove unused properties from the response
@@ -526,7 +526,7 @@
     };
 
     this.getRpc = function(module, version, rpc, callback) {
-      xhr.get(agApiPath + '/module/' + module + '/rpc/' + module + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller' )
+      xhr.get(agApiPath + '/module/' + module + '/rpc/' + rpc )
       .then(function (response) {
         // Create the fields property in the response
         var rpc = angular.copy(response);
