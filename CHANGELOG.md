@@ -27,3 +27,5 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#91](https://github.com/zfcampus/zf-apigility-admin-ui/pull/91) fixes the
   templates for adding and editing validators and filters with boolean switches
   such that they now work properly.
+- [#99](https://github.com/zfcampus/zf-apigility-admin-ui/pull/99) updates the
+  template to make the copyright date in the footer dynamic.
