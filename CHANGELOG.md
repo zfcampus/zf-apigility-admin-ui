@@ -24,3 +24,6 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#85](https://github.com/zfcampus/zf-apigility-admin-ui/pull/85) adds
   additional information to error messages when unable to create a new service
   for reasons other than conflicts.
+- [#91](https://github.com/zfcampus/zf-apigility-admin-ui/pull/91) fixes the
+  templates for adding and editing validators and filters with boolean switches
+  such that they now work properly.
