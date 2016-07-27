@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#107](https://github.com/zfcampus/zf-apigility-admin-ui/pull/107) adds a
+  "Field type" input to new/edit field entries; this information can now be used
+  by documentation systems (e.g., Swagger) to report field types.
 
 ### Deprecated
 
