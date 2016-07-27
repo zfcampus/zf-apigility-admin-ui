@@ -36,44 +36,27 @@ Requirements
 
 Run the following command from this directory to install dependencies:
 
-```sh
-npm install
+```bash
+$ npm install
 ```
 
 If you have not yet installed Grunt, please do so:
 
-```sh
-sudo npm install -g grunt
+```bash
+$ sudo npm install -g grunt
 ```
 
 If you have not yet installed Bower, please do so:
 
-```sh
-sudo npm install -g bower
+```bash
+$ sudo npm install -g bower
 ```
 
 Finally, invoke Bower to install the relevant CSS and JS libraries:
 
-```sh
-bower install
+```bash
+$ bower install
 ```
-
-Running tests
--------------
-
-Once dependencies are installed, you may run tests using:
-
-```sh
-grunt test
-```
-
-Alternately, fire up a terminal and run:
-
-```sh
-grunt watch
-```
-
-to run tests automatically as files are changed.
 
 Invoking the Admin
 ------------------
@@ -85,7 +68,7 @@ standalone via [node](https://nodejs.org), or via source using grunt.
 
 Add the admin as a dev requirement to your project:
 
-```console
+```bash
 $ composer require-dev "zfcampus/zf-apigility-admin-ui:~1.0"
 ```
 
@@ -109,7 +92,7 @@ navigation item can point to it.
 
 Fire up the admin UI using:
 
-```console
+```bash
 $ node index.js --src --api=<URI to Apigility Admin API (ends in /apigility/api)>
 ```
 
@@ -122,41 +105,18 @@ can specify a port with the `--port=<port>` option.
 
 The `grunt serve` command does several things:
 
-- Runs `grunt watch`, which looks for file changes and runs tasks such as jshint, unit tests, and combining partials into JS templates.
-- Runs a livereload, static HTTP server; any file change will force it to reload, and trigger any browser windows with the UI loaded to reload.
+- Runs `grunt watch`, which looks for file changes and runs tasks such as
+  `jshint`, unit tests, and combining partials into JS templates.
+- Runs a livereload, static HTTP server; any file change will force it to
+  reload, and trigger any browser windows with the UI loaded to reload.
 
-The grunt server runs in the same way as the standalone server: it accepts the same options, and has the same CORS limitations. As an example:
+The grunt server runs in the same way as the standalone server: it accepts the
+same options, and has the same CORS limitations. As an example:
 
-```console
+```bash
 $ grunt serve --api=<URI to Apigility Admin API (ends in /apigility/api)> \
 > --doc=<URI to API documentation> --port=3001 --host=ag.dev
 ```
 
-Workflow
---------
-
-To develop the Admin UI (e.g., to add features or fix a bug), you will need to
-run the server using the source, not distribution, files. This means using
-`grunt serve` to develop.
-
-All changes to the admin UI code should be made in the `src/` directory.
-
-Once you are happy with the changes you have made, you will need to rebuild the
-distribution files. Run the following from this directory:
-
-```console
-$ grunt clean && grunt build
-```
-
-Test that everything is working against the distribution on completion.
-
-
-Adding JS/CSS Dependencies
---------------------------
-
-If you need to add any new JS or CSS dependencies, please do so as follows:
-
-- Edit the `bower.json` file and add the dependency.
-- Execute `bower install`.
-- Add the files to `src/index.html` in the appropriate section of the file.
-- Commit your changes.
+Please see our [contributing guide](CONTRIBUTING.md) for information on how to
+run tests and hack on the UI.

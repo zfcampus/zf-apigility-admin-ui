@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#113](https://github.com/zfcampus/zf-apigility-admin-ui/pull/113) updates ZF
+  component dependencies to versions that are forwards compatible with other ZF
+  version 3 releases.
 - [#107](https://github.com/zfcampus/zf-apigility-admin-ui/pull/107) adds a
   "Field type" input to new/edit field entries; this information can now be used
   by documentation systems (e.g., Swagger) to report field types.
@@ -16,7 +19,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#113](https://github.com/zfcampus/zf-apigility-admin-ui/pull/113) removes
+  support for PHP 5.5.
+- [#113](https://github.com/zfcampus/zf-apigility-admin-ui/pull/113) removes
+  the dependency on rwoverdijk/assetmanager, adding suggestions for:
+  - rwoverdijk/assetmanager at `^1.7` (unreleased at this time)
+  - zfcampus/zf-asset-manager at `^1.0`
 
 ### Fixed
 
