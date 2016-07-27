@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#93](https://github.com/zfcampus/zf-apigility-admin-ui/pull/93) updates how
+  controller names are sent to the admin API, providing the fully qualified
+  class name. This update allows the UI to properly work with modules that use a
+  PSR-4 directory structure.
+
 ## 1.2.4 - 2016-07-27
 
 ### Added
