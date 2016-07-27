@@ -47,11 +47,7 @@
     };
 
     vm.selectOption = function(item, model) {
-      if (vm.options[item] == 'bool') {
-        vm.option.value = false;
-      } else {
-        vm.option.value = '';
-      }
+      vm.option.value = (vm.options[item] == 'bool') ? vm.option.value = false : '';
     };
 
     vm.addOption = function() {
