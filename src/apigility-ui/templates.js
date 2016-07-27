@@ -1103,6 +1103,8 @@ angular.module("apigility-ui/modal/edit-field.html", []).run(["$templateCache", 
     "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.name\" placeholder=\"Insert the Field name\" readonly><br />\n" +
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
+    "  <label class=\"control-label\">Field Type</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.field_type\" rows=\"3\" placeholder=\"Insert the field type\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
@@ -1540,6 +1542,8 @@ angular.module("apigility-ui/modal/new-field.html", []).run(["$templateCache", f
     "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.name\" placeholder=\"Insert the Field name\" autofocus><br />\n" +
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
+    "  <label class=\"control-label\">Field Type</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.field_type\" rows=\"3\" placeholder=\"Insert the field type\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
