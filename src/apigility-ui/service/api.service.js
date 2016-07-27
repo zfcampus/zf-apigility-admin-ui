@@ -94,6 +94,10 @@
       })
       .catch(function (err) {
         growl.error('Unable to create service', {ttl: -1});
+        switch (err.status) {
+          case 409 :
+            return callback(true, 'The service already exists; please choose a different name');
+        }
         return callback(true, 'Unable to create service (Code: ' + err.status + '): ' + err.data.detail);
       });
     };
@@ -513,6 +517,10 @@
       })
       .catch(function (err) {
         growl.error('Error creating service', {ttl: -1});
+        switch (err.status) {
+          case 409 :
+            return callback(true, 'The service already exists; please choose a different name');
+        }
         return callback(true, 'Error creating service (Code: ' + err.status + '): ' + err.data.detail);
       });
     };
