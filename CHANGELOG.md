@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
   controller names are sent to the admin API, providing the fully qualified
   class name. This update allows the UI to properly work with modules that use a
   PSR-4 directory structure.
+- [#97](https://github.com/zfcampus/zf-apigility-admin-ui/pull/97) updates all
+  API calls that pass the module name to normalize the module name using
+  `encodeURIComponent()`; this allows using sub-namespaces in the backend code.
 
 ## 1.2.4 - 2016-07-27
 
