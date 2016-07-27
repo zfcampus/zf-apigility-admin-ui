@@ -26,7 +26,7 @@
         if (!err) {
           SidebarService.setApis(result);
           vm.apis = result;
-          getServiceList(result);
+          getServiceList(api, result);
         }
       });
     }
@@ -107,14 +107,20 @@
       });
     };
 
-    function getServiceList(apiList) {
+    function getServiceList(apiClient, apiList) {
       vm.services = [];
       apiList.forEach(function(api){
         api.rest.forEach(function(service){
           vm.services.push(service);
         });
+        apiClient.getRestList(api.name, api.default_version, function(restList) {
+          api.rest = restList;
+        });
         api.rpc.forEach(function(service){
           vm.services.push(service);
+        });
+        apiClient.getRpcList(api.name, api.default_version, function(rpcList) {
+          api.rpc = rpcList;
         });
       });
     }

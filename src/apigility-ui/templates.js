@@ -74,7 +74,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "          </tr>\n" +
     "        </thead>\n" +
     "        <tr ng-repeat=\"rest in vm.rest\">\n" +
-    "          <td><a ui-sref=\"ag.rest({api: vm.apiName, ver: vm.version, rest: rest.service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)\">{{rest.service_name}}</a></td>\n" +
+    "          <td><a ui-sref=\"ag.rest({api: vm.apiName, ver: vm.version, rest: rest.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)\">{{rest.service_name}}</a></td>\n" +
     "          <td>{{rest.route_match}}</td>\n" +
     "          <td>\n" +
     "            <a href=\"\" ng-if=\"!rest._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
@@ -99,7 +99,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "          </tr>\n" +
     "        </thead>\n" +
     "        <tr ng-repeat=\"rpc in vm.rpc\">\n" +
-    "          <td><a ui-sref=\"ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)\">{{rpc.service_name}}</a></td>\n" +
+    "          <td><a ui-sref=\"ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)\">{{rpc.service_name}}</a></td>\n" +
     "          <td>{{rpc.route_match}}</td>\n" +
     "          <td>\n" +
     "            <a href=\"\" ng-if=\"!rpc._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
@@ -1103,6 +1103,8 @@ angular.module("apigility-ui/modal/edit-field.html", []).run(["$templateCache", 
     "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.name\" placeholder=\"Insert the Field name\" readonly><br />\n" +
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
+    "  <label class=\"control-label\">Field Type</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.field_type\" rows=\"3\" placeholder=\"Insert the field type\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
@@ -1540,6 +1542,8 @@ angular.module("apigility-ui/modal/new-field.html", []).run(["$templateCache", f
     "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.name\" placeholder=\"Insert the Field name\" autofocus><br />\n" +
     "  <label class=\"control-label\">Description</label>\n" +
     "  <textarea class=\"form-control\" ng-model=\"vm.field.description\" rows=\"3\" placeholder=\"Insert the description\"></textarea><br />\n" +
+    "  <label class=\"control-label\">Field Type</label>\n" +
+    "  <input type=\"text\" class=\"form-control\" ng-model=\"vm.field.field_type\" rows=\"3\" placeholder=\"Insert the field type\"><br />\n" +
     "  <label class=\"col-sm-4 control-label\">File upload?</label>\n" +
     "  <input type=\"checkbox\" ng-model=\"vm.field.type\" ng-true-value=\"Zend\\InputFilter\\FileInput\" class=\"col-sm-2 control-label\">\n" +
     "  <label class=\"col-sm-4 control-label\">Required</label>\n" +
@@ -2601,13 +2605,13 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "      </div>\n" +
     "      <ol class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\" ng-class=\"{hidden: collapsed}\">\n" +
     "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rest\">\n" +
-    "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rest'+subItem === vm.getSelected() }\">\n" +
-    "            <span class=\"glyphicon glyphicon-leaf\"></span> <a ui-sref=\"ag.rest({api: item.name, ver: item.selected_version, rest: subItem})\" ng-click=\"vm.setSelected('api'+item.name+'rest'+subItem)\">{{subItem}}</a>\n" +
+    "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rest'+subItem.service_name === vm.getSelected() }\">\n" +
+    "            <span class=\"glyphicon glyphicon-leaf\"></span> <a ui-sref=\"ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rest'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +
     "        </li>\n" +
     "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rpc\">\n" +
-    "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rpc'+subItem === vm.getSelected() }\">\n" +
-    "            <span class=\"glyphicon glyphicon-fire\"></span> <a ui-sref=\"ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem})\" ng-click=\"vm.setSelected('api'+item.name+'rpc'+subItem)\">{{subItem}}</a>\n" +
+    "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rpc'+subItem.service_name === vm.getSelected() }\">\n" +
+    "            <span class=\"glyphicon glyphicon-fire\"></span> <a ui-sref=\"ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rpc'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +
     "        </li>\n" +
     "      </ol>\n" +
