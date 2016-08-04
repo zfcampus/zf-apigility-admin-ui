@@ -55,10 +55,11 @@
   }
 
   function send($http, $q, method, path, options, version) {
+    var headers;
     if (version) {
-      var headers = { Accept: 'application/vnd.apigility.v2+json' };
+      headers = { Accept: 'application/vnd.apigility.v2+json' };
     } else {
-      var headers = { Accept: 'application/json' };
+      headers = { Accept: 'application/json' };
     }
     if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
       headers['Content-Type'] = 'application/json';
