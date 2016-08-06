@@ -53,6 +53,6 @@
           $modalInstance.close(response);
         });
       }
-    }
+    };
   }
 })();

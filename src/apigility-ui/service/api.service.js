@@ -130,7 +130,7 @@
       var result = filterData(data, allowed);
       var path = isDoctrine ? '/doctrine/' : '/rest/';
       var moduleParam = this.normalizeModuleName(module);
-      xhr.update(agApiPath + '/module/' + moduleParam + path + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
+      xhr.update(agApiPath + '/module/' + moduleParam + path + name, result.value, result.key)
       .then(function(response) {
         growl.success('Service updated');
         return callback(false, response);
@@ -154,7 +154,7 @@
       ];
       var moduleParam = this.normalizeModuleName(module);
       var result = filterData(data, allowed);
-      xhr.update(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller', result.value, result.key)
+      xhr.update(agApiPath + '/module/' + moduleParam + '/rest/' + name, result.value, result.key)
       .then(function(response) {
         growl.success('Content negotiation updated');
         return callback(false, response);
@@ -168,7 +168,7 @@
     this.deleteRest = function(module, version, name, isDoctrine, recursive, callback) {
       var path = isDoctrine ? 'doctrine' : 'rest',
           moduleParam = this.normalizeModuleName(module);
-      xhr.remove(agApiPath + '/module/' + moduleParam + '/' + path + '/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
+      xhr.remove(agApiPath + '/module/' + moduleParam + '/' + path + '/' + name + '?recursive=' + (recursive ? 1 : 0))
         .then(function (response) {
           growl.success('Service deleted');
           return callback(false, response);
@@ -187,13 +187,13 @@
         var data = {};
         data.collection = [];
         data.entity = [];
-        var collection = response[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__collection__'];
+        var collection = response[name + '::__collection__'];
         for (method in collection) {
           if (collection[method]) {
             data.collection.push(method);
           }
         }
-        var entity = response[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__entity__'];
+        var entity = response[name + '::__entity__'];
         for (method in entity) {
           if (entity[method]) {
             data.entity.push(method);
@@ -216,8 +216,8 @@
         entity[method] = (auth.entity.indexOf(method) > -1);
       });
       var data = {};
-      data[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__collection__'] = collection;
-      data[module + '\\V' + version + '\\Rest\\' + capitalizeFirstLetter(name) + '\\Controller::__entity__'] = entity;
+      data[name + '::__collection__'] = collection;
+      data[name + '::__entity__'] = entity;
       xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization saved');
@@ -439,7 +439,7 @@
       xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var data = [];
-        var controller = response[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name];
+        var controller = response[name + '::' + name];
         for (var method in controller) {
           if (controller[method]) {
             data.push(method);
@@ -460,7 +460,7 @@
         http[method] = (auth.indexOf(method) > -1);
       });
       var data = {};
-      data[module + '\\V' + version + '\\Rpc\\' + capitalizeFirstLetter(name) + '\\Controller::' + name] = http;
+      data[name + '::' + name] = http;
       xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization updated');
@@ -497,7 +497,7 @@
 
     this.saveRestDoc = function(module, version, restname, doc, callback) {
       var moduleParam = this.normalizeModuleName(module);
-      xhr.save(agApiPath + '/module/' + moduleParam + '/rest/' + moduleParam + '-V' + version + '-Rest-' + capitalizeFirstLetter(restname) + '-Controller/doc', doc)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rest/' + restname + '/doc', doc)
       .then(function(response) {
         growl.success('Documentation saved');
         // Remove unused properties from the response
@@ -512,7 +512,7 @@
 
     this.saveRpcDoc = function(module, version, rpcname, doc, callback) {
       var moduleParam = this.normalizeModuleName(module);
-      xhr.save(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpcname) + '-Controller/doc', doc)
+      xhr.save(agApiPath + '/module/' + moduleParam + '/rpc/' + rpcname + '/doc', doc)
       .then(function(response) {
         growl.success('Documentation saved');
         // Remove unused properties from the response
@@ -586,7 +586,7 @@
         'service_name'
       ];
       var result = filterData(data, allowed);
-      xhr.update(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(rpc) + '-Controller', result.value, result.key)
+      xhr.update(agApiPath + '/module/' + moduleParam + '/rpc/' + rpc, result.value, result.key)
       .then(function(response) {
         growl.success('Service updated');
         return callback(false, response);
@@ -603,7 +603,7 @@
 
     this.deleteRpc = function(module, version, name, recursive, callback) {
       var moduleParam = this.normalizeModuleName(module);
-      xhr.remove(agApiPath + '/module/' + moduleParam + '/rpc/' + moduleParam + '-V' + version + '-Rpc-' + capitalizeFirstLetter(name) + '-Controller?recursive=' + (recursive ? 1 : 0))
+      xhr.remove(agApiPath + '/module/' + moduleParam + '/rpc/' + name + '?recursive=' + (recursive ? 1 : 0))
       .then(function (response) {
         growl.success('Service deleted');
         return callback(false, response);
