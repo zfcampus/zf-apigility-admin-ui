@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.1 - TBD
+## 1.3.1 - 2016-08-06
 
 ### Added
 
@@ -18,7 +18,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#114](https://github.com/zfcampus/zf-apigility-admin-ui/pull/114) fixes how
+  the UI generates URIs to the various service endpoints (REST and RPC services,
+  their input filters, their authorization rules, and their documentation) to
+  ensure they work with the latest admin changes. In particular, prior to this
+  patch, the service names were receiving both a duplicate prefix and suffix
+  that caused the URLs to be invalid.
 
 ## 1.3.0 - 2016-07-27
 
