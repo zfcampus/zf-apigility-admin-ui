@@ -31,6 +31,7 @@
           return;
         }
         vm.rpc = result;
+        vm.serviceName = vm.rpc.service_name;
         vm.rpc.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
         });

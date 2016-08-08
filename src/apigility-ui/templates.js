@@ -1889,7 +1889,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
-    "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.restName}} (v{{vm.version}})\n" +
+    "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.serviceName}} (v{{vm.version}})\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2347,7 +2347,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
-    "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.rpcName}} (v{{vm.version}})\n" +
+    "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.serviceName}} (v{{vm.version}})\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
