@@ -31,6 +31,7 @@
           return;
         }
         vm.rpc = result;
+        vm.serviceName = vm.rpc.service_name;
         vm.rpc.accept_whitelist.forEach(function(entry){
           vm.tags.accept_whitelist.push({ text : entry });
         });
@@ -121,9 +122,9 @@
         controllerAs: 'vm'
       });
 
-      modalInstance.result.then(function (api, version, service) {
-        SidebarService.removeRpcService(api, service);
-        $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
+      modalInstance.result.then(function (response) {
+        SidebarService.removeRpcService(response.api, response.service);
+        $state.go('ag.apimodule', {api: response.api, ver: response.version}, {reload: true});
       });
     };
 

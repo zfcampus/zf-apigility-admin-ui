@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.2 - TBD
+## 1.3.2 - 2016-08-09
 
 ### Added
 
@@ -36,7 +36,17 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#116](https://github.com/zfcampus/zf-apigility-admin-ui/pull/116) ensures
+  that the short service name, and not the full controller service name, is
+  displayed on service pages.
+- [#116](https://github.com/zfcampus/zf-apigility-admin-ui/pull/116) fixes
+  issues with updating the sidebar after adding a new service; previously, the
+  number and type of entries was correct, but no service names were displayed
+  after update; they are now displayed correctly.
+- [#116](https://github.com/zfcampus/zf-apigility-admin-ui/pull/116) fixes
+  issues with updating the sidebar after removing a service; previously, the
+  last service listed of the given type was removed regardless of the service
+  removed; now the correct service is removed from the listing.
 
 ## 1.3.1 - 2016-08-06
 

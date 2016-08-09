@@ -30,7 +30,7 @@
 
 <div class="api-tree" ui-tree class="ng-scope angular-ui-tree" data-drag-enabled="false" data-max-depth="2" ng-hide="vm.apis.length == 0">
   <ol ui-tree-nodes="options" ng-model="vm.apis" class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes">
-    <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis" ui-tree-node="">
+    <li class="ng-scope angular-ui-tree-node" ng-repeat="item in vm.apis track by $index" ui-tree-node="">
       <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name === vm.getSelected() }">
         <a class="btn btn-default btn-xs" ng-click="vm.toggle(this)" data-nodrag="">
           <span ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" class="glyphicon glyphicon-chevron-down"></span>
@@ -39,12 +39,12 @@
         <span class="badge pull-right">{{item.rest.length + item.rpc.length}}</span>
       </div>
       <ol class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes" ng-class="{hidden: collapsed}">
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest">
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest track by $index">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rest'+subItem.service_name === vm.getSelected() }">
             <span class="glyphicon glyphicon-leaf"></span> <a ui-sref="ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rest'+subItem.service_name)">{{subItem.service_name}}</a>
           </div>
         </li>
-        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc">
+        <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc track by $index">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rpc'+subItem.service_name === vm.getSelected() }">
             <span class="glyphicon glyphicon-fire"></span> <a ui-sref="ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rpc'+subItem.service_name)">{{subItem.service_name}}</a>
           </div>
