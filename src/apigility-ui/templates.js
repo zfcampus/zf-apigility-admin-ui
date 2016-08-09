@@ -73,7 +73,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "            <th class=\"col-sm-6\">Description</th>\n" +
     "          </tr>\n" +
     "        </thead>\n" +
-    "        <tr ng-repeat=\"rest in vm.rest\">\n" +
+    "        <tr ng-repeat=\"rest in vm.rest track by $index\">\n" +
     "          <td><a ui-sref=\"ag.rest({api: vm.apiName, ver: vm.version, rest: rest.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)\">{{rest.service_name}}</a></td>\n" +
     "          <td>{{rest.route_match}}</td>\n" +
     "          <td>\n" +
@@ -98,7 +98,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "            <th class=\"col-sm-6\">Description</th>\n" +
     "          </tr>\n" +
     "        </thead>\n" +
-    "        <tr ng-repeat=\"rpc in vm.rpc\">\n" +
+    "        <tr ng-repeat=\"rpc in vm.rpc track by $index\">\n" +
     "          <td><a ui-sref=\"ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)\">{{rpc.service_name}}</a></td>\n" +
     "          <td>{{rpc.route_match}}</td>\n" +
     "          <td>\n" +
@@ -1889,7 +1889,7 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRestModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
-    "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.restName}} (v{{vm.version}})\n" +
+    "      <span class=\"glyphicon glyphicon-leaf\"></span> REST service: {{vm.serviceName}} (v{{vm.version}})\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2347,7 +2347,7 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "  <div class=\"panel-heading\">\n" +
     "    <h3 class=\"panel-title\">\n" +
     "      <span class=\"service-button pull-right\"><button class=\"btn btn-danger\" ng-click=\"vm.deleteRpcModal()\" ng-hide=\"vm.disabled\"><span class=\"glyphicon glyphicon-trash\"></span> Delete service</button></span>\n" +
-    "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.rpcName}} (v{{vm.version}})\n" +
+    "      <span class=\"glyphicon glyphicon-fire\"></span> RPC service: {{vm.serviceName}} (v{{vm.version}})\n" +
     "    </h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
@@ -2595,7 +2595,7 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "\n" +
     "<div class=\"api-tree\" ui-tree class=\"ng-scope angular-ui-tree\" data-drag-enabled=\"false\" data-max-depth=\"2\" ng-hide=\"vm.apis.length == 0\">\n" +
     "  <ol ui-tree-nodes=\"options\" ng-model=\"vm.apis\" class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\">\n" +
-    "    <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"item in vm.apis\" ui-tree-node=\"\">\n" +
+    "    <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"item in vm.apis track by $index\" ui-tree-node=\"\">\n" +
     "      <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name === vm.getSelected() }\">\n" +
     "        <a class=\"btn btn-default btn-xs\" ng-click=\"vm.toggle(this)\" data-nodrag=\"\">\n" +
     "          <span ng-class=\"{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}\" class=\"glyphicon glyphicon-chevron-down\"></span>\n" +
@@ -2604,12 +2604,12 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "        <span class=\"badge pull-right\">{{item.rest.length + item.rpc.length}}</span>\n" +
     "      </div>\n" +
     "      <ol class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\" ng-class=\"{hidden: collapsed}\">\n" +
-    "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rest\">\n" +
+    "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rest track by $index\">\n" +
     "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rest'+subItem.service_name === vm.getSelected() }\">\n" +
     "            <span class=\"glyphicon glyphicon-leaf\"></span> <a ui-sref=\"ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rest'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +
     "        </li>\n" +
-    "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rpc\">\n" +
+    "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rpc track by $index\">\n" +
     "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rpc'+subItem.service_name === vm.getSelected() }\">\n" +
     "            <span class=\"glyphicon glyphicon-fire\"></span> <a ui-sref=\"ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rpc'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +

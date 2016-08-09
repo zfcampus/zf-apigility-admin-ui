@@ -49,7 +49,7 @@
             <th class="col-sm-6">Description</th>
           </tr>
         </thead>
-        <tr ng-repeat="rest in vm.rest">
+        <tr ng-repeat="rest in vm.rest track by $index">
           <td><a ui-sref="ag.rest({api: vm.apiName, ver: vm.version, rest: rest.controller_service_name})" ng-click="vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)">{{rest.service_name}}</a></td>
           <td>{{rest.route_match}}</td>
           <td>
@@ -74,7 +74,7 @@
             <th class="col-sm-6">Description</th>
           </tr>
         </thead>
-        <tr ng-repeat="rpc in vm.rpc">
+        <tr ng-repeat="rpc in vm.rpc track by $index">
           <td><a ui-sref="ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.controller_service_name})" ng-click="vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)">{{rpc.service_name}}</a></td>
           <td>{{rpc.route_match}}</td>
           <td>
