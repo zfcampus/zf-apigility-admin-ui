@@ -18,19 +18,23 @@
 
     vm.cancel = $modalInstance.dismiss;
 
-    vm.ok = function() {
+    vm.ok = function () {
       vm.loading = true;
-      api.deleteRpc(vm.apiName, vm.version, vm.rpcName, vm.recursive, function(err, response) {
+      api.deleteRpc(vm.apiName, vm.version, vm.rpcName, vm.recursive, function (err, response) {
         if (err) {
           vm.alert = 'Error during the delete of the service';
           vm.loading = false;
           return;
         }
-        $timeout(function(){
+        $timeout(function () {
           vm.loading = false;
-          $modalInstance.close(vm.apiName, vm.version, vm.rpcName);
+          $modalInstance.close({
+            'api': vm.apiName,
+            'version': vm.version,
+            'service': vm.rpcName
+          });
         }, 2000);
       });
-    }
+    };
   }
 })();

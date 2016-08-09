@@ -92,25 +92,69 @@
       });
     };
 
-    var removeRestService = function(apiName, serviceName){
+    var removeRestService = function(apiName, serviceName) {
       var newApis = [];
-      apis.forEach(function(api){
-        if (api.name == apiName) {
-          api.rest.splice(api.rest.indexOf(serviceName),1);
+      var apiToUpdate;
+      var toRemove;
+
+      apis.forEach(function (api) {
+        if (api.name !== apiName) {
+          newApis.push(api);
+          return;
         }
-        newApis.push(api);
+
+        toRemove = false;
+        api.rest.forEach(function (service, index) {
+          if (service.controller_service_name !== serviceName) {
+            return;
+          }
+
+          toRemove = index;
+        });
+
+        if (false === toRemove) {
+          newApis.push(api);
+          return;
+        }
+
+        apiToUpdate = angular.copy(api);
+        apiToUpdate.rest.splice(toRemove, 1);
+        newApis.push(apiToUpdate);
       });
+
       apis = newApis;
     };
 
-    var removeRpcService = function(apiName, serviceName){
+    var removeRpcService = function(apiName, serviceName) {
       var newApis = [];
-      apis.forEach(function(api){
-        if (api.name == apiName) {
-          api.rpc.splice(api.rpc.indexOf(serviceName),1);
+      var apiToUpdate;
+      var toRemove;
+
+      apis.forEach(function (api) {
+        if (api.name !== apiName) {
+          newApis.push(api);
+          return;
         }
-        newApis.push(api);
+
+        toRemove = false;
+        api.rpc.forEach(function (service, index) {
+          if (service.controller_service_name !== serviceName) {
+            return;
+          }
+
+          toRemove = index;
+        });
+
+        if (false === toRemove) {
+          newApis.push(api);
+          return;
+        }
+
+        apiToUpdate = angular.copy(api);
+        apiToUpdate.rpc.splice(toRemove, 1);
+        newApis.push(apiToUpdate);
       });
+
       apis = newApis;
     };
 

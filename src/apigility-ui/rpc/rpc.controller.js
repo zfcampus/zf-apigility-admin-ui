@@ -122,9 +122,9 @@
         controllerAs: 'vm'
       });
 
-      modalInstance.result.then(function (api, version, service) {
-        SidebarService.removeRpcService(api, service);
-        $state.go('ag.apimodule', {api: api, ver: version}, {reload: true});
+      modalInstance.result.then(function (response) {
+        SidebarService.removeRpcService(response.api, response.service);
+        $state.go('ag.apimodule', {api: response.api, ver: response.version}, {reload: true});
       });
     };
 
