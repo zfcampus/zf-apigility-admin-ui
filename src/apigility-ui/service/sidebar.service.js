@@ -21,24 +21,25 @@
     };
 
     var setSelectedVersion = function(apiName, version) {
-      for(var i = 0; i < apis.length; i++) {
-        if (apis[i].name === apiName) {
-          apis[i].selected_version = version;
-          api.getRestList(apiName, version, function(result){
-            apis[i].rest = [];
-            result.forEach(function(entry){
-              apis[i].rest.push(entry.service_name);
-            });
-          });
-          api.getRpcList(apiName, version, function(result){
-            apis[i].rpc = [];
-            result.forEach(function(entry){
-              apis[i].rpc.push(entry.service_name);
-            });
-          });
+      apis.forEach(function (currentApi) {
+        if (currentApi.name !== apiName) {
           return;
         }
-      }
+
+        api.getRestList(apiName, version, function (restResult) {
+          currentApi.rest = [];
+          restResult.forEach(function (entry) {
+            currentApi.rest.push(entry);
+          });
+        });
+
+        api.getRpcList(apiName, version, function (rpcResult) {
+          currentApi.rpc = [];
+          rpcResult.forEach(function (entry) {
+            currentApi.rpc.push(entry);
+          });
+        });
+      });
     };
 
     var getSelectedVersion = function(apiName){
@@ -80,7 +81,7 @@
 
     var getApis = function(){
       return apis;
-    }
+    };
 
     var addRestService = function(apiName, serviceName){
       apis.forEach(function(api){
@@ -98,7 +99,7 @@
           api.rest.splice(api.rest.indexOf(serviceName),1);
         }
         newApis.push(api);
-      })
+      });
       apis = newApis;
     };
 
@@ -109,7 +110,7 @@
           api.rpc.splice(api.rpc.indexOf(serviceName),1);
         }
         newApis.push(api);
-      })
+      });
       apis = newApis;
     };
 
@@ -120,15 +121,15 @@
           return;
         }
       });
-    }
+    };
 
     var getSelected = function(){
       return selected;
-    }
+    };
 
     var setSelected = function(data){
       selected = data;
-    }
+    };
 
     return {
       addVersion : addVersion,
