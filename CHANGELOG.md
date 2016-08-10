@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.4 - TBD
+## 1.3.4 - 2016-08-10
 
 ### Added
 
@@ -18,7 +18,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Re-builds the distribution files, as they were not rebuilt for 1.3.3, and thus
+  changes were not observed.
 
 ## 1.3.3 - 2016-08-10
 
