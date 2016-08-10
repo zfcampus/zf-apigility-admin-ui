@@ -19,12 +19,12 @@
       xhr.get(agApiPath + '/apigility-version')
         .then(function (response) {
           if (typeof response.version !== 'string') {
-            return callback(false, { version: '@dev' });
+            return callback({ version: '@dev' });
           }
-          return callback(false, response);
+          return callback(response);
         })
         .catch(function (err) {
-          return callback(false, { version: '@dev' });
+          return callback({ version: '@dev' });
         });
     };
 
