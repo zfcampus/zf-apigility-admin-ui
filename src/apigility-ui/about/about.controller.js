@@ -12,6 +12,14 @@
     /* jshint validthis:true */
     var vm = this;
 
-    vm.version = '1.3.2';
+    vm.version = '@dev';
+
+    function init() {
+      api.getApigilityVersion(function (data) {
+        vm.version = data.version;
+      });
+    }
+
+    init();
   }
 })();
