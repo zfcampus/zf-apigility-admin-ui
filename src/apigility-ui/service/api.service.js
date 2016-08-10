@@ -15,6 +15,19 @@
 
     var httpMethods = [ 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
+    this.getApigilityVersion = function (callback) {
+      xhr.get(agApiPath + '/apigility-version')
+        .then(function (response) {
+          if (typeof response.version !== 'string') {
+            return callback({ version: '@dev' });
+          }
+          return callback(response);
+        })
+        .catch(function (err) {
+          return callback({ version: '@dev' });
+        });
+    };
+
     this.getApiList = function(callback) {
       xhr.get(agApiPath + '/dashboard', '_embedded')
         .then(function (response) {

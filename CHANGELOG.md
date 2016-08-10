@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.3 - TBD
+## 1.3.3 - 2016-08-10
 
 ### Added
 
@@ -36,7 +36,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#117](https://github.com/zfcampus/zf-apigility-admin-ui/pull/117) fixes the
+  about screen to no longer use a hard-coded version. Instead, it now attempts
+  to query the apigility-version API, returning the version that returns. If the
+  API is not pressent, or errors in some way, the string `@dev` is now used for
+  the version.
 
 ## 1.3.2 - 2016-08-09
 
