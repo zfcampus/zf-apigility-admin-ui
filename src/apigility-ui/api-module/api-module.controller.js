@@ -92,7 +92,18 @@
       });
 
       modalInstance.result.then(function (response) {
-        SidebarService.addRestService(response.api, response.rest);
+        if (response.hasOwnProperty('rest')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
+          $state.go('ag.rest', {api: response.api, ver: response.ver, rest: response.rest});
+          vm.setSelected('api' + response.api + 'rest' + response.rest);
+        } else if (response.hasOwnProperty('rpc')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
+          $state.go('ag.rpc', {api: response.api, ver: response.ver, rpc: response.rpc});
+          vm.setSelected('api' + response.api + 'rpc' + response.rpc);
+        } else if (response.hasOwnProperty('rests')) {
+          SidebarService.setSelectedVersion(response.api, response.ver);
+          $state.go('ag.apimodule', {api: response.api, ver: response.ver});
+        }
       });
     };
 
@@ -104,7 +115,7 @@
           vm.alert = response;
           return;
         }
-      })
+      });
     };
 
     vm.saveAuthentication = function(auth) {

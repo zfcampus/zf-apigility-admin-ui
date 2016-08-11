@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.5 - TBD
+## 1.3.5 - 2016-08-11
 
 ### Added
 
@@ -36,7 +36,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#118](https://github.com/zfcampus/zf-apigility-admin-ui/pull/118) fixes the
+  API dashboard new service modal handler to ensure that the sidebar is updated
+  when a new service is successfully created.
 
 ## 1.3.4 - 2016-08-10
 
