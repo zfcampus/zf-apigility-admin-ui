@@ -7,14 +7,45 @@ angular.module("apigility-ui/about/about.html", []).run(["$templateCache", funct
     "    <h3 class=\"panel-title\">Apigility  {{vm.version}}</h3>\n" +
     "  </div>\n" +
     "  <div class=\"panel-body\">\n" +
-    "      <div class=\"hero pull-right\">\n" +
-    "        <img src=\"apigility-ui/img/ag-hero.png\">\n" +
-    "      </div>\n" +
-    "      <p><strong>Apigility</strong> is the open source API builder for PHP, designed to simplify creating and maintaining useful, easy to consume, and well structured APIs. Regardless of your experience in API building, with <strong>Apigility</strong> you can build APIs that enable mobile apps, developer communities, and any other consumer controlled access to your applications.</p>\n" +
-    "      <p><strong>Key features:</strong> RESTful or RPC services; JSON (specifically, <a href=\"http://tools.ietf.org/html/draft-kelly-json-hal-06\" target=\"_blank\">HAL</a>); Problem Details for HTTP APIs; Versioning; Normalisation and Validation; Authentication (HTTP Basic/Digest, <a href=\"http://oauth.net/2/\" target=\"_blank\">OAuth2</a>); Documentation (HTML, <a href=\"http://swagger.io/\" target=\"_blank\">Swagger</a>).</p>\n" +
-    "      <p><strong>Apigility</strong> is made using <a href=\"http://framework.zend.com\" target=\"_blank\">Zend Framework 2</a>, <a href=\"https://angularjs.org/\" target=\"_blank\">AngularJS</a> and <a href=\"http://getbootstrap.com/\" target=\"_blank\">Bootstrap</a>.</p>\n" +
-    "      <p>If you want to contribute you can <a href=\"https://github.com/zfcampus\" target=\"_blank\">fork the project on github</a>.</p>\n" +
-    "      <p>The official web site of the project is <a href=\"https://apigility.org\" target=\"_blank\">apigility.org</a>.</p>\n" +
+    "    <div class=\"hero pull-right\">\n" +
+    "      <img src=\"apigility-ui/img/ag-hero.png\">\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <p>\n" +
+    "      <strong>Apigility</strong> is the open source API builder for PHP,\n" +
+    "      designed to simplify creating and maintaining useful, easy to consume, and\n" +
+    "      well structured APIs. Regardless of your experience in API building, with\n" +
+    "      <strong>Apigility</strong> you can build APIs that enable mobile apps,\n" +
+    "      developer communities, and any other consumer controlled access to your\n" +
+    "      applications.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "      <strong>Key features:</strong> RESTful or RPC services; JSON\n" +
+    "      (specifically, <a href=\"http://tools.ietf.org/html/draft-kelly-json-hal-08\" target=\"_blank\">HAL</a>);\n" +
+    "      <a href=\"https://tools.ietf.org/html/rfc7807\" target=\"_blank\">Problem Details for HTTP APIs</a>;\n" +
+    "      Versioning; Normalisation and Validation; Authentication (HTTP Basic/Digest,\n" +
+    "      <a href=\"http://oauth.net/2/\" target=\"_blank\">OAuth2</a>); Documentation\n" +
+    "      (HTML, <a href=\"http://swagger.io/\" target=\"_blank\">Swagger</a>, and <a\n" +
+    "        href=\"https://apiblueprint.org/\" target=\"_blank\">API Blueprint</a>).\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "      <strong>Apigility</strong> is made using\n" +
+    "      <a href=\"http://framework.zend.com\" target=\"_blank\">Zend Framework</a>,\n" +
+    "      <a href=\"https://angularjs.org/\" target=\"_blank\">AngularJS</a> and\n" +
+    "      <a href=\"http://getbootstrap.com/\" target=\"_blank\">Bootstrap</a>.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "      If you want to contribute, you can <a href=\"https://github.com/zfcampus\"\n" +
+    "        target=\"_blank\">fork any of the relevant repositories under the zfcampus\n" +
+    "        organization on GitHub</a>.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "      The official web site of the project is <a href=\"https://apigility.org\" target=\"_blank\">apigility.org</a>.\n" +
+    "    </p>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
