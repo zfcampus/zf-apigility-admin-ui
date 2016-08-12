@@ -40,6 +40,8 @@ All notable changes to this project will be documented in this file, in reverse 
   transitions to new API versions when selecting an API version in the sidebar.
   Previously, the sidebar would be updated, but the UI would not transition to
   the API's dashboard for that version.
+- [#120](https://github.com/zfcampus/zf-apigility-admin-ui/pull/120) updates the
+  About tab to provide updated links and information about the project.
 
 ## 1.3.5 - 2016-08-11
 
