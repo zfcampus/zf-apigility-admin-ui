@@ -15,7 +15,6 @@
     vm.apis = SidebarService.getApis();
     vm.getSelected = SidebarService.getSelected;
     vm.setSelected = SidebarService.setSelected;
-    vm.changeVersion = SidebarService.setSelectedVersion;
     vm.search = '';
 
     // Make an API call if the list of APIs is empty
@@ -100,6 +99,11 @@
           $state.go('ag.apimodule', {api: response.api, ver: response.ver});
         }
       });
+    };
+
+    vm.changeVersion = function (apiName, apiVersion) {
+      SidebarService.setSelectedVersion(apiName, apiVersion);
+      $state.go('ag.apimodule', {api: apiName, ver: apiVersion});
     };
 
     function getServiceList(apiClient, apiList) {
