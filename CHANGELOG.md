@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.7 - TBD
+## 1.3.7 - 2016-08-14
 
 ### Added
 
@@ -40,6 +40,10 @@ All notable changes to this project will be documented in this file, in reverse 
   display of the sidebar on initial load when a default API version other than
   the latest version is selected; it now correctly *always* displays the latest
   version on initial load.
+- [#125](https://github.com/zfcampus/zf-apigility-admin-ui/pull/125) fixes the
+  "Add a description for this service" links on API dashboards. Previously, they
+  had no handler, and thus did nothing; with this release, they provide a modal
+  for updating the service description.
 
 ## 1.3.6 - 2016-08-12
 
