@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add service description for <strong>{{vm.service_name}}</strong></h4>
+</div>
+
+<div class="modal-body">
+  <label class="control-label">Description</label>
+  <input class="form-control" type="text" ng-model="vm.description" placeholder="Insert the service description" autofocus />
+</div>
+
+<div class="modal-footer">
+  <div class="alert alert-danger" role="alert" ng-hide="!vm.alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{vm.alert}}
+  </div>
+
+  <button class="btn btn-default" type="button" ng-click="vm.cancel()">Close</button>
+  <button class="btn btn-success" type="button" ng-click="vm.ok()" ladda="vm.loading">Save</button>
+</div>
