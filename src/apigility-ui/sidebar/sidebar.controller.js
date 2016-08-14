@@ -112,13 +112,13 @@
         api.rest.forEach(function(service){
           vm.services.push(service);
         });
-        apiClient.getRestList(api.name, api.default_version, function(restList) {
+        apiClient.getRestList(api.name, api.selected_version, function(restList) {
           api.rest = restList;
         });
         api.rpc.forEach(function(service){
           vm.services.push(service);
         });
-        apiClient.getRpcList(api.name, api.default_version, function(rpcList) {
+        apiClient.getRpcList(api.name, api.selected_version, function(rpcList) {
           api.rpc = rpcList;
         });
       });

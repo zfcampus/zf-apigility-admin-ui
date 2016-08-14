@@ -36,7 +36,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#123](https://github.com/zfcampus/zf-apigility-admin-ui/pull/123) fixes
+  display of the sidebar on initial load when a default API version other than
+  the latest version is selected; it now correctly *always* displays the latest
+  version on initial load.
 
 ## 1.3.6 - 2016-08-12
 
