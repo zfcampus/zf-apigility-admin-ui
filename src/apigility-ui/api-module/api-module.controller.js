@@ -107,6 +107,26 @@
       });
     };
 
+    vm.addServiceDescriptionModal = function (service, type) {
+      var modalInstance = $modal.open({
+        templateUrl: 'apigility-ui/modal/add-service-description.html',
+        controller: 'AddServiceDescription',
+        controllerAs: 'vm',
+        resolve: {
+          service: function () {
+            return service;
+          },
+          type: function () {
+            return type;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (response) {
+        $state.reload();
+      });
+    };
+
     vm.setDefaultVersion = function() {
       vm.loading = true;
       api.setDefaultVersion(vm.apiName, vm.module.default_version, function(err, response){

@@ -1,4 +1,4 @@
-angular.module('templates-main', ['apigility-ui/about/about.html', 'apigility-ui/api-module/api-module.html', 'apigility-ui/authentication/authentication.html', 'apigility-ui/content-negotiation/content-negotiation.html', 'apigility-ui/dashboard/dashboard.html', 'apigility-ui/database/database.html', 'apigility-ui/documentation/documentation-api.html', 'apigility-ui/documentation/documentation-list.html', 'apigility-ui/documentation/documentation-service.html', 'apigility-ui/documentation/documentation.html', 'apigility-ui/header/header.html', 'apigility-ui/modal/add-authoption.html', 'apigility-ui/modal/add-dboption.html', 'apigility-ui/modal/add-filter.html', 'apigility-ui/modal/add-validator.html', 'apigility-ui/modal/delete-api.html', 'apigility-ui/modal/delete-auth.html', 'apigility-ui/modal/delete-authoption.html', 'apigility-ui/modal/delete-db.html', 'apigility-ui/modal/delete-dboption.html', 'apigility-ui/modal/delete-field.html', 'apigility-ui/modal/delete-filter.html', 'apigility-ui/modal/delete-rest.html', 'apigility-ui/modal/delete-rpc.html', 'apigility-ui/modal/delete-selector.html', 'apigility-ui/modal/delete-validator.html', 'apigility-ui/modal/delete-viewmodel.html', 'apigility-ui/modal/edit-auth.html', 'apigility-ui/modal/edit-authoption.html', 'apigility-ui/modal/edit-db.html', 'apigility-ui/modal/edit-dboption.html', 'apigility-ui/modal/edit-field.html', 'apigility-ui/modal/edit-filter.html', 'apigility-ui/modal/edit-validator.html', 'apigility-ui/modal/edit-viewmodel.html', 'apigility-ui/modal/new-api.html', 'apigility-ui/modal/new-auth.html', 'apigility-ui/modal/new-db.html', 'apigility-ui/modal/new-doctrinestrategy.html', 'apigility-ui/modal/new-field.html', 'apigility-ui/modal/new-selector.html', 'apigility-ui/modal/new-service.html', 'apigility-ui/modal/new-version.html', 'apigility-ui/modal/new-viewmodel.html', 'apigility-ui/modal/view-doctrineparams.html', 'apigility-ui/package/package.html', 'apigility-ui/rest/rest.html', 'apigility-ui/rpc/rpc.html', 'apigility-ui/sidebar/sidebar.html']);
+angular.module('templates-main', ['apigility-ui/about/about.html', 'apigility-ui/api-module/api-module.html', 'apigility-ui/authentication/authentication.html', 'apigility-ui/content-negotiation/content-negotiation.html', 'apigility-ui/dashboard/dashboard.html', 'apigility-ui/database/database.html', 'apigility-ui/documentation/documentation-api.html', 'apigility-ui/documentation/documentation-list.html', 'apigility-ui/documentation/documentation-service.html', 'apigility-ui/documentation/documentation.html', 'apigility-ui/header/header.html', 'apigility-ui/modal/add-authoption.html', 'apigility-ui/modal/add-dboption.html', 'apigility-ui/modal/add-filter.html', 'apigility-ui/modal/add-service-description.html', 'apigility-ui/modal/add-validator.html', 'apigility-ui/modal/delete-api.html', 'apigility-ui/modal/delete-auth.html', 'apigility-ui/modal/delete-authoption.html', 'apigility-ui/modal/delete-db.html', 'apigility-ui/modal/delete-dboption.html', 'apigility-ui/modal/delete-field.html', 'apigility-ui/modal/delete-filter.html', 'apigility-ui/modal/delete-rest.html', 'apigility-ui/modal/delete-rpc.html', 'apigility-ui/modal/delete-selector.html', 'apigility-ui/modal/delete-validator.html', 'apigility-ui/modal/delete-viewmodel.html', 'apigility-ui/modal/edit-auth.html', 'apigility-ui/modal/edit-authoption.html', 'apigility-ui/modal/edit-db.html', 'apigility-ui/modal/edit-dboption.html', 'apigility-ui/modal/edit-field.html', 'apigility-ui/modal/edit-filter.html', 'apigility-ui/modal/edit-validator.html', 'apigility-ui/modal/edit-viewmodel.html', 'apigility-ui/modal/new-api.html', 'apigility-ui/modal/new-auth.html', 'apigility-ui/modal/new-db.html', 'apigility-ui/modal/new-doctrinestrategy.html', 'apigility-ui/modal/new-field.html', 'apigility-ui/modal/new-selector.html', 'apigility-ui/modal/new-service.html', 'apigility-ui/modal/new-version.html', 'apigility-ui/modal/new-viewmodel.html', 'apigility-ui/modal/view-doctrineparams.html', 'apigility-ui/package/package.html', 'apigility-ui/rest/rest.html', 'apigility-ui/rpc/rpc.html', 'apigility-ui/sidebar/sidebar.html']);
 
 angular.module("apigility-ui/about/about.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("apigility-ui/about/about.html",
@@ -108,7 +108,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "          <td><a ui-sref=\"ag.rest({api: vm.apiName, ver: vm.version, rest: rest.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rest'+rest.service_name)\">{{rest.service_name}}</a></td>\n" +
     "          <td>{{rest.route_match}}</td>\n" +
     "          <td>\n" +
-    "            <a href=\"\" ng-if=\"!rest._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
+    "            <a ng-click=\"vm.addServiceDescriptionModal(rest, 'rest')\" ng-if=\"!rest._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
     "            <span ng-if=\"rest._embedded.documentation.description\">{{rest._embedded.documentation.description}}</span>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -133,7 +133,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "          <td><a ui-sref=\"ag.rpc({api: vm.apiName, ver: vm.version, rpc: rpc.controller_service_name})\" ng-click=\"vm.setSelected('api'+vm.apiName+'rpc'+rpc.service_name)\">{{rpc.service_name}}</a></td>\n" +
     "          <td>{{rpc.route_match}}</td>\n" +
     "          <td>\n" +
-    "            <a href=\"\" ng-if=\"!rpc._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
+    "            <a ng-click=\"vm.addServiceDescriptionModal(rpc, 'rpc')\" ng-if=\"!rpc._embedded.documentation.description\" ng-hide=\"vm.disabled\">Add a description for this service</a>\n" +
     "            <span ng-if=\"rpc._embedded.documentation.description\">{{rpc._embedded.documentation.description}}</span>\n" +
     "          </td>\n" +
     "        </tr>\n" +
@@ -612,6 +612,28 @@ angular.module("apigility-ui/modal/add-filter.html", []).run(["$templateCache", 
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">Close</button>\n" +
     "  <button type=\"button\" class=\"btn btn-success btn-sm\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</span></button>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("apigility-ui/modal/add-service-description.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("apigility-ui/modal/add-service-description.html",
+    "<div class=\"modal-header\">\n" +
+    "  <h4 class=\"modal-title\">Add service description for <strong>{{vm.service_name}}</strong></h4>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"modal-body\">\n" +
+    "  <label class=\"control-label\">Description</label>\n" +
+    "  <input class=\"form-control\" type=\"text\" ng-model=\"vm.description\" placeholder=\"Insert the service description\" autofocus />\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"modal-footer\">\n" +
+    "  <div class=\"alert alert-danger\" role=\"alert\" ng-hide=\"!vm.alert\">\n" +
+    "    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> {{vm.alert}}\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <button class=\"btn btn-default\" type=\"button\" ng-click=\"vm.cancel()\">Close</button>\n" +
+    "  <button class=\"btn btn-success\" type=\"button\" ng-click=\"vm.ok()\" ladda=\"vm.loading\">Save</button>\n" +
     "</div>\n" +
     "");
 }]);
