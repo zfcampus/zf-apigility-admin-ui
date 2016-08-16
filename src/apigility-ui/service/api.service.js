@@ -193,20 +193,21 @@
     };
 
     this.getAuthorizationRest = function(module, version, name, callback) {
-      var moduleParam = this.normalizeModuleName(module);
+      var moduleParam = this.normalizeModuleName(module),
+          controllerName = name.replace(/-/g, '\\');
       xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var method;
         var data = {};
         data.collection = [];
         data.entity = [];
-        var collection = response[name + '::__collection__'];
+        var collection = response[controllerName + '::__collection__'];
         for (method in collection) {
           if (collection[method]) {
             data.collection.push(method);
           }
         }
-        var entity = response[name + '::__entity__'];
+        var entity = response[controllerName + '::__entity__'];
         for (method in entity) {
           if (entity[method]) {
             data.entity.push(method);
@@ -223,14 +224,15 @@
     this.saveAuthorizationRest = function(module, version, name, auth, callback) {
       var collection = {};
       var entity = {};
-      var moduleParam = this.normalizeModuleName(module);
+      var moduleParam = this.normalizeModuleName(module),
+          controllerName = name.replace(/-/g, '\\');
       httpMethods.forEach(function(method){
         collection[method] = (auth.collection.indexOf(method) > -1);
         entity[method] = (auth.entity.indexOf(method) > -1);
       });
       var data = {};
-      data[name + '::__collection__'] = collection;
-      data[name + '::__entity__'] = entity;
+      data[controllerName + '::__collection__'] = collection;
+      data[controllerName + '::__entity__'] = entity;
       xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization saved');
@@ -448,11 +450,13 @@
     };
 
     this.getAuthorizationRpc = function(module, version, name, callback) {
-      var moduleParam = this.normalizeModuleName(module);
+      var moduleParam = this.normalizeModuleName(module),
+          controllerName = name.replace(/-/g, '\\'),
+          rpcName = name.replace(/-Controller$/, '').split('-').pop();
       xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var data = [];
-        var controller = response[name + '::' + name];
+        var controller = response[controllerName + '::' + rpcName];
         for (var method in controller) {
           if (controller[method]) {
             data.push(method);
@@ -468,12 +472,14 @@
 
     this.saveAuthorizationRpc = function(module, version, name, auth, callback) {
       var http = {},
-          moduleParam = this.normalizeModuleName(module);
+          moduleParam = this.normalizeModuleName(module),
+          controllerName = name.replace(/-/g, '\\'),
+          rpcName = name.replace(/-Controller$/, '').split('-').pop();
       httpMethods.forEach(function(method){
         http[method] = (auth.indexOf(method) > -1);
       });
       var data = {};
-      data[name + '::' + name] = http;
+      data[controllerName + '::' + rpcName] = http;
       xhr.save(agApiPath + '/module/' + moduleParam + '/authorization', data)
       .then(function (response) {
         growl.success('Authorization updated');
