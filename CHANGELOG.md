@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.8 - TBD
+## 1.3.8 - 2016-08-17
 
 ### Added
 
@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#128](https://github.com/zfcampus/zf-apigility-admin-ui/pull/128) fixes how
+  the UI calls the authorization endpoints, ensuring the controller name is
+  properly formed.
 
 ## 1.3.7 - 2016-08-14
 
