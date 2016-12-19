@@ -155,7 +155,15 @@
             <div class="form-group">
               <label for="doctrine_object_manager" class="col-sm-2 control-label">Object Manager</label>
               <div class="col-sm-8">
-                <select class="form-control" id="doctrine_object_manager" ng-model="vm.rest.object_manager" ng-options="om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager"></select>
+                <ui-select
+                  ng-model="vm.rest.object_manager"
+                  ng-disabled="vm.disabled">
+                  <ui-select-match placeholder="Select Doctrine Object Manager...">{{$select.selected}}</ui-select-match>
+                  <ui-select-choices
+                    repeat="adapter in vm.objectManagerNames | filter: $select.search">
+                    <div ng-bind-html="adapter | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
             </div>
             <div class="form-group">
