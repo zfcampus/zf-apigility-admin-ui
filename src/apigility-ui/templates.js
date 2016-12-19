@@ -2095,7 +2095,15 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "            <div class=\"form-group\">\n" +
     "              <label for=\"doctrine_object_manager\" class=\"col-sm-2 control-label\">Object Manager</label>\n" +
     "              <div class=\"col-sm-8\">\n" +
-    "                <select class=\"form-control\" id=\"doctrine_object_manager\" ng-model=\"vm.rest.object_manager\" ng-options=\"om.adapter_name as om.adapter_name for om in vm.doctrine track by vm.rest.object_manager\"></select>\n" +
+    "                <ui-select\n" +
+    "                  ng-model=\"vm.rest.object_manager\"\n" +
+    "                  ng-disabled=\"vm.disabled\">\n" +
+    "                  <ui-select-match placeholder=\"Select Doctrine Object Manager...\">{{$select.selected}}</ui-select-match>\n" +
+    "                  <ui-select-choices\n" +
+    "                    repeat=\"adapter in vm.objectManagerNames | filter: $select.search\">\n" +
+    "                    <div ng-bind-html=\"adapter | highlight: $select.search\"></div>\n" +
+    "                  </ui-select-choices>\n" +
+    "                </ui-select>\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-group\">\n" +
