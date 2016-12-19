@@ -21,6 +21,7 @@
     function initGeneral() {
       vm.selectorNames = [];
       vm.adapterNames = [];
+      vm.objectManagerNames = [];
 
       vm.tags = {
         accept_whitelist : [],
@@ -39,7 +40,9 @@
       });
 
       api.getDoctrineAdapters(function(err, response) {
-        vm.doctrine = response.doctrine_adapter;
+        for(var i in response.doctrine_adapter){
+          vm.objectManagerNames.push(response.doctrine_adapter[i].adapter_name);
+        }
       });
 
       api.getRest(vm.apiName, vm.version, vm.restName, function(result){

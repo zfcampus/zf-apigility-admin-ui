@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.9 - TBD
+## 1.3.9 - 2016-12-19
 
 ### Added
 
@@ -39,6 +39,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#130](https://github.com/zfcampus/zf-apigility-admin-ui/pull/130) updates the
   UI to ensure the `object_manager` key is passed when creating or updating a
   Doctrine-based service.
+- [#136](https://github.com/zfcampus/zf-apigility-admin-ui/pull/136) updates the
+  UI to allow selecting one of many Doctrine object managers; previously, the
+  first item was always selected.
 
 ## 1.3.8 - 2016-08-17
 
