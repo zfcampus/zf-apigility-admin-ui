@@ -138,7 +138,7 @@
         'adapter_name'
       ];
       if (isDoctrine) {
-        allowed.push('strategies', 'by_value');
+        allowed.push('object_manager', 'strategies', 'by_value');
       }
       var result = filterData(data, allowed);
       var path = isDoctrine ? '/doctrine/' : '/rest/';

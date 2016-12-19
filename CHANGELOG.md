@@ -36,7 +36,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#130](https://github.com/zfcampus/zf-apigility-admin-ui/pull/130) updates the
+  UI to ensure the `object_manager` key is passed when creating or updating a
+  Doctrine-based service.
 
 ## 1.3.8 - 2016-08-17
 
