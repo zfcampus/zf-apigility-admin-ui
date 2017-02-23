@@ -9,7 +9,12 @@
   <p>By default, deleting the API only removes the API module from the application configuration.
   You can re-enable it by re-adding the module to your application configuration at a later date.</p>
 
-  <p><input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading"> Delete all files associated with this API?</p>
+  <p>
+    <label>
+      <input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading">
+      Delete all files associated with this API?
+    </label>
+  </p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-default" ng-click="vm.cancel()" ng-disabled="vm.loading">No</button>
