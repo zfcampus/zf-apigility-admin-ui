@@ -163,6 +163,12 @@
             <tabset justified="true" class="col-sm-12">
               <tab ng-repeat="http in vm.rpc.http_methods" heading="{{http}}">
                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Identifier</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" ng-model="vm.rpc.documentation[http].identifier" placeholder="Insert the identifier here" ng-disabled="vm.disabled"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Description</label>
                   <div class="col-sm-10">
                     <textarea class="form-control" ng-model="vm.rpc.documentation[http].description" placeholder="Insert the description here" ng-disabled="vm.disabled"></textarea>
