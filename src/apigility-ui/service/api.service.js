@@ -475,6 +475,8 @@
           moduleParam = this.normalizeModuleName(module),
           controllerName = name.replace(/-/g, '\\'),
           rpcName = name.replace(/-Controller$/, '').split('-').pop();
+      // Actions have an initial lowercase letter
+      rpcName = rpcName.charAt(0).toLowerCase() + rpcName.substr(1);
       httpMethods.forEach(function(method){
         http[method] = (auth.indexOf(method) > -1);
       });
