@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.11 - TBD
+## 1.3.11 - 2018-09-10
 
 ### Added
 
@@ -44,7 +44,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#148](https://github.com/zfcampus/zf-apigility-admin-ui/pull/148) fixes how the UI parses authorizations retrieved for an RPC
+  service to ensure they are mapped to the authorizations form correctly.
 
 ## 1.3.10 - 2018-09-10
 
