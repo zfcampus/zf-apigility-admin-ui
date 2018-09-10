@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+### Changed
+
+- Nothing.
+
 ### Deprecated
 
 - Nothing.
@@ -20,11 +24,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 1.3.10 - TBD
+## 1.3.10 - 2018-09-10
 
 ### Added
 
 - Nothing.
+
+### Changed
+
+- [#141](https://github.com/zfcampus/zf-apigility-admin-ui/pull/141) makes the "Delete all files..." text of modal dialogs clickable,
+  making it easier to select the checkbox.
 
 ### Deprecated
 
