@@ -36,7 +36,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#147](https://github.com/zfcampus/zf-apigility-admin-ui/pull/147) fixes how authorizations are saved for RPC services. Previously,
+  the UI was sending the RPC controller action using the same casing as the
+  service name.  However, controller actions are, without variance, always using
+  an initial lowercase letter. As a result, ACLs for RPC services were created
+  in such a way that the expected resource could never be found. This release
+  fixes that situation to ensure they are mapped correctly.
 
 ## 1.3.9 - 2016-12-19
 
