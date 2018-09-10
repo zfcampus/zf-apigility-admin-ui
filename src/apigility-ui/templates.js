@@ -731,7 +731,12 @@ angular.module("apigility-ui/modal/delete-api.html", []).run(["$templateCache", 
     "  <p>By default, deleting the API only removes the API module from the application configuration.\n" +
     "  You can re-enable it by re-adding the module to your application configuration at a later date.</p>\n" +
     "\n" +
-    "  <p><input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\"> Delete all files associated with this API?</p>\n" +
+    "  <p>\n" +
+    "    <label>\n" +
+    "      <input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\">\n" +
+    "      Delete all files associated with this API?\n" +
+    "    </label>\n" +
+    "  </p>\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\" ng-disabled=\"vm.loading\">No</button>\n" +
@@ -840,7 +845,12 @@ angular.module("apigility-ui/modal/delete-rest.html", []).run(["$templateCache",
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
     "  <p class=\"modal_msg\">Are you sure to delete the REST service <strong>{{vm.restName}}</strong>?</p>\n" +
-    "  <p><input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\"> Delete all files and directories for this service</p>\n" +
+    "  <p>\n" +
+    "    <label>\n" +
+    "      <input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\">\n" +
+    "      Delete all files and directories for this service\n" +
+    "    </label>\n" +
+    "  </p>\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
@@ -856,7 +866,12 @@ angular.module("apigility-ui/modal/delete-rpc.html", []).run(["$templateCache", 
     "</div>\n" +
     "<div class=\"modal-body\">\n" +
     "  <p class=\"modal_msg\">Are you sure to delete the RPC service <strong>{{vm.rpcName}}</strong>?</p>\n" +
-    "  <p><input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\"> Delete all files and directories for this service</p>\n" +
+    "  <p>\n" +
+    "    <label>\n" +
+    "      <input type=\"checkbox\" ng-model=\"vm.recursive\" ng-disabled=\"vm.loading\">\n" +
+    "      Delete all files and directories for this service\n" +
+    "    </label>\n" +
+    "  </p>\n" +
     "</div>\n" +
     "<div class=\"modal-footer\">\n" +
     "  <button type=\"button\" class=\"btn btn-default\" ng-click=\"vm.cancel()\">No</button>\n" +
