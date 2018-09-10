@@ -3,7 +3,12 @@
 </div>
 <div class="modal-body">
   <p class="modal_msg">Are you sure to delete the REST service <strong>{{vm.restName}}</strong>?</p>
-  <p><input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading"> Delete all files and directories for this service</p>
+  <p>
+    <label>
+      <input type="checkbox" ng-model="vm.recursive" ng-disabled="vm.loading">
+      Delete all files and directories for this service
+    </label>
+  </p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-default" ng-click="vm.cancel()">No</button>
