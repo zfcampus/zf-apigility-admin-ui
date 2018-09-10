@@ -453,6 +453,8 @@
       var moduleParam = this.normalizeModuleName(module),
           controllerName = name.replace(/-/g, '\\'),
           rpcName = name.replace(/-Controller$/, '').split('-').pop();
+      // Actions have an initial lowercase letter
+      rpcName = rpcName.charAt(0).toLowerCase() + rpcName.substr(1);
       xhr.get(agApiPath + '/module/' + moduleParam + '/authorization')
       .then(function (response) {
         var data = [];
