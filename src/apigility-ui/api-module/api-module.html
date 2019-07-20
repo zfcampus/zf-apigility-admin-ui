@@ -16,7 +16,7 @@
         <form class="form-inline" role="form" unsaved-warning-form>
           <div class="form-group">
             <label class="control-label">Set authentication type</label>
-            <select class="form-control" ng-model="vm.auth_type" ng-disabled="vm.disabled">
+            <select class="form-control" ng-model="vm.auth_type" ng-disabled="vm.disabled || !vm.auth_types">
               <option value="None">None</option>
               <option ng-repeat="type in vm.auth_types" value="{{type.value}}">{{type.key}}</option>
             </select>
@@ -59,7 +59,10 @@
         </tr>
         <tr ng-if="!vm.rest || vm.rest.length == 0">
           <td colspan="3">
-            No REST services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
+            <span ng-if="!vm.rest"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
+            <span ng-if="vm.rest && vm.rest.length == 0">
+              No REST services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
+            </span>
           </td>
         </tr>
       </table>
@@ -84,7 +87,10 @@
         </tr>
         <tr ng-if="!vm.rpc || vm.rpc.length == 0">
           <td colspan="3">
-            No RPC services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
+            <span ng-if="!vm.rpc"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
+            <span ng-if="vm.rpc && vm.rpc.length == 0">
+              No RPC services<span ng-hide="vm.disabled">, <a ng-click="vm.newServiceModal()">create a new one</a></span>
+            </span>
           </td>
         </tr>
       </table>
