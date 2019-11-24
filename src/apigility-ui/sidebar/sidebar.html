@@ -41,12 +41,16 @@
       <ol class="ng-scope ng-pristine ng-valid angular-ui-tree-nodes" ng-class="{hidden: collapsed}">
         <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rest track by $index">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rest'+subItem.service_name === vm.getSelected() }">
-            <span class="glyphicon glyphicon-leaf"></span> <a ui-sref="ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rest'+subItem.service_name)">{{subItem.service_name}}</a>
+            <span class="glyphicon glyphicon-leaf"></span>
+            <span ng-if="!subItem.service_name">{{subItem}} <img src="apigility-ui/img/spinning.gif"></span>
+            <a ui-sref="ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rest'+subItem.service_name)">{{subItem.service_name}}</a>
           </div>
         </li>
         <li class="ng-scope angular-ui-tree-node" ng-repeat="subItem in item.rpc track by $index">
           <div class="ng-scope ng-binding angular-ui-tree-handle" ui-tree-handle ng-class="{ 'selected' : 'api'+item.name+'rpc'+subItem.service_name === vm.getSelected() }">
-            <span class="glyphicon glyphicon-fire"></span> <a ui-sref="ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rpc'+subItem.service_name)">{{subItem.service_name}}</a>
+            <span class="glyphicon glyphicon-fire"></span>
+            <span ng-if="!subItem.service_name">{{subItem}} <img src="apigility-ui/img/spinning.gif"></span>
+            <a ui-sref="ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})" ng-click="vm.setSelected('api'+item.name+'rpc'+subItem.service_name)">{{subItem.service_name}}</a>
           </div>
         </li>
       </ol>
