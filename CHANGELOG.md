@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#151](https://github.com/zfcampus/zf-apigility-admin-ui/pull/151) fixes responsiveness on loading api details.
 
 ## 1.3.11 - 2018-09-10
 

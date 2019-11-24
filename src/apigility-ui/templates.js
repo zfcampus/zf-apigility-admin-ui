@@ -71,7 +71,7 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "        <form class=\"form-inline\" role=\"form\" unsaved-warning-form>\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"control-label\">Set authentication type</label>\n" +
-    "            <select class=\"form-control\" ng-model=\"vm.auth_type\" ng-disabled=\"vm.disabled\">\n" +
+    "            <select class=\"form-control\" ng-model=\"vm.auth_type\" ng-disabled=\"vm.disabled || !vm.auth_types\">\n" +
     "              <option value=\"None\">None</option>\n" +
     "              <option ng-repeat=\"type in vm.auth_types\" value=\"{{type.value}}\">{{type.key}}</option>\n" +
     "            </select>\n" +
@@ -114,7 +114,10 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "        </tr>\n" +
     "        <tr ng-if=\"!vm.rest || vm.rest.length == 0\">\n" +
     "          <td colspan=\"3\">\n" +
-    "            No REST services<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newServiceModal()\">create a new one</a></span>\n" +
+    "            <span ng-if=\"!vm.rest\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "            <span ng-if=\"vm.rest && vm.rest.length == 0\">\n" +
+    "              No REST services<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newServiceModal()\">create a new one</a></span>\n" +
+    "            </span>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "      </table>\n" +
@@ -139,7 +142,10 @@ angular.module("apigility-ui/api-module/api-module.html", []).run(["$templateCac
     "        </tr>\n" +
     "        <tr ng-if=\"!vm.rpc || vm.rpc.length == 0\">\n" +
     "          <td colspan=\"3\">\n" +
-    "            No RPC services<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newServiceModal()\">create a new one</a></span>\n" +
+    "            <span ng-if=\"!vm.rpc\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "            <span ng-if=\"vm.rpc && vm.rpc.length == 0\">\n" +
+    "              No RPC services<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newServiceModal()\">create a new one</a></span>\n" +
+    "            </span>\n" +
     "          </td>\n" +
     "        </tr>\n" +
     "      </table>\n" +
