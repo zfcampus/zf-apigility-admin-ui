@@ -46,6 +46,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#151](https://github.com/zfcampus/zf-apigility-admin-ui/pull/151) fixes responsiveness on loading api details.
 
+- [#153](https://github.com/zfcampus/zf-apigility-admin-ui/pull/153) fixes responsiveness on loading api services on sidebar.
+
 ## 1.3.11 - 2018-09-10
 
 ### Added

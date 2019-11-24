@@ -2688,12 +2688,16 @@ angular.module("apigility-ui/sidebar/sidebar.html", []).run(["$templateCache", f
     "      <ol class=\"ng-scope ng-pristine ng-valid angular-ui-tree-nodes\" ng-class=\"{hidden: collapsed}\">\n" +
     "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rest track by $index\">\n" +
     "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rest'+subItem.service_name === vm.getSelected() }\">\n" +
-    "            <span class=\"glyphicon glyphicon-leaf\"></span> <a ui-sref=\"ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rest'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
+    "            <span class=\"glyphicon glyphicon-leaf\"></span>\n" +
+    "            <span ng-if=\"!subItem.service_name\">{{subItem}} <img src=\"apigility-ui/img/spinning.gif\"></span>\n" +
+    "            <a ui-sref=\"ag.rest({api: item.name, ver: item.selected_version, rest: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rest'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +
     "        </li>\n" +
     "        <li class=\"ng-scope angular-ui-tree-node\" ng-repeat=\"subItem in item.rpc track by $index\">\n" +
     "          <div class=\"ng-scope ng-binding angular-ui-tree-handle\" ui-tree-handle ng-class=\"{ 'selected' : 'api'+item.name+'rpc'+subItem.service_name === vm.getSelected() }\">\n" +
-    "            <span class=\"glyphicon glyphicon-fire\"></span> <a ui-sref=\"ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rpc'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
+    "            <span class=\"glyphicon glyphicon-fire\"></span>\n" +
+    "            <span ng-if=\"!subItem.service_name\">{{subItem}} <img src=\"apigility-ui/img/spinning.gif\"></span>\n" +
+    "            <a ui-sref=\"ag.rpc({api: item.name, ver: item.selected_version, rpc: subItem.controller_service_name})\" ng-click=\"vm.setSelected('api'+item.name+'rpc'+subItem.service_name)\">{{subItem.service_name}}</a>\n" +
     "          </div>\n" +
     "        </li>\n" +
     "      </ol>\n" +
