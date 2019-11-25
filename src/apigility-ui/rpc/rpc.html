@@ -115,9 +115,12 @@
                 <button type="button" ng-click="vm.editFieldModal(field)" class="btn btn-success btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-pencil"></i> edit</button> <button type="button" ng-click="vm.deleteFieldModal(field)" class="btn btn-danger btn-xs" ng-hide="vm.disabled"><i class="glyphicon glyphicon-trash"></i> delete</button>
               </td>
             </tr>
-            <tr ng-if="vm.rest.fields.length == 0">
+            <tr ng-if="!vm.rpc || vm.rpc.fields.length == 0">
               <td colspan="5">
-                No fields have been configured<span ng-hide="vm.disabled">, <a ng-click="vm.newFieldModal()">create the first one</a></span>
+                <span ng-if="!vm.rpc"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
+                <span ng-if="vm.rpc && vm.rpc.fields.length == 0">
+                  No fields have been configured<span ng-hide="vm.disabled">, <a ng-click="vm.newFieldModal()">create the first one</a></span>
+                </span>
               </td>
             </tr>
           </table>
@@ -201,13 +204,16 @@
         <form class="form-inline">
           <div class="form-group">
             <label class="control-label">Select the file to open</label>
-            <select ng-model="vm.source" class="form-control" ng-change="vm.getSourceCode(vm.source.classname)" ng-options="source.name for source in vm.rpc.source_code"></select>
+            <select ng-model="vm.source" class="form-control" ng-change="vm.getSourceCode(vm.source.classname)" ng-options="source.name for source in vm.rpc.source_code" ng-disabled="!vm.source"></select>
           </div>
         </form>
         <br clear="left">
         <div class="panel panel-default">
-          <div class="panel-heading code-button"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}</div>
-          <div class="panel-body" ng-bind-html="vm.sourcecode"></div>
+          <div class="panel-heading code-button">
+            <span ng-if="!vm.sourcecode"><img src="apigility-ui/img/spinning.gif"> Loading...</span>
+            <span ng-if="vm.sourcecode" class="glyphicon glyphicon-file" aria-hidden="true"></span> {{vm.file}}
+          </div>
+          <div ng-if="vm.sourcecode" class="panel-body" ng-bind-html="vm.sourcecode"></div>
         </div>
       </tab>
     </tabset>

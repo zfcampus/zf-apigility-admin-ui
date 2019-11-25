@@ -2256,9 +2256,12 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "                  <button type=\"button\" ng-click=\"vm.editFieldModal(field)\" class=\"btn btn-success btn-xs\" ng-hide=\"vm.disabled\"><i class=\"glyphicon glyphicon-pencil\"></i> edit</button> <button type=\"button\" ng-click=\"vm.deleteFieldModal(field)\" class=\"btn btn-danger btn-xs\" ng-hide=\"vm.disabled\"><i class=\"glyphicon glyphicon-trash\"></i> delete</button>\n" +
     "                </td>\n" +
     "              </tr>\n" +
-    "              <tr ng-if=\"vm.rest.fields.length == 0\">\n" +
+    "              <tr ng-if=\"!vm.rest || vm.rest.fields.length == 0\">\n" +
     "                <td colspan=\"5\">\n" +
-    "                  No fields have been configured<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newFieldModal()\">create the first one</a></span>\n" +
+    "                  <span ng-if=\"!vm.rest\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "                  <span ng-if=\"vm.rest && vm.rest.fields.length == 0\">\n" +
+    "                      No fields have been configured<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newFieldModal()\">create the first one</a></span>\n" +
+    "                  </span>\n" +
     "                </td>\n" +
     "              </tr>\n" +
     "            </table>\n" +
@@ -2407,13 +2410,16 @@ angular.module("apigility-ui/rest/rest.html", []).run(["$templateCache", functio
     "          <form class=\"form-inline\">\n" +
     "            <div class=\"form-group\">\n" +
     "              <label class=\"control-label\">Select the file to open</label>\n" +
-    "              <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rest.source_code\"></select>\n" +
+    "              <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rest.source_code\" ng-disabled=\"!vm.source\"></select>\n" +
     "            </div>\n" +
     "          </form>\n" +
     "          <br clear=\"left\">\n" +
     "          <div class=\"panel panel-default\">\n" +
-    "            <div class=\"panel-heading code-button\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
-    "            <div class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
+    "            <div class=\"panel-heading code-button\">\n" +
+    "              <span ng-if=\"!vm.sourcecode\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "              <span ng-if=\"vm.sourcecode\" class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"vm.sourcecode\" class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
     "          </div>\n" +
     "        </tab>\n" +
     "      </tabset>\n" +
@@ -2542,9 +2548,12 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "                <button type=\"button\" ng-click=\"vm.editFieldModal(field)\" class=\"btn btn-success btn-xs\" ng-hide=\"vm.disabled\"><i class=\"glyphicon glyphicon-pencil\"></i> edit</button> <button type=\"button\" ng-click=\"vm.deleteFieldModal(field)\" class=\"btn btn-danger btn-xs\" ng-hide=\"vm.disabled\"><i class=\"glyphicon glyphicon-trash\"></i> delete</button>\n" +
     "              </td>\n" +
     "            </tr>\n" +
-    "            <tr ng-if=\"vm.rest.fields.length == 0\">\n" +
+    "            <tr ng-if=\"!vm.rpc || vm.rpc.fields.length == 0\">\n" +
     "              <td colspan=\"5\">\n" +
-    "                No fields have been configured<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newFieldModal()\">create the first one</a></span>\n" +
+    "                <span ng-if=\"!vm.rpc\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "                <span ng-if=\"vm.rpc && vm.rpc.fields.length == 0\">\n" +
+    "                  No fields have been configured<span ng-hide=\"vm.disabled\">, <a ng-click=\"vm.newFieldModal()\">create the first one</a></span>\n" +
+    "                </span>\n" +
     "              </td>\n" +
     "            </tr>\n" +
     "          </table>\n" +
@@ -2628,13 +2637,16 @@ angular.module("apigility-ui/rpc/rpc.html", []).run(["$templateCache", function(
     "        <form class=\"form-inline\">\n" +
     "          <div class=\"form-group\">\n" +
     "            <label class=\"control-label\">Select the file to open</label>\n" +
-    "            <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rpc.source_code\"></select>\n" +
+    "            <select ng-model=\"vm.source\" class=\"form-control\" ng-change=\"vm.getSourceCode(vm.source.classname)\" ng-options=\"source.name for source in vm.rpc.source_code\" ng-disabled=\"!vm.source\"></select>\n" +
     "          </div>\n" +
     "        </form>\n" +
     "        <br clear=\"left\">\n" +
     "        <div class=\"panel panel-default\">\n" +
-    "          <div class=\"panel-heading code-button\"><span class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}</div>\n" +
-    "          <div class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
+    "          <div class=\"panel-heading code-button\">\n" +
+    "            <span ng-if=\"!vm.sourcecode\"><img src=\"apigility-ui/img/spinning.gif\"> Loading...</span>\n" +
+    "            <span ng-if=\"vm.sourcecode\" class=\"glyphicon glyphicon-file\" aria-hidden=\"true\"></span> {{vm.file}}\n" +
+    "          </div>\n" +
+    "          <div ng-if=\"vm.sourcecode\" class=\"panel-body\" ng-bind-html=\"vm.sourcecode\"></div>\n" +
     "        </div>\n" +
     "      </tab>\n" +
     "    </tabset>\n" +
