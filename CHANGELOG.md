@@ -48,6 +48,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#156](https://github.com/zfcampus/zf-apigility-admin-ui/pull/156) fixes responsiveness on loading fields configuration. Proper loader has been added.
 
+- [#157](https://github.com/zfcampus/zf-apigility-admin-ui/pull/157) fixes errors on sidebar search.
+
 ## 1.3.12 - 2019-11-24
 
 ### Added
