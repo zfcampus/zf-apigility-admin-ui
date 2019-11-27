@@ -39,14 +39,15 @@
       var newApis = [];
       vm.apis.forEach(function(api) {
         var rest = [];
+
         api.rest.forEach(function(service){
-          if (service.toUpperCase()  == search.toUpperCase()) {
+          if (service.service_name.toUpperCase().includes(search.toUpperCase())) {
             rest.push(service);
           }
         });
         var rpc = [];
         api.rpc.forEach(function(service){
-          if (service.toUpperCase()  == search.toUpperCase()) {
+          if (service.service_name.toUpperCase().includes(search.toUpperCase())) {
             rpc.push(service);
           }
         });
