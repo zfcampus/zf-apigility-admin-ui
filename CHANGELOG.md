@@ -50,6 +50,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#157](https://github.com/zfcampus/zf-apigility-admin-ui/pull/157) fixes errors on sidebar search.
 
+- [#158](https://github.com/zfcampus/zf-apigility-admin-ui/pull/158) fixes removal of database adapter containing special chars in the name.
+
 ## 1.3.12 - 2019-11-24
 
 ### Added

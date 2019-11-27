@@ -792,7 +792,7 @@
     };
 
     this.deleteDatabase = function(name, callback) {
-      xhr.remove(agApiPath + '/db-adapter/' + name)
+      xhr.remove(agApiPath + '/db-adapter/' + encodeURIComponent(name))
       .then(function (response) {
         growl.success('Database adapter removed');
         return callback(false, response);
