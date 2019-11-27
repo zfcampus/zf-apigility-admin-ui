@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#156](https://github.com/zfcampus/zf-apigility-admin-ui/pull/156) fixes responsiveness on loading source code. Proper loader has been added.
+
+- [#156](https://github.com/zfcampus/zf-apigility-admin-ui/pull/156) fixes responsiveness on loading fields configuration. Proper loader has been added.
 
 ## 1.3.12 - 2019-11-24
 
