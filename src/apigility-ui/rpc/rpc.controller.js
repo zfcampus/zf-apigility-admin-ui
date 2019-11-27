@@ -293,6 +293,7 @@
     };
 
     vm.getSourceCode = function(classname) {
+      vm.sourcecode = vm.file = undefined;
       api.getSourceCode(vm.apiName, classname, function(err, response){
         vm.sourcecode = $sce.trustAsHtml(response.source);
         vm.file = response.file;
